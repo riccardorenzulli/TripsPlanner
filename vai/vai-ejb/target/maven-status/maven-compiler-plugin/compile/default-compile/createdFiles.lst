@@ -1,0 +1,9 @@
+com/giocompany/facades/RegistrationFacade.class
+com/giocompany/entities/User_.class
+com/giocompany/managers/RegistrationManagerLocal.class
+com/giocompany/facades/UserFacade.class
+com/giocompany/entities/User.class
+com/giocompany/facades/RegistrationFacadeLocal.class
+com/giocompany/facades/UserFacadeLocal.class
+com/giocompany/managers/RegistrationManager.class
+com/giocompany/facades/AbstractFacade.class

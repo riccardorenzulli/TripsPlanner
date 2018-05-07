@@ -1,0 +1,5 @@
+com/giocompany/config/AppConfig.class
+com/giocompany/config/core/SpringSecurityInitializer.class
+com/giocompany/config/SecurityConfig.class
+com/giocompany/web/controller/MainController.class
+com/giocompany/config/core/SpringMvcInitializer.class
