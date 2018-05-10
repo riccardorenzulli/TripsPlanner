@@ -32,7 +32,11 @@ public class LoginBean implements LoginBeanLocal {
     // "Insert Code > Add Business Method")
     
     public User validateFacebookUser(String token, boolean create) throws MalformedURLException, IOException {
+        System.out.print("validateFbUser");
+        
         JSONObject userJson = getFacebookUserJson(token);
+        
+        System.out.print(userJson.toString());
         
         User user = userFacade.findUserByEmail(userJson.getString("email"));
         
@@ -41,7 +45,7 @@ public class LoginBean implements LoginBeanLocal {
             user.setEmail(userJson.getString("email"));
             user.setName(userJson.getString("name"));
             user.setImgURL(userJson.getJSONObject("picture").getJSONObject("data").getString("url"));
-
+            System.out.print(user.getImgURL());
             userFacade.create(user);
         }
         
@@ -50,7 +54,7 @@ public class LoginBean implements LoginBeanLocal {
     
     private JSONObject getFacebookUserJson(String token)
             throws MalformedURLException, IOException {
-        URL validationUrl = new URL("https://graph.facebook.com/me?fields=id,name,email,picture&access_token=" + token);
+        URL validationUrl = new URL("http://graph.facebook.com/me?fields=name,email&access_token=" + token);
         HttpURLConnection conn = (HttpURLConnection) validationUrl.openConnection();
 
         StringBuilder b;

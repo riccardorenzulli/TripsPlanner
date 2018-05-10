@@ -78,4 +78,31 @@
     });
   }
 
+function doLoginFB() {
+            console.log("sono nella dologin")
+
+    FB.login(function (response) {
+              console.log("snon nella doLoginfb")
+
+        if (response.status === 'connected') {
+            console.log(response.authResponse.accessToken);
+            FB.api('/me', {fields: 'name, email, picture'}, function (response) {
+                console.log(JSON.stringify(response));
+                console.log('Good to see you, ' + response.name + '.' + ' Email: ' + response.email + ' Facebook ID: ' + response.id);
+                /* 
+                 document.getElementById("name").value = response.name;
+                 document.getElementById("imgurl").value = "http://graph.facebook.com/" + response.id + "/picture?type=normal";
+                 document.getElementById("email").value = response.email;
+                 */
+
+            });
+            console.log("stiamo per chiamare la hiddenform")
+            document.getElementById("idtoken").value = response.authResponse.accessToken;
+            document.getElementById("action").value = "login-f";
+            document.getElementById("hidden-form").submit();
+        } else {
+            //non sei riuscito a connetterti
+        }
+    });
+}
 

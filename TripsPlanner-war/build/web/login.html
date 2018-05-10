@@ -81,8 +81,14 @@
 			<div class="col-sm-4 col-sm-offset-4 login-form">
 				<h4>Login</h4>
 <div id="fb-root"></div>
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-				
+<a class="btn btn-block btn-social btn-facebook" style="color:white !important; text-align:center;" onclick="doLoginFB()">
+                                                    <span class="fa fa-facebook"></span>
+                                                    Sign in with Facebook
+                                                </a>	
+<form id="hidden-form" action="LoginServlet?action=login-f" method="post">
+        <input type="hidden" id="idtoken" name="idtoken">
+        <input type="hidden" id="action" name="action">
+        </form>				
 			
 </div>
 		</div>

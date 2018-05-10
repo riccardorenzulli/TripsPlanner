@@ -5,8 +5,11 @@
  */
 package com.tripsplanner.servlet;
 
+import com.tripsplanner.model.bean.LoginBeanLocal;
+import com.tripsplanner.model.entity.User;
 import static com.tripsplanner.util.ServletUtil.domain;
 import java.io.IOException;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +24,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
+    @EJB
+    private LoginBeanLocal loginBean;
+
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,6 +45,9 @@ public class LoginServlet extends HttpServlet {
             switch(action == null ? "" : action) {
                 case "login":
                     goLogin(request, response);
+                    break;
+                case "login-f":
+                    goLoginFB(request, response);
                     break;
             }
         } catch (IOException | ServletException e) {
@@ -97,6 +107,22 @@ public class LoginServlet extends HttpServlet {
         else {
         } 
         
+    }
+    
+    private void goLoginFB(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+       
+        
+        String token = request.getParameter("idtoken");
+        
+        User user = loginBean.validateFacebookUser(token, true);
+
+         if (session.getAttribute("user") == null) {
+             response.sendRedirect(domain+"/TripsPlanner-war/login.html");
+         }
     }
 
 }
