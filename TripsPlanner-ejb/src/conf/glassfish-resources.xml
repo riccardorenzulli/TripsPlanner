@@ -11,4 +11,5 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:module/Tripsplanner" object-type="user" pool-name="mysql_MySQL_db_adminPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:module/trips" object-type="user" pool-name="mysql_MySQL_db_adminPool"/>
 </resources>

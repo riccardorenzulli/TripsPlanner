@@ -5,17 +5,17 @@
  */
 package com.tripsplanner.model.facade;
 
-import com.tripsplanner.model.entity.Users;
+import com.tripsplanner.model.entity.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author riccardo
+ * @author giovannibonetta
  */
 @Stateless
-public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLocal {
+public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
 
     @PersistenceContext(unitName = "TripsPlanner-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
         return em;
     }
 
-    public UsersFacade() {
-        super(Users.class);
+    public UserFacade() {
+        super(User.class);
     }
     
 }

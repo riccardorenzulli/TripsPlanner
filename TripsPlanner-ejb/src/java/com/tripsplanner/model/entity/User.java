@@ -25,21 +25,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author giovannibonetta
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
-    , @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")
-    , @NamedQuery(name = "Users.findBySurname", query = "SELECT u FROM Users u WHERE u.surname = :surname")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByFbID", query = "SELECT u FROM Users u WHERE u.fbID = :fbID")
-    , @NamedQuery(name = "Users.findByGoogleID", query = "SELECT u FROM Users u WHERE u.googleID = :googleID")
-    , @NamedQuery(name = "Users.findByAge", query = "SELECT u FROM Users u WHERE u.age = :age")
-    , @NamedQuery(name = "Users.findBySex", query = "SELECT u FROM Users u WHERE u.sex = :sex")
-    , @NamedQuery(name = "Users.findByEnabled", query = "SELECT u FROM Users u WHERE u.enabled = :enabled")})
-public class Users implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
+    , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
+    , @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByImgURL", query = "SELECT u FROM User u WHERE u.imgURL = :imgURL")
+    , @NamedQuery(name = "User.findByFbID", query = "SELECT u FROM User u WHERE u.fbID = :fbID")
+    , @NamedQuery(name = "User.findByGoogleID", query = "SELECT u FROM User u WHERE u.googleID = :googleID")
+    , @NamedQuery(name = "User.findByAge", query = "SELECT u FROM User u WHERE u.age = :age")
+    , @NamedQuery(name = "User.findBySex", query = "SELECT u FROM User u WHERE u.sex = :sex")
+    , @NamedQuery(name = "User.findByEnabled", query = "SELECT u FROM User u WHERE u.enabled = :enabled")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,15 +56,18 @@ public class Users implements Serializable {
     @Size(max = 45)
     @Column(name = "surname")
     private String surname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
+    @Size(max = 512)
+    @Column(name = "imgURL")
+    private String imgURL;
     @Column(name = "fbID")
     private BigInteger fbID;
     @Column(name = "googleID")
@@ -77,17 +81,17 @@ public class Users implements Serializable {
     @Column(name = "enabled")
     private short enabled;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Long id) {
+    public User(Long id) {
         this.id = id;
     }
 
-    public Users(Long id, String name, String password, short enabled) {
+    public User(Long id, String name, String email, short enabled) {
         this.id = id;
         this.name = name;
-        this.password = password;
+        this.email = email;
         this.enabled = enabled;
     }
 
@@ -129,6 +133,14 @@ public class Users implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public BigInteger getFbID() {
@@ -181,10 +193,10 @@ public class Users implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -193,7 +205,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tripsplanner.model.entity.Users[ id=" + id + " ]";
+        return "com.tripsplanner.model.entity.User[ id=" + id + " ]";
     }
     
 }

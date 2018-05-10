@@ -5,28 +5,28 @@
  */
 package com.tripsplanner.model.facade;
 
-import com.tripsplanner.model.entity.Users;
+import com.tripsplanner.model.entity.User;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author riccardo
+ * @author giovannibonetta
  */
 @Local
-public interface UsersFacadeLocal {
+public interface UserFacadeLocal {
 
-    void create(Users users);
+    void create(User user);
 
-    void edit(Users users);
+    void edit(User user);
 
-    void remove(Users users);
+    void remove(User user);
 
-    Users find(Object id);
+    User find(Object id);
 
-    List<Users> findAll();
+    List<User> findAll();
 
-    List<Users> findRange(int[] range);
+    List<User> findRange(int[] range);
 
     int count();
     
