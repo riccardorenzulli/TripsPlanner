@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.servlet;
 
+import static com.tripsplanner.util.ServletUtil.domain;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -90,7 +91,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("user") == null) {
-            response.sendRedirect("/TripsPlanner-war/login.html");
+            response.sendRedirect(domain+"/TripsPlanner-war/login.html");
         }
         
         else {
