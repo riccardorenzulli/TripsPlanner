@@ -6,6 +6,7 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,17 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
 
     public UserFacade() {
         super(User.class);
+    }
+    
+    public User findUserByEmail(String email) {
+        List<User> results = em.createNamedQuery("User.findByEmail")
+                .setParameter("email", email)
+                .setMaxResults(10)
+                .getResultList();
+        if (results.size() > 1) {
+            throw new IllegalStateException("The email address '" + email + "' is used by more than one user!");
+        }
+        return results.isEmpty() ? null : results.get(0);
     }
     
 }
