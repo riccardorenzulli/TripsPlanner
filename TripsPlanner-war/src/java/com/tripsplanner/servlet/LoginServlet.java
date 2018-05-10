@@ -39,6 +39,9 @@ public class LoginServlet extends HttpServlet {
                 case "login":
                     goLogin(request, response);
                     break;
+                case "login-f":
+                    goLoginFB(request, response);
+                    break;
             }
         } catch (IOException | ServletException e) {
             request.setAttribute("error", e.getMessage());
@@ -89,6 +92,25 @@ public class LoginServlet extends HttpServlet {
         throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+
+        System.out.println("siamo dentro la servlet e reindirizza a login");
+
+        
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect(domain+"/TripsPlanner-war/login.html");
+        }
+        
+        else {
+        } 
+        
+    }
+    
+    private void goLoginFB(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+        System.out.println("il token di fb per: "+request.getParameter("idtoken"));
 
         if (session.getAttribute("user") == null) {
             response.sendRedirect(domain+"/TripsPlanner-war/login.html");
