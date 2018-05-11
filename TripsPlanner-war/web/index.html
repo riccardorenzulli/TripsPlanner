@@ -465,7 +465,7 @@
 					<div class="tab-content">
 							<!-- BEGIN: FLIGHT SEARCH -->
 							<div role="tabpanel" class="tab-pane active" id="flight">
-								<form>
+                                                            <form action="SearchServlet?action=search" method="post">
 									<div class="col-md-12 product-search-title">Book Flight Tickets</div>
 									<div class="col-md-12 search-col-padding">
 										<label class="radio-inline">
@@ -479,14 +479,14 @@
 									<div class="col-md-6 col-sm-6 search-col-padding">
 										<label>Leaving From</label>
 										<div class="input-group">
-											<input name="departure_city" class="form-control" required="" placeholder="E.g. London" type="text">
+                                                                                    <input id="departure_city" name="departure_city" class="form-control" required="" placeholder="E.g. London" type="text">
 											<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 										</div>
 									</div>
 									<div class="col-md-6 col-sm-6 search-col-padding">
 										<label>Leaving To</label>
 										<div class="input-group">
-											<input name="destination_city" class="form-control" required="" placeholder="E.g. New York" type="text">
+											<input id="destination_city" name="destination_city" class="form-control" required="" placeholder="E.g. New York" type="text">
 											<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
 										</div>
 									</div>
@@ -1786,7 +1786,6 @@
 			jQuery(function($){
 				"use strict";
 				$.supersized({
-
 					//Functionality
 					slideshow               :   1,		//Slideshow on/off
 					autoplay				:	1,		//Slideshow starts playing automatically
@@ -1800,7 +1799,6 @@
 					keyboard_nav            :   0,		//Keyboard navigation on/off
 					performance				:	1,		//0-Normal, 1-Hybrid speed/quality, 2-Optimizes image quality, 3-Optimizes transition speed // (Only works for Firefox/IE, not Webkit)
 					image_protect			:	1,		//Disables image dragging and right click with Javascript
-
 					//Size & Position
 					min_width		        :   0,		//Min width allowed (in pixels)
 					min_height		        :   0,		//Min height allowed (in pixels)
@@ -1808,7 +1806,6 @@
 					horizontal_center       :   1,		//Horizontally center background
 					fit_portrait         	:   1,		//Portrait images will not exceed browser height
 					fit_landscape			:   0,		//Landscape images will not exceed browser width
-
 					//Components
 					navigation              :   1,		//Slideshow controls on/off
 					thumbnail_navigation    :   1,		//Thumbnail navigation
@@ -1819,10 +1816,8 @@
 														{image : 'assets/images/slide2.jpg', title : 'Slide 2'},
 														{image : 'assets/images/slide.jpg', title : 'Slide 3'},
 												]
-
 				});
 		    });
-
 </script>
 
 <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body>
