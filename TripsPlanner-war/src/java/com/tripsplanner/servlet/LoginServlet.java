@@ -9,6 +9,7 @@ import com.tripsplanner.model.bean.LoginBeanLocal;
 import com.tripsplanner.model.entity.User;
 import static com.tripsplanner.util.ServletUtil.domain;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +50,10 @@ public class LoginServlet extends HttpServlet {
                 case "login-f":
                     goLoginFB(request, response);
                     break;
+                case "login-g":
+                    goLoginGoogle(request, response);
+                    break;
+                    
             }
         } catch (IOException | ServletException e) {
             request.setAttribute("error", e.getMessage());
@@ -101,7 +106,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("user") == null) {
-            response.sendRedirect(domain+"/TripsPlanner-war/login.html");
+            response.sendRedirect("/TripsPlanner-war/login.html");
         }
         
         else {
@@ -121,8 +126,29 @@ public class LoginServlet extends HttpServlet {
         User user = loginBean.validateFacebookUser(token, true);
 
          if (session.getAttribute("user") == null) {
-             response.sendRedirect(domain+"/TripsPlanner-war/login.html");
+             response.sendRedirect("/TripsPlanner-war/login.html");
          }
+    }
+
+    private void goLoginGoogle(HttpServletRequest request, HttpServletResponse response) {        
+        HttpSession session = request.getSession();
+        
+        HashMap<String, String> mapUser = new HashMap<String, String>();
+        
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String imgURL = request.getParameter("imgURL");
+        String id = request.getParameter("id");
+        
+        mapUser.put("email", email);
+        mapUser.put("name", name);
+        mapUser.put("surname", surname);
+        mapUser.put("imgURL", imgURL);
+        mapUser.put("id", id);
+        
+        User user = loginBean.validateGoogleUser(mapUser);
+ 
     }
 
 }

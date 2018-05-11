@@ -11,6 +11,6 @@ package com.tripsplanner.util;
  */
 public class ServletUtil {
     
-    public static String domain = "https://9906dda2.ngrok.io";
+    public static String domain = "https://8952a141.ngrok.io";
     
 }

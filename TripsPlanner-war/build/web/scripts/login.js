@@ -99,10 +99,37 @@ function doLoginFB() {
             console.log("stiamo per chiamare la hiddenform")
             document.getElementById("idtoken").value = response.authResponse.accessToken;
             document.getElementById("action").value = "login-f";
-            document.getElementById("hidden-form").submit();
+            document.getElementById("hidden-form-f").submit();
         } else {
             //non sei riuscito a connetterti
         }
     });
+}
+
+
+//Google
+
+function doLoginGoogle(googleUser) {       
+  // Useful data for your client-side scripts:
+  var profile = googleUser.getBasicProfile();
+  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+  console.log('Full Name: ' + profile.getName());
+  console.log('Given Name: ' + profile.getGivenName());
+  console.log('Family Name: ' + profile.getFamilyName());
+  console.log("Image URL: " + profile.getImageUrl());
+  console.log("Email: " + profile.getEmail());
+
+  // The ID token you need to pass to your backend:
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);
+  
+  document.getElementById("idtoken").value = id_token;
+  document.getElementById("action").value = "login-g";
+  document.getElementById("id").value = profile.getId()
+  document.getElementById("name").value = profile.getGivenName();
+  document.getElementById("surname").value = profile.getFamilyName();
+  document.getElementById("imgURL").value = profile.getImageUrl();
+  document.getElementById("email").value = profile.getEmail();
+  document.getElementById("hidden-form-g").submit();
 }
 

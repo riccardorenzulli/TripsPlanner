@@ -8,6 +8,7 @@ package com.tripsplanner.model.bean;
 import com.tripsplanner.model.entity.User;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.HashMap;
 import javax.ejb.Local;
 
 /**
@@ -18,5 +19,7 @@ import javax.ejb.Local;
 public interface LoginBeanLocal {
     
     User validateFacebookUser(String token, boolean create) throws MalformedURLException, IOException;
+
+    User validateGoogleUser(HashMap<String, String> mapUser);
     
 }

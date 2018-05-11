@@ -44,40 +44,32 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @Size(max = 45)
     @Column(name = "surname")
     private String surname;
-    @Size(max = 45)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
-    @Size(max = 512)
     @Column(name = "imgURL")
     private String imgURL;
     @Column(name = "fbID")
     private BigInteger fbID;
     @Column(name = "googleID")
-    private BigInteger googleID;
+    private String googleID;
     @Column(name = "age")
     private Integer age;
     @Column(name = "sex")
     private Short sex;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "enabled")
     private short enabled;
 
@@ -151,11 +143,11 @@ public class User implements Serializable {
         this.fbID = fbID;
     }
 
-    public BigInteger getGoogleID() {
+    public String getGoogleID() {
         return googleID;
     }
 
-    public void setGoogleID(BigInteger googleID) {
+    public void setGoogleID(String googleID) {
         this.googleID = googleID;
     }
 

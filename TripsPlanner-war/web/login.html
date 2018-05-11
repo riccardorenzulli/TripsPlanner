@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="LimpidThemes">
+        
+        <meta name="google-signin-client_id" content="682887231528-qe2dfr4gba9fn1dmef7q97bq7l6o6m98.apps.googleusercontent.com">
+
 
 	<title>Cruise - Responsive Travel Agency Template</title>
 
@@ -81,14 +84,31 @@
 			<div class="col-sm-4 col-sm-offset-4 login-form">
 				<h4>Login</h4>
 <div id="fb-root"></div>
+
 <a class="btn btn-block btn-social btn-facebook" style="color:white !important; text-align:center;" onclick="doLoginFB()">
                                                     <span class="fa fa-facebook"></span>
                                                     Sign in with Facebook
-                                                </a>	
-<form id="hidden-form" action="LoginServlet?action=login-f" method="post">
+                                                </a>
+
+<div class="g-signin2" data-onsuccess="doLoginGoogle" data-theme="light"></div>
+
+
+<form id="hidden-form-g" action="LoginServlet?action=login-g" method="post">
         <input type="hidden" id="idtoken" name="idtoken">
         <input type="hidden" id="action" name="action">
-        </form>				
+        <input type="hidden" id="id" name="id">
+        <input type="hidden" id="name" name="name">
+        <input type="hidden" id="surname" name="surname">
+        <input type="hidden" id="email" name="email">
+        <input type="hidden" id="imgURL" name="imgURL">
+
+ </form>
+
+<form id="hidden-form-f" action="LoginServlet?action=login-f" method="post">
+        <input type="hidden" id="idtoken" name="idtoken">
+        <input type="hidden" id="action" name="action">
+
+ </form>
 			
 </div>
 		</div>
@@ -212,7 +232,7 @@
 <script src="assets/plugins/wow.min.js"></script>
 <script src="assets/plugins/jquery.magnific-popup.min.js"></script>
 <script src="assets/js/js.js"></script>
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </body>
 

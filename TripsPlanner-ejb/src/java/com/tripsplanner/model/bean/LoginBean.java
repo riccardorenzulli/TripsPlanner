@@ -10,9 +10,11 @@ import com.tripsplanner.model.facade.UserFacadeLocal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.json.JSONObject;
@@ -54,6 +56,9 @@ public class LoginBean implements LoginBeanLocal {
     
     private JSONObject getFacebookUserJson(String token)
             throws MalformedURLException, IOException {
+        
+        System.out.println("------------JSON--------------");
+
         URL validationUrl = new URL("http://graph.facebook.com/me?fields=name,email&access_token=" + token);
         HttpURLConnection conn = (HttpURLConnection) validationUrl.openConnection();
 
@@ -68,7 +73,34 @@ public class LoginBean implements LoginBeanLocal {
         }
         String graph = b.toString();
         JSONObject jsonOut = new JSONObject(graph);
+        System.out.println("------------JSON--------------");
+        System.out.println(jsonOut);
         return jsonOut.has("error") ? null : jsonOut;
+    }
+
+    public User validateGoogleUser(HashMap<String, String> mapUser) {
+        
+        User user = userFacade.findUserByEmail(mapUser.get("email"));
+        
+        if (user == null) {
+            user = new User();
+            user.setEmail(mapUser.get("email"));
+            user.setName(mapUser.get("name"));
+            user.setSurname(mapUser.get("surname"));
+            user.setImgURL(mapUser.get("imgURL"));
+            user.setGoogleID(mapUser.get("id"));
+            
+            System.out.print("-----GOOGLE ID:"+user.getGoogleID());
+            System.out.print(user.getEmail());
+            
+            System.out.print(user.getName());
+            System.out.print(user.getSurname());
+            System.out.print(user.getImgURL());
+
+            userFacade.create(user);
+        }
+        
+        return user;
     }
     
 }
