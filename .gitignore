@@ -7,4 +7,5 @@
 /TripsPlanner-war/build
 /TripsPlanner-war/dist
 /TripsPlanner-war/nbproject/
+/TripsPlanner-war/src/java/com/tripsplanner/util/ServletUtil.java
 
