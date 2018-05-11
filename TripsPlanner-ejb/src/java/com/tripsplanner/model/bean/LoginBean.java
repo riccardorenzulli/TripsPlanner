@@ -79,9 +79,9 @@ public class LoginBean implements LoginBeanLocal {
     }
 
     public User validateGoogleUser(HashMap<String, String> mapUser) {
-        
+
         User user = userFacade.findUserByEmail(mapUser.get("email"));
-        
+
         if (user == null) {
             user = new User();
             user.setEmail(mapUser.get("email"));

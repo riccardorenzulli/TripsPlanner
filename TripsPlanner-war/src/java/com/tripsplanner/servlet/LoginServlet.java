@@ -9,6 +9,7 @@ import com.tripsplanner.model.bean.LoginBeanLocal;
 import com.tripsplanner.model.entity.User;
 import static com.tripsplanner.util.ServletUtil.domain;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -52,6 +53,9 @@ public class LoginServlet extends HttpServlet {
                     break;
                 case "login-g":
                     goLoginGoogle(request, response);
+                    break;
+                case "logout":
+                    logout(request, response);
                     break;
                     
             }
@@ -110,6 +114,7 @@ public class LoginServlet extends HttpServlet {
         }
         
         else {
+            System.out.println("esiste già un utente in sessione");
         } 
         
     }
@@ -118,8 +123,6 @@ public class LoginServlet extends HttpServlet {
         throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        
-       
         
         String token = request.getParameter("idtoken");
         
@@ -130,7 +133,8 @@ public class LoginServlet extends HttpServlet {
          }
     }
 
-    private void goLoginGoogle(HttpServletRequest request, HttpServletResponse response) {        
+    private void goLoginGoogle(HttpServletRequest request, HttpServletResponse response) 
+    throws IOException, ServletException{        
         HttpSession session = request.getSession();
         
         HashMap<String, String> mapUser = new HashMap<String, String>();
@@ -147,8 +151,52 @@ public class LoginServlet extends HttpServlet {
         mapUser.put("imgURL", imgURL);
         mapUser.put("id", id);
         
+        try{
+        // create user in db if not present, and return user
         User user = loginBean.validateGoogleUser(mapUser);
+        
+        
+        if (user == null) {
+                throw new ServletException("Cant validate user");
+            }
+
+        String typeLogin = "google";
+        // setup the user in the session
+        setupSession(user, typeLogin, request, response);
+            
+        }catch (ServletException | IOException e) {
+            // msg sent in the http request
+            request.setAttribute("msg", e.getMessage());
+            request.getRequestDispatcher("/admin/500.jsp").forward(request, response);
+        }
  
+    }
+
+    private void setupSession(User user, String typeLogin, HttpServletRequest request, HttpServletResponse response) 
+    throws ServletException, IOException{
+        
+        // add the user object and logintype to the http session
+        request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("typeLogin", typeLogin);
+        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (getSessionUser(request) != null) {
+            //if(request.getSession()!=null)
+            try {
+                request.getSession().invalidate();
+            } catch (NullPointerException ne) {
+
+            }
+        }
+        response.sendRedirect("index.html");
+    }
+    
+    User getSessionUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        return (User) session.getAttribute("user");
     }
 
 }
