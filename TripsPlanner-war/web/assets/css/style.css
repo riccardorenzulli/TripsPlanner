@@ -7377,3 +7377,7 @@ h5 {
   -ms-filter: blur(5px);
   /*filter: blur(5px);*/
 }
+
+#googlelogin .abcRioButton {
+    width: auto !important;
+}

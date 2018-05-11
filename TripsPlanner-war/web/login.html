@@ -82,14 +82,16 @@
 	<div class="row login-row">
 		<div class="container clear-padding">
 			<div class="col-sm-4 col-sm-offset-4 login-form">
--<div id="fb-root"></div>
+-<div id="fb-root">
+    
+<div id="googlelogin" class="g-signin2" data-longtitle="true" data-onsuccess="doLoginGoogle" data-theme="light" style="margin-bottom: 5%"></div>
 
 <a class="btn btn-block btn-social btn-facebook" style="background-color: #3b5998; color:white !important; text-align:center;" onclick="doLoginFB()">
-    <span class="fa fa-facebook"></span>
+    <span class="fa fa-facebook" style="float: left; height: center"></span>
     Sign in with Facebook
 </a>
 
-<div class="g-signin2" data-onsuccess="doLoginGoogle" data-theme="light"></div>
+</div>
 
 
 <form id="hidden-form-g" action="LoginServlet?action=login-g" method="post">
