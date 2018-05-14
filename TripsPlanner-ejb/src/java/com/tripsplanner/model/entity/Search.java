@@ -29,6 +29,13 @@ public class Search implements Serializable {
     private Date returnDate;
     private int numAdult;
     private int numChildren; //declared for future works
+    /*Preferences*/
+    private boolean museums;
+    private boolean culture;
+    private boolean nature;
+    private boolean beaches;
+    private boolean nightLife;
+    private boolean shopping;
     
     public String getDepartureCity() {
         return departureCity;
@@ -76,6 +83,54 @@ public class Search implements Serializable {
 
     public void setNumChildren(int numChildren) {
         this.numChildren = numChildren;
+    }
+
+    public boolean isMuseums() {
+        return museums;
+    }
+
+    public void setMuseums(boolean museums) {
+        this.museums = museums;
+    }
+
+    public boolean isCulture() {
+        return culture;
+    }
+
+    public void setCulture(boolean culture) {
+        this.culture = culture;
+    }
+
+    public boolean isNature() {
+        return nature;
+    }
+
+    public void setNature(boolean nature) {
+        this.nature = nature;
+    }
+
+    public boolean isBeaches() {
+        return beaches;
+    }
+
+    public void setBeaches(boolean beaches) {
+        this.beaches = beaches;
+    }
+
+    public boolean isNightLife() {
+        return nightLife;
+    }
+
+    public void setNightLife(boolean nightLife) {
+        this.nightLife = nightLife;
+    }
+
+    public boolean isShopping() {
+        return shopping;
+    }
+
+    public void setShopping(boolean shopping) {
+        this.shopping = shopping;
     }
 
     

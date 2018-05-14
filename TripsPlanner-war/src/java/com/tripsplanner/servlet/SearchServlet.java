@@ -89,7 +89,12 @@ public class SearchServlet extends HttpServlet {
         String returnDate = request.getParameter("return_date");
         String numAdult = request.getParameter("adult_count");
         String numChildren = request.getParameter("child_count");
-        String museums = request.getParameter("museums");
+        String museums = request.getParameter("museums") == null ? "NO" : "YES";
+        String culture = request.getParameter("culture") == null ? "NO" : "YES";
+        String nature = request.getParameter("nature") == null ? "NO" : "YES";
+        String beaches = request.getParameter("beaches") == null ? "NO" : "YES";
+        String shopping = request.getParameter("shopping") == null ? "NO" : "YES";
+        String nightLife = request.getParameter("night_life") == null ? "NO" : "YES";
         
         mapSearch.put(departureCity, "departure_city");
         mapSearch.put(destinationCity, "destination_city");
@@ -97,7 +102,12 @@ public class SearchServlet extends HttpServlet {
         System.out.print("Departure: " + departureCity + "\nDestination: " + destinationCity);
         System.out.print("Departure date: " + departureDate + "\nDestination date: " + returnDate);
         System.out.print("Adult: " + numAdult + "\nChildren: " + numChildren);
-        System.out.print("Museums checkbox: " + museums);
+        System.out.print("Checkbox: \n" + "Museums: " + museums + 
+                "\nCulture: " + culture +
+                "\nNature: " + nature +
+                "\nBeaches: " + beaches + 
+                "\nShopping: " + shopping + 
+                "\nNight life: " + nightLife);
     }
 
 }

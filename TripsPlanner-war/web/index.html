@@ -466,8 +466,8 @@
 							<!-- BEGIN: FLIGHT SEARCH -->
 							<div role="tabpanel" class="tab-pane active" id="flight">
                                                             <form action="SearchServlet?action=search" method="post">
-									<div class="col-md-12 product-search-title">Book Flight Tickets</div>
-									<div class="col-md-12 search-col-padding">
+									<div class="col-md-12 product-search-title">Trip information</div>
+									<div class="col-md-12 search-col-padding hidden">
 										<label class="radio-inline">
 											<input name="inlineRadioOptions" id="inlineRadio1" value="One Way" type="radio"> One Way
 										</label>
@@ -524,19 +524,22 @@
 										
 </div>
 	<div class="clearfix"></div>
-	<div class="col-md-6 col-sm-6 search-col-padding">
+	<div class="col-md-12 search-col-padding">
 					<h5><i class="fa fa-list"></i> Interests</h5>
-					<ul>
+					<ul class="list-unstyled list-inline">
                                             <li><input id="museums" type="checkbox" name="museums" value="YES"> Museums</li>
-						<li><input id="nature" type="checkbox"> Nature</li>
-						<li><input id="night_life" type="checkbox">Night life</li>
+                                            <li><input id="culture" type="checkbox" name="culture" value="YES"> Culture</li>
+                                            <li><input id="nature" type="checkbox" name="nature" value="YES"> Nature</li>
+                                            <li><input id="beaches" type="checkbox" name="beaches" value="YES"> Beaches</li>
+                                            <li><input id="shopping" type="checkbox" name="shopping" value="YES"> Shopping</li>
+                                            <li><input id="night_life" type="checkbox" name="night_life" value="YES"> Night life</li>
 					</ul>
 				</div>
 	
 									<div class="clearfix"></div>
 																															
 									<div class="col-md-12 search-col-padding">
-										<button type="submit" class="search-button btn transition-effect">Search Flights</button>
+										<button type="submit" class="search-button btn transition-effect">Search</button>
 									</div>
 									<div class="clearfix"></div>
 								</form>
