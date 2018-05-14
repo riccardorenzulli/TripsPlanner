@@ -110,7 +110,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("user") == null) {
-            response.sendRedirect("/TripsPlanner-war/login.html");
+            response.sendRedirect("login.jsp");
         }
         
         else {
@@ -129,7 +129,7 @@ public class LoginServlet extends HttpServlet {
         User user = loginBean.validateFacebookUser(token, true);
 
          if (session.getAttribute("user") == null) {
-             response.sendRedirect("/TripsPlanner-war/login.html");
+             response.sendRedirect("login.jsp");
          }
     }
 
@@ -183,20 +183,19 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if (getSessionUser(request) != null) {
+        User user = getSessionUser(request);
+        if (user != null) {
             //if(request.getSession()!=null)
-            try {
-                request.getSession().invalidate();
-            } catch (NullPointerException ne) {
-
-            }
+            request.getSession().invalidate();
+            user = null;
+            System.out.println("Session invalidated");
         }
-        response.sendRedirect("index.html");
+        response.sendRedirect("index.jsp");
     }
     
-    User getSessionUser(HttpServletRequest request) {
+    private User getSessionUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return (User) session.getAttribute("user");
+        return (User)session.getAttribute("user");
     }
 
 }
