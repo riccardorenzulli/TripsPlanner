@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : 11-mag-2018, 15.24.13
     Author     : giovannibonetta
@@ -7,43 +7,58 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="user" class="com.tripsplanner.model.entity.User" scope="session" />
+
 <!DOCTYPE html>
-<html class="load-full-screen"><head>
+<html class="load-full-screen">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="LimpidThemes">
+		<meta name="google-signin-client_id" content="682887231528-qe2dfr4gba9fn1dmef7q97bq7l6o6m98.apps.googleusercontent.com">
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="LimpidThemes">
-        <meta name="google-signin-client_id" content="682887231528-qe2dfr4gba9fn1dmef7q97bq7l6o6m98.apps.googleusercontent.com">
-
-
-	<title>Cruise - Responsive Travel Agency Template</title>
+		<title>TripsPlanner - Create fantastic trips</title>
 
     <!-- STYLES -->
-	<link href="assets/css/animate.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="assets/css/owl.carousel.css" rel="stylesheet">
-	<link href="assets/css/owl-carousel-theme.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
-	<link href="assets/css/style.css" rel="stylesheet" media="screen">
-	<!-- LIGHT -->
-	<link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
-	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="assets/css/animate.min.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
+		<link href="assets/css/owl.carousel.css" rel="stylesheet">
+		<link href="assets/css/owl-carousel-theme.css" rel="stylesheet">
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
+		<link href="assets/css/style.css" rel="stylesheet" media="screen">
+		<!-- LIGHT -->
+		<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<!-- FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
-	<!-- FONTS -->
+    <!-- SCRIPTS -->
+		<script src="scripts/login.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+	</head>
 
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
-        
-        <!-- SCRIPTS -->
-        <script src="scripts/login.js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-</head>
-
-<body class="load-full-screen"><div id="supersized" class="quality" style="display: block;"><a target="_blank" style="display: block; opacity: 1;" class="prevslide"><img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a><a target="_blank" style="display: block; opacity: 1;" class="activeslide"><img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a><a target="_blank"><img src="assets/images/slide2.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a></div><div id="supersized" class="quality" style="display: block;"><a target="_blank" style="display: block; opacity: 1;" class=""><img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a><a target="_blank" style="display: block; opacity: 1;" class="activeslide"><img src="assets/images/slide2.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a><a target="_blank"><img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a></div>
+	<body class="load-full-screen">
+		<div id="supersized" class="quality" style="display: block;">
+			<a target="_blank" style="display: block; opacity: 1;" class="prevslide">
+				<img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
+			</a>
+			<a target="_blank" style="display: block; opacity: 1;" class="activeslide">
+				<img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
+			</a>
+			<a target="_blank">
+				<img src="assets/images/road.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
+			</a>
+		</div>
+		<div id="supersized" class="quality" style="display: block;">
+			<a target="_blank" style="display: block; opacity: 1;" class="">
+				<img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a>
+				<a target="_blank" style="display: block; opacity: 1;" class="activeslide">
+					<img src="assets/images/road.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a>
+					<a target="_blank">
+						<img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;"></a>
+		</div>
 
 <!-- BEGIN: PRELOADER -->
 <div id="loader" class="load-full-screen" style="display: none;">
@@ -58,384 +73,9 @@
 <!-- BEGIN: SITE-WRAPPER -->
 <div class="site-wrapper">
 <!-- BEGIN: NAV SECTION -->
-<section>
-	<div class="row transparent-menu-top">
-		<div class="container clear-padding">
-			<div class="navbar-contact">
-				<div class="col-md-7 col-sm-6 clear-padding">
-					<a href="#" class="transition-effect hidden"><i class="fa fa-phone"></i> (+91) 1234567890</a>
-					<a href="#" class="transition-effect"><i class="fa fa-envelope-o hidden"></i>TripsPlanner</a>
-				</div>
-				<div class="col-md-5 col-sm-6 clear-padding search-box">
-					<div class="col-md-6 col-xs-5 clear-padding hidden">
-						<form>
-							<div class="input-group">
-								<input name="search" class="form-control" required="" placeholder="Search" type="text">
-								<span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 col-xs-7 clear-padding user-logged">
-						<a href="#" class="transition-effect">
-							<img src="<jsp:getProperty name="user" property="imgURL"/>" alt="cruise">
-							<jsp:getProperty name="user" property="name"/>
-						</a>
-
-						<a href="javascript:genericLogout('${sessionScope.typeLogin}')" class="transition-effect">
-							<i class="fa fa-sign-out"></i>Logout</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="row transparent-menu hidden">
-		<div class="container clear-padding">
-			<!-- BEGIN: HEADER -->
-			<div class="navbar-wrapper">
-				<div class="navbar navbar-default" role="navigation">
-					<!-- BEGIN: NAV-CONTAINER -->
-					<div class="nav-container">
-						<div class="navbar-header">
-							<!-- BEGIN: TOGGLE BUTTON (RESPONSIVE)-->
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-
-							<!-- BEGIN: LOGO -->
-							<a class="navbar-brand logo" href="index.html">CRUISE</a>
-						</div>
-
-						<!-- BEGIN: NAVIGATION -->
-						<div class="navbar-collapse collapse">
-							<ul class="nav navbar-nav navbar-right">
-								<li class="dropdown">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-home"></i> HOME <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu">
-										<li><a href="index.html"> HOME STYLE 1</a></li>
-										<li><a href="index-2.html"> HOME STYLE 2</a></li>
-										<li><a href="index-3.html"> HOME STYLE 3</a></li>
-										<li><a href="index-4.html"> HOME STYLE 4</a></li>
-										<li><a href="index-5.html"> HOME STYLE 5</a></li>
-									</ul>
-								</li>
-								<li class="dropdown mega">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-bed"></i> HOTELS <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu mega-menu">
-										<li class="col-md-3 col-sm-3 desc">
-											<h4>HOTELS</h4>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>PAGES</h5>
-											<ul>
-												<li><a href="hotel.html">HOTEL SEARCH</a></li>
-
-												<li><a href="hotel-list.html">HOTEL LIST</a></li>
-												<li><a href="hotel-grid.html">HOTEL GRID</a></li>
-												<li><a href="hotel-booking.html">HOTEL BOOKING</a></li>
-												<li><a href="hotel-booking-2.html">HOTEL BOOKING 2</a></li>
-												<li><a href="hotel-detailed-3.html">HOTEL DETAILED</a></li>
-												<li><a href="hotel-detailed.html">HOTEL DETAILED 2</a></li>
-											</ul>
-											<h5 class="top-margin">TOP REGION</h5>
-											<ul>
-												<li><a href="#">ASIA</a></li>
-												<li><a href="#">AFRICA</a></li>
-												<li><a href="#">EAST ASIA</a></li>
-												<li><a href="#">WESTERN EUROPE</a></li>
-												<li><a href="#">SOUTH AMERICA</a></li>
-												<li><a href="#">LATIN AMERICA</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>TOP REGION</h5>
-											<ul>
-												<li><a href="#">ASIA</a></li>
-												<li><a href="#">AFRICA</a></li>
-												<li><a href="#">EAST ASIA</a></li>
-												<li><a href="#">WESTERN EUROPE</a></li>
-												<li><a href="#">SOUTH AMERICA</a></li>
-												<li><a href="#">LATIN AMERICA</a></li>
-											</ul>
-											<h5 class="top-margin">TOP DESTINATION</h5>
-											<ul>
-												<li><a href="#">BENGLURU</a></li>
-												<li><a href="#">CHENNAI</a></li>
-												<li><a href="#">CALIFORNIA</a></li>
-												<li><a href="#">GOA</a></li>
-												<li><a href="#">NEW YORK</a></li>
-												<li><a href="#">NEW DELHI</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<div class="img-div clear-top">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>20% OFF</h5>
-													<p>On Paris HOTELS</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-											<div class="img-div">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>20% OFF</h5>
-													<p>On Paris HOTELS</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-								<li class="dropdown mega">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-plane"></i> FLIGHTS <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu mega-menu">
-										<li class="col-md-3 col-sm-3 desc">
-											<h4>FLIGHTS</h4>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>PAGES</h5>
-											<ul>
-												<li><a href="flight.html">FLIGHT SEARCH</a></li>
-												<li><a href="flight-list-2.html">FLIGHT LIST</a></li>
-												<li><a href="flight-list.html">FLIGHT LIST 2</a></li>
-												<li><a href="flight-booking.html">FLIGHT BOOKING</a></li>
-											</ul>
-											<div class="img-div">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>30% OFF</h5>
-													<p>On BANGKOK FLIGHTS</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>TOP REGION</h5>
-											<ul>
-												<li><a href="#">ASIA</a></li>
-												<li><a href="#">AFRICA</a></li>
-												<li><a href="#">EAST ASIA</a></li>
-												<li><a href="#">WESTERN EUROPE</a></li>
-											</ul>
-											<div class="img-div">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>10% OFF</h5>
-													<p>On DUBAI FLIGHTS</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>CHEAP FLIGHTS TO</h5>
-											<ul>
-												<li><a href="#">BENGLURU</a></li>
-												<li><a href="#">CHENNAI</a></li>
-												<li><a href="#">CALIFORNIA</a></li>
-												<li><a href="#">GOA</a></li>
-											</ul>
-											<div class="img-div">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>20% OFF</h5>
-													<p>On Paris Flights</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-								<li class="dropdown mega">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-suitcase"></i> TOURS <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu mega-menu">
-										<li class="col-md-3 col-sm-3 desc">
-											<h4>TOURS</h4>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>PAGES</h5>
-											<ul>
-												<li><a href="holiday.html">TOUR SEARCH</a></li><li><a href="holidays-list.html">TOUR LIST</a></li>
-												<li><a href="holidays-grid.html">TOUR GRID</a></li>
-												<li><a href="holidays-grid-2.html">TOUR GRID 2</a></li>
-												<li><a href="holiday-detail-2.html">TOUR DETAIL</a></li>
-												<li><a href="holiday-detail.html">TOUR DETAIL 2</a></li>
-												<li><a href="holiday-booking.html">TOUR BOOKING</a></li>
-												<li><a href="holiday-booking-2.html">TOUR BOOKING 2</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>TOP REGION</h5>
-											<ul>
-												<li><a href="#">ASIA</a></li>
-												<li><a href="#">AFRICA</a></li>
-												<li><a href="#">EAST ASIA</a></li>
-												<li><a href="#">WESTERN EUROPE</a></li>
-												<li><a href="#">SOUTH AMERICA</a></li>
-												<li><a href="#">LATIN AMERICA</a></li>
-												<li><a href="#">ASIA</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<div class="img-div clear-top">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>DUBAI</h5>
-													<p>Starting From $599</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-								<li class="dropdown mega">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-taxi"></i> CARS <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu mega-menu">
-										<li class="col-md-3 col-sm-3 desc">
-											<h4>CARS</h4>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>PAGES</h5>
-											<ul>
-												<li><a href="car.html">CAR SEARCH</a></li>
-												<li><a href="car-grid-3.html">CAR GRID</a></li>
-												<li><a href="car-list.html">CAR LIST</a></li>
-												<li><a href="car-detailed-2.html">CAR DETAIL</a></li>
-												<li><a href="car-detailed.html">CAR DETAIL 2</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>TOP REGION</h5>
-											<ul>
-												<li><a href="#">ASIA</a></li>
-												<li><a href="#">AFRICA</a></li>
-												<li><a href="#">EAST ASIA</a></li>
-												<li><a href="#">WESTERN EUROPE</a></li>
-												<li><a href="#">SOUTH AMERICA</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<div class="img-div clear-top">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>DUBAI</h5>
-													<p>Starting From $599</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-								<li class="dropdown mega">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-ship"></i> CRUISE <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu mega-menu">
-										<li class="col-md-3 col-sm-3 desc">
-											<h4>CRUISES</h4>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>PAGES</h5>
-											<ul>
-												<li><a href="cruise.html">CRUISE SEARCH</a></li>
-												<li><a href="cruise-list.html">CRUISE LIST</a></li>
-												<li><a href="cruise-detail-2.html">CRUISE DETAIL</a></li>
-												<li><a href="cruise-detail.html">CRUISE DETAIL 2</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>TOP REGION</h5>
-											<ul>
-												<li><a href="#">ASIA</a></li>
-												<li><a href="#">AFRICA</a></li>
-												<li><a href="#">EAST ASIA</a></li>
-												<li><a href="#">WESTERN EUROPE</a></li>
-												<li><a href="#">SOUTH AMERICA</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<div class="img-div clear-top">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>DUBAI</h5>
-													<p>Starting From $599</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-								<li class="dropdown mega">
-									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-file"></i> PAGES <i class="fa fa-caret-down"></i></a>
-									<ul class="dropdown-menu mega-menu">
-										<li class="col-md-3 col-sm-4 links">
-											<h5>BLOG PAGES</h5>
-											<ul>
-												<li><a href="blog-right-sidebar.html">RIGHT SIDEBAR</a></li>
-												<li><a href="blog-left-sidebar.html">LEFT SIDEBAR</a></li>
-												<li><a href="blog-full-width.html">FULL WIDTH</a></li>
-												<li><a href="single-right-sidebar.html">SINGLE RIGHT SIDEBAR</a></li>
-												<li><a href="single-left-sidebar.html">SINGLE LEFT SIDEBAR</a></li>
-												<li><a href="single-full-width.html">SINGLE FULL WIDTH</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>SPECIAL PAGES</h5>
-											<ul>
-												<li><a href="coming-soon.html">COMING SOON</a></li>
-												<li><a href="404.html">404</a></li>
-												<li><a href="404-2.html">404 2</a></li>
-												<li><a href="loading.html">LOADING</a></li>
-												<li><a href="login.html">LOGIN/REGSITER</a></li>
-												<li><a href="elements.html">ELEMENTS</a></li>
-												<li><a href="thank-you.html">COMING SOON</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<h5>EXTRA PAGES</h5>
-											<ul>
-												<li><a href="user-profile.html">USER DASHBOARD</a></li>
-												<li><a href="gallery-3column.html">GALLERY 3 COLUMN</a></li>
-												<li><a href="gallery-4column.html">GALLERY 4 COLUMN</a></li>
-												<li><a href="about-us.html">ABOUT US</a></li>
-												<li><a href="contact-us.html">CONTACT US</a></li>
-											</ul>
-										</li>
-										<li class="col-md-3 col-sm-4 links">
-											<div class="img-div clear-top">
-												<img src="assets/images/tour1.jpg" alt="cruise">
-												<div class="overlay">
-													<h5>DUBAI</h5>
-													<p>Starting From $599</p>
-													<a href="#">KNOW MORE</a>
-												</div>
-											</div>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-							</ul>
-						</div>
-						<!-- END: NAVIGATION -->
-					</div>
-					<!--END: NAV-CONTAINER -->
-				</div>
-			</div>
-			<!-- END: HEADER -->
-		</div>
-	</div>
-</section>
+<jsp:include page="header.jsp" />
+<jsp:include page="nav.html"/>
+<div class="clearfix"></div>
 <!-- END: NAV SECTION -->
 
 <%@include file="searchBox.html" %>
@@ -474,113 +114,6 @@
 		</div>
 </section>
 <!--END: HOW IT WORK -->
-
-<!-- START: PRODUCT SECTION-->
-<section class="hotel-product home-product hidden">
-	<!-- START: PRODUCT ROW 1 -->
-	<div class="row light-row">
-			<div class="col-md-6 clear-padding wow slideInLeft animated" style="visibility: visible; animation-name: slideInLeft;">
-				<div class="product-wrapper">
-					<div class="col-md-6 col-sm-6 home-product-padding tooltip-right">
-						<h4>Romantic Paris</h4>
-						<h5><i class="fa fa-map-marker"></i> France</h5>
-						<p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing.</p>
-						<div class="rating-box">
-							<div class="pull-left">
-								<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.0/5</span>
-							</div>
-							<div class="pull-right">
-								<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><span>4.5/5</span>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-						<div class="pricing-info">
-							<div class="pull-left">
-								<span>$999/Person</span>
-							</div>
-							<div class="pull-right">
-								<a href="#" class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">BOOK NOW</a>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="col-md-6 col-sm-6 clear-padding image-sm text-center">
-						<img src="assets/images/home2.jpg" alt="cruise">
-						<div class="detail-link-wrapper">
-							<div class="detail-link">
-								<a href="#"><i class="fa fa-search"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-				<div class="product-wrapper">
-					<div class="col-md-6 col-sm-6 clear-padding image-sm text-center">
-						<img src="assets/images/home2.jpg" alt="cruise">
-						<div class="detail-link-wrapper">
-							<div class="detail-link">
-								<a href="#"><i class="fa fa-search"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 home-product-padding tooltip-left">
-						<h4>Blue Beach</h4>
-						<h5><i class="fa fa-map-marker"></i> Dubai</h5>
-						<p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing.</p>
-						<div class="rating-box">
-							<div class="pull-left">
-								<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.0/5</span>
-							</div>
-							<div class="pull-right">
-								<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><span>4.5/5</span>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-						<div class="pricing-info">
-							<div class="pull-left">
-								<span>$899/Person</span>
-							</div>
-							<div class="pull-right">
-								<a href="#" class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">BOOK NOW</a>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-			<div class="clearfix visible-sm-block"></div>
-			<div class="col-md-6 clear-padding image-lg wow slideInRight animated" style="visibility: visible; animation-name: slideInRight;">
-				<img src="assets/images/home.jpg" alt="cruise">
-				<div class="overlay">
-					<div class="product-detail text-center">
-						<h3>Africa Safari</h3>
-						<h5><i class="fa fa-map-marker"></i> KENYA</h5>
-						<p>Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing.</p>
-						<div class="rating-box">
-							<div class="pull-left">
-								<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.0/5</span>
-							</div>
-							<div class="pull-right">
-								<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><span>4.5/5</span>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-						<div class="pricing-info">
-							<div class="pull-left">
-								<span>$499/Person</span>
-							</div>
-							<div class="pull-right">
-								<a href="#" class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">BOOK NOW</a>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-	</div>
-	<!-- END: PRODUCT ROW 1 -->
-</section>
-<!-- END: PRODUCT SECTION -->
 
 <!-- BEGIN: TOP DESTINATION SECTION -->
 <section id="home-top-destination">
@@ -1221,106 +754,8 @@
 <!-- END: HOT DEALS -->
 
 <!-- START: FOOTER -->
-<section id="footer">
-	<footer>
-		<div class="row main-footer-sub hidden">
-			<div class="container clear-padding">
-				<div class="col-md-7 col-sm-7">
-					<form>
-						<label>SUBSCRIBE TO OUR NEWSLETTER</label>
-						<div class="clearfix"></div>
-						<div class="col-md-9 col-sm-8 col-xs-6 clear-padding">
-							<input class="form-control" required="" placeholder="Enter Your Email" name="email" type="email">
-						</div>
-						<div class="col-md-3 col-sm-4 col-xs-6 clear-padding">
-							<button type="submit"><i class="fa fa-paper-plane"></i>SUBSCRIBE</button>
-						</div>
-					</form>
-				</div>
-				<div class="col-md-5 col-sm-5">
-					<div class="social-media pull-right">
-						<ul>
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="main-footer row">
-			<div class="container clear-padding">
-				<div class="col-md-3 col-sm-6 about-box">
-					<h3>CRUISE</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-					<a href="#">READ MORE</a>
-				</div>
-				<div class="col-md-3 col-sm-6 links">
-					<h4>Popular Tours</h4>
-					<ul>
-						<li><a href="#">Romantic France</a></li>
-						<li><a href="#">Wonderful Lodnon</a></li>
-						<li><a href="#">Awesome Amsterdam</a></li>
-						<li><a href="#">Wild Africa</a></li>
-						<li><a href="#">Beach Goa</a></li>
-						<li><a href="#">Casino Los Vages</a></li>
-						<li><a href="#">Romantic France</a></li>
-					</ul>
-				</div>
-				<div class="clearfix visible-sm-block"></div>
-				<div class="col-md-3 col-sm-6 links">
-					<h4>Our Services</h4>
-					<ul>
-						<li><a href="#">Domestic Flights</a></li>
-						<li><a href="#">International Flights</a></li>
-						<li><a href="#">Tours &amp; Holidays</a></li>
-						<li><a href="#">Domestic Hotels</a></li>
-						<li><a href="#">International Hotels</a></li>
-						<li><a href="#">Cruise Holidays</a></li>
-						<li><a href="#">Car Rental</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 col-sm-6 contact-box">
-					<h4>Contact Us</h4>
-					<p><i class="fa fa-home"></i> Street #156 Burbank, Studio City Hollywood, California USA</p>
-					<p><i class="fa fa-phone"></i> +91 1234567890</p>
-					<p><i class="fa fa-envelope-o"></i> support@domain.com</p>
-				</div>
-				<div class="clearfix"></div>
-				<div class="col-md-12 text-center we-accept hidden">
-					<h4>We Accept</h4>
-					<ul>
-						<li><img src="assets/images/card/card.jpg" alt="cruise"></li>
-						<li><img src="assets/images/card/card.jpg" alt="cruise"></li>
-						<li><img src="assets/images/card/card.jpg" alt="cruise"></li>
-						<li><img src="assets/images/card/card.jpg" alt="cruise"></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="main-footer-nav row">
-			<div class="container clear-padding">
-				<div class="col-md-6 col-sm-6">
-					<p>Copyright © 2015 LimpidThemes. All Rights Reserved.</p>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<ul>
-						<li><a href="#">FLIGHTS</a></li>
-						<li><a href="#">TOURS</a></li>
-						<li><a href="#">CARS</a></li>
-						<li><a href="#">HOTELS</a></li>
-						<li><a href="#">BLOG</a></li>
-					</ul>
-				</div>
-				<div class="go-up">
-					<a href="#"><i class="fa fa-arrow-up"></i></a>
-				</div>
-			</div>
-		</div>
-	</footer>
-</section>
+<jsp:include page="footer.html" />
+
 <!-- END: FOOTER -->
 </div>
 <!-- END: SITE-WRAPPER -->
@@ -1335,10 +770,9 @@
 <script src="assets/plugins/wow.min.js"></script>
 <script type="text/javascript" src="assets/plugins/supersized.3.1.3.min.js"></script>
 <script src="assets/js/js.js"></script>
-  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script type="text/javascript">
-			/* SLIDER SETTINGS */
+
 			jQuery(function($){
 				"use strict";
 				$.supersized({
@@ -1371,17 +805,14 @@
 					slide_counter           :   1,		//Display slide numbers
 					slide_captions          :   1,		//Slide caption (Pull from "title" in slides array)
 					slides 					:  	[		//Slideshow Images
-														{image : 'assets/images/slide.jpg', title : 'Slide 1'},
-														{image : 'assets/images/slide2.jpg', title : 'Slide 2'},
-														{image : 'assets/images/slide.jpg', title : 'Slide 3'},
+														{image : 'assets/images/road.jpg', title : 'Slide 1'},
+														{image : 'assets/images/road.jpg', title : 'Slide 2'},
+														{image : 'assets/images/road.jpg', title : 'Slide 3'}
 												]
 
 				});
 		    });
 
 </script>
-
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body>
-
+</body>
 </html>
-

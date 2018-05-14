@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -31,16 +31,17 @@
 //    });
 //  }
 //
-//  window.fbAsyncInit = function() {
-//    FB.init({
-//      appId      : '1525121230949483',
-//      cookie     : true,  // enable cookies to allow the server to access 
-//                          // the session
-//      xfbml      : true,  // parse social plugins on this page
-//      version    : 'v3.0' // use graph api version 2.8
-//    });
+ // window.fbAsyncInit = function() {
+ //   FB.init({
+ //     appId      : '1525121230949483',
+ //     cookie     : true,  // enable cookies to allow the server to access
+ //                         // the session
+ //     xfbml      : true,  // parse social plugins on this page
+ //     version    : 'v3.0' // use graph api version 2.8
+ //   });
+
 //
-//    // Now that we've initialized the JavaScript SDK, we call 
+//    // Now that we've initialized the JavaScript SDK, we call
 //    // FB.getLoginStatus().  This function gets the state of the
 //    // person visiting this page and can return one of three states to
 //    // the callback you provide.  They can be:
@@ -89,7 +90,7 @@
 //            FB.api('/me', {fields: 'name, email, picture'}, function (response) {
 //                console.log(JSON.stringify(response));
 //                console.log('Good to see you, ' + response.name + '.' + ' Email: ' + response.email + ' Facebook ID: ' + response.id);
-//                /* 
+//                /*
 //                 document.getElementById("name").value = response.name;
 //                 document.getElementById("imgurl").value = "http://graph.facebook.com/" + response.id + "/picture?type=normal";
 //                 document.getElementById("email").value = response.email;
@@ -108,7 +109,7 @@
 //
 //Google
 
-function doLoginGoogle(googleUser) {       
+function doLoginGoogle(googleUser) {
   // Useful data for your client-side scripts:
   var profile = googleUser.getBasicProfile();
   console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -121,7 +122,7 @@ function doLoginGoogle(googleUser) {
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
-  
+
   document.getElementById("idtoken").value = id_token;
   document.getElementById("action").value = "login-g";
   document.getElementById("id").value = profile.getId()
@@ -140,6 +141,12 @@ function genericLogout(typeLogin) {
     }
 }
 
+// function logoutFacebook() {
+//   FB.logout(function(response) {
+//     console.log("user is now logged out");
+//   });
+// }
+
 function logoutGoogle() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -153,4 +160,4 @@ function onLoad() {
       gapi.load('auth2', function() {
         gapi.auth2.init();
       });
-    }
+}
