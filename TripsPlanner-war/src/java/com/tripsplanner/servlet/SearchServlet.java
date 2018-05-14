@@ -6,7 +6,6 @@
 package com.tripsplanner.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -86,12 +85,19 @@ public class SearchServlet extends HttpServlet {
         
         String departureCity = request.getParameter("departure_city");
         String destinationCity = request.getParameter("destination_city");
+        String departureDate = request.getParameter("departure_date");
+        String returnDate = request.getParameter("return_date");
+        String numAdult = request.getParameter("adult_count");
+        String numChildren = request.getParameter("child_count");
+        String museums = request.getParameter("museums");
         
         mapSearch.put(departureCity, "departure_city");
         mapSearch.put(destinationCity, "destination_city");
         
         System.out.print("Departure: " + departureCity + "\nDestination: " + destinationCity);
-        
+        System.out.print("Departure date: " + departureDate + "\nDestination date: " + returnDate);
+        System.out.print("Adult: " + numAdult + "\nChildren: " + numChildren);
+        System.out.print("Museums checkbox: " + museums);
     }
 
 }
