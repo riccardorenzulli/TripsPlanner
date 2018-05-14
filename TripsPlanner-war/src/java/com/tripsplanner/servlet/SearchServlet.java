@@ -6,6 +6,7 @@
 package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.SearchBeanLocal;
+import com.tripsplanner.model.entity.Search;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.ejb.EJB;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class SearchServlet extends HttpServlet {
 
     @EJB
-    private SearchBeanLocal search;
+    private SearchBeanLocal searchBean;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -112,20 +113,20 @@ public class SearchServlet extends HttpServlet {
                 "\nShopping: " + shopping + 
                 "\nNight life: " + nightLife);
         
-        mapSearch.put(departureCity, "departure_city");
-        mapSearch.put(destinationCity, "destination_city");
-        mapSearch.put(departureDate, "departure_date");
-        mapSearch.put(returnDate, "departure_date");
-        mapSearch.put(numAdult, "adult_count");
-        mapSearch.put(numChildren, "child_count");
-        mapSearch.put(museums, "museums");
-        mapSearch.put(culture, "culture");
-        mapSearch.put(nature, "nature");
-        mapSearch.put(beaches, "beaches");
-        mapSearch.put(shopping, "shopping");
-        mapSearch.put(nightLife, "night_life");
+        mapSearch.put("departure_city", departureCity);
+        mapSearch.put("destination_city", destinationCity);
+        mapSearch.put("departure_date", departureDate);
+        mapSearch.put("return_date", returnDate);
+        mapSearch.put("adult_count", numAdult);
+        mapSearch.put("child_count", numChildren);
+        mapSearch.put("museums", museums);
+        mapSearch.put("culture", culture);
+        mapSearch.put("nature", nature);
+        mapSearch.put("beaches", beaches);
+        mapSearch.put("shopping", shopping);
+        mapSearch.put("night_life", nightLife);
         
-        search.performSearch(mapSearch);
+        Search search = searchBean.createSearch(mapSearch);
  
     }
 

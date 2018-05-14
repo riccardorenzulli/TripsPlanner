@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.Search;
 import java.util.HashMap;
 import javax.ejb.Local;
 
@@ -15,6 +16,6 @@ import javax.ejb.Local;
 @Local
 public interface SearchBeanLocal {
 
-    public void performSearch(HashMap<String, String> mapSearch);
+    public Search createSearch(HashMap<String, String> mapSearch);
     
 }

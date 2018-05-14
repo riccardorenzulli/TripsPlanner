@@ -7,35 +7,60 @@ package com.tripsplanner.model.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author the-silent-fox
  */
 @Entity
+@Table(name = "search")
+@XmlRootElement
 public class Search implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic(optional = false)
     private Long id;
+    @Basic(optional = false)
+    @Column(name = "departureCity")
     private String departureCity;
+    @Basic(optional = false)
+    @Column(name = "destinationCity")
     private String destinationCity;
+    @Basic(optional = false)
+    @Column(name = "departureDate")
     private Date departureDate;
+    @Basic(optional = false)
+    @Column(name = "returnDate")
     private Date returnDate;
+    @Column(name = "numAdult")
     private int numAdult;
+    @Column(name = "numChildren")
     private int numChildren; //declared for future works
     /*Preferences*/
+    @Column(name = "museums")
     private boolean museums;
+    @Column(name = "culture")
     private boolean culture;
+    @Column(name = "nature")
     private boolean nature;
+    @Column(name = "beaches")
     private boolean beaches;
+    @Column(name = "nightLife")
     private boolean nightLife;
+    @Column(name = "shopping")
     private boolean shopping;
+    
+    public Search() {}
     
     public String getDepartureCity() {
         return departureCity;
