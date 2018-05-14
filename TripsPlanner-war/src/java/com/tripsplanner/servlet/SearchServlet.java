@@ -5,8 +5,10 @@
  */
 package com.tripsplanner.servlet;
 
+import com.tripsplanner.model.bean.SearchBeanLocal;
 import java.io.IOException;
 import java.util.HashMap;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,9 @@ import javax.servlet.http.HttpSession;
  */
 public class SearchServlet extends HttpServlet {
 
+    @EJB
+    private SearchBeanLocal search;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -96,9 +101,7 @@ public class SearchServlet extends HttpServlet {
         String shopping = request.getParameter("shopping") == null ? "NO" : "YES";
         String nightLife = request.getParameter("night_life") == null ? "NO" : "YES";
         
-        mapSearch.put(departureCity, "departure_city");
-        mapSearch.put(destinationCity, "destination_city");
-        
+        System.out.print("Hello by SearchServlet!\n");
         System.out.print("Departure: " + departureCity + "\nDestination: " + destinationCity);
         System.out.print("Departure date: " + departureDate + "\nDestination date: " + returnDate);
         System.out.print("Adult: " + numAdult + "\nChildren: " + numChildren);
@@ -108,6 +111,22 @@ public class SearchServlet extends HttpServlet {
                 "\nBeaches: " + beaches + 
                 "\nShopping: " + shopping + 
                 "\nNight life: " + nightLife);
+        
+        mapSearch.put(departureCity, "departure_city");
+        mapSearch.put(destinationCity, "destination_city");
+        mapSearch.put(departureDate, "departure_date");
+        mapSearch.put(returnDate, "departure_date");
+        mapSearch.put(numAdult, "adult_count");
+        mapSearch.put(numChildren, "child_count");
+        mapSearch.put(museums, "museums");
+        mapSearch.put(culture, "culture");
+        mapSearch.put(nature, "nature");
+        mapSearch.put(beaches, "beaches");
+        mapSearch.put(shopping, "shopping");
+        mapSearch.put(nightLife, "night_life");
+        
+        search.performSearch(mapSearch);
+ 
     }
 
 }
