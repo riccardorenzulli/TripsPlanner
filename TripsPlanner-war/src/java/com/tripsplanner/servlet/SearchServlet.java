@@ -7,6 +7,7 @@ package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.SearchBeanLocal;
 import com.tripsplanner.model.entity.Search;
+import com.tripsplanner.util.GoogleAPI;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.ejb.EJB;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONObject;
 
 /**
  *
@@ -84,7 +86,7 @@ public class SearchServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void goSearch(HttpServletRequest request, HttpServletResponse response) {
+    private void goSearch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         
         HashMap<String, String> mapSearch = new HashMap<String, String>();
@@ -128,6 +130,8 @@ public class SearchServlet extends HttpServlet {
         
         Search search = searchBean.createSearch(mapSearch);
  
+        JSONObject jsonResult = GoogleAPI.getInterestingPlaces(search);
+        
     }
 
 }
