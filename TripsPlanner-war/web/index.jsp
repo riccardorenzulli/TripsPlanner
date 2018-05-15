@@ -88,6 +88,7 @@
 					<h2>HOW IT WORKS?</h2>
 					<h4>SEARCH - SELECT - BOOK</h4>
 					<div class="space"></div>
+
 					<p>
 						Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br>
 						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
@@ -771,7 +772,10 @@
 <script type="text/javascript" src="assets/plugins/supersized.3.1.3.min.js"></script>
 <script src="assets/js/js.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&libraries=places"></script>
+<script src="scripts/googleAutocomplete.js"></script>
 <script type="text/javascript">
+    
 
 			jQuery(function($){
 				"use strict";
