@@ -6,6 +6,7 @@
 package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.SearchBeanLocal;
+import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.util.GoogleAPI;
 import java.io.IOException;
@@ -135,11 +136,11 @@ public class SearchServlet extends HttpServlet {
         
         JSONArray results = jsonResult.getJSONArray("results");
         
-        System.out.println(results.getJSONObject(0).getString("name"));
-        
         /*Print the first result element*/
-        System.out.println(results.getJSONObject(0));
+        JSONObject jsonObj = results.getJSONObject(0);
         
+        Place place = Place.fromJsonToPlace(jsonObj);
+        System.out.println(place.toString());
     }
 
 }

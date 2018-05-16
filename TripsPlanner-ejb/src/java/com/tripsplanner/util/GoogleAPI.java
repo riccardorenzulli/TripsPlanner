@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.util;
 
+import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class GoogleAPI {
         System.out.println(stringCity);
         
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query=point+of+interests+in+"+stringCity+"&key=" + api_key;
+	String parameters = "query=what+to+see+in+"+stringCity+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
