@@ -150,7 +150,7 @@ function genericLogout(typeLogin) {
 function logoutGoogle() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-        window.location.href = 'LoginServlet?action=logout';
+        window.location.href = 'ControllerServlet?action=logout';
     });
     auth2.disconnect();
 }

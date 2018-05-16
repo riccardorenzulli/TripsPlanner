@@ -188,7 +188,6 @@ public class LoginServlet extends HttpServlet {
             //if(request.getSession()!=null)
             request.getSession().invalidate();
             user = null;
-            System.out.println("Session invalidated");
         }
         response.sendRedirect("index.jsp");
     }
