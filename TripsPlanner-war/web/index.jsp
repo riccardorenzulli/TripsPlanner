@@ -184,7 +184,7 @@
 				<h4>REASONS TO TRUST US</h4>
 				<div class="space"></div>
 				<p>
-					TripsPlanner works for you and save you time.<br>
+					TripsPlanner works for you and saves you time.<br>
 					It helps you organize your travels and share them with your friends.<br>
 					Always take it with you through the android app.<br>
 					It's free!<br>
