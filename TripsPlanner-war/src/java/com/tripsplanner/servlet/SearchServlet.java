@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -131,6 +132,10 @@ public class SearchServlet extends HttpServlet {
         Search search = searchBean.createSearch(mapSearch);
  
         JSONObject jsonResult = GoogleAPI.getInterestingPlaces(search);
+        
+        JSONArray results = jsonResult.getJSONArray("results");
+        
+        System.out.print(jsonResult.get("results"));
         
     }
 

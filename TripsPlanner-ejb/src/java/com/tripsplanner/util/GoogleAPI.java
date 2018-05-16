@@ -24,7 +24,7 @@ public class GoogleAPI {
     
     public static JSONObject getInterestingPlaces(Search search) throws IOException {
         JSONObject interestingPlacesJson = getInterestingPlaces(search.getDestinationCity());
-        return null;
+        return interestingPlacesJson;
     }
     
     private static JSONObject getInterestingPlaces(String city) throws ProtocolException, IOException {
@@ -58,7 +58,7 @@ public class GoogleAPI {
         }
 
         JSONObject json = new JSONObject(sb.toString());
-        System.out.println(json);
+        //System.out.println(json);
         
         return json;      
     }
@@ -94,7 +94,7 @@ public class GoogleAPI {
         }
 
         JSONObject json = new JSONObject(sb.toString());
-        System.out.println(json);
+        //System.out.println(json);
         
         return json;      
     }
