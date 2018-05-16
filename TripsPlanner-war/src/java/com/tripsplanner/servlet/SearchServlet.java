@@ -135,7 +135,10 @@ public class SearchServlet extends HttpServlet {
         
         JSONArray results = jsonResult.getJSONArray("results");
         
-        System.out.print(jsonResult.get("results"));
+        System.out.println(results.getJSONObject(0).getString("name"));
+        
+        /*Print the first result element*/
+        System.out.println(results.getJSONObject(0));
         
     }
 

@@ -28,8 +28,14 @@ public class GoogleAPI {
     }
     
     private static JSONObject getInterestingPlaces(String city) throws ProtocolException, IOException {
+        String[] cityElements = city.split(",");
+        String cityElem1 = cityElements[0].replace(' ', '+');
+        String cityElem2 = cityElements[cityElements.length-1].replace(' ', '+');
+        String stringCity = cityElem1 + cityElem2;
+        System.out.println(stringCity);
+        
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query=point+of+interests+in+"+city+"&key=" + api_key;
+	String parameters = "query=point+of+interests+in+"+stringCity+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
@@ -52,7 +58,7 @@ public class GoogleAPI {
         StringBuilder sb = new StringBuilder();
 
         while(line!=null) {
-            System.out.println(line);
+            //System.out.println(line);
             sb.append(line);
             line = read.readLine();
         }
@@ -88,7 +94,7 @@ public class GoogleAPI {
         StringBuilder sb = new StringBuilder();
 
         while(line!=null) {
-            System.out.println(line);
+            //System.out.println(line);
             sb.append(line);
             line = read.readLine();
         }
