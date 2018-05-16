@@ -1460,6 +1460,7 @@ h5 {
 	padding: 30px;
     position: absolute;
     top: 50%;
+    width: 100%;
     transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
@@ -7401,6 +7402,7 @@ h5 {
 	margin-right:37.5%;
 	margin-top: 10%;
 	margin-bottom: 25%;
+        min-width: 350px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
