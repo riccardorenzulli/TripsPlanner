@@ -10,6 +10,7 @@ function useAutocomplete() {
     var input = document.getElementById('departure_city');
     var input2 = document.getElementById('destination_city');
     var options = {
+        language: 'en',
         types: ['(cities)']
     };
     autocomplete = new google.maps.places.Autocomplete(input, options);

@@ -237,7 +237,7 @@
 <script type="text/javascript" src="assets/plugins/supersized.3.1.3.min.js"></script>
 <script src="assets/js/js.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&libraries=places&language=en"></script>
 <script src="scripts/googleAutocomplete.js"></script>
 <script type="text/javascript">
     
