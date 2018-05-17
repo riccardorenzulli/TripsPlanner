@@ -113,7 +113,9 @@ public class Place {
         place.setLng(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lng"));
         place.setGoogleID(jsonObj.getString("id"));
         place.setGooglePlaceID(jsonObj.getString("place_id"));
-        place.setPhotosUrl(jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference"));
+        try {
+            place.setPhotosUrl(jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference"));
+        } catch(Exception e) { System.out.println("Photos not found"); }
         try {
             place.setRating(jsonObj.getFloat("rating"));
         } catch(Exception e) { System.out.println("Rating not found"); }
