@@ -21,6 +21,7 @@
 		<title>TripsPlanner - Create fantastic trips</title>
 
     <!-- STYLES -->
+                <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		<link href="assets/css/animate.min.css" rel="stylesheet">
 		<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
 		<link href="assets/css/owl.carousel.css" rel="stylesheet">
@@ -28,6 +29,8 @@
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
 		<link href="assets/css/style.css" rel="stylesheet" media="screen">
+                
+                <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 		<!-- LIGHT -->
 		<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<!-- FONTS -->
@@ -184,7 +187,7 @@
 				<h4>REASONS TO TRUST US</h4>
 				<div class="space"></div>
 				<p>
-					TripsPlanner works for you and save you time.<br>
+					TripsPlanner works for you and saves you time.<br>
 					It helps you organize your travels and share them with your friends.<br>
 					Always take it with you through the android app.<br>
 					It's free!<br>
@@ -236,9 +239,11 @@
 <script src="assets/plugins/wow.min.js"></script>
 <script type="text/javascript" src="assets/plugins/supersized.3.1.3.min.js"></script>
 <script src="assets/js/js.js"></script>
-<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&libraries=places&language=en"></script>
-<script src="scripts/googleAutocomplete.js"></script>
+<!-- <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> -->
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&libraries=places&language=en"></script> -->
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="scripts/AmadeusAutocomplete.js"></script>
 <script type="text/javascript">
     
 

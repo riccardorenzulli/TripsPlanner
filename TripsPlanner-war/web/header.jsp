@@ -29,7 +29,7 @@
             </a>
             <% } else {
             %>
-            <a href="LoginServlet?action=login" class="transition-effect">
+            <a href="ControllerServlet?action=login" class="transition-effect">
 							<i class="fa fa-sign-out"></i>
                 Login
             </a>
