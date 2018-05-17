@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.servlet;
 
+import com.tripsplanner.model.bean.GoogleDirectionsBean;
 import com.tripsplanner.model.bean.SearchBeanLocal;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.util.GoogleAPI;
@@ -27,6 +28,8 @@ public class SearchServlet extends HttpServlet {
 
     @EJB
     private SearchBeanLocal searchBean;
+    @EJB
+    private GoogleDirectionsBean dirBean;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,6 +47,7 @@ public class SearchServlet extends HttpServlet {
         switch(action == null ? "" : action) {
             case "search":
                 goSearch(request, response);
+                //dirBean.getDirections("ChIJC-rXcnBtiEcRjK-icXN-bd8", "ChIJCQ6ZCQ9tiEcRjSyxb9zkZ1I", "driving", "now");
                 break;
         }
     }
