@@ -81,4 +81,19 @@ public final class AmadeusAPI {
         return jsonObj;
     }
     
+    //I know where I want to fly, the dates and duration, what are the best flight deals?
+    public static JSONObject getLowFareFlight(String departure_IATA, String destination_IATA,  String departure_date) throws Exception{
+        String amadeus_token = getAmadeusToken();
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .header("authorization", "Bearer " + amadeus_token)
+                .url("https://test.api.amadeus.com/v1/shopping/flight-offers?origin=" + departure_IATA + "&destination="+ destination_IATA +"&departureDate="+ departure_date)
+                .build();
+        
+        Response response = client.newCall(request).execute();
+        String response_body = response.body().string();
+        JSONObject jsonObj = new JSONObject(response_body);
+        return jsonObj;
+    }
 }
