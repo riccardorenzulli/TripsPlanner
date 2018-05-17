@@ -10,7 +10,9 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.util.GoogleAPI;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -100,9 +102,8 @@ public class SearchServlet extends HttpServlet {
         String numAdult = request.getParameter("adult_count");
         String numChildren = request.getParameter("child_count");
         String museums = request.getParameter("museums") == null ? "NO" : "YES";
-        String culture = request.getParameter("culture") == null ? "NO" : "YES";
+        String art = request.getParameter("art") == null ? "NO" : "YES";
         String nature = request.getParameter("nature") == null ? "NO" : "YES";
-        String beaches = request.getParameter("beaches") == null ? "NO" : "YES";
         String shopping = request.getParameter("shopping") == null ? "NO" : "YES";
         String nightLife = request.getParameter("night_life") == null ? "NO" : "YES";
         
@@ -111,9 +112,8 @@ public class SearchServlet extends HttpServlet {
         System.out.print("Departure date: " + departureDate + "\nDestination date: " + returnDate);
         System.out.print("Adult: " + numAdult + "\nChildren: " + numChildren);
         System.out.print("Checkbox: \n" + "Museums: " + museums + 
-                "\nCulture: " + culture +
+                "\nArt: " + art +
                 "\nNature: " + nature +
-                "\nBeaches: " + beaches + 
                 "\nShopping: " + shopping + 
                 "\nNight life: " + nightLife);
         
@@ -124,23 +124,16 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("adult_count", numAdult);
         mapSearch.put("child_count", numChildren);
         mapSearch.put("museums", museums);
-        mapSearch.put("culture", culture);
+        mapSearch.put("art", art);
         mapSearch.put("nature", nature);
-        mapSearch.put("beaches", beaches);
         mapSearch.put("shopping", shopping);
         mapSearch.put("night_life", nightLife);
         
         Search search = searchBean.createSearch(mapSearch);
  
-        JSONObject jsonResult = GoogleAPI.getInterestingPlaces(search);
+        ArrayList<Place> bestPlaces = GoogleAPI.getInterestingPlaces(search);
+
         
-        JSONArray results = jsonResult.getJSONArray("results");
-        
-        /*Print the first result element*/
-        JSONObject jsonObj = results.getJSONObject(0);
-        
-        Place place = Place.fromJsonToPlace(jsonObj);
-        System.out.println(place.toString());
     }
 
 }

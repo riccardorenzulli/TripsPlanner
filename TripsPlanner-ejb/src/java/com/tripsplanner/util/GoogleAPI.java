@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -23,12 +26,7 @@ public class GoogleAPI {
     
     private static final String api_key = "AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo";
     
-    public static JSONObject getInterestingPlaces(Search search) throws IOException {
-        JSONObject interestingPlacesJson = getInterestingPlaces(search.getDestinationCity());
-        return interestingPlacesJson;
-    }
-    
-    private static JSONObject getInterestingPlaces(String city) throws ProtocolException, IOException {
+    private static JSONObject getInterestingPlacesJSON(String city) throws ProtocolException, IOException {
         String[] cityElements = city.split(",");
         String cityElem1 = cityElements[0].replace(' ', '+');
         String cityElem2 = cityElements[cityElements.length-1].replace(' ', '+');
@@ -70,9 +68,14 @@ public class GoogleAPI {
         return json;      
     }
     
-    private static JSONObject getInterestingPlaces(String city, String type) throws ProtocolException, IOException {
+    private static JSONObject getInterestingPlacesJSON(String city, String type) throws ProtocolException, IOException {
+        String[] cityElements = city.split(",");
+        String cityElem1 = cityElements[0].replace(' ', '+');
+        String cityElem2 = cityElements[cityElements.length-1].replace(' ', '+');
+        String stringCity = cityElem1 + cityElem2;
+        
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query="+type+"+in+"+city+"&key=" + api_key;
+	String parameters = "query="+type+"+in+"+stringCity+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
@@ -105,5 +108,33 @@ public class GoogleAPI {
         
         return json;      
     }
+    
+    public static ArrayList<Place> getInterestingPlaces(Search search) throws IOException {
+        JSONObject jsonResult = getInterestingPlacesJSON(search.getDestinationCity());
+        ArrayList<Place> places = Place.fromJsonToListPlace(jsonResult);
+        
+        if(search.isMuseums()) {
+            JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "museum");
+            places.addAll(Place.fromJsonToListPlace(obj));
+        }
+        if(search.isArt()) {
+            JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "art");
+            places.addAll(Place.fromJsonToListPlace(obj));
+        }
+        if(search.isNature()) {
+            JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "park");
+            places.addAll(Place.fromJsonToListPlace(obj));
+        }
+        if(search.isShopping()) {
+            JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "shopping");
+            places.addAll(Place.fromJsonToListPlace(obj));
+        }
+        if(search.isNightLife()) {
+            JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "club");
+            places.addAll(Place.fromJsonToListPlace(obj));
+        }
+        
+        return places;
+    } 
     
 }

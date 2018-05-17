@@ -29,7 +29,7 @@ public class Place {
     private String googleID;
     /*opening hours?*/
     private String photosUrl; //only the first one
-    private float rating;
+    private float rating = 0;
     private List<String> types;
 
     public String getName() {
@@ -114,7 +114,9 @@ public class Place {
         place.setGoogleID(jsonObj.getString("id"));
         place.setGooglePlaceID(jsonObj.getString("place_id"));
         place.setPhotosUrl(jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference"));
-        place.setRating(jsonObj.getFloat("rating"));
+        try {
+            place.setRating(jsonObj.getFloat("rating"));
+        } catch(Exception e) { System.out.println("Rating not found"); }
         
         JSONArray typesJson = jsonObj.getJSONArray("types");
         List<String> typesList = new ArrayList<String>();
@@ -123,6 +125,17 @@ public class Place {
         place.setTypes(typesList);
         
         return place;
+    }
+    
+    public static ArrayList<Place> fromJsonToListPlace(JSONObject jsonResult) {
+        ArrayList<Place> places = new ArrayList<Place>();
+        JSONArray results = jsonResult.getJSONArray("results");
+        
+        for(int i=0; i<5 && i<results.length(); i++) {
+            JSONObject jsonObj = results.getJSONObject(i);
+            places.add(Place.fromJsonToPlace(jsonObj));
+        }
+        return places;
     }
     
     public String toString() {
