@@ -61,9 +61,8 @@ public class SearchBean implements SearchBeanLocal {
         tmpSearch.setNumAdult(Integer.parseInt(mapSearch.get("adult_count")));
         tmpSearch.setNumChildren(Integer.parseInt(mapSearch.get("child_count")));
         tmpSearch.setMuseums(mapSearch.get("museums").equals("YES"));
-        tmpSearch.setCulture(mapSearch.get("culture").equals("YES"));
+        tmpSearch.setArt(mapSearch.get("art").equals("YES"));
         tmpSearch.setNature(mapSearch.get("nature").equals("YES"));
-        tmpSearch.setBeaches(mapSearch.get("beaches").equals("YES"));
         tmpSearch.setShopping(mapSearch.get("shopping").equals("YES"));
         tmpSearch.setNightLife(mapSearch.get("night_life").equals("YES"));
         
