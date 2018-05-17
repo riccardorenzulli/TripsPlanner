@@ -6,6 +6,8 @@
             <name>TripsPlanner-ejb</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <included-library dirs="200">file.reference.json-20180130.jar</included-library>
+            <included-library dirs="200">file.reference.okhttp-3.10.0.jar</included-library>
+            <included-library dirs="200">file.reference.okio-1.14.1.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

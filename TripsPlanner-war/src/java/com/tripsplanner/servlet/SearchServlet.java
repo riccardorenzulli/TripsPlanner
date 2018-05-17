@@ -8,9 +8,12 @@ package com.tripsplanner.servlet;
 import com.tripsplanner.model.bean.GoogleDirectionsBean;
 import com.tripsplanner.model.bean.SearchBeanLocal;
 import com.tripsplanner.model.entity.Search;
+import com.tripsplanner.util.AmadeusAPI;
 import com.tripsplanner.util.GoogleAPI;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -134,6 +137,13 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("night_life", nightLife);
         
         Search search = searchBean.createSearch(mapSearch);
+        
+        try{
+        JSONObject jsonFlight = AmadeusAPI.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
+        System.out.print(jsonFlight);
+        } catch (Exception ex) {
+            Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
  
         JSONObject jsonResult = GoogleAPI.getInterestingPlaces(search);
         
