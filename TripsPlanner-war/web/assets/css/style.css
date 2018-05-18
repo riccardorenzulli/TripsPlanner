@@ -835,9 +835,8 @@ h5 {
 	background: #AEC6CF;
 	z-index: 9999 !important;
 }
-#ui-datepicker-div  table {
-	margin: 10px;
-}
+
+
 .ui-datepicker-calendar a {
 	padding: 5px;
 	color: #ffffff;
@@ -7434,4 +7433,12 @@ h5 {
 #profile-pic {
     width: 15px;
     height: 15px
+}
+
+#child_count {
+	text-align: center;
+}
+
+#adult_count {
+	text-align: center;
 }
