@@ -55,5 +55,4 @@ function useAutocomplete() {
 
 function deleteUICss(){
     $('.ui-spinner-button').detach();
-    console.log("deletecss");
 }

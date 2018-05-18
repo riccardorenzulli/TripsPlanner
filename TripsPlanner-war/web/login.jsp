@@ -22,7 +22,6 @@
 	<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
 	<link href="assets/css/style.css" rel="stylesheet" media="screen">
 	<!-- LIGHT -->
-	<link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
 	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- FONTS -->
@@ -113,7 +112,7 @@
 <script src="assets/plugins/jquery.magnific-popup.min.js"></script>
 <script src="assets/js/js.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="scripts/login.js"></script>
+<script src="assets/js/login.js"></script>
 
 </body>
 
