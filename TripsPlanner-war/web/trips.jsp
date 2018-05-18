@@ -84,11 +84,11 @@
                                                                         </h5>
 									<p><i class="fa fa-map-marker"></i>
                                                                             <%= place.getAddress() %>
-                                                                            <i class="fa fa-phone"></i></p>
+                                                                           </p>
 								</div>
 	
 								<div class="hotel-desc">
-									<p>Piazza Castello è famosa per Renzino Renzulli, Duca di Mezzi Po. Nel 1999 è stata dimora di Britney Spears.</p>
+									<p><%= place.getDescription() %></p>
 								</div>
 							</div>
 						</div>
