@@ -49,12 +49,10 @@ public class Search implements Serializable {
     /*Preferences*/
     @Column(name = "museums")
     private boolean museums;
-    @Column(name = "culture")
-    private boolean culture;
+    @Column(name = "art")
+    private boolean art;
     @Column(name = "nature")
     private boolean nature;
-    @Column(name = "beaches")
-    private boolean beaches;
     @Column(name = "nightLife")
     private boolean nightLife;
     @Column(name = "shopping")
@@ -118,12 +116,12 @@ public class Search implements Serializable {
         this.museums = museums;
     }
 
-    public boolean isCulture() {
-        return culture;
+    public boolean isArt() {
+        return art;
     }
 
-    public void setCulture(boolean culture) {
-        this.culture = culture;
+    public void setArt(boolean art) {
+        this.art = art;
     }
 
     public boolean isNature() {
@@ -132,14 +130,6 @@ public class Search implements Serializable {
 
     public void setNature(boolean nature) {
         this.nature = nature;
-    }
-
-    public boolean isBeaches() {
-        return beaches;
-    }
-
-    public void setBeaches(boolean beaches) {
-        this.beaches = beaches;
     }
 
     public boolean isNightLife() {
