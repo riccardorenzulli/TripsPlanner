@@ -6,6 +6,7 @@
 package com.tripsplanner.model.entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,37 @@ public class Route implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Column(name = "departurePlace")
+    private Place departurePlace;
+    @Column(name = "arrivalPlace")
+    private Place arrivalPlace;
+    
+    @Column(name = "distanceText")
+    private String distanceText;
+    @Column(name = "distanceValue")   
+    private long distanceValue;
+    
+    @Column(name = "durationText") 
+    private String durationText;
+    @Column(name = "durationValue")
+    private long durationValue;
+    
+    @Column(name = "travelMode")
+    private String travelMode;
+    
+    @Column(name = "fareText")
+    private String fareText;
+    @Column(name = "fareValue")
+    private double fareValue;
+    
+    @Column(name = "query")
+    private String query;
+    
+    @Column(name = "departureTime")
+    private long departureTime;
+    @Column(name = "arrivalTime")
+    private long arrivalTime;
 
     public Long getId() {
         return id;

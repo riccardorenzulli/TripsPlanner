@@ -6,6 +6,7 @@
 package com.tripsplanner.model.bean;
 
 import com.tripsplanner.config.Config;
+import com.tripsplanner.model.entity.Route;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,10 +28,10 @@ public class GoogleDirectionsBean {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
-    public JSONObject getDirections(String departurePlaceID, String destinationPlaceID, String m, String departureTime) throws MalformedURLException, IOException {
+    public JSONObject getDirections(String departurePlaceID, String destinationPlaceID, String travelMode, String departureTime) throws MalformedURLException, IOException {
         String url = "https://maps.googleapis.com/maps/api/directions/json?";
         String parameters = "origin=place_id:" + departurePlaceID + "&destination=place_id:" + departurePlaceID;
-        String mode = "&mode=" + m;
+        String mode = "&mode=" + travelMode;
         String depTime = "&departure_time=" + departureTime;
         String key = "&key=" + Config.google_key;
         
@@ -56,6 +57,10 @@ public class GoogleDirectionsBean {
         JSONObject json = new JSONObject(sb.toString());
         
         return json;
+    }
+    
+    public Route getRouteFromJSON(JSONObject obj) {
+        return null;
     }
     
 }
