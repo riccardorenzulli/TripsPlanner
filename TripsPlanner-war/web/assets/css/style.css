@@ -1415,7 +1415,7 @@ h5 {
 /* ======= Home Page Top Destination Section Start ======= */
 
 .image-background {
-	background: url(../images/bg-image2.jpg) center center;
+	background: url(../images/road.jpg) center center;
 	background-attachment: fixed;
 	overflow: hidden;
 }
@@ -7476,7 +7476,6 @@ h5 {
 	top: 359px;
 	left: 222px;
 	opacity: 0.9;
-	background-color: : rgb(174, 198, 207, 0.8);
 	display: none;
 	width: 489px;
 }
