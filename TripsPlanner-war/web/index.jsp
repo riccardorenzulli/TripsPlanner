@@ -21,7 +21,7 @@
 		<title>TripsPlanner - Create fantastic trips</title>
 
     <!-- STYLES -->
-                <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		<link href="assets/css/animate.min.css" rel="stylesheet">
 		<link href="assets/css/bootstrap-select.min.css" rel="stylesheet">
 		<link href="assets/css/owl.carousel.css" rel="stylesheet">
@@ -29,7 +29,7 @@
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
 		<link href="assets/css/style.css" rel="stylesheet" media="screen">
-                
+
                 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 		<!-- LIGHT -->
 		<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
     <!-- SCRIPTS -->
-		<script src="scripts/login.js"></script>
+		<script src="assets/js/login.js"></script>
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 
@@ -243,10 +243,8 @@
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&libraries=places&language=en"></script> -->
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="scripts/AmadeusAutocomplete.js"></script>
+<script src="assets/js/AmadeusAutocomplete.js"></script>
 <script type="text/javascript">
-    
-
 			jQuery(function($){
 				"use strict";
 				$.supersized({

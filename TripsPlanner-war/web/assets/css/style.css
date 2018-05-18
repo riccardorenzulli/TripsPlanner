@@ -845,7 +845,7 @@ h5 {
 	color: #cfb7ae;
 }
 .ui-datepicker-calendar td {
-	padding: 10px 5px;
+	padding: 5px 5px;
 }
 .ui-datepicker-calendar .ui-state-disabled {
 	color: #0A3152;
@@ -7441,4 +7441,46 @@ h5 {
 
 #adult_count {
 	text-align: center;
+}
+
+.ui-widget-content {
+    border: none;
+    background: #ffffff;
+    color: #222222;
+}
+
+.ui-widget {
+    font-family: Montserrat, Verdana,Arial,sans-serif;
+    font-size: 1.1em;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+	border: none;
+}
+
+.ui-widget-header {
+		border: none;
+    background: none;
+    color: #222222;
+    font-weight: bold;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: none;
+    background: none;
+    font-weight: normal;
+    color: #555555;
+}
+
+.ui-autocomplete {
+	top: 359px;
+	left: 222px;
+	opacity: 0.9;
+	background-color: : rgb(174, 198, 207, 0.8);
+	display: none;
+	width: 489px;
+}
+
+.ui-menu .ui-menu-item a:hover {
+	background: rgb(174, 198, 207);
 }
