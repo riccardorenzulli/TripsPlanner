@@ -97,7 +97,7 @@ public class SearchServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void goSearch(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void goSearch(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         
         HashMap<String, String> mapSearch = new HashMap<String, String>();
@@ -147,7 +147,9 @@ public class SearchServlet extends HttpServlet {
  
         ArrayList<Place> bestPlaces = GoogleAPI.getInterestingPlaces(search);
 
+        request.setAttribute("places", bestPlaces);
         
+        request.getRequestDispatcher("trips.jsp").forward(request, response);
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package com.tripsplanner.model.entity;
 
+import static com.tripsplanner.util.GoogleAPI.getPhotoFromReference;
+import com.tripsplanner.util.WikipediaAPI;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -23,6 +25,7 @@ public class Place {
 
     private String name;
     private String address;
+    private String description;
     private float lat;
     private float lng;
     private String googlePlaceID;
@@ -46,6 +49,14 @@ public class Place {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public float getLat() {
@@ -109,11 +120,19 @@ public class Place {
         
         place.setName(jsonObj.getString("name"));
         place.setAddress(jsonObj.getString("formatted_address"));
+        
+        try {
+            place.setDescription(WikipediaAPI.getDescription(place.getName()));
+        } catch (Exception e) { place.setDescription(""); }
+        
         place.setLat(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lat"));
         place.setLng(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lng"));
         place.setGoogleID(jsonObj.getString("id"));
         place.setGooglePlaceID(jsonObj.getString("place_id"));
-        place.setPhotosUrl(jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference"));
+        try {
+            String photoReference = jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference");
+            place.setPhotosUrl(getPhotoFromReference(photoReference));
+        } catch(Exception e) { System.out.println("Photos not found"); }
         try {
             place.setRating(jsonObj.getFloat("rating"));
         } catch(Exception e) { System.out.println("Rating not found"); }
