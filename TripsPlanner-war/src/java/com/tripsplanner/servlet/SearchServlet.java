@@ -147,7 +147,7 @@ public class SearchServlet extends HttpServlet {
  
         ArrayList<Place> bestPlaces = GoogleAPI.getInterestingPlaces(search);
 
-        request.getSession().setAttribute("places", bestPlaces);
+        request.setAttribute("places", bestPlaces);
         
         request.getRequestDispatcher("trips.jsp").forward(request, response);
     }

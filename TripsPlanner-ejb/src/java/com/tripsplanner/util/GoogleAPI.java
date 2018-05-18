@@ -137,4 +137,8 @@ public class GoogleAPI {
         return places;
     } 
     
+    public static String getPhotoFromReference(String photoReference) throws IOException {
+        return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=640&maxheight=425&photoreference="+photoReference+"&key="+api_key;
+    }
+    
 }

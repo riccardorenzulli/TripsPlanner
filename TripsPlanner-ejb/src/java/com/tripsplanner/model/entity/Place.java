@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.model.entity;
 
+import static com.tripsplanner.util.GoogleAPI.getPhotoFromReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -114,7 +115,8 @@ public class Place {
         place.setGoogleID(jsonObj.getString("id"));
         place.setGooglePlaceID(jsonObj.getString("place_id"));
         try {
-            place.setPhotosUrl(jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference"));
+            String photoReference = jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference");
+            place.setPhotosUrl(getPhotoFromReference(photoReference));
         } catch(Exception e) { System.out.println("Photos not found"); }
         try {
             place.setRating(jsonObj.getFloat("rating"));

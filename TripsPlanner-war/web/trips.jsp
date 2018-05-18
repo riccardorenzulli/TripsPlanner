@@ -67,22 +67,20 @@
 			<!-- START: HOTEL LIST VIEW -->
 			<div class="switchable col-md-12 clear-padding">
                             <%
-                                List<Place> places = (List<Place>)session.getAttribute("places");
+                                List<Place> places = (List<Place>)request.getAttribute("places");
                                 if(places != null) {
                                     for(Place place : places) {
                             %>
                                     <div  class="hotel-list-view">
 					<div class="wrapper">
 						<div class="col-md-4 col-sm-6 switch-img clear-padding">
-							<img src="assets/images/offer1.jpg" alt="cruise">
+                                                    <img src="<%=place.getPhotosUrl()%>" alt="cruise">
 						</div>
 						<div class="col-md-6 col-sm-6 hotel-info">
 							<div>
 								<div class="hotel-header">
 									<h5>
                                                                             <%= place.getName() %>
-                                                                            <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i>
-                                                                            </span>
                                                                         </h5>
 									<p><i class="fa fa-map-marker"></i>
                                                                             <%= place.getAddress() %>
@@ -118,45 +116,7 @@
                                     }
                                 }
                             %>
-				<div  class="hotel-list-view">
-					<div class="wrapper">
-						<div class="col-md-4 col-sm-6 switch-img clear-padding">
-							<img src="assets/images/offer1.jpg" alt="cruise">
-						</div>
-						<div class="col-md-6 col-sm-6 hotel-info">
-							<div>
-								<div class="hotel-header">
-									<h5>Piazza Castello <span><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star colored"></i><i class="fa fa-star-o colored"></i></span></h5>
-									<p><i class="fa fa-map-marker"></i>Piazza Castello, 1, Torino<i class="fa fa-phone"></i></p>
-								</div>
-	
-								<div class="hotel-desc">
-									<p>Piazza Castello è famosa per Renzino Renzulli, Duca di Mezzi Po. Nel 1999 è stata dimora di Britney Spears.</p>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix visible-sm-block"></div>
-						<div class="col-md-2 rating-price-box text-center clear-padding">
-							<div class="rating-box">
-								<div class="tripadvisor-rating">
-									<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-								</div>
-								<div class="user-rating">
-									<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-									<span>128 Guest Reviews.</span>
-								</div>
-							</div>
-							<div class="room-book-box">
-							
-								<div class="book">
-									<a href="#">Modify</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-			
+
 				<!-- END: HOTEL LIST VIEW -->
 			</div>
 			<div class="clearfix"></div>
