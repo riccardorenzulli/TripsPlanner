@@ -8,7 +8,10 @@ package com.tripsplanner.model.entity;
 import com.tripsplanner.model.bean.WikipediaAPIBean;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.json.JSONArray;
@@ -19,20 +22,34 @@ import org.json.JSONObject;
  * @author the-silent-fox
  */
 
-public class Place {
+@Entity
+public class Place implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    @Column(name = "name")
     private String name;
+    @Column(name = "address")
     private String address;
+    @Column(name = "description")
     private String description;
+    @Column(name = "lat")
     private float lat;
+    @Column(name = "lng")
     private float lng;
+    @Column(name = "googlePlaceID")
     private String googlePlaceID;
+    @Column(name = "googleID")
     private String googleID;
     /*opening hours?*/
+    @Column(name = "photosUrl")
     private String photosUrl; //only the first one
+    @Column(name = "rating")
     private float rating = 0;
-    private List<String> types;
+    @Column(name = "types")
+    private ArrayList<String> types;
 
     public String getName() {
         return name;
@@ -102,7 +119,7 @@ public class Place {
         return types;
     }
 
-    public void setTypes(List<String> types) {
+    public void setTypes(ArrayList<String> types) {
         this.types = types;
     }
 
@@ -114,8 +131,17 @@ public class Place {
         this.rating = rating;
     }
     
+
     public String toString() {
         return "Place:\n"+this.name+" - "+this.address+" - "+this.lat+" - "+this.lng+"\n"+this.googleID+"\n"+this.googlePlaceID+"\n"+this.photosUrl+"\nRating "+this.rating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     
