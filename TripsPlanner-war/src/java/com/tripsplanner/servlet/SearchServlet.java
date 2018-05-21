@@ -33,11 +33,14 @@ import org.json.JSONObject;
 public class SearchServlet extends HttpServlet {
 
     @EJB
+    private AmadeusAPIBean amadeusAPIBean;
+    @EJB
     private GooglePlacesBean googlePlacesBean;
     @EJB
     private SearchBeanLocal searchBean;
     @EJB
     private GoogleDirectionsBean dirBean;
+    
     
     
     /**
@@ -141,7 +144,7 @@ public class SearchServlet extends HttpServlet {
         Search search = searchBean.createSearch(mapSearch);
         
         try{
-        JSONObject jsonFlight = AmadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
+        JSONObject jsonFlight = amadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
         System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
