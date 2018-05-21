@@ -26,8 +26,8 @@ import org.json.JSONObject;
 @LocalBean
 public class AmadeusAPIBean {
     
-    private static final String api_key = "UACF64XEPrrIs5lxmRKmmCmrCp5SAKmG";
-    private static final String client_secret = "AOzTEn5RzVLsdC5T";
+    private static final String api_key = ApiKeysBean.keys.get("amadeus_api");
+    private static final String client_secret = ApiKeysBean.keys.get("amadeus_client_secret");
     
     private static String getAmadeusToken() throws Exception {
 

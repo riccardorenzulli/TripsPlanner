@@ -5,7 +5,6 @@
  */
 package com.tripsplanner.model.entity;
 
-import static com.tripsplanner.model.bean.GooglePlacesBean.getPhotoFromReference;
 import com.tripsplanner.model.bean.WikipediaAPIBean;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,48 +112,6 @@ public class Place {
 
     public void setRating(float rating) {
         this.rating = rating;
-    }
-    
-    public static Place fromJsonToPlace(JSONObject jsonObj) {
-        Place place = new Place();
-        
-        place.setName(jsonObj.getString("name"));
-        place.setAddress(jsonObj.getString("formatted_address"));
-        
-        try {
-            place.setDescription(WikipediaAPIBean.getDescription(place.getName()));
-        } catch (Exception e) { place.setDescription(""); }
-        
-        place.setLat(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lat"));
-        place.setLng(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lng"));
-        place.setGoogleID(jsonObj.getString("id"));
-        place.setGooglePlaceID(jsonObj.getString("place_id"));
-        try {
-            String photoReference = jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference");
-            place.setPhotosUrl(getPhotoFromReference(photoReference));
-        } catch(Exception e) { System.out.println("Photos not found"); }
-        try {
-            place.setRating(jsonObj.getFloat("rating"));
-        } catch(Exception e) { System.out.println("Rating not found"); }
-        
-        JSONArray typesJson = jsonObj.getJSONArray("types");
-        List<String> typesList = new ArrayList<String>();
-        for(int i=0; i<typesJson.length(); i++)
-            typesList.add(typesJson.getString(i));
-        place.setTypes(typesList);
-        
-        return place;
-    }
-    
-    public static ArrayList<Place> fromJsonToListPlace(JSONObject jsonResult) {
-        ArrayList<Place> places = new ArrayList<Place>();
-        JSONArray results = jsonResult.getJSONArray("results");
-        
-        for(int i=0; i<5 && i<results.length(); i++) {
-            JSONObject jsonObj = results.getJSONObject(i);
-            places.add(Place.fromJsonToPlace(jsonObj));
-        }
-        return places;
     }
     
     public String toString() {

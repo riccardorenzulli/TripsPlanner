@@ -33,9 +33,12 @@ import org.json.JSONObject;
 public class SearchServlet extends HttpServlet {
 
     @EJB
+    private GooglePlacesBean googlePlacesBean;
+    @EJB
     private SearchBeanLocal searchBean;
     @EJB
     private GoogleDirectionsBean dirBean;
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -145,7 +148,7 @@ public class SearchServlet extends HttpServlet {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
  
-        ArrayList<Place> bestPlaces = GooglePlacesBean.getInterestingPlaces(search);
+        ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
 
         request.setAttribute("places", bestPlaces);
         
