@@ -40,11 +40,7 @@ public class ControllerServlet extends HttpServlet {
         String action = request.getParameter("action");
         
         // control for api keys in session
-        if (ctx.getAttribute("keysPresent") == null){
-            apiKaysBean.findKeysFromCSV(ctx);
-            System.out.println("keys create in sessione");
-            System.out.println(ctx.getAttribute("google"));
-        }
+        apiKaysBean.findKeysFromCSV(ctx);
         
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");

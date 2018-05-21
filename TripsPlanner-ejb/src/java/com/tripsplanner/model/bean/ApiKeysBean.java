@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.servlet.ServletContext;
@@ -24,6 +25,7 @@ import javax.servlet.ServletContext;
 public class ApiKeysBean {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    public static HashMap<String, String> keys = new HashMap<String, String>();
 
     public void findKeysFromCSV(ServletContext ctx) {
         InputStream csvFile = ctx.getResourceAsStream("/WEB-INF/keys.csv");
@@ -39,9 +41,12 @@ public class ApiKeysBean {
                 String apiProvider = api[0];
                 String key = api[1];
                 ctx.setAttribute(apiProvider, key);
+                keys.put(apiProvider, key);
             }
             
             ctx.setAttribute("keysPresent", "True");
+            keys.put("keysPresent", "True");
+            
 
         } catch (IOException e) {
             e.printStackTrace();
