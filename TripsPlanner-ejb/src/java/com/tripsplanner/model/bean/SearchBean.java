@@ -39,7 +39,7 @@ public class SearchBean implements SearchBeanLocal {
         tmpSearch.setDestinationCity(mapSearch.get("destination_city"));
         
         /*Departure date*/
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         Date parsed = null;
         try {
             parsed = format.parse(mapSearch.get("departure_date"));
