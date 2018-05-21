@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tripsplanner.util;
+package com.tripsplanner.model.bean;
 
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
@@ -15,6 +15,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,14 +24,17 @@ import org.json.JSONObject;
  *
  * @author the-silent-fox
  */
-public class GoogleAPI {
+
+@Stateless
+@LocalBean
+public class GooglePlacesBean {
     
     private static final String api_key = "AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo";
     
     private static JSONObject getInterestingPlacesJSON(String city) throws ProtocolException, IOException {
-        String[] cityElements = city.split(",");
-        String cityElem1 = cityElements[0].replace(' ', '+');
-        String cityElem2 = cityElements[cityElements.length-1].replace(' ', '+');
+        String[] cityElements = city.split("\\[");
+        String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
+        String cityElem2 = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
         String stringCity = cityElem1 + cityElem2;
         System.out.println(stringCity);
         
@@ -69,9 +74,9 @@ public class GoogleAPI {
     }
     
     private static JSONObject getInterestingPlacesJSON(String city, String type) throws ProtocolException, IOException {
-        String[] cityElements = city.split(",");
-        String cityElem1 = cityElements[0].replace(' ', '+');
-        String cityElem2 = cityElements[cityElements.length-1].replace(' ', '+');
+        String[] cityElements = city.split("\\[");
+        String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
+        String cityElem2 = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
         String stringCity = cityElem1 + cityElem2;
         
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";

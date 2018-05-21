@@ -140,7 +140,7 @@ public class Place implements Serializable {
         place.setAddress(jsonObj.getString("formatted_address"));
         
         try {
-            place.setDescription(WikipediaAPI.getDescription(place.getName()));
+            place.setDescription(WikipediaAPIBean.getDescription(place.getName()));
         } catch (Exception e) { place.setDescription(""); }
         
         place.setLat(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lat"));
