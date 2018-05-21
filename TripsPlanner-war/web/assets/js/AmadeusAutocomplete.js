@@ -18,8 +18,6 @@ function useAutocomplete() {
 
     $(function () {
         function log(message) {
-            //$("<div>").text(message).prependTo("#log");
-            //$("#log").scrollTop(0);
         }
         $("#departure_city").autocomplete({
             source: function (request, response) {
@@ -31,16 +29,19 @@ function useAutocomplete() {
                         term: request.term
                     },
                     success: function (data) {
-                        response(data);
-                        console.log("chiamata success");
+                        var res = [];
+                        for (i = 0; i < data.length; i++ ) {
+                                city = data[i];
+                                city['value'] = city['label'];
+                                res.push(city);
+                        }
+                        response(res);
                     }
                 });
             },
             minLength: 3,
             select: function (event, ui) {
-                //log(ui.item ?
-                        //"Selected: " + ui.item.label :
-                        //"Nothing selected, input was " + this.value);
+
             },
             open: function () {
                 //$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
@@ -50,6 +51,43 @@ function useAutocomplete() {
             }
         });
     });
+    
+    $(function () {
+        function log(message) {
+        }
+        $("#destination_city").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
+                    dataType: "json",
+                    data: {
+                        apikey: "3AKuSyfvvCZE43RQw1dvNKC2NK6yJP7J",
+                        term: request.term
+                    },
+                    success: function (data) {
+                        var res = [];
+                        for (i = 0; i < data.length; i++ ) {
+                                city = data[i];
+                                city['value'] = city['label'];
+                                res.push(city);
+                        }
+                        response(res);
+                    }
+                });
+            },
+            minLength: 3,
+            select: function (event, ui) {
+
+            },
+            open: function () {
+                //$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                //$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+    });
+    
 }
 
 
