@@ -53,7 +53,6 @@ public class SearchServlet extends HttpServlet {
         switch(action == null ? "" : action) {
             case "search":
                 goSearch(request, response);
-                //dirBean.getDirections("ChIJC-rXcnBtiEcRjK-icXN-bd8", "ChIJCQ6ZCQ9tiEcRjSyxb9zkZ1I", "driving", "now");
                 break;
         }
     }
@@ -146,6 +145,8 @@ public class SearchServlet extends HttpServlet {
         }
  
         ArrayList<Place> bestPlaces = GoogleAPI.getInterestingPlaces(search);
+        //dirBean.getDirections("ChIJC-rXcnBtiEcRjK-icXN-bd8", "ChIJCQ6ZCQ9tiEcRjSyxb9zkZ1I", "driving", "now");
+        dirBean.getRoute(bestPlaces.get(0), bestPlaces.get(1), "driving", "now");
 
         request.setAttribute("places", bestPlaces);
         
