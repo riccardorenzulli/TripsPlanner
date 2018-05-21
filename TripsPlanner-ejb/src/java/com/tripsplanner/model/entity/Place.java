@@ -5,8 +5,8 @@
  */
 package com.tripsplanner.model.entity;
 
-import static com.tripsplanner.util.GoogleAPI.getPhotoFromReference;
-import com.tripsplanner.util.WikipediaAPI;
+import static com.tripsplanner.model.bean.GooglePlacesBean.getPhotoFromReference;
+import com.tripsplanner.model.bean.WikipediaAPIBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -122,7 +122,7 @@ public class Place {
         place.setAddress(jsonObj.getString("formatted_address"));
         
         try {
-            place.setDescription(WikipediaAPI.getDescription(place.getName()));
+            place.setDescription(WikipediaAPIBean.getDescription(place.getName()));
         } catch (Exception e) { place.setDescription(""); }
         
         place.setLat(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lat"));

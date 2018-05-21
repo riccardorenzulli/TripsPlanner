@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tripsplanner.util;
+package com.tripsplanner.model.bean;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,13 +11,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import org.json.JSONObject;
 
 /**
  *
  * @author the-silent-fox
  */
-public class WikipediaAPI {
+
+@Stateless
+@LocalBean
+public class WikipediaAPIBean {
     
     public static String getDescription(String name) throws MalformedURLException, IOException {
         String stringName = name.replace(' ', '_');

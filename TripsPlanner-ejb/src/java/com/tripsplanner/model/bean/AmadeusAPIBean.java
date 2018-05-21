@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tripsplanner.util;
+package com.tripsplanner.model.bean;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.net.ssl.HttpsURLConnection;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,10 +21,10 @@ import org.json.JSONObject;
  *
  * @author giovannibonetta
  */
-public final class AmadeusAPI {
 
-    private AmadeusAPI() {
-    }
+@Stateless
+@LocalBean
+public class AmadeusAPIBean {
     
     private static final String api_key = "UACF64XEPrrIs5lxmRKmmCmrCp5SAKmG";
     private static final String client_secret = "AOzTEn5RzVLsdC5T";

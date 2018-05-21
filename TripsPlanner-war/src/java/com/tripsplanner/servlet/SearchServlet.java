@@ -9,8 +9,8 @@ import com.tripsplanner.model.bean.GoogleDirectionsBean;
 import com.tripsplanner.model.bean.SearchBeanLocal;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
-import com.tripsplanner.util.AmadeusAPI;
-import com.tripsplanner.util.GoogleAPI;
+import com.tripsplanner.model.bean.AmadeusAPIBean;
+import com.tripsplanner.model.bean.GooglePlacesBean;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -139,13 +139,13 @@ public class SearchServlet extends HttpServlet {
         Search search = searchBean.createSearch(mapSearch);
         
         try{
-        JSONObject jsonFlight = AmadeusAPI.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
+        JSONObject jsonFlight = AmadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
         System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
  
-        ArrayList<Place> bestPlaces = GoogleAPI.getInterestingPlaces(search);
+        ArrayList<Place> bestPlaces = GooglePlacesBean.getInterestingPlaces(search);
 
         request.setAttribute("places", bestPlaces);
         
