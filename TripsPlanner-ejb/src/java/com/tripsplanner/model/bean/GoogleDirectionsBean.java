@@ -5,13 +5,13 @@
  */
 package com.tripsplanner.model.bean;
 
-import com.tripsplanner.config.Config;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import org.json.JSONObject;
@@ -24,6 +24,9 @@ import org.json.JSONObject;
 @LocalBean
 public class GoogleDirectionsBean {
 
+    @EJB
+    private ApiKeysBean apiKeysBean;
+    private String api_key = apiKeysBean.keys.get("google_places_api");
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
@@ -32,7 +35,7 @@ public class GoogleDirectionsBean {
         String parameters = "origin=place_id:" + departurePlaceID + "&destination=place_id:" + departurePlaceID;
         String mode = "&mode=" + m;
         String depTime = "&departure_time=" + departureTime;
-        String key = "&key=" + Config.google_key;
+        String key = "&key=" + api_key;
         
         String query = new StringBuilder(url).append(parameters).append(mode).append(depTime).append(key).toString();
         
