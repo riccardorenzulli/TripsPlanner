@@ -5,8 +5,10 @@
  */
 package com.tripsplanner.servlet;
 
+import com.tripsplanner.model.bean.ApiKeysBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ControllerServlet extends HttpServlet {
 
+    @EJB
+    private ApiKeysBean apiKaysBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,6 +38,13 @@ public class ControllerServlet extends HttpServlet {
         
         ServletContext ctx = getServletContext();
         String action = request.getParameter("action");
+        
+        // control for api keys in session
+        if (ctx.getAttribute("keysPresent") == null){
+            apiKaysBean.findKeysFromCSV(ctx);
+            System.out.println("keys create in sessione");
+            System.out.println(ctx.getAttribute("google"));
+        }
         
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
