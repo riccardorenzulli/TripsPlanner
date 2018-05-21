@@ -6,6 +6,7 @@
 package com.tripsplanner.model.entity;
 
 import com.tripsplanner.model.bean.WikipediaAPIBean;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;

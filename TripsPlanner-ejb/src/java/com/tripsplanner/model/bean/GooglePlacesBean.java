@@ -173,7 +173,7 @@ public class GooglePlacesBean {
         } catch(Exception e) { System.out.println("Rating not found"); }
         
         JSONArray typesJson = jsonObj.getJSONArray("types");
-        List<String> typesList = new ArrayList<String>();
+        ArrayList<String> typesList = new ArrayList<String>();
         for(int i=0; i<typesJson.length(); i++)
             typesList.add(typesJson.getString(i));
         place.setTypes(typesList);
