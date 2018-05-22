@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.net.ssl.HttpsURLConnection;
@@ -18,18 +19,27 @@ import okhttp3.Response;
 import org.json.JSONObject;
 
 /**
- *
- * @author giovannibonetta
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * <p/>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
  */
 
 @Stateless
 @LocalBean
 public class AmadeusAPIBean {
     
-    private static final String api_key = "UACF64XEPrrIs5lxmRKmmCmrCp5SAKmG";
-    private static final String client_secret = "AOzTEn5RzVLsdC5T";
+    @EJB
+    private ApiKeysBean apiKeysBean;
+    private String api_key = apiKeysBean.keys.get("amadeus_api");
+    private String client_secret = apiKeysBean.keys.get("amadeus_client_secret");
     
-    private static String getAmadeusToken() throws Exception {
+    private String getAmadeusToken() throws Exception {
 
         String url = "https://test.api.amadeus.com/v1/security/oauth2/token";
         URL obj = new URL(url);
@@ -68,7 +78,7 @@ public class AmadeusAPIBean {
     }
 
     // Where can I fly to from Paris?
-    public static JSONObject getInspirationFlight(String departure_city_IATA, String departure_date) throws Exception{
+    public JSONObject getInspirationFlight(String departure_city_IATA, String departure_date) throws Exception{
         String amadeus_token = getAmadeusToken();
         OkHttpClient client = new OkHttpClient();
 
@@ -84,7 +94,7 @@ public class AmadeusAPIBean {
     }
     
     //I know where I want to fly, the dates and duration, what are the best flight deals?
-    public static JSONObject getLowFareFlight(String departure_IATA, String destination_IATA,  String departure_date) throws Exception{
+    public JSONObject getLowFareFlight(String departure_IATA, String destination_IATA,  String departure_date) throws Exception{
         String amadeus_token = getAmadeusToken();
         OkHttpClient client = new OkHttpClient();
 

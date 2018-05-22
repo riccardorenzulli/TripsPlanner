@@ -81,6 +81,9 @@
 <div class="clearfix"></div>
 <!-- END: NAV SECTION -->
 
+<!-- hidden input to pass the amadeus key to javascript for the autocomplete service -->
+<input id='amadeus_autocomplete' type='hidden' value='${applicationScope['amadeus_autocomplete']}'/>
+
 <%@include file="searchBox.html" %>
 
 <!-- BEGIN: HOW IT WORK -->

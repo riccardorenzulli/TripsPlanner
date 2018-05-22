@@ -5,35 +5,57 @@
  */
 package com.tripsplanner.model.entity;
 
-import static com.tripsplanner.model.bean.GooglePlacesBean.getPhotoFromReference;
-import com.tripsplanner.model.bean.WikipediaAPIBean;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * <p/>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
  */
 
-public class Place {
+@Entity
+public class Place implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    @Column(name = "name")
     private String name;
+    @Column(name = "address")
     private String address;
+    @Column(name = "description")
     private String description;
+    @Column(name = "lat")
     private float lat;
+    @Column(name = "lng")
     private float lng;
+    @Column(name = "googlePlaceID")
     private String googlePlaceID;
+    @Column(name = "googleID")
     private String googleID;
     /*opening hours?*/
+    @Column(name = "photosUrl")
     private String photosUrl; //only the first one
+    @Column(name = "rating")
     private float rating = 0;
-    private List<String> types;
+    @Column(name = "types")
+    private ArrayList<String> types;
+    @Column(name = "memories")
+    private ArrayList<Memory> memories;
 
     public String getName() {
         return name;
@@ -103,7 +125,7 @@ public class Place {
         return types;
     }
 
-    public void setTypes(List<String> types) {
+    public void setTypes(ArrayList<String> types) {
         this.types = types;
     }
 
@@ -114,51 +136,25 @@ public class Place {
     public void setRating(float rating) {
         this.rating = rating;
     }
-    
-    public static Place fromJsonToPlace(JSONObject jsonObj) {
-        Place place = new Place();
-        
-        place.setName(jsonObj.getString("name"));
-        place.setAddress(jsonObj.getString("formatted_address"));
-        
-        try {
-            place.setDescription(WikipediaAPIBean.getDescription(place.getName()));
-        } catch (Exception e) { place.setDescription(""); }
-        
-        place.setLat(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lat"));
-        place.setLng(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lng"));
-        place.setGoogleID(jsonObj.getString("id"));
-        place.setGooglePlaceID(jsonObj.getString("place_id"));
-        try {
-            String photoReference = jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference");
-            place.setPhotosUrl(getPhotoFromReference(photoReference));
-        } catch(Exception e) { System.out.println("Photos not found"); }
-        try {
-            place.setRating(jsonObj.getFloat("rating"));
-        } catch(Exception e) { System.out.println("Rating not found"); }
-        
-        JSONArray typesJson = jsonObj.getJSONArray("types");
-        List<String> typesList = new ArrayList<String>();
-        for(int i=0; i<typesJson.length(); i++)
-            typesList.add(typesJson.getString(i));
-        place.setTypes(typesList);
-        
-        return place;
+
+    public ArrayList<Memory> getMemories() {
+        return memories;
     }
-    
-    public static ArrayList<Place> fromJsonToListPlace(JSONObject jsonResult) {
-        ArrayList<Place> places = new ArrayList<Place>();
-        JSONArray results = jsonResult.getJSONArray("results");
-        
-        for(int i=0; i<5 && i<results.length(); i++) {
-            JSONObject jsonObj = results.getJSONObject(i);
-            places.add(Place.fromJsonToPlace(jsonObj));
-        }
-        return places;
+
+    public void setMemories(ArrayList<Memory> memories) {
+        this.memories = memories;
     }
-    
+
     public String toString() {
         return "Place:\n"+this.name+" - "+this.address+" - "+this.lat+" - "+this.lng+"\n"+this.googleID+"\n"+this.googlePlaceID+"\n"+this.photosUrl+"\nRating "+this.rating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

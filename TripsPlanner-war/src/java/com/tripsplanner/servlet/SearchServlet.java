@@ -16,7 +16,6 @@ import com.tripsplanner.model.bean.TripBeanLocal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -25,21 +24,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * <p/>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
  */
+
 public class SearchServlet extends HttpServlet {
 
+    @EJB
+    private AmadeusAPIBean amadeusAPIBean;
+    @EJB
+    private GooglePlacesBean googlePlacesBean;
     @EJB
     private SearchBeanLocal searchBean;
     @EJB
     private GoogleDirectionsBean dirBean;
     @EJB
     private TripBeanLocal tripBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,7 +67,6 @@ public class SearchServlet extends HttpServlet {
         switch(action == null ? "" : action) {
             case "search":
                 goSearch(request, response);
-                //dirBean.getDirections("ChIJC-rXcnBtiEcRjK-icXN-bd8", "ChIJCQ6ZCQ9tiEcRjSyxb9zkZ1I", "driving", "now");
                 break;
         }
     }
@@ -142,7 +152,7 @@ public class SearchServlet extends HttpServlet {
         Search search = searchBean.createSearch(mapSearch);
         
         try{
-        JSONObject jsonFlight = AmadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
+        JSONObject jsonFlight = amadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
         System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,6 +161,8 @@ public class SearchServlet extends HttpServlet {
         ArrayList<Place> bestPlaces = GooglePlacesBean.getInterestingPlaces(search);
         
         tripBean.buildTrip(bestPlaces, 3);
+
+        dirBean.getRoute(bestPlaces.get(0), bestPlaces.get(1), "driving", "now");
 
         request.setAttribute("places", bestPlaces);
         

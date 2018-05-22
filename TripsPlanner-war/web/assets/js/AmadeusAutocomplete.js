@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-window.onload = deleteUICss();
+
 window.onload = useAutocomplete();
 
 function useAutocomplete() {
@@ -25,7 +25,7 @@ function useAutocomplete() {
                     url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                     dataType: "json",
                     data: {
-                        apikey: "3AKuSyfvvCZE43RQw1dvNKC2NK6yJP7J",
+                        apikey: getApiFromHidden(),
                         term: request.term
                     },
                     success: function (data) {
@@ -61,7 +61,7 @@ function useAutocomplete() {
                     url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                     dataType: "json",
                     data: {
-                        apikey: "3AKuSyfvvCZE43RQw1dvNKC2NK6yJP7J",
+                        apikey: getApiFromHidden(),
                         term: request.term
                     },
                     success: function (data) {
@@ -90,7 +90,8 @@ function useAutocomplete() {
     
 }
 
-
-function deleteUICss(){
-    $('.ui-spinner-button').detach();
+function getApiFromHidden(){
+    var amadeus_autocomplete = $('#amadeus_autocomplete').val();
+    console.log("l'api è:" + amadeus_autocomplete);
+    return amadeus_autocomplete;
 }

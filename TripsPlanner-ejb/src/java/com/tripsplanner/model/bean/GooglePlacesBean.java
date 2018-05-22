@@ -14,24 +14,34 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * <p/>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
  */
 
 @Stateless
 @LocalBean
 public class GooglePlacesBean {
     
-    private static final String api_key = "AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo";
+    @EJB
+    private ApiKeysBean apiKeysBean;
+    private String api_key = apiKeysBean.keys.get("google_places_api");
     
-    private static JSONObject getInterestingPlacesJSON(String city) throws ProtocolException, IOException {
+    private JSONObject getInterestingPlacesJSON(String city) throws ProtocolException, IOException {
+        System.out.println("google places api key "+ api_key);
         String[] cityElements = city.split("\\[");
         String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
         String cityElem2 = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
@@ -74,7 +84,7 @@ public class GooglePlacesBean {
         return json;      
     }
     
-    private static JSONObject getInterestingPlacesJSON(String city, String type) throws ProtocolException, IOException {
+    private JSONObject getInterestingPlacesJSON(String city, String type) throws ProtocolException, IOException {
         String[] cityElements = city.split("\\[");
         String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
         String cityElem2 = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
@@ -116,36 +126,77 @@ public class GooglePlacesBean {
         return json;      
     }
     
-    public static ArrayList<Place> getInterestingPlaces(Search search) throws IOException {
+    public ArrayList<Place> getInterestingPlaces(Search search) throws IOException {
         JSONObject jsonResult = getInterestingPlacesJSON(search.getDestinationCity());
-        ArrayList<Place> places = Place.fromJsonToListPlace(jsonResult);
+        ArrayList<Place> places = fromJsonToListPlace(jsonResult);
         
         if(search.isMuseums()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "museum");
-            places.addAll(Place.fromJsonToListPlace(obj));
+            places.addAll(fromJsonToListPlace(obj));
         }
         if(search.isArt()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "art");
-            places.addAll(Place.fromJsonToListPlace(obj));
+            places.addAll(fromJsonToListPlace(obj));
         }
         if(search.isNature()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "park");
-            places.addAll(Place.fromJsonToListPlace(obj));
+            places.addAll(fromJsonToListPlace(obj));
         }
         if(search.isShopping()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "shopping");
-            places.addAll(Place.fromJsonToListPlace(obj));
+            places.addAll(fromJsonToListPlace(obj));
         }
         if(search.isNightLife()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "club");
-            places.addAll(Place.fromJsonToListPlace(obj));
+            places.addAll(fromJsonToListPlace(obj));
         }
         
         return places;
     } 
     
-    public static String getPhotoFromReference(String photoReference) throws IOException {
+    public String getPhotoFromReference(String photoReference) throws IOException {
         return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=640&maxheight=425&photoreference="+photoReference+"&key="+api_key;
     }
     
+    public Place fromJsonToPlace(JSONObject jsonObj) {
+        Place place = new Place();
+        
+        place.setName(jsonObj.getString("name"));
+        place.setAddress(jsonObj.getString("formatted_address"));
+        
+        try {
+            place.setDescription(WikipediaAPIBean.getDescription(place.getName()));
+        } catch (Exception e) { place.setDescription(""); }
+        
+        place.setLat(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lat"));
+        place.setLng(jsonObj.getJSONObject("geometry").getJSONObject("location").getFloat("lng"));
+        place.setGoogleID(jsonObj.getString("id"));
+        place.setGooglePlaceID(jsonObj.getString("place_id"));
+        try {
+            String photoReference = jsonObj.getJSONArray("photos").getJSONObject(0).getString("photo_reference");
+            place.setPhotosUrl(getPhotoFromReference(photoReference));
+        } catch(Exception e) { System.out.println("Photos not found"); }
+        try {
+            place.setRating(jsonObj.getFloat("rating"));
+        } catch(Exception e) { System.out.println("Rating not found"); }
+        
+        JSONArray typesJson = jsonObj.getJSONArray("types");
+        ArrayList<String> typesList = new ArrayList<String>();
+        for(int i=0; i<typesJson.length(); i++)
+            typesList.add(typesJson.getString(i));
+        place.setTypes(typesList);
+        
+        return place;
+    }
+    
+    public ArrayList<Place> fromJsonToListPlace(JSONObject jsonResult) {
+        ArrayList<Place> places = new ArrayList<Place>();
+        JSONArray results = jsonResult.getJSONArray("results");
+        
+        for(int i=0; i<5 && i<results.length(); i++) {
+            JSONObject jsonObj = results.getJSONObject(i);
+            places.add(fromJsonToPlace(jsonObj));
+        }
+        return places;
+    }
 }
