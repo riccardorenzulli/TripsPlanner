@@ -10,7 +10,6 @@ import com.tripsplanner.model.facade.UserFacadeLocal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,9 +19,17 @@ import javax.ejb.Stateless;
 import org.json.JSONObject;
 
 /**
- *
- * @author giovannibonetta
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * <p/>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
  */
+
 @Stateless
 public class LoginBean implements LoginBeanLocal {
 

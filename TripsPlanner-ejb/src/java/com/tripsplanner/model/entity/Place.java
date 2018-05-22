@@ -5,7 +5,6 @@
  */
 package com.tripsplanner.model.entity;
 
-import com.tripsplanner.model.bean.WikipediaAPIBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +13,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * <p/>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
  */
 
 @Entity
@@ -51,6 +54,8 @@ public class Place implements Serializable {
     private float rating = 0;
     @Column(name = "types")
     private ArrayList<String> types;
+    @Column(name = "memories")
+    private ArrayList<Memory> memories;
 
     public String getName() {
         return name;
@@ -131,7 +136,14 @@ public class Place implements Serializable {
     public void setRating(float rating) {
         this.rating = rating;
     }
-    
+
+    public ArrayList<Memory> getMemories() {
+        return memories;
+    }
+
+    public void setMemories(ArrayList<Memory> memories) {
+        this.memories = memories;
+    }
 
     public String toString() {
         return "Place:\n"+this.name+" - "+this.address+" - "+this.lat+" - "+this.lng+"\n"+this.googleID+"\n"+this.googlePlaceID+"\n"+this.photosUrl+"\nRating "+this.rating;

@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tripsplanner.model.bean;
+package com.tripsplanner.model.facade;
 
-import com.tripsplanner.model.entity.User;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.HashMap;
+import com.tripsplanner.model.entity.Place;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -24,10 +22,20 @@ import javax.ejb.Local;
  */
 
 @Local
-public interface LoginBeanLocal {
-    
-    User validateFacebookUser(String token, boolean create) throws MalformedURLException, IOException;
+public interface PlaceFacadeLocal {
 
-    User validateGoogleUser(HashMap<String, String> mapUser);
+    void create(Place place);
+
+    void edit(Place place);
+
+    void remove(Place place);
+
+    Place find(Object id);
+
+    List<Place> findAll();
+
+    List<Place> findRange(int[] range);
+
+    int count();
     
 }
