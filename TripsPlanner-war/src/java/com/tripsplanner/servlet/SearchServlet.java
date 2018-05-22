@@ -158,7 +158,7 @@ public class SearchServlet extends HttpServlet {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
  
-        ArrayList<Place> bestPlaces = GooglePlacesBean.getInterestingPlaces(search);
+        ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
         
         tripBean.buildTrip(bestPlaces, 3);
 
