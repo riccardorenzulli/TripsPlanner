@@ -11,6 +11,7 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
+import com.tripsplanner.model.bean.TripBean;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +37,8 @@ public class SearchServlet extends HttpServlet {
     private SearchBeanLocal searchBean;
     @EJB
     private GoogleDirectionsBean dirBean;
-    
+    @EJB
+    private TripBean tripBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -146,6 +148,8 @@ public class SearchServlet extends HttpServlet {
         }
  
         ArrayList<Place> bestPlaces = GooglePlacesBean.getInterestingPlaces(search);
+        
+        tripBean.buildTrip(bestPlaces, 3);
 
         request.setAttribute("places", bestPlaces);
         

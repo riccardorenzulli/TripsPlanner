@@ -5,6 +5,9 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.Place;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +16,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface TripBeanLocal {
+    
+    ArrayList<ArrayList<Integer>> buildTrip(List<Place> interestingPlaces, int dayTrips);
     
 }

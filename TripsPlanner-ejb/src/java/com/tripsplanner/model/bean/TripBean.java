@@ -22,22 +22,26 @@ public class TripBean implements TripBeanLocal {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
-    public void buildTrip() {
+    /*Given the interesting places to be visited and the number of days
+      return an arraylist for each cluster containing the indexes of the
+      places belonging to the clusters.
+    */
+    public ArrayList<ArrayList<Integer>> buildTrip(List<Place> interestingPlaces, int dayTrips) {
         /*Clustering + shortest path tour*/
         Random rand = new Random();
-        List<Place> places = null;
-        int daysOfTrip = 3;
+        List<Place> places = interestingPlaces;
+        int daysOfTrip = dayTrips;
         int numberOfPlaces = places.size();
         
-        ArrayList<Integer> medoidsIndex = new ArrayList<Integer>();
+        ArrayList<Integer> medoidsIndexes = new ArrayList<Integer>();
         /*initializing centroids*/
         for(int i=0; i<daysOfTrip; i++) {
             boolean equalCentroids = true;
             /*create unique centroids*/
             while(equalCentroids) {
                 int newIndex = rand.nextInt(daysOfTrip);
-                if(!medoidsIndex.contains(newIndex)) { //need to use Integer object?
-                    medoidsIndex.add(newIndex);
+                if(!medoidsIndexes.contains(newIndex)) { //need to use Integer object?
+                    medoidsIndexes.add(newIndex);
                     equalCentroids = false;
                 }
             }
@@ -46,20 +50,29 @@ public class TripBean implements TripBeanLocal {
         ArrayList<ArrayList<Integer>> clusters = new ArrayList<ArrayList<Integer>>();
         /*Assign places to the closest medoids*/
         for(int i=0; i<numberOfPlaces; i++) {
-            int closestClusterIndex = getClosestCluster(places, medoidsIndex, i);
+            int closestClusterIndex = getClosestCluster(places, medoidsIndexes, i);
             clusters.get(closestClusterIndex).add(i); //put the place i in the closest cluster
         }
         /*Recalculate medoids*/
-        for(int i=0; i<medoidsIndex.size(); i++) {
+        for(int i=0; i<medoidsIndexes.size(); i++) {
             int indexBestMedoid = calculateBestMedoid(places, clusters.get(i), i);
+            medoidsIndexes.set(i, indexBestMedoid);
         }
         
+        for(int i=0; i<clusters.size(); i++) {
+            System.out.println("Cluster_"+i+":{");
+            for(int index : clusters.get(i))
+                System.out.print(" "+index);
+            System.out.print("}\n");
+        }
+        
+        return clusters;
     }
 
-    private int getClosestCluster(List<Place> places, ArrayList<Integer> medoidsIndex, int placeIndex) {
+    private int getClosestCluster(List<Place> places, ArrayList<Integer> medoidsIndexes, int placeIndex) {
         int indexClosestCluster = 0;
         float minDistance = Float.MAX_VALUE;
-        for(int i=0; i<medoidsIndex.size(); i++) {
+        for(int i=0; i<medoidsIndexes.size(); i++) {
             float distance = getDistance(places.get(placeIndex), places.get(i));
             if(distance < minDistance) {
                 minDistance = distance;
@@ -76,9 +89,18 @@ public class TripBean implements TripBeanLocal {
        return (float) Math.sqrt(latDifference + lngDifference);
     }
 
-    /*TODO*/
+    /*Given the cluster, recalculate the medoid*/
     private int calculateBestMedoid(List<Place> places, ArrayList<Integer> clusterIndexes, int i) {
-        return i;
+        int medoidIndex = clusterIndexes.get(0);
+        float minDistancesSum = Float.MIN_VALUE;
+        for(int index : clusterIndexes) {
+            float distancesSum = 0;
+            for(int otherIndex : clusterIndexes)
+                distancesSum += getDistance(places.get(index), places.get(otherIndex));
+            if(distancesSum < minDistancesSum)
+                medoidIndex = index;
+        }
+        return medoidIndex;
     }
 
     
