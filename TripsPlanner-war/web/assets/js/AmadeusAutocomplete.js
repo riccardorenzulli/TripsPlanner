@@ -61,7 +61,7 @@ function useAutocomplete() {
                     url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
                     dataType: "json",
                     data: {
-                        apikey: "3AKuSyfvvCZE43RQw1dvNKC2NK6yJP7J",
+                        apikey: getApiFromHidden(),
                         term: request.term
                     },
                     success: function (data) {
