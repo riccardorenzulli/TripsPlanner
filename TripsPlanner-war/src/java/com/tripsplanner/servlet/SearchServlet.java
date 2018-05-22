@@ -12,6 +12,7 @@ import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
 import com.tripsplanner.model.bean.TripBean;
+import com.tripsplanner.model.bean.TripBeanLocal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class SearchServlet extends HttpServlet {
     @EJB
     private GoogleDirectionsBean dirBean;
     @EJB
-    private TripBean tripBean;
+    private TripBeanLocal tripBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

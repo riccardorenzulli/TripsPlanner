@@ -33,13 +33,13 @@ public class TripBean implements TripBeanLocal {
         int daysOfTrip = dayTrips;
         int numberOfPlaces = places.size();
         
-        ArrayList<Integer> medoidsIndexes = new ArrayList<Integer>();
+        ArrayList<Integer> medoidsIndexes = new ArrayList<>();
         /*initializing centroids*/
         for(int i=0; i<daysOfTrip; i++) {
             boolean equalCentroids = true;
             /*create unique centroids*/
             while(equalCentroids) {
-                int newIndex = rand.nextInt(daysOfTrip);
+                int newIndex = rand.nextInt(numberOfPlaces);
                 if(!medoidsIndexes.contains(newIndex)) { //need to use Integer object?
                     medoidsIndexes.add(newIndex);
                     equalCentroids = false;
@@ -47,17 +47,28 @@ public class TripBean implements TripBeanLocal {
             }
         }
         
-        ArrayList<ArrayList<Integer>> clusters = new ArrayList<ArrayList<Integer>>();
-        /*Assign places to the closest medoids*/
-        for(int i=0; i<numberOfPlaces; i++) {
-            int closestClusterIndex = getClosestCluster(places, medoidsIndexes, i);
-            clusters.get(closestClusterIndex).add(i); //put the place i in the closest cluster
+        ArrayList<ArrayList<Integer>> clusters = null;
+        
+        int iterations = 5;
+        for(int it=0; it<iterations; it++) {
+            /*Clean the clusters*/
+            clusters = clusters = new ArrayList<>();
+            for(int i=0; i<daysOfTrip; i++)
+                clusters.add(new ArrayList<>());
+            
+            /*Assign places to the closest medoids*/
+            for(int i=0; i<numberOfPlaces; i++) {
+                int closestClusterIndex = getClosestCluster(places, medoidsIndexes, i);
+                clusters.get(closestClusterIndex).add(i); //put the place i in the closest cluster
+            }
+            /*Recalculate medoids*/
+            for(int i=0; i<medoidsIndexes.size(); i++) {
+                int indexBestMedoid = calculateBestMedoid(places, clusters.get(i), i);
+                medoidsIndexes.set(i, indexBestMedoid);
+            }
         }
-        /*Recalculate medoids*/
-        for(int i=0; i<medoidsIndexes.size(); i++) {
-            int indexBestMedoid = calculateBestMedoid(places, clusters.get(i), i);
-            medoidsIndexes.set(i, indexBestMedoid);
-        }
+        
+        
         
         for(int i=0; i<clusters.size(); i++) {
             System.out.println("Cluster_"+i+":{");
@@ -65,6 +76,8 @@ public class TripBean implements TripBeanLocal {
                 System.out.print(" "+index);
             System.out.print("}\n");
         }
+        for(int i=0; i<places.size(); i++)
+            System.out.println(places.get(i).getLat()+","+places.get(i).getLng()+","+i);
         
         return clusters;
     }
