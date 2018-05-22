@@ -35,7 +35,9 @@ public class Hotel implements Serializable {
     @Column(name = "currency")
     private String currency;
     @Column(name = "total")
-    private String total;
+    private String total;   
+    @Column(name = "avaiable")
+    private String avaiable;
 
     public Long getId() {
         return id;
