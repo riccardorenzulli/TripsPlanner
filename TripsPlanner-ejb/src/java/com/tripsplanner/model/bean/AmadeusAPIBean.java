@@ -101,4 +101,20 @@ public class AmadeusAPIBean {
         JSONObject jsonObj = new JSONObject(response_body);
         return jsonObj;
     }
+    
+    // What are the best hotel offers during my trip?
+    public JSONObject getHotels(String destination_IATA,  String departure_date, String return_date) throws Exception{
+        String amadeus_token = getAmadeusToken();
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .header("authorization", "Bearer " + amadeus_token)
+                .url("https://test.api.amadeus.com/v1/shopping/flight-offers?origin=" + destination_IATA + "&destination="+ destination_IATA +"&departureDate="+ departure_date)
+                .build();
+        
+        Response response = client.newCall(request).execute();
+        String response_body = response.body().string();
+        JSONObject jsonObj = new JSONObject(response_body);
+        return jsonObj;
+    }
 }
