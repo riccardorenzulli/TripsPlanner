@@ -153,7 +153,7 @@ public class SearchServlet extends HttpServlet {
         
         try{
         JSONObject jsonFlight = amadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
-        System.out.print(jsonFlight);
+        //System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
