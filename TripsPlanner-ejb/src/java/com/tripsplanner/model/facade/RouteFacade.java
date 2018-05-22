@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tripsplanner.model.bean;
+package com.tripsplanner.model.facade;
 
-import com.tripsplanner.model.entity.User;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.HashMap;
-import javax.ejb.Local;
+import com.tripsplanner.model.entity.Route;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -23,11 +23,19 @@ import javax.ejb.Local;
  * gabriele.sartor@edu.unito.it<br><br>
  */
 
-@Local
-public interface LoginBeanLocal {
-    
-    User validateFacebookUser(String token, boolean create) throws MalformedURLException, IOException;
+@Stateless
+public class RouteFacade extends AbstractFacade<Route> implements RouteFacadeLocal {
 
-    User validateGoogleUser(HashMap<String, String> mapUser);
+    @PersistenceContext(unitName = "TripsPlanner-ejbPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public RouteFacade() {
+        super(Route.class);
+    }
     
 }
