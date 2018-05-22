@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>com.mycompany</groupId>
-    <artifactId>TripsPlanner-web</artifactId>
+    <artifactId>TripsPlanner-war</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>TripsPlanner-web</name>
+    <name>TripsPlanner-war</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

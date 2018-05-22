@@ -54,6 +54,7 @@ public class ControllerServlet extends HttpServlet {
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
+            System.out.println("---------------------------------------------------------------------------");
         }
         
         else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
