@@ -7496,3 +7496,9 @@ h5 {
 	font-weight: normal;
 	color: #212121;
 }
+
+.directions {
+    margin-top: 10px;
+    padding-top: 5px;
+    margin-bottom: -30px;
+}

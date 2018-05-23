@@ -13,6 +13,7 @@ import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
 import com.tripsplanner.model.bean.TripBean;
 import com.tripsplanner.model.bean.TripBeanLocal;
+import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -160,9 +161,10 @@ public class SearchServlet extends HttpServlet {
  
         ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
         
-        tripBean.buildTrip(bestPlaces, 3);
+        Trip trip = tripBean.buildTrip(bestPlaces, 3);
+        /*Add the owner of the trip here*/
 
-        request.setAttribute("places", bestPlaces);
+        request.setAttribute("trip", trip);
         
         request.getRequestDispatcher("trips.jsp").forward(request, response);
     }

@@ -1,3 +1,6 @@
+<%@page import="com.tripsplanner.model.entity.Route"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.tripsplanner.model.entity.Trip"%>
 <%@page import="com.tripsplanner.model.entity.Place"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -67,28 +70,86 @@
 			<!-- START: HOTEL LIST VIEW -->
 			<div class="switchable col-md-12 clear-padding">
                             <%
-                                List<Place> places = (List<Place>)request.getAttribute("places");
+                                Trip trip = (Trip)request.getAttribute("trip");
+                                ArrayList<Place> places = trip.getDayPlaces(0);
+                                ArrayList<Route> legs = trip.getItineraries().get(0).getLegs();
                                 if(places != null) {
-                                    for(Place place : places) {
+                                    for(int i=0; i<places.size()-1; i++) {
                             %>
                                     <div  class="hotel-list-view">
 					<div class="wrapper">
 						<div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                                    <img src="<%=place.getPhotosUrl()%>" alt="cruise">
+                                                    <img src="<%=places.get(i).getPhotosUrl()%>" alt="cruise">
 						</div>
 						<div class="col-md-6 col-sm-6 hotel-info">
 							<div>
 								<div class="hotel-header">
 									<h5>
-                                                                            <%= place.getName() %>
+                                                                            <%= places.get(i).getName() %>
                                                                         </h5>
 									<p><i class="fa fa-map-marker"></i>
-                                                                            <%= place.getAddress() %>
+                                                                            <%= places.get(i).getAddress() %>
                                                                            </p>
 								</div>
 	
 								<div class="hotel-desc">
-									<p><%= place.getDescription() %></p>
+									<p><%= places.get(i).getDescription() %></p>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix visible-sm-block"></div>
+						<div class="col-md-2 rating-price-box text-center clear-padding">
+							<div class="rating-box">
+								<div class="tripadvisor-rating">
+									<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
+								</div>
+								<div class="user-rating">
+									<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+									<span>128 Guest Reviews.</span>
+								</div>
+							</div>
+							<div class="room-book-box">
+							
+								<div class="book">
+									<a href="#">Modify</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                                                                
+                                <div class="hotel-list-view directions">
+                                        <div class="col-md-3 col-sm-3"></div>
+                                        <div class="col-md-3 col-sm-3">
+                                            <p><%= legs.get(i).getInfo() %></p>
+                                        </div>
+                                        <div class="clearfix visible-sm-block"></div>
+                                        <div class="col-md-3 ">
+                                            <a href="#">Get directions</a>
+                                        </div>
+                                </div>
+                            <%
+                                    }
+                                    int lastIndex = places.size()-1;
+                            %>
+                                <div  class="hotel-list-view">
+					<div class="wrapper">
+						<div class="col-md-4 col-sm-6 switch-img clear-padding">
+                                                    <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="cruise">
+						</div>
+						<div class="col-md-6 col-sm-6 hotel-info">
+							<div>
+								<div class="hotel-header">
+									<h5>
+                                                                            <%= places.get(lastIndex).getName() %>
+                                                                        </h5>
+									<p><i class="fa fa-map-marker"></i>
+                                                                            <%= places.get(lastIndex).getAddress() %>
+                                                                           </p>
+								</div>
+	
+								<div class="hotel-desc">
+									<p><%= places.get(lastIndex).getDescription() %></p>
 								</div>
 							</div>
 						</div>
@@ -113,7 +174,6 @@
 					</div>
 				</div>
                             <%
-                                    }
                                 }
                             %>
 

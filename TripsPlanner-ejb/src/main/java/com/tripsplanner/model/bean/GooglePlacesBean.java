@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -128,7 +130,9 @@ public class GooglePlacesBean {
     
     public ArrayList<Place> getInterestingPlaces(Search search) throws IOException {
         JSONObject jsonResult = getInterestingPlacesJSON(search.getDestinationCity());
-        ArrayList<Place> places = fromJsonToListPlace(jsonResult);
+        Set<Place> places = new HashSet();
+                
+        places.addAll(fromJsonToListPlace(jsonResult));
         
         if(search.isMuseums()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "museum");
@@ -151,7 +155,10 @@ public class GooglePlacesBean {
             places.addAll(fromJsonToListPlace(obj));
         }
         
-        return places;
+        ArrayList<Place> results = new ArrayList();
+        results.addAll(places);
+        
+        return results;
     } 
     
     public String getPhotoFromReference(String photoReference) throws IOException {
