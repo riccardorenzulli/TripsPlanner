@@ -162,8 +162,6 @@ public class SearchServlet extends HttpServlet {
         
         tripBean.buildTrip(bestPlaces, 3);
 
-        dirBean.getRoute(bestPlaces.get(0), bestPlaces.get(1), "driving", "now");
-
         request.setAttribute("places", bestPlaces);
         
         request.getRequestDispatcher("trips.jsp").forward(request, response);
