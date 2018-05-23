@@ -5,10 +5,12 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.Hotel;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -16,6 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -110,7 +113,7 @@ public class AmadeusAPIBean {
     }
     
     // What are the best hotel offers during my trip?
-    public JSONObject getHotelsJson(String destination_IATA,  String departure_date, String return_date) throws Exception{
+    public JSONObject getHotelsJson(String destination_IATA,  String departure_date, String return_date) throws Exception {
         String amadeus_token = getAmadeusToken();
         System.out.println("amadeus token: "+ amadeus_token);
         OkHttpClient client = new OkHttpClient();
@@ -124,6 +127,21 @@ public class AmadeusAPIBean {
         String response_body = response.body().string();
         JSONObject jsonObj = new JSONObject(response_body);
         return jsonObj;
+    }
+    
+    public ArrayList<Hotel> getHotels(String destination_IATA,  String departure_date, String return_date) throws Exception{
+        JSONObject json = getHotelsJson(destination_IATA, departure_date, return_date);
+        System.out.println(json);
+        ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+        JSONArray JsonHotelArray = json.getJSONArray("data");
+        int len = JsonHotelArray.length();
+        
+        for(int i=0; i<len; i++){
+            JSONObject h = JsonHotelArray.getJSONObject(i);
+            hotels.add(Hotel.fromJsonToHotel(h));
+        }
+
+        return hotels;
     }
     
 }
