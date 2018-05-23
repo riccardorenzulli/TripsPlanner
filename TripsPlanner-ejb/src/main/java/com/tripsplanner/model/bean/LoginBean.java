@@ -64,8 +64,6 @@ public class LoginBean implements LoginBeanLocal {
     private JSONObject getFacebookUserJson(String token)
             throws MalformedURLException, IOException {
         
-        System.out.println("------------JSON--------------");
-
         URL validationUrl = new URL("http://graph.facebook.com/me?fields=name,email&access_token=" + token);
         HttpURLConnection conn = (HttpURLConnection) validationUrl.openConnection();
 
@@ -80,8 +78,6 @@ public class LoginBean implements LoginBeanLocal {
         }
         String graph = b.toString();
         JSONObject jsonOut = new JSONObject(graph);
-        System.out.println("------------JSON--------------");
-        System.out.println(jsonOut);
         return jsonOut.has("error") ? null : jsonOut;
     }
 
@@ -96,13 +92,6 @@ public class LoginBean implements LoginBeanLocal {
             user.setSurname(mapUser.get("surname"));
             user.setImgURL(mapUser.get("imgURL"));
             user.setGoogleID(mapUser.get("id"));
-            
-            System.out.print("-----GOOGLE ID:"+user.getGoogleID());
-            System.out.print(user.getEmail());
-            
-            System.out.print(user.getName());
-            System.out.print(user.getSurname());
-            System.out.print(user.getImgURL());
 
             userFacade.create(user);
         }

@@ -188,4 +188,5 @@ public class Hotel implements Serializable {
         return hotel;
     }
     
+
 }
