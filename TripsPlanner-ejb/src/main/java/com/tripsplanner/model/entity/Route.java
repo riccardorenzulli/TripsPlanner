@@ -239,6 +239,9 @@ public class Route implements Serializable {
                       "\n arrivalTimeValue=" + arrivalTimeValue + '}';
     }
     
-    
+    public String getInfo() {
+        
+        return ""+this.durationText+" by "+this.travelMode;
+    }
     
 }

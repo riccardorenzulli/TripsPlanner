@@ -65,7 +65,7 @@ public class GoogleDirectionsBean {
         StringBuilder sb = new StringBuilder();
 
         while(line!=null) {
-            System.out.println(line);
+            //System.out.println(line);
             sb.append(line);
             line = read.readLine();
         }
