@@ -11,3 +11,7 @@ and open the template in the editor.
 div.hotel-detail-sidebar {
     margin-top: 60px;
 }
+
+#map {
+        height: 500px;
+      }

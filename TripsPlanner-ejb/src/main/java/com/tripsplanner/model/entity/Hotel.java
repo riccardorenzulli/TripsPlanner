@@ -45,8 +45,10 @@ public class Hotel implements Serializable {
     private float latitude;
     @Column(name = "longitude")
     private float longitude;
+    @Column(name = "address")
+    private String address;
 
-    public Hotel(String name, String cityCode, String roomType, String roomDescription, String currency, float total, boolean avaiable, float latitude, float longitude) {
+    public Hotel(String name, String cityCode, String roomType, String roomDescription, String currency, float total, boolean avaiable, float latitude, float longitude, String address) {
         this.name = name;
         this.cityCode = cityCode;
         this.roomType = roomType;
@@ -56,6 +58,15 @@ public class Hotel implements Serializable {
         this.available = available;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getName() {
@@ -171,6 +182,11 @@ public class Hotel implements Serializable {
         float latitude = h.getJSONObject("hotel").getFloat("latitude");
         float longitude = h.getJSONObject("hotel").getFloat("longitude");
         
+        String address = "no address available";
+        try {
+            address = h.getJSONObject("hotel").getJSONObject("address").getJSONArray("lines").getString(0);
+        } catch (Exception e) {}
+
         JSONArray offers = h.getJSONArray("offers");
         JSONObject offer = offers.getJSONObject(0);
         
@@ -179,11 +195,11 @@ public class Hotel implements Serializable {
             roomType = offer.getJSONObject("room").getJSONObject("typeEstimated").getString("category");
         }catch(Exception e){}
         
-        String roomDescription = offer.getJSONObject("room").getJSONObject("description").getString("text");
+        String roomDescription = offer.getJSONObject("room").getJSONObject("description").getString("text").toLowerCase();
         String currency = offer.getJSONObject("price").getString("currency");
         float total = offer.getJSONObject("price").getFloat("total");
         
-        Hotel hotel = new Hotel(name, cityCode, roomType, roomDescription, currency, total, available, latitude, longitude);
+        Hotel hotel = new Hotel(name, cityCode, roomType, roomDescription, currency, total, available, latitude, longitude, address);
         
         return hotel;
     }

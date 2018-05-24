@@ -8,9 +8,16 @@ package com.tripsplanner.model.bean;
 import com.tripsplanner.model.entity.Hotel;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -18,6 +25,7 @@ import javax.net.ssl.HttpsURLConnection;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -41,6 +49,26 @@ public class AmadeusAPIBean {
     private ApiKeysBean apiKeysBean;
     private String api_key = apiKeysBean.keys.get("amadeus_api");
     private String client_secret = apiKeysBean.keys.get("amadeus_client_secret");
+    
+    private String mmggyy_to_yymmgg(String date) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat dff = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate;
+        String newDateString = "";
+        try {
+            startDate = df.parse(date);
+            newDateString = dff.format(startDate);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDateString;
+    }
+    
+    private String getIATAfromName(String name){
+        String Iata = StringUtils.substringBetween(name, "[","]");
+        return Iata;
+    }
     
     private String getAmadeusToken() throws Exception {
 
@@ -115,22 +143,27 @@ public class AmadeusAPIBean {
     // What are the best hotel offers during my trip?
     public JSONObject getHotelsJson(String destination_IATA,  String departure_date, String return_date) throws Exception {
         String amadeus_token = getAmadeusToken();
-        System.out.println("amadeus token: "+ amadeus_token);
-        OkHttpClient client = new OkHttpClient();
+//        System.out.println("amadeus token: " + amadeus_token);
+//        OkHttpClient client = new OkHttpClient();
+//
+//        Request request = new Request.Builder()
+//                .header("authorization", "Bearer " + amadeus_token)
+//                .url("https://test.api.amadeus.com/v1/shopping/hotel-offers?cityCode=" + destination_IATA + "&checkInDate=" + departure_date + "&checkOutDate=" + return_date) //+"&page%5Blimit%5D=5")
+//                .build();
+//
+//        Response response = client.newCall(request).execute();
+//        String response_body = response.body().string();
+        String requestUrl = "https://test.api.amadeus.com/v1/shopping/hotel-offers?cityCode=" + destination_IATA + "&checkInDate=" + departure_date + "&checkOutDate=" + return_date +"&bestRateOnly=true&view=FULL"; //+"&page%5Blimit%5D=5"
+        JSONObject jsonObj = runConnection(requestUrl, amadeus_token);
 
-        Request request = new Request.Builder()
-                .header("authorization", "Bearer " + amadeus_token)
-                .url("https://test.api.amadeus.com/v1/shopping/hotel-offers?cityCode=" + destination_IATA + "&checkInDate=" + departure_date +"&checkOutDate=" + return_date +"&page%5Blimit%5D=5")
-                .build();
-        
-        Response response = client.newCall(request).execute();
-        String response_body = response.body().string();
-        JSONObject jsonObj = new JSONObject(response_body);
         return jsonObj;
     }
     
     public ArrayList<Hotel> getHotels(String destination_IATA,  String departure_date, String return_date) throws Exception{
-        JSONObject json = getHotelsJson(destination_IATA, departure_date, return_date);
+        String dep_date = mmggyy_to_yymmgg(departure_date);
+        String ret_date = mmggyy_to_yymmgg(return_date);
+        String Iata = getIATAfromName(destination_IATA);
+        JSONObject json = getHotelsJson(Iata, dep_date, ret_date);
         System.out.println(json);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         JSONArray JsonHotelArray = json.getJSONArray("data");
@@ -142,6 +175,35 @@ public class AmadeusAPIBean {
         }
 
         return hotels;
+    }
+    
+    private JSONObject runConnection(String requestUrl, String amadeus_token) throws MalformedURLException, IOException{
+        URL obj = new URL(requestUrl);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+        //add request header
+        con.setRequestProperty("authorization", "Bearer " + amadeus_token);
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'GET' request to URL : " + requestUrl);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader read = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        String line = read.readLine();
+        StringBuilder sb = new StringBuilder();
+
+        while(line!=null) {
+            //System.out.println(line);
+            sb.append(line);
+            line = read.readLine();
+        }
+
+        JSONObject json = new JSONObject(sb.toString());
+        return json;
     }
     
 }
