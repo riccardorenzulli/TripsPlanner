@@ -119,14 +119,13 @@
 				</div>
                                                                 
                                 <div class="hotel-list-view directions">
-                                        <div class="col-md-3 col-sm-3"></div>
-                                        <div class="col-md-3 col-sm-3">
-                                            <p><%= legs.get(i).getInfo() %></p>
+                                    <div class="wrapper">
+                                        <div class="col-md-1 col-sm-1"></div>
+                                        <div class="col-md-5 col-sm-5 directions-border-left">
+                                            <p><%= legs.get(i).getInfo() %> <a href="#">Get directions</a></p> 
                                         </div>
-                                        <div class="clearfix visible-sm-block"></div>
-                                        <div class="col-md-3 ">
-                                            <a href="#">Get directions</a>
-                                        </div>
+                                        <div class="col-md-6 col-sm-6"></div>
+                                    </div>                                  
                                 </div>
                             <%
                                     }

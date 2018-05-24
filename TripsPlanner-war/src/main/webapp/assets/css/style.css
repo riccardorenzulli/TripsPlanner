@@ -2293,10 +2293,10 @@ h5 {
 .hotel-list-view .tripadvisor-rating {
 	display: none;
 }
-.hotel-list-view:hover {
+/*.hotel-list-view:hover {
 	border: 1px solid #F19C4F;
 	box-shadow: 0px 0px 5px #F19C4F;
-}
+}*/
 .hotel-list-view  img{
 	max-width: 100%;
 	min-height: 200px;
@@ -2374,7 +2374,7 @@ h5 {
 	margin-top: 5px;
 	border: 2px solid transparent;
 }
-.hotel-list-view:hover .room-book-box {
+/*.hotel-list-view:hover .room-book-box {
 	color: #ffffff;
 	background: #cfb7ae;
 }
@@ -2382,7 +2382,7 @@ h5 {
 	color: #ffffff;
 	border: 2px solid #ffffff;
 	background: #cfb7ae;
-}
+}*/
 @media (max-width: 991px) {
 	.hotel-list-view  img{
 		min-height: initial;
@@ -7498,7 +7498,15 @@ h5 {
 }
 
 .directions {
-    margin-top: 10px;
+    margin-top: 0px;
     padding-top: 5px;
-    margin-bottom: -30px;
+    margin-bottom: -40px;
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+
+.directions-border-left {
+    border-left: 1px solid #e9e0e0;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
