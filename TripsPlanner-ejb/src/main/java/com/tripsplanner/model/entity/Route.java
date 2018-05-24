@@ -244,4 +244,10 @@ public class Route implements Serializable {
         return ""+this.durationText+" by "+this.travelMode;
     }
     
+    public String getMapsDirections() {        
+        return "https://www.google.com/maps/dir/?api=1&"
+                + "origin="+this.departurePlace.getAddress().replaceAll("[^A-Za-z0-9]", "+")
+                + "&destination="+this.arrivalPlace.getAddress().replaceAll("[^A-Za-z0-9]", "+");
+    }
+    
 }

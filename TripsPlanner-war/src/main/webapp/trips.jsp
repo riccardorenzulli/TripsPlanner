@@ -122,7 +122,7 @@
                                     <div class="wrapper">
                                         <div class="col-md-1 col-sm-1"></div>
                                         <div class="col-md-5 col-sm-5 directions-border-left">
-                                            <p><%= legs.get(i).getInfo() %> <a href="#">Get directions</a></p> 
+                                            <p><%= legs.get(i).getInfo() %> <a href="<%= legs.get(i).getMapsDirections() %>" target="_blank">Get directions</a></p> 
                                         </div>
                                         <div class="col-md-6 col-sm-6"></div>
                                     </div>                                  
