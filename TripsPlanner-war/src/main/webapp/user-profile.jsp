@@ -28,7 +28,11 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
-    <!-- SCRIPTS -->
+        <!-- SCRIPTS -->
+        <script src="assets/js/sweetalert2.all.js" type="text/javascript"></script>
+        <script src="assets/js/script.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      
 	</head>
 
 	<body class="load-full-screen">
@@ -46,17 +50,16 @@
                 <div class="container">
                     <div class="col-md-12 col-sm-10">
                         <div id="user-personal" class="col-md-6">
-                            <div class="user-personal-info">
+                            <div id ="user-personal-info" class="user-personal-info">
                                 <h4>Personal Informations</h4>
                                 <div class="user-info-body">
-                                    <form action="ControllerServlet?action=modify-user-info" method="POST">
                                         <div class="col-md-6 col-sm-6">
                                             <label>Name</label>
-                                                <input type="text" name="name" required="" value="<%=((User)session.getAttribute("user")).getName()%>" class="form-control">
+                                                <input id="name" type="text" name="name" required="" value="<%=((User)session.getAttribute("user")).getName()%>" class="form-control">
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <label>Surname</label>
-                                                <input type="text" name="surname" required="" value="<%=((User)session.getAttribute("user")).getSurname()%>" class="form-control">
+                                                <input id="surname" type="text" name="surname" required="" value="<%=((User)session.getAttribute("user")).getSurname()%>" class="form-control">
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="col-md-12">
@@ -70,7 +73,7 @@
 
                                         <div class="col-md-6 col-sm-6">
                                             <label>Age</label>
-                                            <input type="text" name="age" required="" value="<%=((User)session.getAttribute("user")).getAge()%>" class="form-control">
+                                            <input id="age" type="text" name="age" required="" value="<%=((User)session.getAttribute("user")).getAge()%>" class="form-control">
                                         </div>
 
                                         <% 
@@ -79,7 +82,7 @@
 
                                         <div class="col-md-6 col-sm-6">
                                             <label>Age</label>
-                                            <input type="text" name="age" required="" value="18" class="form-control">
+                                            <input id="age" type="text" name="age" required="" value="18" class="form-control">
                                         </div>
 
                                         <% } %>
@@ -90,7 +93,7 @@
 
                                         <div class="col-md-6 col-sm-6">
                                             <label>Sex</label>
-                                            <select class="form-control" name="sex">
+                                            <select id="sex" class="form-control" name="sex">
                                                 <% 
                                                     if (((String)(((User)session.getAttribute("user")).getSex())).equalsIgnoreCase("Male")) {
                                                 %>        
@@ -124,7 +127,7 @@
 
                                         <div class="col-md-6 col-sm-6">
                                             <label>Sex</label>
-                                            <select class="form-control" name="sex">
+                                            <select id="sex" class="form-control" name="sex">
                                                 <option>Male</option>
                                                 <option selected>Female</option>
                                                 <option>Other</option>
@@ -134,10 +137,11 @@
 
 
                                         <div class="clearfix"></div>
-                                        <div class="col-md-6 col-sm-6 col-xs-6 text-center">
-                                            <button type="submit" class="search-button btn transition-effect">SAVE CHANGES</button>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <input id="savechanges" class="savechanges-button btn transition-effect" value="SAVE CHANGES" type="submit" onclick="modifyUserInfo()">
                                         </div>
-                                    </form>
+                                </div>
+                                <div id="logchanges" class="alert alert-success">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +166,5 @@
         <script src="assets/plugins/wow.min.js"></script>
         <script src="assets/js/js.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script src="assets/js/login.js"></script>
-        
     </body>
 </html>

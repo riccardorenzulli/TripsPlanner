@@ -43,11 +43,13 @@ public class UserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         switch(action == null ? "" : action) {
             case "modify-user-info":
                 modifyUserInfo(request, response);
+                out.write("success");
                 break;
         }
     }
@@ -103,7 +105,6 @@ public class UserServlet extends HttpServlet {
         
         userInfoBean.modifyUser(oldUser, newName, newSurname, newAge, newSex);
         
-        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
 }

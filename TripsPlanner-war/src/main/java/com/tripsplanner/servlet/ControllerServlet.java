@@ -7,6 +7,7 @@ package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.ApiKeysBean;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -45,6 +46,7 @@ public class ControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        PrintWriter out = response.getWriter();
         ServletContext ctx = getServletContext();
         String action = request.getParameter("action");
         
