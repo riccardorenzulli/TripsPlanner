@@ -13,7 +13,7 @@
 		<div class="col-md-9 hotel-listing">
 			
 			<% 
-                                Trip trip = (Trip) session.getAttribute("trip");
+                                Trip trip = (Trip) request.getAttribute("trip");
                                 int tripDays = trip.getItineraries().size();
                                 for(int k=0; k<tripDays; k++) {
                                     %>

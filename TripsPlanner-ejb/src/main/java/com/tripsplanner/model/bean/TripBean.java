@@ -36,7 +36,17 @@ public class TripBean implements TripBeanLocal {
     */
     public Trip buildTrip(List<Place> interestingPlaces, int dayTrips) {
         Trip trip = null;
-        ArrayList<ArrayList<Integer>> clusters = calculateClusters(interestingPlaces, dayTrips);
+        
+        ArrayList<ArrayList<Integer>> clusters = null;
+        int attempts = 0;
+        
+        while(!satisfyingClusters(clusters,interestingPlaces.size()) && attempts < 5) {
+            clusters = calculateClusters(interestingPlaces, dayTrips);
+            attempts++;
+        }
+        
+        if(!satisfyingClusters(clusters,interestingPlaces.size()))
+            clusters = forceModifyClusters(clusters);
         
         try {
             trip = fromClustersToTrip(interestingPlaces, clusters);
@@ -49,31 +59,19 @@ public class TripBean implements TripBeanLocal {
     
     private ArrayList<ArrayList<Integer>> calculateClusters(List<Place> interestingPlaces, int dayTrips) {
         /*Clustering + shortest path tour*/
-        Random rand = new Random();
+
         List<Place> places = interestingPlaces;
         int daysOfTrip = dayTrips;
         int numberOfPlaces = places.size();
         
-        ArrayList<Integer> medoidsIndexes = new ArrayList<>();
-        /*initializing centroids*/
-        for(int i=0; i<daysOfTrip; i++) {
-            boolean equalCentroids = true;
-            /*create unique centroids*/
-            while(equalCentroids) {
-                int newIndex = rand.nextInt(numberOfPlaces);
-                if(!medoidsIndexes.contains(newIndex)) { //need to use Integer object?
-                    medoidsIndexes.add(newIndex);
-                    equalCentroids = false;
-                }
-            }
-        }
-        
+        ArrayList<Integer> medoidsIndexes = randomMedoids(daysOfTrip,numberOfPlaces);
+
         ArrayList<ArrayList<Integer>> clusters = null;
         
-        int iterations = 5;
+        int iterations = 2;
         for(int it=0; it<iterations; it++) {
             /*Clean the clusters*/
-            clusters = clusters = new ArrayList<>();
+            clusters = new ArrayList<>();
             for(int i=0; i<daysOfTrip; i++)
                 clusters.add(new ArrayList<Integer>());
             
@@ -82,6 +80,7 @@ public class TripBean implements TripBeanLocal {
                 int closestClusterIndex = getClosestCluster(places, medoidsIndexes, i);
                 clusters.get(closestClusterIndex).add(i); //put the place i in the closest cluster
             }
+            
             /*Recalculate medoids*/
             for(int i=0; i<medoidsIndexes.size(); i++) {
                 int indexBestMedoid = calculateBestMedoid(places, clusters.get(i), i);
@@ -164,5 +163,51 @@ public class TripBean implements TripBeanLocal {
         return route;
     }
 
-    
+    private ArrayList<Integer> randomMedoids(int daysOfTrip, int numberOfPlaces) {
+        Random rand = new Random();
+        ArrayList<Integer> medoidsIndexes = new ArrayList<>();        
+        /*initializing centroids*/
+        for(int i=0; i<daysOfTrip; i++) {
+            boolean equalCentroids = true;
+            /*create unique centroids*/
+            while(equalCentroids) {
+                int newIndex = rand.nextInt(numberOfPlaces);
+                if(!medoidsIndexes.contains(newIndex)) { //need to use Integer object?
+                    medoidsIndexes.add(newIndex);
+                    equalCentroids = false;
+                }
+            }
+        }
+        return medoidsIndexes;
+    }
+
+    private boolean satisfyingClusters(ArrayList<ArrayList<Integer>> clusters, int totalPlaces) {
+        if(clusters == null)
+            return false;
+        for(int i=0; i<clusters.size(); i++) {
+            if(clusters.get(i).size() < 2 || clusters.get(i).size() > (totalPlaces/3 + 1))
+                return false;
+        }
+        return true;
+    }
+
+    private ArrayList<ArrayList<Integer>> forceModifyClusters(ArrayList<ArrayList<Integer>> clusters) {
+        ArrayList<ArrayList<Integer>> newClusters = clusters;
+        int indexBiggestCluster = 0;
+        int biggestSize = 0;
+        for(int i=0; i<newClusters.size(); i++) {
+            if(newClusters.get(i).size() > biggestSize) {
+                indexBiggestCluster = i;
+                biggestSize = newClusters.get(i).size();
+            }
+        }
+        
+        for(int i=0; i<newClusters.size(); i++) {
+            if(newClusters.get(i).size() < 2) {
+                int example = newClusters.get(indexBiggestCluster).remove(0);
+                newClusters.get(i).add(example);
+            }
+        }
+        return newClusters;
+    }
 }
