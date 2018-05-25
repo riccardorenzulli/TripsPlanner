@@ -5,15 +5,16 @@
  */
 package com.tripsplanner.servlet;
 
-import com.tripsplanner.model.bean.ApiKeysBean;
+import com.tripsplanner.model.bean.UserInfoBeanLocal;
+import com.tripsplanner.model.entity.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -27,12 +28,11 @@ import javax.servlet.http.HttpServletResponse;
  * gabriele.sartor@edu.unito.it<br><br>
  */
 
-public class ControllerServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
     @EJB
-    private ApiKeysBean apiKaysBean;
-    
-    
+    private UserInfoBeanLocal userInfoBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,50 +42,14 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        ServletContext ctx = getServletContext();
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        
-        // control for api keys in session
-        apiKaysBean.findKeysFromCSV(ctx);
-        
-        if (action == null) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
+        switch(action == null ? "" : action) {
+            case "modify-user-info":
+                modifyUserInfo(request, response);
+                break;
         }
-        
-        else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/LoginServlet");
-            rd.forward(request, response);
-        }
-        
-        else if(action.equalsIgnoreCase("search")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
-            rd.forward(request, response);
-        }
-        
-        else if(action.equalsIgnoreCase("memoryUpload")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
-            rd.forward(request, response);
-        }
-        
-        else if(action.equalsIgnoreCase("user-info")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/user-profile.jsp");
-            rd.forward(request, response);
-        }
-        
-        else if(action.equalsIgnoreCase("modify-user-info")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/UserServlet");
-            rd.forward(request, response);
-        }
-        
-        else {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/error.jsp");
-            rd.forward(request, response);
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -126,5 +90,20 @@ public class ControllerServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void modifyUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(false);
+        
+        User oldUser = (User) session.getAttribute("user");
+        
+        String newName = request.getParameter("name");
+        String newSurname = request.getParameter("surname");
+        String newAge = request.getParameter("age");
+        String newSex = request.getParameter("sex");
+        
+        userInfoBean.modifyUser(oldUser, newName, newSurname, newAge, newSex);
+        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
 
 }

@@ -19,7 +19,7 @@
             <%
                if((User)session.getAttribute("user") != null) {
             %>
-            <a href="#" class="transition-effect">
+            <a href="ControllerServlet?action=user-info" class="transition-effect">
               <img id="profile-pic" src="<%=((User)session.getAttribute("user")).getImgURL()%>" alt="profile pic">
               Hi, <%=((User)session.getAttribute("user")).getName()%>!
             </a>
