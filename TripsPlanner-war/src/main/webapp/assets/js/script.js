@@ -87,8 +87,12 @@ function reloadUserInfo() {
             $("#header").load("header.jsp #header>*","");
             swal('Success!', 'Personal informations updated.', 'success')
         }
+        
+        else {
+            swal('Warning!', ris, 'warning');
+        }
     }
-    else if(xhrObj.status === 400) console.log("Error : status 400");
+    else if(xhrObj.status === 400) swal("Error!",  "status 400", "error");
     
 }
 

@@ -21,14 +21,77 @@ public class UserInfoBean implements UserInfoBeanLocal {
     private UserFacadeLocal userFacade;
 
     @Override
-    public void modifyUser(User oldUser, String newName, String newSurname, String newAge, String newSex) {
-        oldUser.setName(newName);
-        oldUser.setSurname(newSurname);
-        oldUser.setAge(Integer.parseInt(newAge));
-        oldUser.setSex(newSex);
+    public String modifyUser(User oldUser, String newName, String newSurname, String newAge, String newSex) {
         
-        userFacade.edit(oldUser);
+        boolean isOld = newName.equals(oldUser.getName()) && newSurname.equals(oldUser.getSurname()) 
+                && newAge.equals((oldUser.getAge()).toString()) && newSex.equals(oldUser.getSex()); 
+        
+        if (!isOld) {
+            
+            String res = checkNewInfo(newName, newSurname, newAge, newSex);
+            
+            if (!(res.equals("success"))) return res;
+            
+            oldUser.setName(newName);
+            oldUser.setSurname(newSurname);
+            oldUser.setAge(Integer.parseInt(newAge));
+            oldUser.setSex(newSex);
+        
+            userFacade.edit(oldUser);
+            return res;
+        }
+        
+        return "New data can't be the same as the old ones.";
     }
+
+    private String checkNewInfo(String name, String surname, String age, String sex) {
+        String result;
+        if(name == "") {
+            result = "Name field is empty! \n Please insert your name.";
+            return result;
+        }
+  
+        else if(!checkExpressionReg(name, "^[a-zA-Z]{1,30}$")) {
+            result = "Name field is incorrect! \n Please insert a valid name.";
+            return result;
+        }
     
+        if(surname == "") {
+            result = "Surname field is empty! \n Please insert your surname.";
+            return result;
+        }
+
+        else if(!checkExpressionReg(surname, "^[a-zA-Z]{1,30}$")) {
+            result = "Surname field is incorrect! \n Please insert a valid surname.";
+            return result;
+        }
+
+        if(age == "") {
+            result = "Age field is empty! \n Please insert your age.";
+            return result;
+        }
+
+        else if(!checkExpressionReg(age, "^[0-9]{2,3}$")) {
+            result = "Age field is incorrect! \n Please insert a valid age.";
+            return result;
+        }
+
+        if(sex == "") {
+            result = "Sex field is empty! \n Please insert your sex.";
+            return result;
+        }
+
+        else if(!checkExpressionReg(sex, "^(Male|Female|Other|male|female|other)$")) {
+            result = "Sex field is incorrect! \n Please insert a valid sex.";
+            return result;
+        }
+        
+        else return "success";
+        
+    }
+
+    private boolean checkExpressionReg(String s, String expr) {
+        return s.matches(expr);
+    }
     
 }

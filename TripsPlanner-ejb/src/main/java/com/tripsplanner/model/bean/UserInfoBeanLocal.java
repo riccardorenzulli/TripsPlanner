@@ -15,6 +15,6 @@ import javax.ejb.Local;
 @Local
 public interface UserInfoBeanLocal {
 
-    public void modifyUser(User olduser, String newName, String newSurname, String newAge, String newSex);
+    public String modifyUser(User olduser, String newName, String newSurname, String newAge, String newSex);
     
 }

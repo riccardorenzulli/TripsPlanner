@@ -48,8 +48,8 @@ public class UserServlet extends HttpServlet {
         String action = request.getParameter("action");
         switch(action == null ? "" : action) {
             case "modify-user-info":
-                modifyUserInfo(request, response);
-                out.write("success");
+                String res = modifyUserInfo(request, response);
+                out.write(res);
                 break;
         }
     }
@@ -93,7 +93,7 @@ public class UserServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void modifyUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private String modifyUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         
         User oldUser = (User) session.getAttribute("user");
@@ -103,7 +103,7 @@ public class UserServlet extends HttpServlet {
         String newAge = request.getParameter("age");
         String newSex = request.getParameter("sex");
         
-        userInfoBean.modifyUser(oldUser, newName, newSurname, newAge, newSex);
+        return userInfoBean.modifyUser(oldUser, newName, newSurname, newAge, newSex);
         
     }
 
