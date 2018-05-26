@@ -5,25 +5,16 @@
  */
 package com.tripsplanner.servlet;
 
-import com.tripsplanner.model.bean.MemoryBeanLocal;
+import com.tripsplanner.model.bean.UserInfoBeanLocal;
 import com.tripsplanner.model.entity.User;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -37,11 +28,10 @@ import javax.servlet.http.Part;
  * gabriele.sartor@edu.unito.it<br><br>
  */
 
-@MultipartConfig
-public class MemoryServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
     @EJB
-    private MemoryBeanLocal memoryBean;
+    private UserInfoBeanLocal userInfoBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,38 +43,15 @@ public class MemoryServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        ServletContext ctx = getServletContext();
-        String action = request.getParameter("action");
-        
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-
-        if(action.equalsIgnoreCase("memoryUpload")) {
-            
-            User user = getSessionUser(request);
-            String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
-            Part filePart = request.getPart("memoryIMG"); // Retrieves <input type="file" name="file">
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-            InputStream fileContent = filePart.getInputStream();
-
-            try {
-                memoryBean.uploadMemory(description, filePart, fileName, fileContent, user);
-            } catch (ParseException ex) {
-                //rimandare ad una pagina o popup error
-                Logger.getLogger(MemoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+        String action = request.getParameter("action");
+        switch(action == null ? "" : action) {
+            case "modify-user-info":
+                String res = modifyUserInfo(request, response);
+                out.write(res);
+                break;
         }
-        
-        else {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/error.jsp");
-            rd.forward(request, response);
-        }
-    }
-    
-    private User getSessionUser(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        return (User)session.getAttribute("user");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -125,5 +92,19 @@ public class MemoryServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String modifyUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(false);
+        
+        User oldUser = (User) session.getAttribute("user");
+        
+        String newName = request.getParameter("name");
+        String newSurname = request.getParameter("surname");
+        String newAge = request.getParameter("age");
+        String newSex = request.getParameter("sex");
+        
+        return userInfoBean.modifyUser(oldUser, newName, newSurname, newAge, newSex);
+        
+    }
 
 }

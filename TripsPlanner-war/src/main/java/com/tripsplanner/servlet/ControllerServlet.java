@@ -7,6 +7,7 @@ package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.ApiKeysBean;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -45,6 +46,7 @@ public class ControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        PrintWriter out = response.getWriter();
         ServletContext ctx = getServletContext();
         String action = request.getParameter("action");
         
@@ -68,6 +70,16 @@ public class ControllerServlet extends HttpServlet {
         
         else if(action.equalsIgnoreCase("memoryUpload")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
+            rd.forward(request, response);
+        }
+        
+        else if(action.equalsIgnoreCase("user-info")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/user-profile.jsp");
+            rd.forward(request, response);
+        }
+        
+        else if(action.equalsIgnoreCase("modify-user-info")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/UserServlet");
             rd.forward(request, response);
         }
         

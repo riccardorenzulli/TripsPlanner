@@ -915,24 +915,48 @@ h5 {
 	color: #cfb7ae;
 }
 .search-button {
-	background: #AEC6CF;
+    background: #AEC6CF;
     border-radius: 0;
     margin-top: 10px;
     padding: 10px 30px;
-	font-size: 15px;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-weight: bold;
-	color: #fff;
-	transition: all 0.3s ease;
-	-ms-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-webkit-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #fff;
+    transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
 }
+
 .search-button:hover {
-	background: #cfb7ae;
-	color: #fff;
+    background: #cfb7ae;
+    color: #fff;
+}
+
+.savechanges-button {
+    background: #AEC6CF;
+    border-radius: 0;
+    margin-top: 10px;
+    padding: 10px 30px;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #fff;
+    transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.savechanges-button:hover {
+    background: #cfb7ae;
+    color: #fff;
 }
 .owl-theme .owl-dots .owl-dot.active span,
 .owl-theme .owl-dots .owl-dot:hover span {
@@ -2293,10 +2317,10 @@ h5 {
 .hotel-list-view .tripadvisor-rating {
 	display: none;
 }
-/*.hotel-list-view:hover {
+.hotel-list-view:hover {
 	border: 1px solid #F19C4F;
 	box-shadow: 0px 0px 5px #F19C4F;
-}*/
+}
 .hotel-list-view  img{
 	max-width: 100%;
 	min-height: 200px;
@@ -2374,7 +2398,7 @@ h5 {
 	margin-top: 5px;
 	border: 2px solid transparent;
 }
-/*.hotel-list-view:hover .room-book-box {
+.hotel-list-view:hover .room-book-box {
 	color: #ffffff;
 	background: #cfb7ae;
 }
@@ -2382,7 +2406,7 @@ h5 {
 	color: #ffffff;
 	border: 2px solid #ffffff;
 	background: #cfb7ae;
-}*/
+}
 @media (max-width: 991px) {
 	.hotel-list-view  img{
 		min-height: initial;
@@ -5167,7 +5191,6 @@ h5 {
 .user-personal-info textarea {
 	height: auto !important;
 }
-.user-personal-info button,
 .user-change-password button,
 .user-preference button,
 .user-add-card button,
@@ -7495,6 +7518,16 @@ h5 {
 	background: #AEC6CF 50% 50% repeat-x;
 	font-weight: normal;
 	color: #212121;
+}
+
+#user-personal {
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#logchanges {
+    display: none;
+    margin-top: 1%;
 }
 
 .directions {
