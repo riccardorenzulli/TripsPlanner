@@ -10,7 +10,7 @@
         <meta name="google-signin-client_id" content="682887231528-qe2dfr4gba9fn1dmef7q97bq7l6o6m98.apps.googleusercontent.com">
 
         <title>TripsPlanner - Create fantastic trips</title>
-        
+
         <!-- STYLES -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link href="assets/css/animate.min.css" rel="stylesheet">
@@ -30,12 +30,23 @@
 
         <!-- SCRIPTS -->
         <script src="assets/js/sweetalert2.all.js" type="text/javascript"></script>
-        <script src="assets/js/script.js" type="text/javascript"></script>
+        <script src="assets/js/login.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-      
+
 	</head>
 
 	<body class="load-full-screen">
+
+            <!-- BEGIN: PRELOADER -->
+            <div id="loader" class="load-full-screen">
+                <div class="loading-animation">
+                    <span><i class="fa fa-plane"></i></span>
+                    <span><i class="fa fa-bed"></i></span>
+                    <span><i class="fa fa-ship"></i></span>
+                    <span><i class="fa fa-suitcase"></i></span>
+                </div>
+            </div>
 
             <!-- BEGIN: SITE-WRAPPER -->
             <div class="site-wrapper">
@@ -76,7 +87,7 @@
                                             <input id="age" type="text" name="age" required="" value="<%=((User)session.getAttribute("user")).getAge()%>" class="form-control">
                                         </div>
 
-                                        <% 
+                                        <%
                                             } else {
                                         %>
 
@@ -94,34 +105,34 @@
                                         <div class="col-md-6 col-sm-6">
                                             <label>Sex</label>
                                             <select id="sex" class="form-control" name="sex">
-                                                <% 
+                                                <%
                                                     if (((String)(((User)session.getAttribute("user")).getSex())).equalsIgnoreCase("Male")) {
-                                                %>        
+                                                %>
                                                 <option selected>Male</option>
                                                 <% } else {
                                                 %>
                                                 <option>Male</option>
                                                 <% } %>
-                                                <% 
+                                                <%
                                                     if (((String)(((User)session.getAttribute("user")).getSex())).equalsIgnoreCase("Female")) {
-                                                %>        
+                                                %>
                                                 <option selected>Female</option>
                                                 <% } else {
                                                 %>
                                                 <option>Female</option>
                                                 <% } %>
-                                                <% 
+                                                <%
                                                     if (((String)(((User)session.getAttribute("user")).getSex())).equalsIgnoreCase("Other")) {
-                                                %>        
+                                                %>
                                                 <option selected>Other</option>
                                                 <% } else {
                                                 %>
                                                 <option>Other</option>
                                                 <% } %>
-                                            </select>                                                                        
+                                            </select>
                                         </div>
 
-                                        <% 
+                                        <%
                                             } else {
                                         %>
 
@@ -165,6 +176,7 @@
         <script src="assets/js/bootstrap-select.min.js"></script>
         <script src="assets/plugins/wow.min.js"></script>
         <script src="assets/js/js.js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
     </body>
 </html>

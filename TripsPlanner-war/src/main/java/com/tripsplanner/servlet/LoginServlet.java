@@ -197,7 +197,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().invalidate();
             user = null;
         }
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("ControllerServlet");
     }
     
     private User getSessionUser(HttpServletRequest request) {

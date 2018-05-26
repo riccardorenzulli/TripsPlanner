@@ -63,23 +63,28 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
-        else if(action.equalsIgnoreCase("search")) {
+        else if (action.equalsIgnoreCase("search")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
             rd.forward(request, response);
         }
         
-        else if(action.equalsIgnoreCase("memoryUpload")) {
+        else if (action.equalsIgnoreCase("memoryUpload")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
             rd.forward(request, response);
         }
         
-        else if(action.equalsIgnoreCase("user-info")) {
+        else if (action.equalsIgnoreCase("user-info")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/user-profile.jsp");
             rd.forward(request, response);
         }
         
-        else if(action.equalsIgnoreCase("modify-user-info")) {
+        else if (action.equalsIgnoreCase("modify-user-info")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/UserServlet");
+            rd.forward(request, response);
+        }
+        
+        else if (action.equalsIgnoreCase("contacts")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/contact-us.jsp");
             rd.forward(request, response);
         }
         
