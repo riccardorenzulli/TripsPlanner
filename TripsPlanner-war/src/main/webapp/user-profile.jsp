@@ -31,7 +31,8 @@
         <!-- SCRIPTS -->
         <script src="assets/js/sweetalert2.all.js" type="text/javascript"></script>
         <script src="assets/js/login.js"></script>
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="assets/js/script.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 	</head>
