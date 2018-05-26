@@ -5,10 +5,17 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.DayItinerary;
 import com.tripsplanner.model.entity.Place;
+import com.tripsplanner.model.entity.Route;
+import com.tripsplanner.model.entity.Trip;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -18,14 +25,29 @@ import javax.ejb.Stateless;
 @Stateless
 public class TripBean implements TripBeanLocal {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private GoogleDirectionsBean dirBean;
+
+    
     
     /*Given the interesting places to be visited and the number of days
       return an arraylist for each cluster containing the indexes of the
       places belonging to the clusters.
     */
-    public ArrayList<ArrayList<Integer>> buildTrip(List<Place> interestingPlaces, int dayTrips) {
+    public Trip buildTrip(List<Place> interestingPlaces, int dayTrips) {
+        Trip trip = null;
+        ArrayList<ArrayList<Integer>> clusters = calculateClusters(interestingPlaces, dayTrips);
+        
+        try {
+            trip = fromClustersToTrip(interestingPlaces, clusters);
+        } catch (IOException ex) {
+            Logger.getLogger(TripBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return trip;
+    }
+    
+    private ArrayList<ArrayList<Integer>> calculateClusters(List<Place> interestingPlaces, int dayTrips) {
         /*Clustering + shortest path tour*/
         Random rand = new Random();
         List<Place> places = interestingPlaces;
@@ -66,9 +88,7 @@ public class TripBean implements TripBeanLocal {
                 medoidsIndexes.set(i, indexBestMedoid);
             }
         }
-        
-        
-        
+
         for(int i=0; i<clusters.size(); i++) {
             System.out.println("Cluster_"+i+":{");
             for(int index : clusters.get(i))
@@ -113,6 +133,35 @@ public class TripBean implements TripBeanLocal {
                 medoidIndex = index;
         }
         return medoidIndex;
+    }
+
+    private Trip fromClustersToTrip(List<Place> interestingPlaces, ArrayList<ArrayList<Integer>> clusters) throws IOException {
+        Trip trip = new Trip();
+        ArrayList<DayItinerary> itinerary = new ArrayList();
+        /*For each cluster*/
+        for(int i=0; i<clusters.size(); i++) {
+            DayItinerary dayItinerary = new DayItinerary();
+            ArrayList<Route> legs = new ArrayList();
+            /*For each element of the cluster i*/
+            for(int j=0; j<clusters.get(i).size()-1; j++) {
+                int indexPlace1 = clusters.get(i).get(j);
+                int indexPlace2 = clusters.get(i).get(j+1);
+                Place place1 = interestingPlaces.get(indexPlace1);
+                Place place2 = interestingPlaces.get(indexPlace2);
+                Route route = createRouteFromPlaces(place1, place2);
+                legs.add(route);
+            }
+            dayItinerary.setLegs(legs);
+            itinerary.add(dayItinerary);
+        }
+        trip.setItineraries(itinerary);
+        return trip;
+    }
+
+    private Route createRouteFromPlaces(Place departure, Place destination) throws IOException {
+        Route route = dirBean.getRoute(departure, destination, "driving", "now");
+
+        return route;
     }
 
     

@@ -7529,3 +7529,17 @@ h5 {
     display: none;
     margin-top: 1%;
 }
+
+.directions {
+    margin-top: 0px;
+    padding-top: 5px;
+    margin-bottom: -40px;
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+
+.directions-border-left {
+    border-left: 1px solid #e9e0e0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}

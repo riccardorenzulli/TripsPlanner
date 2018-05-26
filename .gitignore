@@ -1,3 +1,18 @@
-/TripsPlanner-ejb/target/
-/TripsPlanner-war/target/
-/TripsPlanner-ear/target/
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+target
+
+# Build
+out
+build
+bin
+
+#Keys
+*.csv
+
+*.xml
