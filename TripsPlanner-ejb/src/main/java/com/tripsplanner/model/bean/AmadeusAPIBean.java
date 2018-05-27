@@ -171,7 +171,7 @@ public class AmadeusAPIBean {
         
         for(int i=0; i<len; i++){
             JSONObject h = JsonHotelArray.getJSONObject(i);
-            hotels.add(Hotel.fromJsonToHotel(h));
+            hotels.add(Hotel.fromJsonToHotel(h,i));
         }
 
         return hotels;

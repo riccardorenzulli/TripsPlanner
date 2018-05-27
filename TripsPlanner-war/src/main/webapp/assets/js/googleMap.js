@@ -5,26 +5,27 @@
  */
 
 var map;
+var markers = [];
 
 function initMap() {
     var coordinates = getCoordinates();
     console.log(coordinates);
 
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat:coordinates[0][0], lng:coordinates[0][1]},
-        zoom: 15
+        center: {lat:coordinates[0][0][0], lng:coordinates[0][0][1]},
+        zoom: 13
     });
 
     var hotels;
     for (hotels = 0; coordinates.length; hotels++) {
         var marker = new google.maps.Marker({
-            position: {lat:coordinates[hotels][0], lng:coordinates[hotels][1]},
+            icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            position: {lat:coordinates[hotels][0][0], lng:coordinates[hotels][0][1]},
             map: map,
             title: 'Hello World!'
         });
-
+        markers.push(marker);
     }
-
 
 }
 
@@ -36,7 +37,28 @@ function getCoordinates() {
     var i;
     for (i = 0; i < myNodelat.length; i++) {
         var tmp = [parseFloat(myNodelat[i].value), parseFloat(myNodelon[i].value)];
-        myLatLng.push(tmp);
+        myLatLng.push([tmp, i]);
     }
     return myLatLng;
+}
+
+var last_marker = null; 
+function setPricesAndMarker(T){
+    console.log("in setPrices");
+    var total_price = T.querySelector('#total_price').value;
+    var day_price = T.querySelector('#day_price').value;
+    var adult_number = T.querySelector('#adult_number').value;
+    var list_id = T.querySelector('#list_id').value;
+    
+    document.getElementById('adult_number_field').innerText = adult_number;
+    document.getElementById('base_amount_field').innerText = day_price;
+    document.getElementById('total_cost_field').innerText = total_price;
+    
+    markers[list_id].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+    
+    if(last_marker !== null){
+        last_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+    }
+    
+    last_marker = markers[list_id];
 }

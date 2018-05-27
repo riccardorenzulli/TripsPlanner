@@ -47,8 +47,14 @@ public class Hotel implements Serializable {
     private float longitude;
     @Column(name = "address")
     private String address;
+    @Column(name = "dayPrice")
+    private float dayPrice;
+    @Column(name = "guests")
+    private int guests;
+    @Column(name = "list_id")
+    private int list_id;
 
-    public Hotel(String name, String cityCode, String roomType, String roomDescription, String currency, float total, boolean avaiable, float latitude, float longitude, String address) {
+    public Hotel(int id, String name, String cityCode, String roomType, String roomDescription, String currency, float total, float dayPrice, int guests, boolean avaiable, float latitude, float longitude, String address) {
         this.name = name;
         this.cityCode = cityCode;
         this.roomType = roomType;
@@ -59,8 +65,45 @@ public class Hotel implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
+        this.dayPrice = dayPrice;
+        this.guests = guests;
+        this.list_id = id;
     }
 
+    public int getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(int list_id) {
+        this.list_id = list_id;
+    }
+    
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public float getDayPrice() {
+        return dayPrice;
+    }
+
+    public void setDayPrice(float dayPrice) {
+        this.dayPrice = dayPrice;
+    }
+
+    public int getGuests() {
+        return guests;
+    }
+
+    public void setGuests(int guests) {
+        this.guests = guests;
+    }
+
+    
+    
     public String getAddress() {
         return address;
     }
@@ -117,14 +160,6 @@ public class Hotel implements Serializable {
         this.total = total;
     }
 
-    public boolean getAvaiable() {
-        return available;
-    }
-
-    public void setAvaiable(boolean available) {
-        this.available = available;
-    }
-
     public float getLatitude() {
         return latitude;
     }
@@ -171,10 +206,10 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "Hotel{" + "id=" + id + ", name=" + name + ", cityCode=" + cityCode + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", currency=" + currency + ", total=" + total + ", available=" + available + ", latitude=" + latitude + ", longitude=" + longitude + '}';
+        return "Hotel{" + "id=" + id + ", name=" + name + ", cityCode=" + cityCode + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", currency=" + currency + ", total=" + total + ", available=" + available + ", latitude=" + latitude + ", longitude=" + longitude + ", address=" + address + ", dayPrice=" + dayPrice + ", guests=" + guests + ", list_id=" + list_id + '}';
     }
     
-    public static Hotel fromJsonToHotel(JSONObject h) {
+    public static Hotel fromJsonToHotel(JSONObject h, int i) {
         
         boolean available = h.getBoolean("available");
         String name = h.getJSONObject("hotel").getString("name");
@@ -198,8 +233,24 @@ public class Hotel implements Serializable {
         String roomDescription = offer.getJSONObject("room").getJSONObject("description").getString("text").toLowerCase();
         String currency = offer.getJSONObject("price").getString("currency");
         float total = offer.getJSONObject("price").getFloat("total");
+        float dayPrice = 0;
         
-        Hotel hotel = new Hotel(name, cityCode, roomType, roomDescription, currency, total, available, latitude, longitude, address);
+        try{
+            dayPrice = offer.getJSONObject("price").getJSONObject("variations").getJSONObject("average").getFloat("total");
+        }catch(Exception e){}
+        try{
+            dayPrice = offer.getJSONObject("price").getJSONObject("variations").getJSONObject("average").getFloat("base");
+        }catch(Exception e){}
+        try{
+            dayPrice = offer.getJSONObject("price").getJSONObject("variations").getJSONObject("changes").getFloat("total");
+        }catch(Exception e){}
+        try{
+            dayPrice = offer.getJSONObject("price").getJSONObject("variations").getJSONObject("changes").getFloat("base");
+        }catch(Exception e){}
+        
+        int guests = offer.getJSONObject("guests").getInt("adults");
+        
+        Hotel hotel = new Hotel(i, name, cityCode, roomType, roomDescription, currency, total, dayPrice, guests,available, latitude, longitude, address);
         
         return hotel;
     }
