@@ -13,6 +13,7 @@ import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
 import com.tripsplanner.model.bean.TripBean;
 import com.tripsplanner.model.bean.TripBeanLocal;
+import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
 import java.sql.Date;
@@ -69,6 +70,9 @@ public class SearchServlet extends HttpServlet {
         switch(action == null ? "" : action) {
             case "search":
                 goSearch(request, response);
+                break;
+            case "tripHotel":
+                goTripHotel(request, response);
                 break;
         }
     }
@@ -152,16 +156,26 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("night_life", nightLife);
         
         Search search = searchBean.createSearch(mapSearch);
-        
+        ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         try{
-        JSONObject jsonFlight = amadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
+            hotels = amadeusAPIBean.getHotels(destinationCity, departureDate, returnDate);
         //System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
-        ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
+
+
+        request.setAttribute("hotels", hotels);
+        request.getSession().setAttribute("hotels", hotels);
+        request.getSession().setAttribute("search", search);
         
+        request.getRequestDispatcher("hotelList.jsp").forward(request, response);
+    }
+
+    private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Search search = (Search) request.getSession().getAttribute("search");
+        ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
+        System.out.println("sono in go tripHotel");
         long departureTime = search.getDepartureDate().getTime();
         long returnTime = search.getReturnDate().getTime();
         long timeTrip = returnTime - departureTime;
