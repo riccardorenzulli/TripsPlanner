@@ -178,10 +178,19 @@
 										<td>You Pay</td>
 										<td id="total_cost_field" style="font-weight: bold;">---</td>
 									</tr>
+                                                                        
 								</tbody></table>
-							</div>
+							</div>                                                   
 						</div>
-
+    
+                                <div>
+                                    <form action="ControllerServlet?action=tripHotel" method="post">
+                                        <input id="list_id_choosed" name="list_id_choosed" type='hidden' value="-1"/>
+<button type="submit" class="search-button btn transition-effect" name="act" value="skip">Skip hotel</button>
+<button type="submit" class="search-button btn transition-effect" name="act" value="choose" style="float: right;">Choose</button>
+                                    </form>
+                                </div>
+<div class="clearfix"></div>
                             </div>
                                 
                             </div>   
@@ -296,7 +305,7 @@
 <script src="assets/plugins/jquery.flexslider-min.js"></script>
 <script src="assets/js/js.js"></script>
 <script src="assets/js/googleMap.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhWd3kTxtx-49mP3x8SiNIvH3XZKL-Wo&callback=initMap&libraries=drawing"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1R8HigvjL4UgHft-PPsfme65pvj846U&callback=initMap&libraries=drawing"
     async defer></script>
 <script>
 $(window).load(function() {

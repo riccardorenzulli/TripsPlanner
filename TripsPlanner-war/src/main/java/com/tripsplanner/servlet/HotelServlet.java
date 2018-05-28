@@ -5,34 +5,21 @@
  */
 package com.tripsplanner.servlet;
 
-import com.tripsplanner.model.bean.ApiKeysBean;
+import com.tripsplanner.model.entity.Hotel;
 import java.io.IOException;
-import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
- * Università degli Studi di Torino<br>
- * Department of Computer Science<br>
- * Sviluppo Software per Componenti e Servizi Web<br>
- * Date: May 2018<br><br>
- * <p/>
- * giovanni.bonetta@edu.unito.it<br>
- * riccardo.renzulli@edu.unito.it<br>
- * gabriele.sartor@edu.unito.it<br><br>
+ *
+ * @author giovannibonetta
  */
+public class HotelServlet extends HttpServlet {
 
-public class ControllerServlet extends HttpServlet {
-
-    @EJB
-    private ApiKeysBean apiKaysBean;
-    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,34 +31,14 @@ public class ControllerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        ServletContext ctx = getServletContext();
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        
-        // control for api keys in session
-        apiKaysBean.findKeysFromCSV(ctx);
-        
-        if (action == null) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
-            System.out.println("---------------------------------------------------------------------------");
+        switch(action == null ? "" : action) {
+            case "tripHotel":
+                goHotelTrip(request, response);
+                break;
         }
-        
-        else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/LoginServlet");
-            rd.forward(request, response);
-        }
-        
-        else if(action.equalsIgnoreCase("search")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
-            rd.forward(request, response);
-        }
-        
-        else if(action.equalsIgnoreCase("tripHotel")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
-            rd.forward(request, response);
-        }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -112,5 +79,27 @@ public class ControllerServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void goHotelTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<Hotel> hotels = (ArrayList<Hotel>) request.getSession().getAttribute("hotels");
+        String act = request.getParameter("act");
+        int id = -1;
+                
+        System.out.println("numero"+request.getParameter("list_id_choosed"));
+        
+        if (act.equals("choose")){
+            String list_id = request.getParameter("list_id_choosed");
+            System.out.println("sono in choose");
+            id = Integer.parseInt(list_id);
+            request.setAttribute("hotel", hotels.get(id));
+            request.setAttribute("action", "tripHotel");
+        }else{
+            System.out.println("sono in no choose");
+            request.setAttribute("hotel", null);
+            request.setAttribute("action", "tripNoHotel");
+        }
+        System.out.println("sono arrivato alla forward alla search, l'hotel "+id+"action"+request.getAttribute("action"));
+        request.getRequestDispatcher("/SearchServlet").forward(request, response);
+    }
 
 }
