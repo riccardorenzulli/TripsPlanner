@@ -8,6 +8,7 @@ package com.tripsplanner.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -162,6 +163,21 @@ public class Place implements Serializable {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    public boolean equals(Place other) {
+
+        if (this.name != null && other.name != null && this.name.equals(other.getName())) {
+            return true;
+        }
+        return false;
+    }
+    
     public Long getId() {
         return id;
     }
