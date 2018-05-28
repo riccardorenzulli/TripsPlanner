@@ -60,10 +60,98 @@
             <jsp:include page="header.jsp" />
             <jsp:include page="nav.html"/>
             <div class="clearfix"></div>
+
             <!-- START: LISTING AREA-->
             <div class="row">
-                <div class="container">	
-                    <jsp:include page="dayContent.jsp" /> 
+                <div class="container">
+                    <div class="section-title text-center">
+                        <h2>MY TRIPS</h2>
+                    </div>
+                    <!-- START: INDIVIDUAL LISTING AREA -->
+                    <div class="col-md-9 holidays-listing">
+                        <%
+                            Trip trip = (Trip) request.getSession().getAttribute("trip");
+                            if (trip != null) {
+                        %>
+                        <!-- START: HOLIDAYS GRID VIEW -->
+                        <div class="col-md-4 col-sm-6">
+                            <div class="holiday-grid-view">
+                                <div class="holiday-header-wrapper">
+                                    <div class="holiday-header">
+                                        <div class="holiday-img">
+                                            <img src="<%= trip.getDayPlaces(0).get(0).getPhotosUrl()%>" alt="cruise">
+                                        </div>
+                                        <div class="holiday-price">
+                                            <h4>$499</h4>
+                                            <h5><%= trip.getItineraries().size()%> Days</h5>
+                                        </div>
+                                        <div class="holiday-title">
+                                            <h3><%= trip.getSearch().getDestinationCity()%></h3>
+                                            <h5></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="holiday-details">
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <h5>Theme</h5>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <p><i class="fa fa-heart" title="Honeymoon Tour"></i><i class="fa fa-users" title="Group Tour"></i></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <h5>Inclusion</h5>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <p>
+                                            <i class="fa fa-plane" title="Flight"></i>
+                                            <i class="fa fa-bed" title="Hotel"></i>
+                                            <i class="fa fa-cutlery" title="Meal"></i>
+                                            <i class="fa fa-taxi" title="Transport"></i>
+                                            <i class="fa fa-eye" title="Sightseeing"></i></p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <h5>Highlight</h5>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <p class="sm-text">Lorem Ipsum is simply dummy text of the printing industry.</p>
+                                    </div>
+                                </div>
+                                <div class="holiday-footer text-center">
+                                    <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
+                                        <a href="#">VIEW DETAILS</a>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 social">
+                                        <i class="fa fa-heart-o"></i>
+                                        <i class="fa fa-share-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix-sm clearfix"></div>
+                        <!-- END: HOTEL GRID VIEW -->
+                        <%
+                            }
+                        %>
+
+                        <!-- START: PAGINATION -->
+                        <div class="bottom-pagination">
+                            <nav class="pull-right">
+                                <ul class="pagination pagination-lg">
+                                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">6 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- END: PAGINATION -->
+                    </div>
+                    <!-- END: INDIVIDUAL LISTING AREA -->
                 </div>
             </div>
             <!-- END: LISTING AREA -->

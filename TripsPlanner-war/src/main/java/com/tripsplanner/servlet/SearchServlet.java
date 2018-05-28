@@ -166,9 +166,10 @@ public class SearchServlet extends HttpServlet {
         int tripDays = ((int)timeTrip/86400000) + 1;
         
         Trip trip = tripBean.buildTrip(bestPlaces, tripDays);
+        trip.setSearch(search);
         /*Add the owner of the trip here*/
 
-        request.setAttribute("trip", trip);
+        request.getSession().setAttribute("trip", trip);
         
         request.getRequestDispatcher("tripPages.jsp").forward(request, response);
     }
