@@ -159,7 +159,7 @@ public class AmadeusAPIBean {
         return jsonObj;
     }
     
-    public ArrayList<Hotel> getHotels(String destination_IATA,  String departure_date, String return_date) throws Exception{
+    public ArrayList<Hotel> getHotels(String destination_IATA,  String departure_date, String return_date) throws Exception {
         String dep_date = mmggyy_to_yymmgg(departure_date);
         String ret_date = mmggyy_to_yymmgg(return_date);
         String Iata = getIATAfromName(destination_IATA);

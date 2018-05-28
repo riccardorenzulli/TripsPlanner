@@ -11,9 +11,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -214,6 +216,52 @@ public class GooglePlacesBean {
             places.add(fromJsonToPlace(jsonObj));
         }
         return places;
+    }
+    
+    public HashMap<String, Float>  getCoordinates(String city) throws MalformedURLException, IOException {
+        HashMap<String, Float> map = new HashMap<String, Float>();
+        
+        String newcity = city.replaceAll("\\s+", "");
+        
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?";
+	String parameters = "address="+newcity+"&key=" + api_key;
+        
+        String requestUrl = url + parameters;
+        
+        System.out.println(requestUrl);
+        
+        URL obj = new URL(requestUrl);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+
+        int responseCode = con.getResponseCode();
+
+        BufferedReader read = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        String line = read.readLine();
+        StringBuilder sb = new StringBuilder();
+
+        while(line!=null) {
+            sb.append(line);
+            line = read.readLine();
+        }
+
+        JSONObject json = new JSONObject(sb.toString());
+        
+        System.out.println(json);
+        System.out.println(json.getJSONArray("results"));
+        JSONObject temp = (JSONObject)json.getJSONArray("results").get(0);
+        JSONObject location = temp.getJSONObject("geometry").getJSONObject("location");
+        
+        Float latitude = location.getFloat("lat");
+        Float longitude = location.getFloat("lng");
+
+        map.put("lat", latitude);
+        map.put("long", longitude);
+        
+        return map;
     }
     
 }
