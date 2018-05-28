@@ -74,7 +74,7 @@ public class User implements Serializable {
     @Column(name = "age")
     private Integer age;
     @Column(name = "sex")
-    private Short sex;
+    private String sex;
     @Basic(optional = false)
     @Column(name = "enabled")
     private short enabled;
@@ -165,11 +165,11 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public Short getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Short sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

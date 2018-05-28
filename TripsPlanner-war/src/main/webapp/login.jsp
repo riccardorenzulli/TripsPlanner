@@ -71,7 +71,7 @@
 						</div>
 
 
-						<form id="hidden-form-g" action="LoginServlet?action=login-g" method="post">
+						<form id="hidden-form-g" action="ControllerServlet?action=login-g" method="post">
 						        <input type="hidden" id="idtoken" name="idtoken">
 						        <input type="hidden" id="action" name="action">
 						        <input type="hidden" id="id" name="id">
@@ -82,7 +82,7 @@
 
 						 </form>
 
-						<form id="hidden-form-f" action="LoginServlet?action=login-f" method="post">
+						<form id="hidden-form-f" action="ControllerServlet?action=login-f" method="post">
 						        <input type="hidden" id="idtoken" name="idtoken">
 						        <input type="hidden" id="action" name="action">
 

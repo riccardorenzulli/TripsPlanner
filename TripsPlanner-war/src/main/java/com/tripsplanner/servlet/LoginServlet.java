@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -118,7 +119,8 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("user") == null) {
-            response.sendRedirect("login.jsp");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/login.jsp");
+            rd.forward(request, response);
         }
         
         else {
@@ -137,7 +139,8 @@ public class LoginServlet extends HttpServlet {
         User user = loginBean.validateFacebookUser(token, true);
 
          if (session.getAttribute("user") == null) {
-             response.sendRedirect("login.jsp");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/login.jsp");
+            rd.forward(request, response);
          }
     }
 
@@ -190,14 +193,15 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
-    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User user = getSessionUser(request);
         if (user != null) {
             //if(request.getSession()!=null)
             request.getSession().invalidate();
             user = null;
         }
-        response.sendRedirect("index.jsp");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     
     private User getSessionUser(HttpServletRequest request) {

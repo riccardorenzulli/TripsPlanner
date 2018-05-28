@@ -122,4 +122,19 @@ public class Trip implements Serializable {
         return "com.tripsplanner.model.entity.Trip[ id=" + id + " ]";
     }
     
+    /*Return the places to be visited the day specified by the parameter*/
+    public ArrayList<Place> getDayPlaces(int day) {
+        if(day > this.itineraries.size() || day < 0)
+            new IllegalArgumentException("The trip is not that long!");
+        DayItinerary dayItinerary = this.itineraries.get(day);
+        ArrayList<Place> result = new ArrayList();
+        for(Route route : dayItinerary.getLegs()) {
+            result.add(route.getDeparturePlace());
+        }
+        /*Add the last place*/
+        int lastLeg = dayItinerary.getLegs().size()-1;
+        result.add(dayItinerary.getLegs().get(lastLeg).getArrivalPlace());
+        return result;
+    }
+    
 }

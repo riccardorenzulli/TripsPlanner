@@ -1,131 +1,144 @@
 <script type="text/javascript">
 
-	function increment(id) {
-		oldvalue = parseInt(document.getElementById(id).value);
-		newvalue = oldvalue + 1;
-		if (newvalue <= 10) {
-			document.getElementById(id).value = newvalue
-		}
-	}
+    function increment(id) {
+        oldvalue = parseInt(document.getElementById(id).value);
+        newvalue = oldvalue + 1;
+        if (newvalue <= 10) {
+            document.getElementById(id).value = newvalue
+        }
+    }
 
-	function decrement(id) {
-		oldvalue = parseInt(document.getElementById(id).value);
-		newvalue = oldvalue - 1;
-		if ((id === "child_count" && newvalue >= 0) || (id === "adult_count" && newvalue > 0)) {
-			document.getElementById(id).value = newvalue
-		}
-	}
+    function decrement(id) {
+        oldvalue = parseInt(document.getElementById(id).value);
+        newvalue = oldvalue - 1;
+        if ((id === "child_count" && newvalue >= 0) || (id === "adult_count" && newvalue > 0)) {
+            document.getElementById(id).value = newvalue
+        }
+    }
+    
+    function loading() {
+        //content = "<body id=\"load_cont\" class=\"full-screen\"><div class=\"coming-soon-wrapper full-screen\"><div class=\"coming-soon full-screen\"><div class=\"centered-box text-center\"><div class=\"logo\"><h2>TRIPSPLANNER</h2></div><div class=\"loading-animation\"><span><i class=\"fa fa-plane\"></i></span><span><i class=\"fa fa-bed\"></i></span><span><i class=\"fa fa-ship\"></i></span><span><i class=\"fa fa-suitcase\"></i></span></div><div class=\"search-title\"><p>We Are On It! Looking For The Best Trip For You. This Will Take Few Seconds.</p></div><p class=\"copyright\">&copy; 2018 TripsPlanner</p></div></div></div></body>";
+        document.getElementById("main_cont").style.display = "none";
+        document.getElementById("load_cont").style.display = "block";
+    }
 
 </script>
 
 <!-- BEGIN: SEARCH SECTION -->
 <section>
-	<div class="row full-width-search">
-		<div class="container clear-padding">
-			<div class="col-md-8 search-section">
-				<div role="tabpanel">
-					<!-- BEGIN: TAB PANELS -->
-					<div class="tab-content">
-							<!-- BEGIN: FLIGHT SEARCH -->
-							<div role="tabpanel" class="tab-pane active" id="flight">
-                <form action="ControllerServlet?action=search" method="post">
-									<div class="col-md-12 product-search-title">Trip information</div>
-									<div class="clearfix"></div>
-									<div class="col-md-6 col-sm-6 search-col-padding">
-										<label>Leaving From</label>
-										<div class="input-group">
-                    	<input id="departure_city" name="departure_city" class="form-control" required="" placeholder="E.g. London" type="text">
-											<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 search-col-padding">
-										<label>Leaving To</label>
-										<div class="input-group">
-											<input id="destination_city" name="destination_city" class="form-control" required="" placeholder="E.g. New York" type="text">
-											<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-									<div class="col-md-6 col-sm-6 search-col-padding">
-										<label>Departure</label>
-										<div class="input-group">
-											<input type="text" id="departure_date" name="departure_date" class="form-control" placeholder="DD/MM/YYYY">
-											<span class="input-group-addon">
-												<i class="fa fa-calendar fa-fw"></i>
-											</span>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 search-col-padding">
-										<label>Return</label>
-										<div class="input-group">
-											<input type="text" id="return_date" name="return_date" class="form-control" placeholder="DD/MM/YYYY">
-												<span class="input-group-addon">
-													<i class="fa fa-calendar fa-fw"></i>
-												</span>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-									<div class="col-md-3 col-sm-3 search-col-padding">
-										<label>Adult</label><br>
-										<!-- <input id="adult_count" name="adult_count" value="1" class="form-control quantity-padding"> -->
-										<div class="input-group">
-													<span class="input-group-btn">
-															<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]" onclick="decrement('adult_count')">
-																	<span class="glyphicon glyphicon-minus"></span>
-															</button>
-													</span>
-													<input id="adult_count" name="adult_count" type="text" name="quant[1]" class="form-control input-number" value="1">
-													<span class="input-group-btn">
-															<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]" onclick="increment('adult_count')">
-																	<span class="glyphicon glyphicon-plus"></span>
-															</button>
-													</span>
-											</div>
-									</div>
-									<div class="col-md-3 col-sm-3 search-col-padding">
-										<label>Child</label><br>
-										<!-- <input type="text" id="child_count" name="child_count" value="1" class="form-control quantity-padding"> -->
-										<div class="input-group">
-													<span class="input-group-btn">
-															<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]" onclick="decrement('child_count')">
-																	<span class="glyphicon glyphicon-minus"></span>
-															</button>
-													</span>
-													<input id="child_count" name="child_count" type="text" name="quant[1]" class="form-control input-number" value="0">
-													<span class="input-group-btn">
-															<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]" onclick="increment('child_count')">
-																	<span class="glyphicon glyphicon-plus"></span>
-															</button>
-													</span>
-											</div>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-								<div class="col-md-12 search-col-padding">
-									<label></i> ACTIVITIES</label>
-					        <ul class="list-unstyled list-inline">
-                    <li><input id="museums" type="checkbox" name="museums" value="YES"> Museums</li>
-                    <li><input id="culture" type="checkbox" name="art" value="YES"> Art</li>
-                    <li><input id="nature" type="checkbox" name="nature" value="YES"> Nature</li>
-                    <li><input id="shopping" type="checkbox" name="shopping" value="YES"> Shopping</li>
-                    <li><input id="night_life" type="checkbox" name="night_life" value="YES"> Night life</li>
-					        </ul>
-								</div>
+    <div class="row full-width-search">
+        <div class="container clear-padding">
+            <div class="col-md-8 search-section">
+                <div role="tabpanel">
+                    <!-- BEGIN: TAB PANELS -->
+                    <div class="tab-content">
+                        <!-- BEGIN: FLIGHT SEARCH -->
+                        <div role="tabpanel" class="tab-pane active" id="flight">
+                            <form action="ControllerServlet?action=search" method="post">
+                                <div class="col-md-12 product-search-title">Trip information</div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6 col-sm-6 search-col-padding">
+                                    <label>Leaving From</label>
+                                    <div class="input-group">
+                                        <input id="departure_city" name="departure_city" class="form-control" required="" placeholder="E.g. London" type="text">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-map-marker fa-fw"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 search-col-padding">
+                                    <label>Leaving To</label>
+                                    <div class="input-group">
+                                        <input id="destination_city" name="destination_city" class="form-control" required="" placeholder="E.g. New York" type="text">
+                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6 col-sm-6 search-col-padding">
+                                    <label>Departure</label>
+                                    <div class="input-group">
+                                        <input type="text" id="departure_date" name="departure_date" class="form-control" placeholder="DD/MM/YYYY">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-fw"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 search-col-padding">
+                                    <label>Return</label>
+                                    <div class="input-group">
+                                        <input type="text" id="return_date" name="return_date" class="form-control" placeholder="DD/MM/YYYY">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-fw"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-3 col-sm-3 search-col-padding">
+                                    <label>Adult</label><br>
+                                    <!-- <input id="adult_count" name="adult_count" value="1" class="form-control quantity-padding"> -->
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]" onclick="decrement('adult_count')">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input id="adult_count" name="adult_count" type="text" class="form-control input-number" value="1">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]" onclick="increment('adult_count')">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 search-col-padding">
+                                    <label>Child</label><br>
+                                    <!-- <input type="text" id="child_count" name="child_count" value="1" class="form-control quantity-padding"> -->
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]" onclick="decrement('child_count')">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input id="child_count" name="child_count" type="text" class="form-control input-number" value="0">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]" onclick="increment('child_count')">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12 search-col-padding">
+                                    <label>ACTIVITIES</label>
+                                    <ul class="list-unstyled list-inline">
+                                        <li><input id="museums" type="checkbox" name="museums" value="YES"> Museums</li>
+                                        <li><input id="culture" type="checkbox" name="art" value="YES"> Art</li>
+                                        <li><input id="nature" type="checkbox" name="nature" value="YES"> Nature</li>
+                                        <li><input id="shopping" type="checkbox" name="shopping" value="YES"> Shopping</li>
+                                        <li><input id="night_life" type="checkbox" name="night_life" value="YES"> Night life</li>
+                                    </ul>
+                                </div>
 
-								<div class="clearfix"></div>
+                                <div class="clearfix"></div>
 
-									<div class="col-md-12 search-col-padding">
-										<button type="submit" class="search-button btn transition-effect">Search</button>
-									</div>
-									<div class="clearfix"></div>
-								</form>
-							</div>
-							<!-- END: FLIGHT SEARCH -->
-						</div>
-						<!-- END: TAB PANE -->
-				</div>
-			</div>
-		</div>
-	</div>
+                                <div class="col-md-12 search-col-padding">
+                                    <button type="submit" class="search-button btn transition-effect" onclick="loading()">Search</button>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </form>
+                        </div>
+                        <form action="ControllerServlet?action=memoryUpload" method="post" enctype="multipart/form-data">
+                            <input type="text" name="description" />
+                            <input type="file" name="memoryIMG" />
+                            <input type="submit" />
+                        </form>
+                        <!-- END: FLIGHT SEARCH -->
+                    </div>
+                    <!-- END: TAB PANE -->
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- END: SEARCH SECTION -->

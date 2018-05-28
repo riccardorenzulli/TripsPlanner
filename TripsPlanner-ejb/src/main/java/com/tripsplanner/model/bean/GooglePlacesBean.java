@@ -14,6 +14,9 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -128,30 +131,45 @@ public class GooglePlacesBean {
     
     public ArrayList<Place> getInterestingPlaces(Search search) throws IOException {
         JSONObject jsonResult = getInterestingPlacesJSON(search.getDestinationCity());
-        ArrayList<Place> places = fromJsonToListPlace(jsonResult);
+        Set<Place> places = new HashSet();
+                
+        places.addAll(fromJsonToListPlace(jsonResult));
         
         if(search.isMuseums()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "museum");
-            places.addAll(fromJsonToListPlace(obj));
+            List<Place> result = fromJsonToListPlace(obj);
+            for(Place place : result)
+                places.add(place);
         }
         if(search.isArt()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "art");
-            places.addAll(fromJsonToListPlace(obj));
+            List<Place> result = fromJsonToListPlace(obj);
+            for(Place place : result)
+                places.add(place);
         }
         if(search.isNature()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "park");
-            places.addAll(fromJsonToListPlace(obj));
+            List<Place> result = fromJsonToListPlace(obj);
+            for(Place place : result)
+                places.add(place);
         }
         if(search.isShopping()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "shopping");
-            places.addAll(fromJsonToListPlace(obj));
+            List<Place> result = fromJsonToListPlace(obj);
+            for(Place place : result)
+                places.add(place);
         }
         if(search.isNightLife()) {
             JSONObject obj = getInterestingPlacesJSON(search.getDestinationCity(), "club");
-            places.addAll(fromJsonToListPlace(obj));
+            List<Place> result = fromJsonToListPlace(obj);
+            for(Place place : result)
+                places.add(place);
         }
         
-        return places;
+        ArrayList<Place> results = new ArrayList();
+        results.addAll(places);
+        
+        return results;
     } 
     
     public String getPhotoFromReference(String photoReference) throws IOException {

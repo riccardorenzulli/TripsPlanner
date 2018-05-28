@@ -5,10 +5,17 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.DayItinerary;
 import com.tripsplanner.model.entity.Place;
+import com.tripsplanner.model.entity.Route;
+import com.tripsplanner.model.entity.Trip;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -18,40 +25,53 @@ import javax.ejb.Stateless;
 @Stateless
 public class TripBean implements TripBeanLocal {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private GoogleDirectionsBean dirBean;
+
+    
     
     /*Given the interesting places to be visited and the number of days
       return an arraylist for each cluster containing the indexes of the
       places belonging to the clusters.
     */
-    public ArrayList<ArrayList<Integer>> buildTrip(List<Place> interestingPlaces, int dayTrips) {
+    public Trip buildTrip(List<Place> interestingPlaces, int dayTrips) {
+        Trip trip = null;
+        
+        ArrayList<ArrayList<Integer>> clusters = null;
+        int attempts = 0;
+        
+        while(!satisfyingClusters(clusters,interestingPlaces.size()) && attempts < 5) {
+            clusters = calculateClusters(interestingPlaces, dayTrips);
+            attempts++;
+        }
+        
+        if(!satisfyingClusters(clusters,interestingPlaces.size()))
+            clusters = forceModifyClusters(clusters);
+        
+        try {
+            trip = fromClustersToTrip(interestingPlaces, clusters);
+        } catch (IOException ex) {
+            Logger.getLogger(TripBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return trip;
+    }
+    
+    private ArrayList<ArrayList<Integer>> calculateClusters(List<Place> interestingPlaces, int dayTrips) {
         /*Clustering + shortest path tour*/
-        Random rand = new Random();
+
         List<Place> places = interestingPlaces;
         int daysOfTrip = dayTrips;
         int numberOfPlaces = places.size();
         
-        ArrayList<Integer> medoidsIndexes = new ArrayList<>();
-        /*initializing centroids*/
-        for(int i=0; i<daysOfTrip; i++) {
-            boolean equalCentroids = true;
-            /*create unique centroids*/
-            while(equalCentroids) {
-                int newIndex = rand.nextInt(numberOfPlaces);
-                if(!medoidsIndexes.contains(newIndex)) { //need to use Integer object?
-                    medoidsIndexes.add(newIndex);
-                    equalCentroids = false;
-                }
-            }
-        }
-        
+        ArrayList<Integer> medoidsIndexes = randomMedoids(daysOfTrip,numberOfPlaces);
+
         ArrayList<ArrayList<Integer>> clusters = null;
         
-        int iterations = 5;
+        int iterations = 2;
         for(int it=0; it<iterations; it++) {
             /*Clean the clusters*/
-            clusters = clusters = new ArrayList<>();
+            clusters = new ArrayList<>();
             for(int i=0; i<daysOfTrip; i++)
                 clusters.add(new ArrayList<Integer>());
             
@@ -60,15 +80,14 @@ public class TripBean implements TripBeanLocal {
                 int closestClusterIndex = getClosestCluster(places, medoidsIndexes, i);
                 clusters.get(closestClusterIndex).add(i); //put the place i in the closest cluster
             }
+            
             /*Recalculate medoids*/
             for(int i=0; i<medoidsIndexes.size(); i++) {
                 int indexBestMedoid = calculateBestMedoid(places, clusters.get(i), i);
                 medoidsIndexes.set(i, indexBestMedoid);
             }
         }
-        
-        
-        
+
         for(int i=0; i<clusters.size(); i++) {
             System.out.println("Cluster_"+i+":{");
             for(int index : clusters.get(i))
@@ -115,5 +134,80 @@ public class TripBean implements TripBeanLocal {
         return medoidIndex;
     }
 
-    
+    private Trip fromClustersToTrip(List<Place> interestingPlaces, ArrayList<ArrayList<Integer>> clusters) throws IOException {
+        Trip trip = new Trip();
+        ArrayList<DayItinerary> itinerary = new ArrayList();
+        /*For each cluster*/
+        for(int i=0; i<clusters.size(); i++) {
+            DayItinerary dayItinerary = new DayItinerary();
+            ArrayList<Route> legs = new ArrayList();
+            /*For each element of the cluster i*/
+            for(int j=0; j<clusters.get(i).size()-1; j++) {
+                int indexPlace1 = clusters.get(i).get(j);
+                int indexPlace2 = clusters.get(i).get(j+1);
+                Place place1 = interestingPlaces.get(indexPlace1);
+                Place place2 = interestingPlaces.get(indexPlace2);
+                Route route = createRouteFromPlaces(place1, place2);
+                legs.add(route);
+            }
+            dayItinerary.setLegs(legs);
+            itinerary.add(dayItinerary);
+        }
+        trip.setItineraries(itinerary);
+        return trip;
+    }
+
+    private Route createRouteFromPlaces(Place departure, Place destination) throws IOException {
+        Route route = dirBean.getRoute(departure, destination, "driving", "now");
+
+        return route;
+    }
+
+    private ArrayList<Integer> randomMedoids(int daysOfTrip, int numberOfPlaces) {
+        Random rand = new Random();
+        ArrayList<Integer> medoidsIndexes = new ArrayList<>();        
+        /*initializing centroids*/
+        for(int i=0; i<daysOfTrip; i++) {
+            boolean equalCentroids = true;
+            /*create unique centroids*/
+            while(equalCentroids) {
+                int newIndex = rand.nextInt(numberOfPlaces);
+                if(!medoidsIndexes.contains(newIndex)) { //need to use Integer object?
+                    medoidsIndexes.add(newIndex);
+                    equalCentroids = false;
+                }
+            }
+        }
+        return medoidsIndexes;
+    }
+
+    private boolean satisfyingClusters(ArrayList<ArrayList<Integer>> clusters, int totalPlaces) {
+        if(clusters == null)
+            return false;
+        for(int i=0; i<clusters.size(); i++) {
+            if(clusters.get(i).size() < 2 || clusters.get(i).size() > (totalPlaces/3 + 1))
+                return false;
+        }
+        return true;
+    }
+
+    private ArrayList<ArrayList<Integer>> forceModifyClusters(ArrayList<ArrayList<Integer>> clusters) {
+        ArrayList<ArrayList<Integer>> newClusters = clusters;
+        int indexBiggestCluster = 0;
+        int biggestSize = 0;
+        for(int i=0; i<newClusters.size(); i++) {
+            if(newClusters.get(i).size() > biggestSize) {
+                indexBiggestCluster = i;
+                biggestSize = newClusters.get(i).size();
+            }
+        }
+        
+        for(int i=0; i<newClusters.size(); i++) {
+            if(newClusters.get(i).size() < 2) {
+                int example = newClusters.get(indexBiggestCluster).remove(0);
+                newClusters.get(i).add(example);
+            }
+        }
+        return newClusters;
+    }
 }

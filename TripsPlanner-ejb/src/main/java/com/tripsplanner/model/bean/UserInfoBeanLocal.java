@@ -5,18 +5,16 @@
  */
 package com.tripsplanner.model.bean;
 
-import com.tripsplanner.model.entity.Place;
-import java.util.ArrayList;
-import java.util.List;
+import com.tripsplanner.model.entity.User;
 import javax.ejb.Local;
 
 /**
  *
- * @author the-silent-fox
+ * @author riccardo
  */
 @Local
-public interface TripBeanLocal {
-    
-    ArrayList<ArrayList<Integer>> buildTrip(List<Place> interestingPlaces, int dayTrips);
+public interface UserInfoBeanLocal {
+
+    public String modifyUser(User olduser, String newName, String newSurname, String newAge, String newSex);
     
 }

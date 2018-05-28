@@ -8,6 +8,7 @@ package com.tripsplanner.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -148,7 +149,35 @@ public class Place implements Serializable {
     public String toString() {
         return "Place:\n"+this.name+" - "+this.address+" - "+this.lat+" - "+this.lng+"\n"+this.googleID+"\n"+this.googlePlaceID+"\n"+this.photosUrl+"\nRating "+this.rating;
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Place)) {
+            return false;
+        }
+        Place other = (Place) object;
+        if (this.name != null && other.name != null && this.name.equals(other.getName())) {
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    public boolean equals(Place other) {
+
+        if (this.name != null && other.name != null && this.name.equals(other.getName())) {
+            return true;
+        }
+        return false;
+    }
+    
     public Long getId() {
         return id;
     }

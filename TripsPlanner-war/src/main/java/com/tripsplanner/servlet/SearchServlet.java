@@ -13,7 +13,9 @@ import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
 import com.tripsplanner.model.bean.TripBean;
 import com.tripsplanner.model.bean.TripBeanLocal;
+import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -160,11 +162,15 @@ public class SearchServlet extends HttpServlet {
  
         ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
         
-        tripBean.buildTrip(bestPlaces, 3);
+        long departureTime = search.getDepartureDate().getTime();
+        long returnTime = search.getReturnDate().getTime();
+        long timeTrip = returnTime - departureTime;
+        int tripDays = ((int)timeTrip/86400000) + 1;
+        
+        Trip trip = tripBean.buildTrip(bestPlaces, tripDays);
+        /*Add the owner of the trip here*/
 
-        dirBean.getRoute(bestPlaces.get(0), bestPlaces.get(1), "driving", "now");
-
-        request.setAttribute("places", bestPlaces);
+        request.setAttribute("trip", trip);
         
         request.getRequestDispatcher("trips.jsp").forward(request, response);
     }
