@@ -266,6 +266,7 @@
             <!-- END: SITE-WRAPPER -->
         </div>
 
+
         <!-- Load Scripts -->
         <script src="assets/js/respond.js"></script>
         <script src="assets/js/jquery.js"></script>
@@ -297,6 +298,7 @@
                     keyboard_nav: 0, //Keyboard navigation on/off
                     performance: 1, //0-Normal, 1-Hybrid speed/quality, 2-Optimizes image quality, 3-Optimizes transition speed // (Only works for Firefox/IE, not Webkit)
                     image_protect: 1, //Disables image dragging and right click with Javascript
+
 
                     //Size & Position
                     min_width: 0, //Min width allowed (in pixels)

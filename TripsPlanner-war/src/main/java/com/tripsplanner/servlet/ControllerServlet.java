@@ -68,6 +68,10 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
+
+        else if(action.equalsIgnoreCase("tripHotel")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
+
         else if (action.equalsIgnoreCase("memoryUpload")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
             rd.forward(request, response);

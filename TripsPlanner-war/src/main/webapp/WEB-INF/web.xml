@@ -13,6 +13,10 @@
         <servlet-class>com.tripsplanner.servlet.ControllerServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>HotelServlet</servlet-name>
+        <servlet-class>com.tripsplanner.servlet.HotelServlet</servlet-class>
+    </servlet>  
+    <servlet>
         <servlet-name>MemoryServlet</servlet-name>
         <servlet-class>com.tripsplanner.servlet.MemoryServlet</servlet-class>
     </servlet>
@@ -32,6 +36,11 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/ControllerServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>HotelServlet</servlet-name>
+        <url-pattern>/HotelServlet</url-pattern>
+</servlet-mapping>
     <servlet-mapping>
         <servlet-name>MemoryServlet</servlet-name>
         <url-pattern>/MemoryServlet</url-pattern>
