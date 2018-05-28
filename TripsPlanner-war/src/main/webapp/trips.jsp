@@ -37,6 +37,7 @@
 
     <!-- SCRIPTS -->
 		<script src="scripts/login.js"></script>
+                <script src="assets/js/tripPage.js"></script>
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 
@@ -61,142 +62,8 @@
 <div class="clearfix"></div>
 <!-- START: LISTING AREA-->
 <div class="row">
-	<div class="container">
-		
-		<!-- START: INDIVIDUAL LISTING AREA -->
-		<div class="col-md-9 hotel-listing">
-			
-			
-			<!-- START: HOTEL LIST VIEW -->
-			<div class="switchable col-md-12 clear-padding">
-                            <%
-                                Trip trip = (Trip)request.getAttribute("trip");
-                                ArrayList<Place> places = trip.getDayPlaces(0);
-                                ArrayList<Route> legs = trip.getItineraries().get(0).getLegs();
-                                if(places != null) {
-                                    for(int i=0; i<places.size()-1; i++) {
-                            %>
-                                    <div  class="hotel-list-view">
-					<div class="wrapper">
-						<div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                                    <img src="<%=places.get(i).getPhotosUrl()%>" alt="cruise">
-						</div>
-						<div class="col-md-6 col-sm-6 hotel-info">
-							<div>
-								<div class="hotel-header">
-									<h5>
-                                                                            <%= places.get(i).getName() %>
-                                                                        </h5>
-									<p><i class="fa fa-map-marker"></i>
-                                                                            <%= places.get(i).getAddress() %>
-                                                                           </p>
-								</div>
-	
-								<div class="hotel-desc">
-									<p><%= places.get(i).getDescription() %></p>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix visible-sm-block"></div>
-						<div class="col-md-2 rating-price-box text-center clear-padding">
-							<div class="rating-box">
-								<div class="tripadvisor-rating">
-									<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-								</div>
-								<div class="user-rating">
-									<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-									<span>128 Guest Reviews.</span>
-								</div>
-							</div>
-							<div class="room-book-box">
-							
-								<div class="book">
-									<a href="#">Modify</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-                                                                
-                                <div class="hotel-list-view directions">
-                                    <div class="wrapper">
-                                        <div class="col-md-1 col-sm-1"></div>
-                                        <div class="col-md-5 col-sm-5 directions-border-left">
-                                            <p><%= legs.get(i).getInfo() %> <a href="#">Get directions</a></p> 
-                                        </div>
-                                        <div class="col-md-6 col-sm-6"></div>
-                                    </div>                                  
-                                </div>
-                            <%
-                                    }
-                                    int lastIndex = places.size()-1;
-                            %>
-                                <div  class="hotel-list-view">
-					<div class="wrapper">
-						<div class="col-md-4 col-sm-6 switch-img clear-padding">
-                                                    <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="cruise">
-						</div>
-						<div class="col-md-6 col-sm-6 hotel-info">
-							<div>
-								<div class="hotel-header">
-									<h5>
-                                                                            <%= places.get(lastIndex).getName() %>
-                                                                        </h5>
-									<p><i class="fa fa-map-marker"></i>
-                                                                            <%= places.get(lastIndex).getAddress() %>
-                                                                           </p>
-								</div>
-	
-								<div class="hotel-desc">
-									<p><%= places.get(lastIndex).getDescription() %></p>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix visible-sm-block"></div>
-						<div class="col-md-2 rating-price-box text-center clear-padding">
-							<div class="rating-box">
-								<div class="tripadvisor-rating">
-									<img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-								</div>
-								<div class="user-rating">
-									<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-									<span>128 Guest Reviews.</span>
-								</div>
-							</div>
-							<div class="room-book-box">
-							
-								<div class="book">
-									<a href="#">Modify</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-                            <%
-                                }
-                            %>
-
-				<!-- END: HOTEL LIST VIEW -->
-			</div>
-			<div class="clearfix"></div>
-			<!-- START: PAGINATION -->
-			<div class="bottom-pagination">
-				<nav class="pull-right">
-					<ul class="pagination pagination-lg">
-						<li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">6 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
-					</ul>
-				</nav>
-			</div>
-			<!-- END: PAGINATION -->
-		</div>
-		<!-- END: INDIVIDUAL LISTING AREA -->
+	<div class="container">	
+            <jsp:include page="dayContent.jsp" /> 
 	</div>
 </div>
 <!-- END: LISTING AREA -->
