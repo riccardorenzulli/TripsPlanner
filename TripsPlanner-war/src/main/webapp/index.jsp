@@ -14,6 +14,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
+
 <!DOCTYPE html>
 <html class="load-full-screen">
     <head>
@@ -44,8 +46,11 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
         <!-- SCRIPTS -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(request.getAttribute("google_places_api"))%>&libraries=places"></script>
         <script src="assets/js/login.js"></script>
+        <script src="assets/js/index.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     </head>
 
     <body class="load-full-screen">
