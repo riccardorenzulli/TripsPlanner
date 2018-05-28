@@ -133,7 +133,9 @@
 <!-- START: PAGINATION -->
 <div class="bottom-pagination">
     <div class="col-md-9 text-center">
+        <a href="ControllerServlet?action=save-trip">
             <button type="submit" class="search-button btn transition-effect">Save Trip</button>
+        </a>
     </div>
     <nav class="pull-right">
         <ul class="pagination pagination-lg">

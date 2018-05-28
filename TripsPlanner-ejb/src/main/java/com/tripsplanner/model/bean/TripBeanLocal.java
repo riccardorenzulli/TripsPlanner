@@ -20,4 +20,6 @@ public interface TripBeanLocal {
     
     Trip buildTrip(List<Place> interestingPlaces, int dayTrips);
     
+    void saveTrip(Trip myTrip);
+    
 }
