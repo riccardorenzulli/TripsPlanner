@@ -172,7 +172,7 @@ public class SearchServlet extends HttpServlet {
 
         request.setAttribute("trip", trip);
         
-        request.getRequestDispatcher("trips.jsp").forward(request, response);
+        request.getRequestDispatcher("tripPages.jsp").forward(request, response);
     }
 
 }
