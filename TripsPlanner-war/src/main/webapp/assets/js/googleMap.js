@@ -13,7 +13,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat:coordinates[0][0][0], lng:coordinates[0][0][1]},
-        zoom: 13
+        zoom: 15
     });
 
     var hotels;
@@ -56,9 +56,11 @@ function setPricesAndMarker(T){
     
     markers[list_id].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
     
-    if(last_marker !== null){
+    if(last_marker !== null & last_marker !== markers[list_id]){
         last_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
     }
     
     last_marker = markers[list_id];
+    
+    map.panTo(markers[list_id].getPosition());
 }
