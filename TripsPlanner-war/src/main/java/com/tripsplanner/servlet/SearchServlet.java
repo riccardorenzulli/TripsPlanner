@@ -158,7 +158,7 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("shopping", shopping);
         mapSearch.put("night_life", nightLife);
         
-        //Search search = searchBean.createSearch(mapSearch);
+        Search search = searchBean.createSearch(mapSearch);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         int num_people = Integer.parseInt(numAdult) + Integer.parseInt(numChildren);
         try{
@@ -172,7 +172,7 @@ public class SearchServlet extends HttpServlet {
 
         request.setAttribute("hotels", hotels);
         request.getSession().setAttribute("hotels", hotels);
-        //request.getSession().setAttribute("search", search);
+        request.getSession().setAttribute("search", search);
         if((hotels != null) & !hotels.isEmpty()){
         request.getRequestDispatcher("hotelList.jsp").forward(request, response);
         }else{
