@@ -157,8 +157,9 @@ public class SearchServlet extends HttpServlet {
         
         Search search = searchBean.createSearch(mapSearch);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+        int num_people = Integer.parseInt(numAdult) + Integer.parseInt(numChildren);
         try{
-            hotels = amadeusAPIBean.getHotels(destinationCity, departureDate, returnDate);
+            hotels = amadeusAPIBean.getHotels(googlePlacesBean.getCoordinates(destinationCity), num_people, departureDate, returnDate);
         //System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);

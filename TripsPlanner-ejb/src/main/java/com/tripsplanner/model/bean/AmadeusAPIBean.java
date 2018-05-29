@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -44,9 +45,6 @@ import org.json.JSONObject;
 @Stateless
 @LocalBean
 public class AmadeusAPIBean {
-
-    @EJB
-    private GooglePlacesBean googlePlacesBean;
     
     @EJB
     private ApiKeysBean apiKeysBean;
@@ -144,7 +142,7 @@ public class AmadeusAPIBean {
     }
     
     // What are the best hotel offers during my trip?
-    public JSONObject getHotelsJson(String destination_IATA,  String departure_date, String return_date) throws Exception {
+    public JSONObject getHotelsJson(Float lat, Float lon, int num_people, String departure_date, String return_date) throws Exception {
         String amadeus_token = getAmadeusToken();
 //        System.out.println("amadeus token: " + amadeus_token);
 //        OkHttpClient client = new OkHttpClient();
@@ -156,17 +154,18 @@ public class AmadeusAPIBean {
 //
 //        Response response = client.newCall(request).execute();
 //        String response_body = response.body().string();
-        String requestUrl = "https://test.api.amadeus.com/v1/shopping/hotel-offers?cityCode=" + destination_IATA + "&checkInDate=" + departure_date + "&checkOutDate=" + return_date +"&bestRateOnly=true&view=FULL"; //+"&page%5Blimit%5D=5"
+        String requestUrl = "https://test.api.amadeus.com/v1/shopping/hotel-offers?latitude=" + lat +"&longitude=" + lon +"&radius=5&radiusUnit=KM&includeClosed=false&adults="+num_people+"&checkInDate=" + departure_date + "&checkOutDate=" + return_date +"&bestRateOnly=true&view=FULL"; //+"&page%5Blimit%5D=5"
         JSONObject jsonObj = runConnection(requestUrl, amadeus_token);
 
         return jsonObj;
     }
     
-    public ArrayList<Hotel> getHotels(String destination_IATA,  String departure_date, String return_date) throws Exception {
+    public ArrayList<Hotel> getHotels(HashMap<String, Float> map, int num_people, String departure_date, String return_date) throws Exception {
         String dep_date = mmggyy_to_yymmgg(departure_date);
         String ret_date = mmggyy_to_yymmgg(return_date);
-        String Iata = getIATAfromName(destination_IATA);
-        JSONObject json = getHotelsJson(Iata, dep_date, ret_date);
+        Float lat = map.get("lat");
+        Float lon = map.get("long");
+        JSONObject json = getHotelsJson(lat, lon, num_people, dep_date, ret_date);
         System.out.println(json);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         JSONArray JsonHotelArray = json.getJSONArray("data");
