@@ -95,7 +95,14 @@ public class ControllerServlet extends HttpServlet {
         }
         
         else if (action.equalsIgnoreCase("save-trip")) {
+            request.getSession().setAttribute("go-save", false);
             RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
+            rd.forward(request, response);
+        }
+        
+        else if (action.equalsIgnoreCase("save-trip-login")) {
+            request.getSession().setAttribute("go-save", true);
+            RequestDispatcher rd = ctx.getRequestDispatcher("/LoginServlet");
             rd.forward(request, response);
         }
         

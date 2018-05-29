@@ -57,6 +57,9 @@ public class LoginServlet extends HttpServlet {
                 case "login":
                     goLogin(request, response);
                     break;
+                case "save-trip-login":
+                    goLogin(request, response);
+                    break;
                 case "login-f":
                     goLoginFB(request, response);
                     break;
@@ -184,13 +187,18 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void setupSession(User user, String typeLogin, HttpServletRequest request, HttpServletResponse response) 
-    throws ServletException, IOException{
+    throws ServletException, IOException {
         
         // add the user object and logintype to the http session
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("typeLogin", typeLogin);
         
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        Boolean gosave = (Boolean) request.getSession().getAttribute("go-save");
+        
+        if (gosave != null && gosave)
+            request.getRequestDispatcher("tripPages.jsp").forward(request, response);
+        else
+            request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
