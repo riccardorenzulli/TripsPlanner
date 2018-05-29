@@ -165,15 +165,19 @@ public class SearchServlet extends HttpServlet {
             hotels = amadeusAPIBean.getHotels(latitude, longitude, num_people, departureDate, returnDate);
         //System.out.print(jsonFlight);
         } catch (Exception ex) {
-            Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("sono ne catch");
+            //Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
         request.setAttribute("hotels", hotels);
         request.getSession().setAttribute("hotels", hotels);
         //request.getSession().setAttribute("search", search);
-        
+        if((hotels != null) & !hotels.isEmpty()){
         request.getRequestDispatcher("hotelList.jsp").forward(request, response);
+        }else{
+           request.getRequestDispatcher("Error.html").forward(request, response); 
+        }
     }
 
     private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
