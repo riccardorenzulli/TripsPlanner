@@ -155,7 +155,7 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("shopping", shopping);
         mapSearch.put("night_life", nightLife);
         
-        Search search = searchBean.createSearch(mapSearch);
+        //Search search = searchBean.createSearch(mapSearch);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         int num_people = Integer.parseInt(numAdult) + Integer.parseInt(numChildren);
         try{
@@ -168,12 +168,14 @@ public class SearchServlet extends HttpServlet {
 
         request.setAttribute("hotels", hotels);
         request.getSession().setAttribute("hotels", hotels);
-        request.getSession().setAttribute("search", search);
+        //request.getSession().setAttribute("search", search);
         
         request.getRequestDispatcher("hotelList.jsp").forward(request, response);
     }
 
     private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println("attribute act: "+ request.getParameter("act"));
+        System.out.println("attribute list_id: "+ request.getParameter("list_id_choosed"));
         Search search = (Search) request.getSession().getAttribute("search");
         ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
         System.out.println("sono in go tripHotel");

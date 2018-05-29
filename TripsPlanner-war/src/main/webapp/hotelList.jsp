@@ -121,7 +121,10 @@
 									</div>
                                                                                 <% if(hotel.isAvailable()){ %>
 									<div class="book">
-										<a href="#">CHOOSE</a>
+										<form action="ControllerServlet?action=tripHotel" method="post">
+                                                                                    <input id="list_id_choosed" name="list_id_choosed" type='hidden' value=<%= hotel.getList_id()%>/>
+<button type="submit" class="search-button btn transition-effect" name="act" value="choose">Choose</button>
+                                                                                </form>
 									</div>
                                                                                  <% }else{ %>
                                                                         <div class="" style="color:#f9676b">
@@ -185,9 +188,7 @@
     
                                 <div>
                                     <form action="ControllerServlet?action=tripHotel" method="post">
-                                        <input id="list_id_choosed" name="list_id_choosed" type='hidden' value="-1"/>
 <button type="submit" class="search-button btn transition-effect" name="act" value="skip">Skip hotel</button>
-<button type="submit" class="search-button btn transition-effect" name="act" value="choose" style="float: right;">Choose</button>
                                     </form>
                                 </div>
 <div class="clearfix"></div>
