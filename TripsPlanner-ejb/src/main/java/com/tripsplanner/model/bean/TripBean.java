@@ -6,10 +6,10 @@
 package com.tripsplanner.model.bean;
 
 import com.tripsplanner.model.entity.DayItinerary;
+import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Route;
 import com.tripsplanner.model.entity.Trip;
-import com.tripsplanner.model.facade.SearchFacadeLocal;
 import com.tripsplanner.model.facade.TripFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class TripBean implements TripBeanLocal {
       return an arraylist for each cluster containing the indexes of the
       places belonging to the clusters.
     */
-    public Trip buildTrip(List<Place> interestingPlaces, int dayTrips) {
+    public Trip buildTrip(List<Place> interestingPlaces, int dayTrips, Hotel hotel) {
         Trip trip = null;
         
         ArrayList<ArrayList<Integer>> clusters = null;
@@ -50,6 +50,16 @@ public class TripBean implements TripBeanLocal {
         
         if(!satisfyingClusters(clusters,interestingPlaces.size()))
             clusters = forceModifyClusters(clusters);
+        
+        if(hotel != null) {
+            Place hotelPlace = fromHotelToPlace(hotel);
+            interestingPlaces.add(hotelPlace);
+            int indexHotel = interestingPlaces.size()-1;
+            for(ArrayList<Integer> cluster : clusters) {
+                cluster.add(0, indexHotel);
+                cluster.add(indexHotel);
+            }
+        }
         
         try {
             trip = fromClustersToTrip(interestingPlaces, clusters);
@@ -217,6 +227,18 @@ public class TripBean implements TripBeanLocal {
     @Override
     public void saveTrip(Trip myTrip) {
         tripBean.create(myTrip);
+    }
+
+    private Place fromHotelToPlace(Hotel hotel) {
+        Place hotelPlace = new Place();
+        hotelPlace.setName(hotel.getName());
+        hotelPlace.setAddress(hotel.getAddress());
+        hotelPlace.setDescription("");
+        hotelPlace.setLat(hotel.getLatitude());
+        hotelPlace.setLng(hotel.getLongitude());
+        hotelPlace.setId(hotel.getId()); //???????
+        hotelPlace.setPhotosUrl("https://cdn.pixabay.com/photo/2015/07/18/04/48/hotel-850020_960_720.jpg");
+        return hotelPlace;
     }
     
     

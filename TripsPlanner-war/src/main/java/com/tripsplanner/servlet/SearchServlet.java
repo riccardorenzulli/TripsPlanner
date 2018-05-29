@@ -17,6 +17,7 @@ import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -167,31 +168,41 @@ public class SearchServlet extends HttpServlet {
             //Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-        request.setAttribute("hotels", hotels);
         request.getSession().setAttribute("hotels", hotels);
         request.getSession().setAttribute("search", search);
 
         if((hotels != null) & !hotels.isEmpty()){
-        request.getRequestDispatcher("hotelList.jsp").forward(request, response);
+            request.getRequestDispatcher("hotelList.jsp").forward(request, response);
         }else{
-           request.getRequestDispatcher("Error.html").forward(request, response); 
+            request.getRequestDispatcher("Error.html").forward(request, response); 
         }
 
     }
 
     private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("attribute act: "+ request.getParameter("act"));
-        System.out.println("attribute list_id: "+ request.getParameter("list_id_choosed"));
         Search search = (Search) request.getSession().getAttribute("search");
         ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
-        System.out.println("sono in go tripHotel");
+
         long departureTime = search.getDepartureDate().getTime();
         long returnTime = search.getReturnDate().getTime();
         long timeTrip = returnTime - departureTime;
         int tripDays = ((int)timeTrip/86400000) + 1;
+          
+        String action = request.getParameter("act");
+        String hotelId = request.getParameter("list_id_choosed");
+        List<Hotel> hotels = (List<Hotel>) request.getSession().getAttribute("hotels");
+        Hotel selectedHotel = null;
         
-        Trip trip = tripBean.buildTrip(bestPlaces, tripDays);
+        if(action.equals("choose") && hotelId != null) {
+            int id = Integer.parseInt(hotelId);
+            for(Hotel hotel : hotels) {
+                if(id == hotel.getList_id()) {
+                    selectedHotel = hotel;
+                    break;
+                }    
+            }
+        }
+        Trip trip = tripBean.buildTrip(bestPlaces, tripDays, selectedHotel);
         trip.setSearch(search);
         /*Add the owner of the trip here*/
 

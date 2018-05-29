@@ -92,7 +92,7 @@
 							<h4 class="tab-heading">Hotels</h4>
                                                         
                                                         <%
-                                                            List<Hotel> hotels = (List<Hotel>) request.getAttribute("hotels");
+                                                            List<Hotel> hotels = (List<Hotel>) request.getSession().getAttribute("hotels");
                                                             if (hotels != null) {
                                                                 for (Hotel hotel : hotels) {
                                                         %>
