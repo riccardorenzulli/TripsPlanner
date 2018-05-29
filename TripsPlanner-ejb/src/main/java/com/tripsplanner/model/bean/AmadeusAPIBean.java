@@ -160,11 +160,9 @@ public class AmadeusAPIBean {
         return jsonObj;
     }
     
-    public ArrayList<Hotel> getHotels(HashMap<String, Float> map, int num_people, String departure_date, String return_date) throws Exception {
+    public ArrayList<Hotel> getHotels(Float lat, Float lon, int num_people, String departure_date, String return_date) throws Exception {
         String dep_date = mmggyy_to_yymmgg(departure_date);
         String ret_date = mmggyy_to_yymmgg(return_date);
-        Float lat = map.get("lat");
-        Float lon = map.get("long");
         JSONObject json = getHotelsJson(lat, lon, num_people, dep_date, ret_date);
         System.out.println(json);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();

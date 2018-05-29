@@ -133,6 +133,9 @@ public class SearchServlet extends HttpServlet {
         String shopping = request.getParameter("shopping") == null ? "NO" : "YES";
         String nightLife = request.getParameter("night_life") == null ? "NO" : "YES";
         
+        Float latitude = Float.parseFloat(request.getParameter("latitude"));
+        Float longitude = Float.parseFloat(request.getParameter("longitude"));
+        
         System.out.print("Hello by SearchServlet!\n");
         System.out.print("Departure: " + departureCity + "\nDestination: " + destinationCity);
         System.out.print("Departure date: " + departureDate + "\nDestination date: " + returnDate);
@@ -159,7 +162,7 @@ public class SearchServlet extends HttpServlet {
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         int num_people = Integer.parseInt(numAdult) + Integer.parseInt(numChildren);
         try{
-            hotels = amadeusAPIBean.getHotels(googlePlacesBean.getCoordinates(destinationCity), num_people, departureDate, returnDate);
+            hotels = amadeusAPIBean.getHotels(latitude, longitude, num_people, departureDate, returnDate);
         //System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
