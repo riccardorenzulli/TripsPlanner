@@ -126,7 +126,6 @@ function checkDates(departure_date, return_date) {
     var retDate = new Date(ret_yyyy,ret_mm,ret_dd);
 
     var diffDays = Math.round(Math.abs((depDate.getTime() - retDate.getTime())/(oneDay)));
-    console.log(diffDays);
     
     if (diffDays > 7) return false;
     else return true;
