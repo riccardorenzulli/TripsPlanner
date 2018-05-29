@@ -46,8 +46,9 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
         <!-- SCRIPTS -->
+        <script src="assets/js/sweetalert2.all.js" type="text/javascript"></script>
         <script src="assets/js/index.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(request.getSession().getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(session.getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
         <script src="assets/js/login.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 

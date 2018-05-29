@@ -8,7 +8,7 @@
                     <div class="tab-content">
                         <!-- BEGIN: FLIGHT SEARCH -->
                         <div role="tabpanel" class="tab-pane active" id="flight">
-                            <form action="ControllerServlet?action=search" method="post" onsubmit="return validateSearch()">
+                            <form action="ControllerServlet?action=search" method="post" onsubmit="return validateSearch(this);">
                                 <div class="col-md-12 product-search-title">Trip information</div>
                                 <div class="clearfix"></div>
 <!--                                <div class="col-md-6 col-sm-6 search-col-padding">
@@ -23,7 +23,7 @@
                                 <div class="col-md-6 col-sm-6 search-col-padding">
                                     <label>Destination</label>
                                     <div class="input-group">
-                                        <input id="destination_city" name="destination_city" class="form-control" required="" placeholder="Enter a location" autocomplete="on" type="text">
+                                        <input id="destination_city" name="destination_city" class="form-control" placeholder="Enter a location" autocomplete="on" type="text">
                                         <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                 <div class="col-md-6 col-sm-6 search-col-padding">
                                     <label>Departure Date</label>
                                     <div class="input-group">
-                                        <input type="text" id="departure_date" name="departure_date" class="form-control" placeholder="DD/MM/YYYY">
+                                        <input type="text" id="departure_date" name="departure_date" class="form-control" placeholder="MM/DD/YYYY">
                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar fa-fw"></i>
                                         </span>
@@ -40,7 +40,7 @@
                                 <div class="col-md-6 col-sm-6 search-col-padding">
                                     <label>Return Date</label>
                                     <div class="input-group">
-                                        <input type="text" id="return_date" name="return_date" class="form-control" placeholder="DD/MM/YYYY">
+                                        <input type="text" id="return_date" name="return_date" class="form-control" placeholder="MM/DD/YYYY">
                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar fa-fw"></i>
                                         </span>
