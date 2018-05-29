@@ -11,12 +11,10 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
-import com.tripsplanner.model.bean.TripBean;
 import com.tripsplanner.model.bean.TripBeanLocal;
 import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -158,7 +156,7 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("shopping", shopping);
         mapSearch.put("night_life", nightLife);
         
-        //Search search = searchBean.createSearch(mapSearch);
+        Search search = searchBean.createSearch(mapSearch);
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         int num_people = Integer.parseInt(numAdult) + Integer.parseInt(numChildren);
         try{
@@ -172,12 +170,14 @@ public class SearchServlet extends HttpServlet {
 
         request.setAttribute("hotels", hotels);
         request.getSession().setAttribute("hotels", hotels);
-        //request.getSession().setAttribute("search", search);
+        request.getSession().setAttribute("search", search);
+
         if((hotels != null) & !hotels.isEmpty()){
         request.getRequestDispatcher("hotelList.jsp").forward(request, response);
         }else{
            request.getRequestDispatcher("Error.html").forward(request, response); 
         }
+
     }
 
     private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -192,11 +192,12 @@ public class SearchServlet extends HttpServlet {
         int tripDays = ((int)timeTrip/86400000) + 1;
         
         Trip trip = tripBean.buildTrip(bestPlaces, tripDays);
+        trip.setSearch(search);
         /*Add the owner of the trip here*/
 
-        request.setAttribute("trip", trip);
+        request.getSession().setAttribute("trip", trip);
         
-        request.getRequestDispatcher("trips.jsp").forward(request, response);
+        request.getRequestDispatcher("tripPages.jsp").forward(request, response);
     }
 
 }

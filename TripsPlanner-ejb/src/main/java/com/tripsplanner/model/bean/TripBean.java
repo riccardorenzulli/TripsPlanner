@@ -9,6 +9,8 @@ import com.tripsplanner.model.entity.DayItinerary;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Route;
 import com.tripsplanner.model.entity.Trip;
+import com.tripsplanner.model.facade.SearchFacadeLocal;
+import com.tripsplanner.model.facade.TripFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,8 @@ public class TripBean implements TripBeanLocal {
     @EJB
     private GoogleDirectionsBean dirBean;
 
-    
+    @EJB
+    private TripFacadeLocal tripBean;
     
     /*Given the interesting places to be visited and the number of days
       return an arraylist for each cluster containing the indexes of the
@@ -210,4 +213,11 @@ public class TripBean implements TripBeanLocal {
         }
         return newClusters;
     }
+
+    @Override
+    public void saveTrip(Trip myTrip) {
+        tripBean.create(myTrip);
+    }
+    
+    
 }

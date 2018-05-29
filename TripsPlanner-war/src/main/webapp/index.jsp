@@ -47,7 +47,7 @@
 
         <!-- SCRIPTS -->
         <script src="assets/js/index.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(request.getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(request.getSession().getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
         <script src="assets/js/login.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
