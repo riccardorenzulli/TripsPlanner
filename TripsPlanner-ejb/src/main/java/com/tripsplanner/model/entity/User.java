@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -81,6 +82,9 @@ public class User implements Serializable {
     
     @ManyToMany(mappedBy = "collaborators")
     private List<Trip> trips;
+    
+    @OneToMany(mappedBy = "owner")
+    private List<Trip> belongingTrips;
 
     public User() {
     }
