@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerServlet extends HttpServlet {
 
     @EJB
-    private ApiKeysBean apiKaysBean;
+    private ApiKeysBean apiKeysBean;
     
     
     /**
@@ -51,10 +51,11 @@ public class ControllerServlet extends HttpServlet {
         String action = request.getParameter("action");
         
         // control for api keys in session
-        apiKaysBean.findKeysFromCSV(ctx);
+        apiKeysBean.findKeysFromCSV(ctx);
         
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
+            request.getSession().setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
             rd.forward(request, response);
         }
         
@@ -68,6 +69,11 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
+
+        else if(action.equalsIgnoreCase("tripHotel")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
+            rd.forward(request, response);
+        }
         else if (action.equalsIgnoreCase("memoryUpload")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
             rd.forward(request, response);

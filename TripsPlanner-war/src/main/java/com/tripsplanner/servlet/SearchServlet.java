@@ -12,6 +12,7 @@ import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
 import com.tripsplanner.model.bean.TripBeanLocal;
+import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +68,9 @@ public class SearchServlet extends HttpServlet {
         switch(action == null ? "" : action) {
             case "search":
                 goSearch(request, response);
+                break;
+            case "tripHotel":
+                goTripHotel(request, response);
                 break;
         }
     }
@@ -127,6 +131,9 @@ public class SearchServlet extends HttpServlet {
         String shopping = request.getParameter("shopping") == null ? "NO" : "YES";
         String nightLife = request.getParameter("night_life") == null ? "NO" : "YES";
         
+        Float latitude = Float.parseFloat(request.getParameter("latitude"));
+        Float longitude = Float.parseFloat(request.getParameter("longitude"));
+        
         System.out.print("Hello by SearchServlet!\n");
         System.out.print("Departure: " + departureCity + "\nDestination: " + destinationCity);
         System.out.print("Departure date: " + departureDate + "\nDestination date: " + returnDate);
@@ -150,16 +157,29 @@ public class SearchServlet extends HttpServlet {
         mapSearch.put("night_life", nightLife);
         
         Search search = searchBean.createSearch(mapSearch);
-        
+        ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+        int num_people = Integer.parseInt(numAdult) + Integer.parseInt(numChildren);
         try{
-        JSONObject jsonFlight = amadeusAPIBean.getInspirationFlight(search.getDepartureCity(), "2018-07-01");
+            hotels = amadeusAPIBean.getHotels(latitude, longitude, num_people, departureDate, returnDate);
         //System.out.print(jsonFlight);
         } catch (Exception ex) {
             Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
-        ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
+
+
+        request.setAttribute("hotels", hotels);
+        request.getSession().setAttribute("hotels", hotels);
+        request.getSession().setAttribute("search", search);
         
+        request.getRequestDispatcher("hotelList.jsp").forward(request, response);
+    }
+
+    private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println("attribute act: "+ request.getParameter("act"));
+        System.out.println("attribute list_id: "+ request.getParameter("list_id_choosed"));
+        Search search = (Search) request.getSession().getAttribute("search");
+        ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
+        System.out.println("sono in go tripHotel");
         long departureTime = search.getDepartureDate().getTime();
         long returnTime = search.getReturnDate().getTime();
         long timeTrip = returnTime - departureTime;

@@ -11,3 +11,11 @@ and open the template in the editor.
 div.hotel-detail-sidebar {
     margin-top: 60px;
 }
+
+#map {
+        height: 300px;
+      }
+
+.room-info-wrapper:hover {
+    border: 1px solid #F19C4F;
+}

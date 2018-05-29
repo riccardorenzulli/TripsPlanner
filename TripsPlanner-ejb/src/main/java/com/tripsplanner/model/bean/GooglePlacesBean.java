@@ -11,9 +11,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,16 +46,14 @@ public class GooglePlacesBean {
     private String api_key = apiKeysBean.keys.get("google_places_api");
     
     private JSONObject getInterestingPlacesJSON(String city) throws ProtocolException, IOException {
-        System.out.println("google places api key "+ api_key);
-        String[] cityElements = city.split("\\[");
+        String newcity = city.replaceAll("\\s+", "");
+        String[] cityElements = newcity.split(",");
         String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
-        String cityElem2 = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
-        //String stringCity = cityElem1 + cityElem2;
+        String region = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
         String stringCity = cityElem1;
-        System.out.println(stringCity);
         
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query=what+to+see+in+"+stringCity+"&key=" + api_key;
+	String parameters = "query=what+to+see+in+"+stringCity+"&region="+region+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
@@ -88,14 +88,14 @@ public class GooglePlacesBean {
     }
     
     private JSONObject getInterestingPlacesJSON(String city, String type) throws ProtocolException, IOException {
-        String[] cityElements = city.split("\\[");
+        String newcity = city.replaceAll("\\s+", "");
+        String[] cityElements = newcity.split(",");
         String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
-        String cityElem2 = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
-        //String stringCity = cityElem1 + cityElem2;
+        String region = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
         String stringCity = cityElem1;
         
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query="+type+"+in+"+stringCity+"&key=" + api_key;
+	String parameters = "query="+type+"+in+"+stringCity+"&region="+region+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
@@ -217,4 +217,51 @@ public class GooglePlacesBean {
         }
         return places;
     }
+    
+    public HashMap<String, Float>  getCoordinates(String city) throws MalformedURLException, IOException {
+        HashMap<String, Float> map = new HashMap<String, Float>();
+        
+        String newcity = city.replaceAll("\\s+", "");
+        
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?";
+	String parameters = "address="+newcity+"&key=" + api_key;
+        
+        String requestUrl = url + parameters;
+        
+        System.out.println(requestUrl);
+        
+        URL obj = new URL(requestUrl);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+
+        int responseCode = con.getResponseCode();
+
+        BufferedReader read = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        String line = read.readLine();
+        StringBuilder sb = new StringBuilder();
+
+        while(line!=null) {
+            sb.append(line);
+            line = read.readLine();
+        }
+
+        JSONObject json = new JSONObject(sb.toString());
+        
+        System.out.println(json);
+        System.out.println(json.getJSONArray("results"));
+        JSONObject temp = (JSONObject)json.getJSONArray("results").get(0);
+        JSONObject location = temp.getJSONObject("geometry").getJSONObject("location");
+        
+        Float latitude = location.getFloat("lat");
+        Float longitude = location.getFloat("lng");
+
+        map.put("lat", latitude);
+        map.put("long", longitude);
+        
+        return map;
+    }
+    
 }
