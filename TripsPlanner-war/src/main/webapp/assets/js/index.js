@@ -121,11 +121,15 @@ function checkDates(departure_date, return_date) {
     ret_dd = parseInt(ret[1]);
     ret_yyyy = parseInt(ret[2]);
     
-    if (!(ret_yyyy === dep_yyyy && ret_mm === dep_mm && (ret_dd - dep_dd <= 7))) {
-        return false;
-    }
+    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+    var depDate = new Date(dep_yyyy,dep_mm,dep_dd);
+    var retDate = new Date(ret_yyyy,ret_mm,ret_dd);
+
+    var diffDays = Math.round(Math.abs((depDate.getTime() - retDate.getTime())/(oneDay)));
+    console.log(diffDays);
     
-    return true;
+    if (diffDays > 7) return false;
+    else return true;
 }
 
 function checkDepDate(departure_date) {
