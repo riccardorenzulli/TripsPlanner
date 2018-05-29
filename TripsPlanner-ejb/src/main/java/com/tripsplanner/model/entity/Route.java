@@ -31,33 +31,32 @@ public class Route implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "departurePlace")
     private Place departurePlace;
-    @Column(name = "arrivalPlace")
+    
     private Place arrivalPlace;
-    @Column(name = "distanceText")
+    
     private String distanceText;
-    @Column(name = "distanceValue")   
+    
     private Long distanceValue;
-    @Column(name = "durationText") 
+    
     private String durationText;
-    @Column(name = "durationValue")
+    
     private Long durationValue;
-    @Column(name = "travelMode")
+    
     private String travelMode;
-    @Column(name = "fareText")
+    
     private String fareText;
-    @Column(name = "fareValue")
+    
     private Double fareValue;
-    @Column(name = "query")
+    
     private String query;
-    @Column(name = "departureTimeText")
+    
     private String departureTimeText;
-    @Column(name = "departureTimeValue")
+    
     private Long departureTimeValue;
-    @Column(name = "arrivalTimeText")
+    
     private String arrivalTimeText;
-    @Column(name = "arrivalTimeValue")
+    
     private Long arrivalTimeValue;
 
     public Route() {

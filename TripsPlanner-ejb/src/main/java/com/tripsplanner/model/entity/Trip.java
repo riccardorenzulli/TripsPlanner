@@ -7,11 +7,17 @@ package com.tripsplanner.model.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -33,13 +39,19 @@ public class Trip implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "owner")
     private User owner;
-    @Column(name = "collaborators")
-    private ArrayList<User> collaborators;
-    @Column(name = "itineraries")
-    private ArrayList<DayItinerary> itineraries;
-    @Column(name = "search")
+    
+    @ManyToMany
+    @JoinTable(name="trip-collab",
+            joinColumns=@JoinColumn(name="trip-id", referencedColumnName = "id"),
+            inverseJoinColumns=@JoinColumn(name="collab-id", referencedColumnName = "id")
+    )
+    private List<User> collaborators;
+    
+    @OneToMany(mappedBy="trip")
+    private List<DayItinerary> itineraries;
+    
+    @OneToOne
     private Search search;
 
     public Trip() {
@@ -73,7 +85,7 @@ public class Trip implements Serializable {
         this.owner = owner;
     }
 
-    public ArrayList<User> getCollaborators() {
+    public List<User> getCollaborators() {
         return collaborators;
     }
 
@@ -81,7 +93,7 @@ public class Trip implements Serializable {
         this.collaborators = collaborators;
     }
 
-    public ArrayList<DayItinerary> getItineraries() {
+    public List<DayItinerary> getItineraries() {
         return itineraries;
     }
 
