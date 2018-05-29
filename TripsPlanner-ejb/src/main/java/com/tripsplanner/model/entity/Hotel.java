@@ -29,20 +29,28 @@ public class Hotel implements Serializable {
     
     @Column(name = "name")
     private String name;
+    
     @Column(name = "cityCode")
     private String cityCode;
+    
     @Column(name = "roomType")
     private String roomType;
+    
     @Column(name = "roomDescription")
     private String roomDescription;
+    
     @Column(name = "currency")
     private String currency;
+    
     @Column(name = "total")
     private float total;   
+    
     @Column(name = "available")
     private boolean available;
+    
     @Column(name = "latitude")
     private float latitude;
+    
     @Column(name = "longitude")
     private float longitude;
     @Column(name = "address")
@@ -54,7 +62,7 @@ public class Hotel implements Serializable {
     @Column(name = "list_id")
     private int list_id;
 
-    public Hotel(int id, String name, String cityCode, String roomType, String roomDescription, String currency, float total, float dayPrice, int guests, boolean avaiable, float latitude, float longitude, String address) {
+    public Hotel(int id, String name, String cityCode, String roomType, String roomDescription, String currency, float total, float dayPrice, int guests, boolean available, float latitude, float longitude, String address) {
         this.name = name;
         this.cityCode = cityCode;
         this.roomType = roomType;
@@ -212,6 +220,7 @@ public class Hotel implements Serializable {
     public static Hotel fromJsonToHotel(JSONObject h, int i) {
         
         boolean available = h.getBoolean("available");
+        System.out.println("available: "+ available);
         String name = h.getJSONObject("hotel").getString("name");
         String cityCode = h.getJSONObject("hotel").getString("cityCode");
         float latitude = h.getJSONObject("hotel").getFloat("latitude");
@@ -230,7 +239,25 @@ public class Hotel implements Serializable {
             roomType = offer.getJSONObject("room").getJSONObject("typeEstimated").getString("category");
         }catch(Exception e){}
         
-        String roomDescription = offer.getJSONObject("room").getJSONObject("description").getString("text").toLowerCase();
+        String roomDescription = "no description available";
+        try{
+            roomDescription = h.getJSONObject("hotel").getJSONObject("description").getString("text");
+            String[] frasi = roomDescription.split("\\.");
+            if (frasi.length >= 3){
+                roomDescription = frasi[0] +"."+ frasi[1] +"."+frasi[2];
+            }else{
+                roomDescription = frasi[0];
+            }
+        }catch(Exception e){System.err.println(e.toString());}
+        
+        if (roomDescription.equals("no description available")){
+            try{
+                roomDescription = offer.getJSONObject("room").getJSONObject("description").getString("text").toLowerCase();
+                System.out.println("frasi 0: ");
+            }catch(Exception e){}
+        }
+        
+        
         String currency = offer.getJSONObject("price").getString("currency");
         float total = offer.getJSONObject("price").getFloat("total");
         float dayPrice = 0;
@@ -250,7 +277,7 @@ public class Hotel implements Serializable {
         
         int guests = offer.getJSONObject("guests").getInt("adults");
         
-        Hotel hotel = new Hotel(i, name, cityCode, roomType, roomDescription, currency, total, dayPrice, guests,available, latitude, longitude, address);
+        Hotel hotel = new Hotel(i, name, cityCode, roomType, roomDescription, currency, total, dayPrice, guests, available, latitude, longitude, address);
         
         return hotel;
     }

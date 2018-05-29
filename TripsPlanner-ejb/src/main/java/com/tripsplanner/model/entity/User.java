@@ -7,14 +7,19 @@ package com.tripsplanner.model.entity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -51,33 +56,35 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
-    @Column(name = "name")
+    
     private String name;
-    @Column(name = "surname")
+    
     private String surname;
-    @Column(name = "password")
+    
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    
     @Basic(optional = false)
-    @Column(name = "email")
     private String email;
-    @Column(name = "imgURL")
+    
     private String imgURL;
-    @Column(name = "fbID")
+    
     private BigInteger fbID;
-    @Column(name = "googleID")
+    
     private String googleID;
-    @Column(name = "age")
+    
     private Integer age;
-    @Column(name = "sex")
+    
     private String sex;
-    @Basic(optional = false)
-    @Column(name = "enabled")
+    
     private short enabled;
+    
+    @ManyToMany(mappedBy = "collaborators")
+    private List<Trip> trips;
+    
+    @OneToMany(mappedBy = "owner")
+    private List<Trip> belongingTrips;
 
     public User() {
     }
@@ -171,6 +178,14 @@ public class User implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 
     public short getEnabled() {

@@ -94,6 +94,11 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
+        else if (action.equalsIgnoreCase("save-trip")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
+            rd.forward(request, response);
+        }
+        
         else {
             RequestDispatcher rd = ctx.getRequestDispatcher("/error.jsp");
             rd.forward(request, response);

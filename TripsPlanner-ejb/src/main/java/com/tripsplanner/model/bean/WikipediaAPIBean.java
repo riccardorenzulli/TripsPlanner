@@ -64,8 +64,9 @@ public class WikipediaAPIBean {
         JSONObject pages = json.getJSONObject("query").getJSONObject("pages");
         String key = pages.keys().next();
         String description = pages.getJSONObject(key).getString("extract");
-                
-        return description.replaceAll("\\<[^>]*>","");
+        description = description.replaceAll("\\<[^>]*>","");
+        
+        return description.replaceAll("<", " ");
     }
     
 }

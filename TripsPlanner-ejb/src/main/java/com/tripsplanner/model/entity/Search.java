@@ -29,41 +29,34 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @Entity
-@Table(name = "search")
-@XmlRootElement
 public class Search implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional = false)
     private Long id;
-    @Basic(optional = false)
-    @Column(name = "departureCity")
+    
     private String departureCity;
-    @Basic(optional = false)
-    @Column(name = "destinationCity")
+    
     private String destinationCity;
-    @Basic(optional = false)
-    @Column(name = "departureDate")
+
     private Date departureDate;
-    @Basic(optional = false)
-    @Column(name = "returnDate")
+
     private Date returnDate;
-    @Column(name = "numAdult")
+
     private int numAdult;
-    @Column(name = "numChildren")
+
     private int numChildren; //declared for future works
     /*Preferences*/
-    @Column(name = "museums")
+
     private boolean museums;
-    @Column(name = "art")
+
     private boolean art;
-    @Column(name = "nature")
+
     private boolean nature;
-    @Column(name = "nightLife")
+
     private boolean nightLife;
-    @Column(name = "shopping")
+
     private boolean shopping;
     
     public Search() {}

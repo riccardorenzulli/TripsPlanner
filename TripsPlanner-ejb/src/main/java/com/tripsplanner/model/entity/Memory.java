@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -33,14 +36,17 @@ public class Memory implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "imgURL")
     private String imgURL;
-    @Column(name = "text")
+    
     private String text;
-    @Column(name = "owner")
+    
     private User owner;
-    @Column(name = "date")
+    
     private Date date;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "memoryPlace")
+    private Place memoryPlace;
 
     public Memory(String imgURL, String text, User owner, Date date) {
         this.imgURL = imgURL;

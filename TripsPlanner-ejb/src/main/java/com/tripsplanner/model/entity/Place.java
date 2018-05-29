@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -34,29 +35,29 @@ public class Place implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
     private String name;
-    @Column(name = "address")
+    
     private String address;
-    @Column(name = "description")
+    
     private String description;
-    @Column(name = "lat")
+    
     private float lat;
-    @Column(name = "lng")
+    
     private float lng;
-    @Column(name = "googlePlaceID")
+    
     private String googlePlaceID;
-    @Column(name = "googleID")
+    
     private String googleID;
     /*opening hours?*/
-    @Column(name = "photosUrl")
+    
     private String photosUrl; //only the first one
-    @Column(name = "rating")
+    
     private float rating = 0;
-    @Column(name = "types")
+    
     private ArrayList<String> types;
-    @Column(name = "memories")
-    private ArrayList<Memory> memories;
+    
+    @OneToMany(mappedBy="memoryPlace")
+    private List<Memory> memories;
 
     public String getName() {
         return name;
@@ -138,7 +139,7 @@ public class Place implements Serializable {
         this.rating = rating;
     }
 
-    public ArrayList<Memory> getMemories() {
+    public List<Memory> getMemories() {
         return memories;
     }
 

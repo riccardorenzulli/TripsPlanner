@@ -11,12 +11,10 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
-import com.tripsplanner.model.bean.TripBean;
 import com.tripsplanner.model.bean.TripBeanLocal;
 import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Trip;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -165,18 +163,26 @@ public class SearchServlet extends HttpServlet {
             hotels = amadeusAPIBean.getHotels(latitude, longitude, num_people, departureDate, returnDate);
         //System.out.print(jsonFlight);
         } catch (Exception ex) {
-            Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("sono ne catch");
+            //Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
         request.setAttribute("hotels", hotels);
         request.getSession().setAttribute("hotels", hotels);
         request.getSession().setAttribute("search", search);
-        
+
+        if((hotels != null) & !hotels.isEmpty()){
         request.getRequestDispatcher("hotelList.jsp").forward(request, response);
+        }else{
+           request.getRequestDispatcher("Error.html").forward(request, response); 
+        }
+
     }
 
     private void goTripHotel(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println("attribute act: "+ request.getParameter("act"));
+        System.out.println("attribute list_id: "+ request.getParameter("list_id_choosed"));
         Search search = (Search) request.getSession().getAttribute("search");
         ArrayList<Place> bestPlaces = googlePlacesBean.getInterestingPlaces(search);
         System.out.println("sono in go tripHotel");
@@ -186,11 +192,12 @@ public class SearchServlet extends HttpServlet {
         int tripDays = ((int)timeTrip/86400000) + 1;
         
         Trip trip = tripBean.buildTrip(bestPlaces, tripDays);
+        trip.setSearch(search);
         /*Add the owner of the trip here*/
 
-        request.setAttribute("trip", trip);
+        request.getSession().setAttribute("trip", trip);
         
-        request.getRequestDispatcher("trips.jsp").forward(request, response);
+        request.getRequestDispatcher("tripPages.jsp").forward(request, response);
     }
 
 }
