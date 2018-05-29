@@ -38,10 +38,11 @@ public class TripServlet extends HttpServlet {
             throws ServletException, IOException {
     
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
         switch(action == null ? "" : action) {
             case "save-trip":
-                saveTrip(request, response);
+                if (request.getSession().getAttribute("user") != null) saveTrip(request, response);
                 break;
         
         }

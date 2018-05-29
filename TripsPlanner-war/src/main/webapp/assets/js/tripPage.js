@@ -12,3 +12,28 @@ function showPage(indexPage, days) {
         }
     }
 }
+
+function canSaveTrip(f, loggedin) {
+    console.log(loggedin);
+    if (loggedin === "loggedin") return true;
+    
+    else {
+        swal('You are not logged in'
+    , 'Please log in in order to save this trip.', 'warning');
+    swal({
+        title: 'You are not logged in!',
+        text: "Please log in in order to save this trip.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#AEC6CF',
+        cancelButtonColor: '#cfb7ae',
+        confirmButtonText: 'Yes, go to login page!'
+    }).then((result) => {
+        if (result.value) {
+            document.getElementById("save-trip-login").submit();
+        }
+        })
+        
+        return false;
+    }
+}

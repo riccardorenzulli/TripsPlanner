@@ -266,7 +266,6 @@
 
                 <!-- START: FOOTER -->
                 <jsp:include page="footer.html" />
-
                 <!-- END: FOOTER -->
             </div>
             <!-- END: SITE-WRAPPER -->
