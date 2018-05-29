@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.tripsplanner.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/user-profile.jsp</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.tripsplanner.servlet.LoginServlet</servlet-class>
@@ -15,7 +23,7 @@
     <servlet>
         <servlet-name>HotelServlet</servlet-name>
         <servlet-class>com.tripsplanner.servlet.HotelServlet</servlet-class>
-    </servlet>  
+    </servlet>
     <servlet>
         <servlet-name>MemoryServlet</servlet-name>
         <servlet-class>com.tripsplanner.servlet.MemoryServlet</servlet-class>
@@ -41,10 +49,9 @@
         <url-pattern>/ControllerServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>HotelServlet</servlet-name>
         <url-pattern>/HotelServlet</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MemoryServlet</servlet-name>
         <url-pattern>/MemoryServlet</url-pattern>
