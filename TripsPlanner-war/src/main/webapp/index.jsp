@@ -46,9 +46,9 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
         <!-- SCRIPTS -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(request.getAttribute("google_places_api"))%>&libraries=places"></script>
-        <script src="assets/js/login.js"></script>
         <script src="assets/js/index.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(request.getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
+        <script src="assets/js/login.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     </head>
@@ -283,9 +283,7 @@
         <script type="text/javascript" src="assets/plugins/supersized.3.1.3.min.js"></script>
         <script src="assets/js/js.js"></script>
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <script src="assets/js/AmadeusAutocomplete.js"></script>
         <script type="text/javascript">
             jQuery(function ($) {
                 "use strict";

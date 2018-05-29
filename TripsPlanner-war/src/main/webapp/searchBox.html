@@ -8,7 +8,7 @@
                     <div class="tab-content">
                         <!-- BEGIN: FLIGHT SEARCH -->
                         <div role="tabpanel" class="tab-pane active" id="flight">
-                            <form action="ControllerServlet?action=search" method="post">
+                            <form action="ControllerServlet?action=search" method="post" onsubmit="return validateSearch()">
                                 <div class="col-md-12 product-search-title">Trip information</div>
                                 <div class="clearfix"></div>
 <!--                                <div class="col-md-6 col-sm-6 search-col-padding">
@@ -94,19 +94,21 @@
                                 </div>
 
                                 <div class="clearfix"></div>
+                                  <input type="hidden" id="latitude" name="latitude">
+                                  <input type="hidden" id="longitude" name="longitude">
 
                                 <div class="col-md-12 search-col-padding">
-                                    <button type="submit" class="search-button btn transition-effect" onclick="loading()">Search</button>
+                                    <input type="submit" class="search-button btn transition-effect" value="Search">
                                 </div>
                                 <div class="clearfix"></div>
 
                             </form>
                         </div>
-                        <form action="ControllerServlet?action=memoryUpload" method="post" enctype="multipart/form-data">
+<!--                        <form action="ControllerServlet?action=memoryUpload" method="post" enctype="multipart/form-data">
                             <input type="text" name="description" />
                             <input type="file" name="memoryIMG" />
                             <input type="submit" />
-                        </form>
+                        </form>-->
                         <!-- END: FLIGHT SEARCH -->
                     </div>
                     <!-- END: TAB PANE -->
