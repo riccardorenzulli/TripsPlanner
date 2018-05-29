@@ -56,6 +56,7 @@ public class ControllerServlet extends HttpServlet {
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
             request.getSession().setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
+            request.setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
             rd.forward(request, response);
         }
         
