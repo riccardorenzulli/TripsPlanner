@@ -44,6 +44,9 @@ import org.json.JSONObject;
 @Stateless
 @LocalBean
 public class AmadeusAPIBean {
+
+    @EJB
+    private GooglePlacesBean googlePlacesBean;
     
     @EJB
     private ApiKeysBean apiKeysBean;

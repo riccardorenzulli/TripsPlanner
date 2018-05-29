@@ -1,3 +1,5 @@
+var autocomplete;
+
 function increment(id) {
     oldvalue = parseInt(document.getElementById(id).value);
     newvalue = oldvalue + 1;
@@ -20,16 +22,55 @@ function loading() {
     document.getElementById("load_cont").style.display = "block";
 }
 
-function initialize() {
+function initAutocomplete() {
 
     var options = {
         types: ['(cities)']
     };
 
     var input = document.getElementById('destination_city');
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.addListener('place_changed', onPlaceChanged);
+
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
 
+function onPlaceChanged() {
+    console.log("change");
+    var place = autocomplete.getPlace();
+    var latitude = place.geometry.location.lat();
+    var longitude = place.geometry.location.lng();
+    console.log(latitude);
+    console.log(longitude);
+}
 
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: countries['us'].zoom,
+          center: countries['us'].center,
+          mapTypeControl: false,
+          panControl: false,
+          zoomControl: false,
+          streetViewControl: false
+        });
+
+        infoWindow = new google.maps.InfoWindow({
+          content: document.getElementById('info-content')
+        });
+
+        // Create the autocomplete object and associate it with the UI input control.
+        // Restrict the search to the default country, and to place type "cities".
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */ (
+                document.getElementById('autocomplete')), {
+              types: ['(cities)'],
+              componentRestrictions: countryRestrict
+            });
+        places = new google.maps.places.PlacesService(map);
+
+        autocomplete.addListener('place_changed', onPlaceChanged);
+
+        // Add a DOM event listener to react when the user selects a country.
+        document.getElementById('country').addEventListener(
+            'change', setAutocompleteCountry);
+      }
