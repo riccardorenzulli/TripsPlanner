@@ -55,7 +55,7 @@ public class ControllerServlet extends HttpServlet {
         
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
-            request.setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
+            request.getSession().setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
             rd.forward(request, response);
         }
         
@@ -91,6 +91,11 @@ public class ControllerServlet extends HttpServlet {
         
         else if (action.equalsIgnoreCase("contacts")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/contact-us.jsp");
+            rd.forward(request, response);
+        }
+        
+        else if (action.equalsIgnoreCase("save-trip")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
             rd.forward(request, response);
         }
         

@@ -32,6 +32,10 @@
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>com.tripsplanner.servlet.UserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TripServlet</servlet-name>
+        <servlet-class>com.tripsplanner.servlet.TripServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TripServlet</servlet-name>
+        <url-pattern>/TripServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
