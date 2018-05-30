@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,7 +58,7 @@ public class Place implements Serializable {
     
     private ArrayList<String> types;
     
-    @OneToMany(mappedBy="memoryPlace")
+    @OneToMany(mappedBy="memoryPlace", cascade = {CascadeType.ALL})
     private List<Memory> memories;
 
     public String getName() {

@@ -8,6 +8,7 @@ package com.tripsplanner.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +52,7 @@ public class Trip implements Serializable {
     )
     private List<User> collaborators;
     
-    @OneToMany(mappedBy="trip")
+    @OneToMany(mappedBy="trip", cascade = {CascadeType.ALL})
     private List<DayItinerary> itineraries;
     
     @OneToOne
@@ -138,11 +139,11 @@ public class Trip implements Serializable {
     }
     
     /*Return the places to be visited the day specified by the parameter*/
-    public ArrayList<Place> getDayPlaces(int day) {
+    public List<Place> getDayPlaces(int day) {
         if(day > this.itineraries.size() || day < 0)
             new IllegalArgumentException("The trip is not that long!");
         DayItinerary dayItinerary = this.itineraries.get(day);
-        ArrayList<Place> result = new ArrayList();
+        List<Place> result = new ArrayList();
         for(Route route : dayItinerary.getLegs()) {
             result.add(route.getDeparturePlace());
         }

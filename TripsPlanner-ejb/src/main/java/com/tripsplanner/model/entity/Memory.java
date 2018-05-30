@@ -44,7 +44,7 @@ public class Memory implements Serializable {
     
     private Date date;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "memoryPlace")
     private Place memoryPlace;
 

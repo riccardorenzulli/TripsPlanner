@@ -6,11 +6,16 @@
 package com.tripsplanner.model.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -31,8 +36,10 @@ public class Route implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @OneToOne(cascade ={CascadeType.ALL})
     private Place departurePlace;
     
+    @OneToOne(cascade ={CascadeType.ALL})
     private Place arrivalPlace;
     
     private String distanceText;
@@ -58,6 +65,10 @@ public class Route implements Serializable {
     private String arrivalTimeText;
     
     private Long arrivalTimeValue;
+    
+    @ManyToOne
+    @JoinColumn(name = "dayItinerary")
+    private DayItinerary dayItinerary;
 
     public Route() {
         this.departurePlace = null;
@@ -195,8 +206,14 @@ public class Route implements Serializable {
     public void setArrivalTimeValue(long arrivalTimeTextValue) {
         this.arrivalTimeValue = arrivalTimeTextValue;
     }
-    
-    
+
+    public DayItinerary getDayItinerary() {
+        return dayItinerary;
+    }
+
+    public void setDayItinerary(DayItinerary dayItinerary) {
+        this.dayItinerary = dayItinerary;
+    }
 
     @Override
     public int hashCode() {

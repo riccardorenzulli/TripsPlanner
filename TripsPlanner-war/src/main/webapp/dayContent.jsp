@@ -4,6 +4,7 @@
     Author     : the-silent-fox
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="com.tripsplanner.model.entity.Route"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tripsplanner.model.entity.Place"%>
@@ -22,8 +23,8 @@
             <h2>Day <%= k + 1%></h2>
         </div>
         <%
-            ArrayList<Place> places = trip.getDayPlaces(k);
-            ArrayList<Route> legs = trip.getItineraries().get(k).getLegs();
+            List<Place> places = trip.getDayPlaces(k);
+            List<Route> legs = trip.getItineraries().get(k).getLegs();
             for (int i = 0; i < places.size() - 1; i++) {
         %>
 

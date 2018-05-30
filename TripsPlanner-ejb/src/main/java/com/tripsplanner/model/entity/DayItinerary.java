@@ -7,12 +7,16 @@ package com.tripsplanner.model.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -37,7 +41,8 @@ public class DayItinerary implements Serializable {
     @ManyToOne
     Trip trip;
     
-    ArrayList<Route> legs;
+    @OneToMany(mappedBy = "dayItinerary", cascade = {CascadeType.ALL})
+    List<Route> legs;
     
     public DayItinerary() {
         this.legs = null;
@@ -59,7 +64,7 @@ public class DayItinerary implements Serializable {
         this.id = id;
     }
 
-    public ArrayList<Route> getLegs() {
+    public List<Route> getLegs() {
         return legs;
     }
 
