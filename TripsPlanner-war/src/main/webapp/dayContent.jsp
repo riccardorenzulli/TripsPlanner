@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
+<%@page import="com.tripsplanner.model.entity.User"%>
 <%@page import="com.tripsplanner.model.entity.Route"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tripsplanner.model.entity.Place"%>
@@ -134,9 +135,13 @@
 <!-- START: PAGINATION -->
 <div class="bottom-pagination">
     <div class="col-md-9 text-center">
-        <a href="ControllerServlet?action=save-trip">
+        <%
+            String loggedin = request.getSession().getAttribute("user") == null ? "notloggedin" : "loggedin";
+        %>
+        <form action="ControllerServlet?action=save-trip" method="post" onsubmit="return canSaveTrip(this, '<%= loggedin %>');">
             <button type="submit" class="search-button btn transition-effect">Save Trip</button>
-        </a>
+        </form>
+        <form id="save-trip-login" action="ControllerServlet?action=save-trip-login" method="post" hidden></form>
     </div>
     <nav class="pull-right">
         <ul class="pagination pagination-lg">
