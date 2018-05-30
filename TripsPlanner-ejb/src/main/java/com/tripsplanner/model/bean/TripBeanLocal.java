@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Trip;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import javax.ejb.Local;
 @Local
 public interface TripBeanLocal {
     
-    Trip buildTrip(List<Place> interestingPlaces, int dayTrips);
+    Trip buildTrip(List<Place> interestingPlaces, int dayTrips, Hotel hotel);
     
     void saveTrip(Trip myTrip);
     

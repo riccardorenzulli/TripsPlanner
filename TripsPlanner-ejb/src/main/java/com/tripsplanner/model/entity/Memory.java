@@ -43,10 +43,6 @@ public class Memory implements Serializable {
     private User owner;
     
     private Date date;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "memoryPlace")
-    private Place memoryPlace;
 
     public Memory(String imgURL, String text, User owner, Date date) {
         this.imgURL = imgURL;

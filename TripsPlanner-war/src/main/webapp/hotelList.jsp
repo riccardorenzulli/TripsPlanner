@@ -51,6 +51,7 @@
 
         <!-- margin to the map -->
         <link href="assets/css/addmargintomap.css" rel="stylesheet">
+
         <!-- LIGHT -->
         <link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
         <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -155,6 +156,7 @@
                     <div id="fixed" class="col-md-4 hotel-detail-sidebar">
 
                         <div >
+
                             <div class="col-md-12 clear-padding">
                                 <!--					<div class="map sidebar-item">
                                                                                 <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
