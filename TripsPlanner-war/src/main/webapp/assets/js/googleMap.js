@@ -48,12 +48,12 @@ function setPricesAndMarker(T){
     var total_price = T.querySelector('#total_price').value;
     var day_price = T.querySelector('#day_price').value;
     var adult_number = T.querySelector('#adult_number').value;
-    var list_id = T.querySelector('#list_id').value;
+    //var list_id = T.querySelector('#list_id').value;
     
     document.getElementById('adult_number_field').innerText = adult_number;
     document.getElementById('base_amount_field').innerText = day_price;
     document.getElementById('total_cost_field').innerText = total_price;
-    document.getElementById('list_id_choosed').value = list_id;
+    //document.getElementById('list_id_choosed').value = list_id;
     console.log("valore list_id= "+list_id);
     
     markers[list_id].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');

@@ -123,7 +123,7 @@
                                             <% if (hotel.isAvailable()) {%>
                                             <div class="book">
                                                 <form action="ControllerServlet?action=tripHotel" method="post">
-                                                    <input id="list_id_choosed" name="list_id_choosed" type='hidden' value=<%= hotel.getList_id()%>/>
+                                                    <input id="list_id_choosed" name="list_id_choosed" type='hidden' value=<%=hotel.getList_id()%> />
                                                     <button type="submit" class="search-button btn transition-effect" name="act" value="choose">Choose</button>
                                                 </form>
                                             </div>
