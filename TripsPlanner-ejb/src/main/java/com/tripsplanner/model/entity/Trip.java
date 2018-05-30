@@ -46,13 +46,9 @@ public class Trip implements Serializable {
     private User owner;
     
     @ManyToMany
-    @JoinTable(name="trip-collab",
-            joinColumns=@JoinColumn(name="trip-id", referencedColumnName = "id"),
-            inverseJoinColumns=@JoinColumn(name="collab-id", referencedColumnName = "id")
-    )
     private List<User> collaborators;
     
-    @OneToMany(mappedBy="trip", cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<DayItinerary> itineraries;
     
     @OneToOne

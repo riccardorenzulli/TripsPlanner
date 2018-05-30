@@ -36,10 +36,12 @@ public class Route implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne(cascade ={CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="id")
     private Place departurePlace;
     
-    @OneToOne(cascade ={CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="id")
     private Place arrivalPlace;
     
     private String distanceText;
@@ -65,10 +67,6 @@ public class Route implements Serializable {
     private String arrivalTimeText;
     
     private Long arrivalTimeValue;
-    
-    @ManyToOne
-    @JoinColumn(name = "dayItinerary")
-    private DayItinerary dayItinerary;
 
     public Route() {
         this.departurePlace = null;
@@ -205,14 +203,6 @@ public class Route implements Serializable {
 
     public void setArrivalTimeValue(long arrivalTimeTextValue) {
         this.arrivalTimeValue = arrivalTimeTextValue;
-    }
-
-    public DayItinerary getDayItinerary() {
-        return dayItinerary;
-    }
-
-    public void setDayItinerary(DayItinerary dayItinerary) {
-        this.dayItinerary = dayItinerary;
     }
 
     @Override

@@ -38,23 +38,13 @@ public class DayItinerary implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToOne
-    Trip trip;
-    
-    @OneToMany(mappedBy = "dayItinerary", cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     List<Route> legs;
     
     public DayItinerary() {
         this.legs = null;
     }
 
-    public Trip getTrip() {
-        return trip;
-    }
-
-    public void setTrip(Trip trip) {
-        this.trip = trip;
-    }
 
     public Long getId() {
         return id;

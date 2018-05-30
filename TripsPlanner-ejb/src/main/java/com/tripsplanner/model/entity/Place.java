@@ -58,7 +58,7 @@ public class Place implements Serializable {
     
     private ArrayList<String> types;
     
-    @OneToMany(mappedBy="memoryPlace", cascade = {CascadeType.ALL})
+    @OneToMany
     private List<Memory> memories;
 
     public String getName() {
