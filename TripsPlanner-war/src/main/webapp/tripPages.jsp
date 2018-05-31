@@ -27,6 +27,8 @@
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="assets/css/flexslider.css" rel="stylesheet" media="screen">
         <link href="assets/css/style.css" rel="stylesheet" media="screen">
+        <!-- margin to the map -->
+        <link href="assets/css/addmargintomap.css" rel="stylesheet">
 
         <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
         <!-- LIGHT -->
@@ -65,7 +67,42 @@
             <div class="row">
                 <div class="container">	
                     <jsp:include page="dayContent.jsp" /> 
+
                 </div>
+
+                <!-- START: PAGINATION -->
+                <div class="bottom-pagination">
+                    <div class="col-md-9 text-center">
+                        <%
+                            String loggedin = request.getSession().getAttribute("user") == null ? "notloggedin" : "loggedin";
+                        %>
+                        <form action="ControllerServlet?action=save-trip" method="post" onsubmit="return canSaveTrip(this, '<%= loggedin%>');">
+                            <button type="submit" class="search-button btn transition-effect">Save Trip</button>
+                        </form>
+                        <form id="save-trip-login" action="ControllerServlet?action=save-trip-login" method="post" hidden></form>
+                    </div>
+                    <nav class="pull-right">
+                        <ul class="pagination pagination-lg">
+                            <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                <%
+                                    Trip trip = (Trip) request.getSession().getAttribute("trip");
+                                    for (int i = 0; i < trip.getItineraries().size(); i++) {
+                                        if (i == 0) {
+                                %>
+                            <li id="<%= "button" + i%>" class="active"><a href="#" onclick="showPage(<%= i%>,<%= trip.getItineraries().size()%>)"><%= i + 1%><span class="sr-only">(current)</span></a></li>
+                                <%
+                                } else {
+                                %>
+                            <li id="<%= "button" + i%>"><a href="#" onclick="showPage(<%= i%>,<%= trip.getItineraries().size()%>)"><%= i + 1%> <span class="sr-only">(current)</span></a></li>
+                                <%
+                                        }
+                                    }
+                                %>
+                            <li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- END: PAGINATION -->
             </div>
             <!-- END: LISTING AREA -->
 
@@ -85,24 +122,27 @@
         <script src="assets/js/bootstrap-select.min.js"></script>
         <script src="assets/plugins/wow.min.js"></script>
         <script src="assets/js/js.js"></script>
+        <script src="assets/js/googleMapForTrip.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1R8HigvjL4UgHft-PPsfme65pvj846U&callback=initMap&libraries=drawing"
+        async defer></script>
         <script>
 
-            /* Price Range Slider */
+                /* Price Range Slider */
 
-            $(function () {
-                "use strict";
-                $("#price-range").slider({
-                    range: true,
-                    min: 0,
-                    max: 100,
-                    values: [3, 50],
-                    slide: function (event, ui) {
-                        $("#amount").val("$ " + ui.values[ 0 ] + " - $ " + ui.values[ 1 ]);
-                    }
+                $(function () {
+                    "use strict";
+                    $("#price-range").slider({
+                        range: true,
+                        min: 0,
+                        max: 100,
+                        values: [3, 50],
+                        slide: function (event, ui) {
+                            $("#amount").val("$ " + ui.values[ 0 ] + " - $ " + ui.values[ 1 ]);
+                        }
+                    });
+                    $("#amount").val("$ " + $("#price-range").slider("values", 0) +
+                            " - $ " + $("#price-range").slider("values", 1));
                 });
-                $("#amount").val("$ " + $("#price-range").slider("values", 0) +
-                        " - $ " + $("#price-range").slider("values", 1));
-            });
         </script>
     </body>
 </html>
