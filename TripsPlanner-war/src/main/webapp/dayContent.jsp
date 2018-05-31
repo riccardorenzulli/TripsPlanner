@@ -24,8 +24,10 @@
             <h2>Day <%= k + 1%></h2>
         </div>
         <%
-            List<Place> places = trip.getDayPlaces(k);
-            List<Route> legs = trip.getItineraries().get(k).getLegs();
+
+            ArrayList<Place> places = trip.getDayPlaces(k);
+            ArrayList<Route> legs = (ArrayList<Route>) trip.getItineraries().get(k).getLegs();
+
             for (int i = 0; i < places.size() - 1; i++) {
         %>
 

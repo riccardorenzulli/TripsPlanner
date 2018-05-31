@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -36,12 +37,11 @@ public class Route implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name="id")
+    @ManyToOne
+    private DayItinerary dayItinerary;
+
     private Place departurePlace;
     
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name="id")
     private Place arrivalPlace;
     
     private String distanceText;
@@ -83,6 +83,15 @@ public class Route implements Serializable {
         this.departureTimeValue = null;
         this.arrivalTimeText = null;
         this.arrivalTimeValue = null;
+        this.dayItinerary = null;
+    }
+
+    public DayItinerary getDayItinerary() {
+        return dayItinerary;
+    }
+
+    public void setDayItinerary(DayItinerary dayItinerary) {
+        this.dayItinerary = dayItinerary;
     }
     
     public Long getId() {

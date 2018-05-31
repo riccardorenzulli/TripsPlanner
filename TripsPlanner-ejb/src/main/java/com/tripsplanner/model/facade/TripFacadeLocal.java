@@ -6,6 +6,7 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.Trip;
+import com.tripsplanner.model.entity.User;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -37,5 +38,7 @@ public interface TripFacadeLocal {
     List<Trip> findRange(int[] range);
 
     int count();
+    
+    public List<Trip> findTripsByOwner(User owner);
     
 }

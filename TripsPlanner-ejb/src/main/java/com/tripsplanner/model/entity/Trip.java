@@ -19,8 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -35,6 +39,10 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
+@Table(name = "Trip")
+@XmlRootElement
+@NamedQueries({
+@NamedQuery(name = "Trip.findByOwner", query = "SELECT t FROM Trip t WHERE t.owner = :owner")})
 public class Trip implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,9 +54,13 @@ public class Trip implements Serializable {
     private User owner;
     
     @ManyToMany
-    private List<User> collaborators;
+    @JoinTable(name="trip-collab",
+            joinColumns={@JoinColumn(name="trip-id", referencedColumnName = "id")},
+            inverseJoinColumns={@JoinColumn(name="collab-id", referencedColumnName = "id")}
+    )
+    private List<User> collaborators = new ArrayList<>();
     
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy="trip", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DayItinerary> itineraries;
     
     @OneToOne
@@ -131,8 +143,10 @@ public class Trip implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tripsplanner.model.entity.Trip[ id=" + id + " ]";
+        return "Trip{" + "itineraries=" + itineraries + '}';
     }
+
+
     
     /*Return the places to be visited the day specified by the parameter*/
     public List<Place> getDayPlaces(int day) {

@@ -10,6 +10,8 @@ import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Route;
 import com.tripsplanner.model.entity.Trip;
+import com.tripsplanner.model.entity.User;
+import com.tripsplanner.model.facade.SearchFacadeLocal;
 import com.tripsplanner.model.facade.TripFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -160,19 +162,20 @@ public class TripBean implements TripBeanLocal {
                 int indexPlace2 = clusters.get(i).get(j+1);
                 Place place1 = interestingPlaces.get(indexPlace1);
                 Place place2 = interestingPlaces.get(indexPlace2);
-                Route route = createRouteFromPlaces(place1, place2);
+                Route route = createRouteFromPlaces(place1, place2, dayItinerary);
                 legs.add(route);
             }
             dayItinerary.setLegs(legs);
+            dayItinerary.setTrip(trip);
             itinerary.add(dayItinerary);
         }
         trip.setItineraries(itinerary);
         return trip;
     }
 
-    private Route createRouteFromPlaces(Place departure, Place destination) throws IOException {
+    private Route createRouteFromPlaces(Place departure, Place destination, DayItinerary dayItinerary) throws IOException {
         Route route = dirBean.getRoute(departure, destination, "driving", "now");
-
+        route.setDayItinerary(dayItinerary);
         return route;
     }
 
@@ -227,6 +230,12 @@ public class TripBean implements TripBeanLocal {
     @Override
     public void saveTrip(Trip myTrip) {
         tripBean.create(myTrip);
+    }
+
+    @Override
+    public List<Trip> getAllTripByOwner(User owner) {
+        List<Trip> trips = tripBean.findTripsByOwner(owner);
+        return trips;
     }
 
     private Place fromHotelToPlace(Hotel hotel) {

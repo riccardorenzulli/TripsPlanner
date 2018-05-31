@@ -38,8 +38,11 @@ public class DayItinerary implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany(cascade = {CascadeType.ALL})
-    List<Route> legs;
+    @ManyToOne
+    private Trip trip;
+    
+    @OneToMany(mappedBy="dayItinerary", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Route> legs = new ArrayList<Route>();
     
     public DayItinerary() {
         this.legs = null;
@@ -84,7 +87,9 @@ public class DayItinerary implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tripsplanner.model.entity.DayItinerary[ id=" + id + " ]";
+        return "DayItinerary{" + "id=" + id + ", trip=" + trip.getId() + ", legs=" + legs + '}';
     }
+
+
     
 }
