@@ -149,11 +149,11 @@ public class Trip implements Serializable {
 
     
     /*Return the places to be visited the day specified by the parameter*/
-    public ArrayList<Place> getDayPlaces(int day) {
+    public List<Place> getDayPlaces(int day) {
         if(day > this.itineraries.size() || day < 0)
             new IllegalArgumentException("The trip is not that long!");
         DayItinerary dayItinerary = this.itineraries.get(day);
-        ArrayList<Place> result = new ArrayList();
+        List<Place> result = new ArrayList();
         for(Route route : dayItinerary.getLegs()) {
             result.add(route.getDeparturePlace());
         }

@@ -40,9 +40,15 @@ public class GoogleDirectionsBean {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
-    private String getDirectionsQuery(Place departurePlace, Place destinationPlace, String travelMode, String departureTime) {
-        String url = "https://maps.googleapis.com/maps/api/directions/json?";
-        String parameters = "origin=place_id:" + departurePlace.getGooglePlaceID() + "&destination=place_id:" + destinationPlace.getGooglePlaceID();
+    private String getDirectionsQuery(Place departurePlace, Place destinationPlace, String travelMode, String departureTime) {  
+        String origin = departurePlace.getGooglePlaceID() == null ?
+                Float.toString(departurePlace.getLat())+","+Float.toString(departurePlace.getLng()) : "place_id:"+ departurePlace.getGooglePlaceID();
+        String destination = destinationPlace.getGooglePlaceID() == null ?
+                Float.toString(destinationPlace.getLat())+","+Float.toString(destinationPlace.getLng()) : "place_id:"+ destinationPlace.getGooglePlaceID();
+        
+        
+        String url = "https://maps.googleapis.com/maps/api/directions/json?";       
+        String parameters = "origin="+ origin + "&destination="+ destination;
         String mode = "&mode=" + travelMode;
         String depTime = "&departure_time=" + departureTime;
         String key = "&key=" + api_key;
