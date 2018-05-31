@@ -70,11 +70,11 @@
                     <!-- START: INDIVIDUAL LISTING AREA -->
                     <div class="col-md-9 holidays-listing">
                         <%
+                            int count = 0;
                             List<Trip> trips = (List<Trip>) request.getAttribute("trips");
                             if (trips != null) {
-                                for(Trip trip : trips){
+                                for (Trip trip : trips) {
                         %>
-                        <div class="clearfix"></div>
                         <!-- START: HOLIDAYS GRID VIEW -->
                         <div class="col-md-4 col-sm-6">
                             <div class="holiday-grid-view">
@@ -130,14 +130,23 @@
                                 </div>
                             </div>
                         </div>
+                        <%
+                            count++;
+                            if (count % 3 == 0) {
+                        %>
                         <div class="clearfix-sm clearfix"></div>
-                        <!-- END: HOTEL GRID VIEW -->
                         <%
                             }
-                        }
+                        %>
+
+                        <!-- END: HOTEL GRID VIEW -->
+                        <%
+                                }
+                            }
                         %>
 
                         <!-- START: PAGINATION -->
+                        <div class="clearfix-sm clearfix"></div>
                         <div class="bottom-pagination">
                             <nav class="pull-right">
                                 <ul class="pagination pagination-lg">
