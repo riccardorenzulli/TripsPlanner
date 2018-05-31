@@ -7,6 +7,7 @@ package com.tripsplanner.model.bean;
 
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Trip;
+import com.tripsplanner.model.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
@@ -21,5 +22,7 @@ public interface TripBeanLocal {
     Trip buildTrip(List<Place> interestingPlaces, int dayTrips);
     
     void saveTrip(Trip myTrip);
+    
+    List<Trip> getAllTripByOwner(User owner);
     
 }

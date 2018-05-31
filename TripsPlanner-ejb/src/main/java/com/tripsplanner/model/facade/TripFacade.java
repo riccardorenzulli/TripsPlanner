@@ -6,6 +6,8 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.Trip;
+import com.tripsplanner.model.entity.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,6 +37,11 @@ public class TripFacade extends AbstractFacade<Trip> implements TripFacadeLocal 
 
     public TripFacade() {
         super(Trip.class);
+    }
+    
+    public List<Trip> findTripsByOwner(User owner){
+        return em.createNamedQuery("Trip.findByOwner", Trip.class)
+                .setParameter("owner", owner).getResultList();
     }
     
 }

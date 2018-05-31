@@ -10,6 +10,7 @@ import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +44,9 @@ public class TripServlet extends HttpServlet {
             case "save-trip":
                 saveTrip(request, response);
                 break;
-        
+            case "tripsPage":
+                loadTrips(request, response);
+                break;
         }
     }
 
@@ -90,8 +93,26 @@ public class TripServlet extends HttpServlet {
         Trip myTrip = (Trip) request.getSession().getAttribute("trip");
         User owner = (User) request.getSession().getAttribute("user");
         myTrip.setOwner(owner);
+        //System.out.println(myTrip.toString());
         tripBean.saveTrip(myTrip);
+        
+        List<Trip> trips = tripBean.getAllTripByOwner(owner);
+//       for (Trip t : trips){
+//            System.out.println("un trip "+t.toString());
+//       }
+        request.setAttribute("trips", trips);
         request.getRequestDispatcher("myTrips.jsp").forward(request, response);
+    }
+
+    private void loadTrips(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User owner = (User) request.getSession().getAttribute("user");
+        if(owner != null){
+            List<Trip> trips = tripBean.getAllTripByOwner(owner);
+            request.setAttribute("trips", trips);
+            request.getRequestDispatcher("myTrips.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 
 }
