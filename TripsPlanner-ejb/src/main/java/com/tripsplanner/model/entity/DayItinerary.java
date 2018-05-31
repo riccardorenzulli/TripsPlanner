@@ -48,6 +48,14 @@ public class DayItinerary implements Serializable {
         this.legs = null;
     }
 
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
 
     public Long getId() {
         return id;

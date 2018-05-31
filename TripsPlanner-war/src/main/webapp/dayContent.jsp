@@ -25,7 +25,7 @@
         </div>
         <%
 
-            ArrayList<Place> places = trip.getDayPlaces(k);
+            ArrayList<Place> places = (ArrayList<Place>) trip.getDayPlaces(k);
             ArrayList<Route> legs = (ArrayList<Route>) trip.getItineraries().get(k).getLegs();
 
             for (int i = 0; i < places.size() - 1; i++) {
