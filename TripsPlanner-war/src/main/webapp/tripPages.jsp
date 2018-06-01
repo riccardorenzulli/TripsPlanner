@@ -16,6 +16,17 @@
         <meta name="author" content="LimpidThemes">
         <meta name="google-signin-client_id" content="682887231528-qe2dfr4gba9fn1dmef7q97bq7l6o6m98.apps.googleusercontent.com">
 
+        <style>
+
+    #fixed {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        padding: 5px;
+    }
+
+        </style>
+        
         <title>TripsPlanner - Create fantastic trips</title>
 
         <!-- STYLES -->
