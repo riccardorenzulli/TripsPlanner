@@ -66,7 +66,8 @@
                     <div class="room-book-box">
 
                         <div class="book">
-                            <a href="#">Modify</a>
+                            <a href="#">Add Memory</a>
+                            <a href="#">See memories</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +89,7 @@
             }
             int lastIndex = places.size() - 1;
         %>
-        <div  class="hotel-list-view">
+       <div  class="hotel-list-view">    <!-- style="margin-bottom: 60px;"-->
             <div class="wrapper">
                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
                     <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="place">
@@ -123,7 +124,8 @@
                     <div class="room-book-box">
 
                         <div class="book">
-                            <a href="#">Modify</a>
+                            <a href="#">Add Memory</a>
+                            <a href="#">See memories</a>
                         </div>
                     </div>
                 </div>

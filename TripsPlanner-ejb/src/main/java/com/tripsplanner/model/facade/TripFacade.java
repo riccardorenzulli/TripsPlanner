@@ -43,5 +43,12 @@ public class TripFacade extends AbstractFacade<Trip> implements TripFacadeLocal 
         return em.createNamedQuery("Trip.findByOwner", Trip.class)
                 .setParameter("owner", owner).getResultList();
     }
+
+    @Override
+    public Trip getTripByOwnerAndID(User owner, long id) {
+        return em.createNamedQuery("Trip.findByOwnerAndId", Trip.class)
+                .setParameter("owner", owner)
+                .setParameter("id", id).getSingleResult();
+    }
     
 }

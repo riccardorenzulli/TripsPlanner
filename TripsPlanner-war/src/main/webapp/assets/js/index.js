@@ -142,7 +142,9 @@ function checkDepDate(departure_date) {
     dep_dd = parseInt(dep[1]);
     dep_yyyy = parseInt(dep[2]);
     
-    if (!(dep_dd >= dd && dep_mm >= mm && dep_yyyy >= yyyy)) return false;
+    var departure = new Date(dep_yyyy,dep_mm,dep_dd);
+    
+    if (today > departure) return false;
     
     else return true;
     

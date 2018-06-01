@@ -66,21 +66,12 @@
             <!-- START: LISTING AREA-->
             <div class="row">
                 <div class="container">	
-                    <jsp:include page="dayContent.jsp" /> 
+                    <jsp:include page="dayContentFromTrips.jsp" /> 
 
                 </div>
-
-                <!-- START: PAGINATION -->
+<!-- START: PAGINATION -->
                 <div class="bottom-pagination">
-                    <div class="col-md-9 text-center">
-                        <%
-                            String loggedin = request.getSession().getAttribute("user") == null ? "notloggedin" : "loggedin";
-                        %>
-                        <form action="ControllerServlet?action=save-trip" method="post" onsubmit="return canSaveTrip(this, '<%= loggedin%>');">
-                            <button type="submit" class="search-button btn transition-effect">Save Trip</button>
-                        </form>
-                        <form id="save-trip-login" action="ControllerServlet?action=save-trip-login" method="post" hidden></form>
-                    </div>
+                    
                     <nav class="pull-right">
                         <ul class="pagination pagination-lg">
                             <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
@@ -102,7 +93,6 @@
                         </ul>
                     </nav>
                 </div>
-                <!-- END: PAGINATION -->
             </div>
             <!-- END: LISTING AREA -->
 
