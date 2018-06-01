@@ -77,10 +77,7 @@
                         %>
                         <!-- START: HOLIDAYS GRID VIEW -->
 
-                        <div class="col-md-3 col-sm-6" onclick="goToTripView(this);">
-                            <form id="trip_form" action="ControllerServlet?action=tripView" method="post">
-                                <input id='trip_id' name='trip_id' type='hidden' value='<%= trip.getId()%>'/>
-                            </form>
+                        <div class="col-md-3 col-sm-6">
                             <div class="holiday-grid-view">
                                 <div class="holiday-header-wrapper">
                                     <div class="holiday-header">
@@ -125,7 +122,7 @@
                                 </div>
                                 <div class="holiday-footer text-center">
                                     <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                        <a href="#">VIEW DETAILS</a>
+                                        <a href="ControllerServlet?action=tripView&trip_id=<%=trip.getId()%>">VIEW DETAILS</a>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4 social">
                                         <a href="ControllerServlet?action=delete-trip&id=<%=trip.getId()%>"><i class="fa fa-trash-o"></i></a>
