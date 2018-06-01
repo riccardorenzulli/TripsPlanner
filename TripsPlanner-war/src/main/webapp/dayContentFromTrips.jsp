@@ -36,7 +36,7 @@
                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
                     <img src="<%=places.get(i).getPhotosUrl()%>" alt="cruise">
                 </div>
-                <div class="col-md-6 col-sm-6 hotel-info">
+                <div class="col-md-5 col-sm-6 hotel-info">
                     <div>
                         <div class="hotel-header">
                             <h5>
@@ -53,22 +53,28 @@
                     </div>
                 </div>
                 <div class="clearfix visible-sm-block"></div>
-                <div class="col-md-2 rating-price-box text-center clear-padding">
-                    <div class="rating-box">
-                        <div class="tripadvisor-rating">
-                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                        </div>
-                        <div class="user-rating">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                            <span>128 Guest Reviews.</span>
-                        </div>
-                    </div>
-                    <div class="room-book-box">
-
-                        <div class="book">
-                            <a href="#">Add Memory</a>
-                            <a href="#">See memories</a>
-                        </div>
+                <div class="col-md-3 rating-price-box text-center clear-padding">
+                    <input id="add_memory" class="search-button btn transition-effect" type="button" value="Add Memory" onclick="openMemoryUpload()">
+                    <div id="add_memory_div">
+                        <form action="ControllerServlet?action=memoryUpload&id=<%=i%>&day=<%=k%>" id="add_memory_form" class="box" method="post" enctype="multipart/form-data">
+                            <input id="description" type="text" name="description" placeholder="Write your description"/>
+                            <div id="upload-wrap">
+                                <div class="image-upload-wrap">
+                                    <input class="file-upload-input" name="memoryIMG" type='file' onchange="readURL(this);" accept="image/*" />
+                                    <div class="drag-text">
+                                        <h3>Drag and drop a file or select add Image</h3>
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" />
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                </div>
+                                <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Add Image</button>
+                            </div>
+                            <input class="search-button btn transition-effect" type="submit" value="Upload"/>
+                        </form>
                     </div>
                 </div>
                 <input id='lat' type='hidden' value='<%= places.get(i).getLat()%>'/>
@@ -94,7 +100,7 @@
                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
                     <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="place">
                 </div>
-                <div class="col-md-6 col-sm-6 hotel-info">
+                <div class="col-md-5 col-sm-6 hotel-info">
                     <div>
                         <div class="hotel-header">
                             <h5>
@@ -111,22 +117,28 @@
                     </div>
                 </div>
                 <div class="clearfix visible-sm-block"></div>
-                <div class="col-md-2 rating-price-box text-center clear-padding">
-                    <div class="rating-box">
-                        <div class="tripadvisor-rating">
-                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                        </div>
-                        <div class="user-rating">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                            <span>128 Guest Reviews.</span>
-                        </div>
-                    </div>
-                    <div class="room-book-box">
-
-                        <div class="book">
-                            <a href="#">Add Memory</a>
-                            <a href="#">See memories</a>
-                        </div>
+                <div class="col-md-3 rating-price-box text-center clear-padding">
+                <input id="add_memory" class="search-button btn transition-effect" type="button" value="Add Memory" onclick="openMemoryUpload()">
+                    <div id="add_memory_div">
+                        <form action="ControllerServlet?action=memoryUpload" id="add_memory_form" class="box" method="post" action="" enctype="multipart/form-data">
+                            <input id="description" type="text" name="description" placeholder="Write your description"/>
+                            <div id="upload-wrap">
+                                <div class="image-upload-wrap">
+                                    <input class="file-upload-input" name="memoryIMG" type='file' onchange="readURL(this);" accept="image/*" />
+                                    <div class="drag-text">
+                                        <h3>Drag and drop a file or select add Image</h3>
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" />
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                </div>
+                                <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Add Image</button>
+                            </div>
+                            <input class="search-button btn transition-effect" type="submit" value="Upload"/>
+                        </form>
                     </div>
                 </div>
             </div>

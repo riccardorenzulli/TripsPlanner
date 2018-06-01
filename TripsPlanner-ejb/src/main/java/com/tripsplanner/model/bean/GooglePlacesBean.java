@@ -48,12 +48,10 @@ public class GooglePlacesBean {
     private JSONObject getInterestingPlacesJSON(String city) throws ProtocolException, IOException {
         String newcity = city.replaceAll("\\s+", "");
         String[] cityElements = newcity.split(",");
-        String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
-        String region = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
-        String stringCity = cityElem1;
+        String stringCity = cityElements[0].replaceAll("[^A-Za-z0-9Z-äöüßÄÖÜ]", "+");
         
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query=what+to+see+in+"+stringCity+"&region="+region+"&key=" + api_key;
+	String parameters = "query=what+to+see+in+"+stringCity+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
@@ -90,12 +88,10 @@ public class GooglePlacesBean {
     private JSONObject getInterestingPlacesJSON(String city, String type) throws ProtocolException, IOException {
         String newcity = city.replaceAll("\\s+", "");
         String[] cityElements = newcity.split(",");
-        String cityElem1 = cityElements[0].replaceAll("[^A-Za-z0-9]", "+");
-        String region = cityElements[1].replaceAll("[^A-Za-z0-9]", "+");
-        String stringCity = cityElem1;
+        String stringCity = cityElements[0].replaceAll("[^A-Za-z0-9-äöüßÄÖÜ]", "+");
         
         String url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
-	String parameters = "query="+type+"+in+"+stringCity+"&region="+region+"&key=" + api_key;
+	String parameters = "query="+type+"+in+"+stringCity+"&key=" + api_key;
         
         String requestUrl = url + parameters;
         
