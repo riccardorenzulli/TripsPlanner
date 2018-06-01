@@ -56,11 +56,10 @@ public class Trip implements Serializable {
     private User owner;
     
     @ManyToMany
-    @JoinTable(name="trip-collab",
-            joinColumns={@JoinColumn(name="trip-id", referencedColumnName = "id")},
-            inverseJoinColumns={@JoinColumn(name="collab-id", referencedColumnName = "id")}
-    )
     private List<User> collaborators = new ArrayList<>();
+    
+    @OneToOne
+    private Hotel hotel;
     
     @OneToMany(mappedBy="trip", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DayItinerary> itineraries;
@@ -73,13 +72,15 @@ public class Trip implements Serializable {
         this.collaborators = null;
         this.itineraries = null;
         this.search = null;
+        this.hotel = null;
     }
     
-    public Trip(User owner, ArrayList<User> collaborators, ArrayList<DayItinerary> itineraries, Search search) {
+    public Trip(User owner, ArrayList<User> collaborators, ArrayList<DayItinerary> itineraries, Search search, Hotel hotel) {
         this.owner = owner;
         this.collaborators = collaborators;
         this.itineraries = itineraries;
         this.search = search;
+        this.hotel = hotel;
     }
     
 
@@ -123,6 +124,14 @@ public class Trip implements Serializable {
         this.search = search;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -88,7 +88,7 @@
                                             <img src="<%= trip.getDayPlaces(0).get(1).getPhotosUrl()%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
-                                            <h4>$499</h4>
+                                            <h4><%= (int)trip.getHotel().getDayPrice()*trip.getItineraries().size()%>&euro;</h4>
                                             <h5><%= trip.getItineraries().size()%> Days</h5>
                                         </div>
                                         <div class="holiday-title">
@@ -99,10 +99,10 @@
                                 </div>
                                 <div class="holiday-details">
                                     <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <h5>Theme</h5>
+                                        <h5>Date</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p><i class="fa fa-heart" title="Honeymoon Tour"></i><i class="fa fa-users" title="Group Tour"></i></p>
+                                        <p>From <%= trip.getSearch().getDepartureDate().toString()%> to <%=trip.getSearch().getReturnDate().toString() %></p>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -128,7 +128,7 @@
                                         <a href="#">VIEW DETAILS</a>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                        <i class="fa fa-heart-o"></i>
+                                        <a href="ControllerServlet?action=delete-trip&id=<%=trip.getId()%>"><i class="fa fa-trash-o"></i></a>
                                         <i class="fa fa-share-alt"></i>
                                     </div>
                                 </div>
@@ -152,18 +152,7 @@
                         <!-- START: PAGINATION -->
                         <div class="clearfix-sm clearfix"></div>
                         <div class="bottom-pagination">
-                            <nav class="pull-right">
-                                <ul class="pagination pagination-lg">
-                                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">6 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
-                                </ul>
-                            </nav>
+
                         </div>
                         <!-- END: PAGINATION -->
                     </div>
@@ -213,7 +202,7 @@
                                 <h4>Popular Tours</h4>
                                 <ul>
                                     <li><a href="#">Romantic France</a></li>
-                                    <li><a href="#">Wonderful Lodnon</a></li>
+                                    <li><a href="#">Wonderful London</a></li>
                                     <li><a href="#">Awesome Amsterdam</a></li>
                                     <li><a href="#">Wild Africa</a></li>
                                     <li><a href="#">Beach Goa</a></li>

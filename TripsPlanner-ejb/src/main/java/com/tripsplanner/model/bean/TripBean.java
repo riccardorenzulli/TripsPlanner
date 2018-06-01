@@ -231,6 +231,11 @@ public class TripBean implements TripBeanLocal {
     public void saveTrip(Trip myTrip) {
         tripBean.create(myTrip);
     }
+    
+    @Override
+    public void removeTrip(Trip myTrip) {
+        tripBean.remove(myTrip);
+    }
 
     @Override
     public List<Trip> getAllTripByOwner(User owner) {
