@@ -154,7 +154,7 @@ public class AmadeusAPIBean {
 //
 //        Response response = client.newCall(request).execute();
 //        String response_body = response.body().string();
-        String requestUrl = "https://test.api.amadeus.com/v1/shopping/hotel-offers?latitude=" + lat +"&longitude=" + lon +"&radius=5&radiusUnit=KM&includeClosed=false&adults="+num_people+"&checkInDate=" + departure_date + "&checkOutDate=" + return_date +"&bestRateOnly=true&view=FULL"; //+"&page%5Blimit%5D=5"
+        String requestUrl = "https://test.api.amadeus.com/v1/shopping/hotel-offers?latitude=" + lat +"&longitude=" + lon +"&radius=5&radiusUnit=KM&includeClosed=false&adults="+num_people+"&checkInDate=" + departure_date + "&checkOutDate=" + return_date +"&bestRateOnly=true&view=FULL";
         JSONObject jsonObj = runConnection(requestUrl, amadeus_token);
 
         return jsonObj;

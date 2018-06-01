@@ -63,12 +63,26 @@
     </head>
     <body class="load-full-screen">
 
-        <!-- BEGIN: PRELOADER -->
-        <!-- END: PRELOADER -->
-
-        <!-- BEGIN: COLOR SWITCHER -->
-        <!-- END: COLOR SWITCHER -->
-
+<div id="load_cont" class="coming-soon-wrapper full-screen">
+            <div class="coming-soon full-screen">
+                <div class="centered-box text-center">
+                    <div class="logo">
+                        <h2>TRIPSPLANNER</h2>
+                    </div>
+                    <div class="loading-animation">
+                        <span><i class="fa fa-plane"></i></span>
+                        <span><i class="fa fa-bed"></i></span>
+                        <span><i class="fa fa-ship"></i></span>
+                        <span><i class="fa fa-suitcase"></i></span>
+                    </div>
+                    <div class="search-title">
+                        <p>We Are On It! Looking For The Best Trip For You. This Will Take Few Seconds.</p>
+                    </div>
+                    <p class="copyright">&copy; 2018 TripsPlanner</p>
+                </div>
+            </div>
+        </div>
+<div id="main_cont">
         <!-- BEGIN: SITE-WRAPPER -->
         <div class="site-wrapper">
             <jsp:include page="header.jsp" />
@@ -122,7 +136,7 @@
                                             </div>
                                             <% if (hotel.isAvailable()) {%>
                                             <div class="book">
-                                                <form action="ControllerServlet?action=tripHotel" method="post">
+                                                <form action="ControllerServlet?action=tripHotel" method="post" onsubmit="loadingPage();">
                                                     <input id="list_id_choosed" name="list_id_choosed" type='hidden' value=<%=hotel.getList_id()%> />
                                                     <button type="submit" class="search-button btn transition-effect" name="act" value="choose">Choose</button>
                                                 </form>
@@ -189,8 +203,8 @@
                                 </div>
 
                                 <div>
-                                    <form action="ControllerServlet?action=tripHotel" method="post">
-                                        <button type="submit" class="search-button btn transition-effect" name="act" value="skip">Skip hotel</button>
+                                    <form action="ControllerServlet?action=tripHotel" method="post" onsubmit="loadingPage();">
+                                        <button type="submit" class="search-button btn transition-effect" name="act" value="skip" >Skip hotel</button>
                                     </form>
                                 </div>
                                 <div class="clearfix"></div>
@@ -209,7 +223,7 @@
 
         </div>
         <!-- END: SITE-WRAPPER -->
-
+</div>
         <!-- Load Scripts -->
         <script src="assets/js/respond.js"></script>
         <script src="assets/js/jquery.js"></script>
@@ -221,6 +235,7 @@
         <script src="assets/plugins/jquery.flexslider-min.js"></script>
         <script src="assets/js/js.js"></script>
         <script src="assets/js/googleMap.js"></script>
+        <script src="assets/js/loadingPage.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1R8HigvjL4UgHft-PPsfme65pvj846U&callback=initMap&libraries=drawing"
         async defer></script>
         <script>
