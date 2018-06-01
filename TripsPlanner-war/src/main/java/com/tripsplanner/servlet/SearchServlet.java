@@ -78,9 +78,6 @@ public class SearchServlet extends HttpServlet {
             case "tripHotel":
                 goTripHotel(request, response);
                 break;
-            case "tripView":
-                goTripView(request, response);
-                break;   
         }
     }
 
@@ -220,20 +217,6 @@ public class SearchServlet extends HttpServlet {
         request.getSession().setAttribute("trip", trip);
         
         request.getRequestDispatcher("tripPages.jsp").forward(request, response);
-    }
-
-    private void goTripView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User owner = (User) request.getSession().getAttribute("user");
-        Long id = Long.parseLong(request.getParameter("trip_id"));
-        System.out.println("id: "+id);
-        if(owner != null){
-            long idlong = id;
-            Trip trip = tripBean.getTripByOwnerAndID(owner, idlong);
-            request.getSession().setAttribute("trip", trip);
-            request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
-        }else{
-            request.getRequestDispatcher("Error.html").forward(request, response);
-        }
     }
 
 }

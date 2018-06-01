@@ -6,12 +6,17 @@
 package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.MemoryBeanLocal;
+import com.tripsplanner.model.bean.PlaceBeanLocal;
+import com.tripsplanner.model.entity.Memory;
+import com.tripsplanner.model.entity.Place;
+import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -41,6 +46,9 @@ import javax.servlet.http.Part;
 public class MemoryServlet extends HttpServlet {
 
     @EJB
+    private PlaceBeanLocal placeBean;
+
+    @EJB
     private MemoryBeanLocal memoryBean;
 
     /**
@@ -61,14 +69,22 @@ public class MemoryServlet extends HttpServlet {
 
         if(action.equalsIgnoreCase("memoryUpload")) {
             
+            int day = Integer.getInteger(request.getParameter("day"));
+            int indexPlace = Integer.getInteger(request.getParameter("id"));
             User user = getSessionUser(request);
+            Trip trip = getSessionTrip(request);
+            List<Place> places = (List<Place>) trip.getDayPlaces(day);
+            Place place = places.get(indexPlace);
             String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
             Part filePart = request.getPart("memoryIMG"); // Retrieves <input type="file" name="file">
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
             InputStream fileContent = filePart.getInputStream();
 
             try {
-                memoryBean.uploadMemory(description, filePart, fileName, fileContent, user);
+                Memory memory = memoryBean.uploadMemory(description, filePart, fileName, fileContent, user);
+                placeBean.updatePlace(memory, place);
+                request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
+                
             } catch (ParseException ex) {
                 //rimandare ad una pagina o popup error
                 Logger.getLogger(MemoryServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,6 +101,11 @@ public class MemoryServlet extends HttpServlet {
     private User getSessionUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         return (User)session.getAttribute("user");
+    }
+    
+    private Trip getSessionTrip(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        return (Trip)session.getAttribute("trip");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

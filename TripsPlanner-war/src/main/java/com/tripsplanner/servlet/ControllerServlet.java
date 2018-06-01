@@ -44,9 +44,10 @@ public class ControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
         ServletContext ctx = getServletContext();
         String action = request.getParameter("action");
+        String day = request.getParameter("day");
+        System.out.println("DAYYYYYYYYYYYYYYYYYYYYYY: " + day);
 
         // control for api keys in session
         apiKeysBean.findKeysFromCSV(ctx);
@@ -55,51 +56,59 @@ public class ControllerServlet extends HttpServlet {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
             request.getSession().setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
             rd.forward(request, response);
-        } else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
+        }
+        
+        else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/LoginServlet");
             rd.forward(request, response);
-        } else if (action.equalsIgnoreCase("search")) {
+        } 
+        
+        else if (action.equalsIgnoreCase("search")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
             rd.forward(request, response);
-        }
+        } 
+        
         else if (action.equalsIgnoreCase("tripView")) {
-            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
+            System.out.println("IDTRIP: " + request.getParameter("trip_id"));
+            RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
             rd.forward(request, response);
-        }
-
+        } 
+        
         else if(action.equalsIgnoreCase("tripHotel")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
             rd.forward(request, response);
-        }
+        } 
+        
         else if (action.equalsIgnoreCase("tripsPage")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
             rd.forward(request, response);
-        }
+        } 
+        
         else if (action.equalsIgnoreCase("memoryUpload")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
             rd.forward(request, response);
-        }
+        } 
         
         else if (action.equalsIgnoreCase("user-info")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/user-profile.jsp");
             rd.forward(request, response);
-        }
+        } 
         
         else if (action.equalsIgnoreCase("modify-user-info")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/UserServlet");
             rd.forward(request, response);
-        }
+        } 
         
         else if (action.equalsIgnoreCase("contacts")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/contact-us.jsp");
             rd.forward(request, response);
-        }
+        } 
         
         else if (action.equalsIgnoreCase("save-trip")) {
             request.getSession().setAttribute("go-save", false);
             RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
             rd.forward(request, response);
-        }
+        } 
         
         else if(action.equalsIgnoreCase("delete-trip")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
@@ -110,7 +119,7 @@ public class ControllerServlet extends HttpServlet {
             request.getSession().setAttribute("go-save", true);
             RequestDispatcher rd = ctx.getRequestDispatcher("/LoginServlet");
             rd.forward(request, response);
-        }
+        } 
         
         else {
             RequestDispatcher rd = ctx.getRequestDispatcher("/error.jsp");

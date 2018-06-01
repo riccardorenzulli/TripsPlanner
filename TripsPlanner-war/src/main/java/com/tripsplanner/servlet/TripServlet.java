@@ -48,6 +48,9 @@ public class TripServlet extends HttpServlet {
             case "tripsPage":
                 loadTrips(request, response);
                 break;
+            case "tripView":
+                goTripView(request, response);
+                break;   
             case "delete-trip":
                 removeTrip(request, response);
                 break;
@@ -116,6 +119,18 @@ public class TripServlet extends HttpServlet {
             request.getRequestDispatcher("myTrips.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    }
+    
+    private void goTripView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User owner = (User) request.getSession().getAttribute("user");
+        Long id = Long.parseLong(request.getParameter("trip_id"));
+        if(owner != null) {
+            Trip trip = tripBean.getTripByOwnerAndID(owner, id.longValue());
+            request.getSession().setAttribute("trip", trip);
+            request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("Error.html").forward(request, response);
         }
     }
 

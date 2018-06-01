@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="clearfix visible-sm-block"></div>
+<!--                <div class="clearfix visible-sm-block"></div>
                 <div class="col-md-2 rating-price-box text-center clear-padding">
                     <div class="rating-box">
                         <div class="tripadvisor-rating">
@@ -69,7 +69,7 @@
                             <a href="#">Modify</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <input id='lat' type='hidden' value='<%= places.get(i).getLat()%>'/>
                 <input id='lon' type='hidden' value='<%= places.get(i).getLng()%>'/>
             </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="clearfix visible-sm-block"></div>
+<!--                <div class="clearfix visible-sm-block"></div>
                 <div class="col-md-2 rating-price-box text-center clear-padding">
                     <div class="rating-box">
                         <div class="tripadvisor-rating">
@@ -126,7 +126,7 @@
                             <a href="#">Modify</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@ public class MemoryBean implements MemoryBeanLocal {
     private String amazon_secret_key = apiKeysBean.keys.get("amazon_secret_key");
 
     @Override
-    public void uploadMemory(String description, Part filePart, String fileName, InputStream image, User user) throws ParseException {
+    public Memory uploadMemory(String description, Part filePart, String fileName, InputStream image, User user) throws ParseException {
         
         String clientRegion = "eu-west-3";
         String bucketName = "tripsplanner-bucket";
@@ -58,7 +58,7 @@ public class MemoryBean implements MemoryBeanLocal {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Date date = new Date();
         String timestamp = dateFormat.format(date);
-        Date parsed = parsed = dateFormat.parse(timestamp);
+        Date parsed = dateFormat.parse(timestamp);
         
         String descriptionKeyName = user.getGoogleID() + timestamp + "text";
         String imgKeyName = user.getGoogleID() + timestamp + "img";
@@ -85,6 +85,7 @@ public class MemoryBean implements MemoryBeanLocal {
 
         s3Client.putObject(request);
         
+        return memory;
     }
 
     // Add business logic below. (Right-click in editor and choose

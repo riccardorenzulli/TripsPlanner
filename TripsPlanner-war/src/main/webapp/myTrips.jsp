@@ -77,6 +77,7 @@
                         %>
                         <!-- START: HOLIDAYS GRID VIEW -->
 
+
                         <div class="col-md-3 col-sm-6">
                             <div class="holiday-grid-view">
                                 <div class="holiday-header-wrapper">
@@ -291,14 +292,6 @@
                 $("#amount").val("$ " + $("#price-range").slider("values", 0) +
                         " - $ " + $("#price-range").slider("values", 1));
             });
-            
-            /* form submit */
-            function goToTripView(div){
-                var form = div.querySelector('#trip_form');
-                var id = div.querySelector('#trip_id').value;
-                console.log("id: " +id);
-                form.submit();
-            }
         </script>
     </body>
 </html>

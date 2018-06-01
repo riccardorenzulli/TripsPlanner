@@ -142,6 +142,8 @@ public class Place implements Serializable {
     }
 
     public List<Memory> getMemories() {
+        if (memories == null)
+            memories = new ArrayList<Memory>();
         return memories;
     }
 

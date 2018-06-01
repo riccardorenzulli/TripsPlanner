@@ -5,6 +5,7 @@
  */
 package com.tripsplanner.model.bean;
 
+import com.tripsplanner.model.entity.Memory;
 import com.tripsplanner.model.entity.User;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -26,6 +27,6 @@ import javax.servlet.http.Part;
 @Local
 public interface MemoryBeanLocal {
 
-    public void uploadMemory(String description, Part filePart, String fileName, InputStream fileContent, User user) throws ParseException;
+    public Memory uploadMemory(String description, Part filePart, String fileName, InputStream fileContent, User user) throws ParseException;
     
 }
