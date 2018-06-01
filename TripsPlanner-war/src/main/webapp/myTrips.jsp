@@ -117,7 +117,7 @@
                                             <i class="fa fa-eye" title="Sightseeing"></i></p>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <h5>Highlight</h5>
+                                        <h5>Places</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
                                         <p class="sm-text"><%=trip.getDayPlaces(0).get(1).getName() %>,<%=trip.getDayPlaces(0).get(2).getName()%>...</p>
