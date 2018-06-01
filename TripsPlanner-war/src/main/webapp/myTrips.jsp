@@ -120,7 +120,7 @@
                                         <h5>Highlight</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p class="sm-text">Lorem Ipsum is simply dummy text of the printing industry.</p>
+                                        <p class="sm-text"><%=trip.getDayPlaces(0).get(1).getName() %>,<%=trip.getDayPlaces(0).get(2).getName()%>...</p>
                                     </div>
                                 </div>
                                 <div class="holiday-footer text-center">
