@@ -85,7 +85,7 @@
                                             <img src="<%= trip.getDayPlaces(0).get(1).getPhotosUrl()%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
-                                            <h4><%= (int)trip.getHotel().getDayPrice()*trip.getItineraries().size()%>&euro;</h4>
+                                            <h4><%= (int)trip.getHotel().getTotal()%>&euro;</h4>
                                             <h5><%= trip.getItineraries().size()%> Days</h5>
                                         </div>
                                         <div class="holiday-title">
