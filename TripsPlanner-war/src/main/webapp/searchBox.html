@@ -11,15 +11,15 @@
                             <form action="ControllerServlet?action=search" method="post" onsubmit="return validateSearch(this);">
                                 <div class="col-md-12 product-search-title">Trip information</div>
                                 <div class="clearfix"></div>
-<!--                                <div class="col-md-6 col-sm-6 search-col-padding">
-                                    <label>Leaving From</label>
-                                    <div class="input-group">
-                                        <input id="departure_city" name="departure_city" class="form-control" required="" placeholder="E.g. London" type="text">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-marker fa-fw"></i>
-                                        </span>
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="col-md-6 col-sm-6 search-col-padding">
+                                                                    <label>Leaving From</label>
+                                                                    <div class="input-group">
+                                                                        <input id="departure_city" name="departure_city" class="form-control" required="" placeholder="E.g. London" type="text">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-map-marker fa-fw"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>-->
                                 <div class="col-md-6 col-sm-6 search-col-padding">
                                     <label>Destination</label>
                                     <div class="input-group">
@@ -94,8 +94,8 @@
                                 </div>
 
                                 <div class="clearfix"></div>
-                                  <input type="hidden" id="latitude" name="latitude">
-                                  <input type="hidden" id="longitude" name="longitude">
+                                <input type="hidden" id="latitude" name="latitude">
+                                <input type="hidden" id="longitude" name="longitude">
 
                                 <div class="col-md-12 search-col-padding">
                                     <input type="submit" class="search-button btn transition-effect" value="Search">
@@ -104,11 +104,42 @@
 
                             </form>
                         </div>
-<!--                        <form action="ControllerServlet?action=memoryUpload" method="post" enctype="multipart/form-data">
-                            <input type="text" name="description" />
-                            <input type="file" name="memoryIMG" />
-                            <input type="submit" />
-                        </form>-->
+
+                        <input id="add_memory" class="search-button btn transition-effect" value="Add Memory" onclick="openMemoryUpload()">
+
+                        <div id="add_memory_div">
+                            <form id="add_memory_form" class="box" method="post" action="" enctype="multipart/form-data">
+                            <!--                            
+                                <form id="add_memory_form" class="box" method="post" action="" enctype="multipart/form-data">
+                                <input type="text" name="description" placeholder="Write your description"/>
+                                <input id="input-b2" name="input-b2" type="file" class="file" data-show-preview="false">
+                                <input type="submit" value="Upload"/>
+                            </form>-->
+                                <input id="description" type="text" name="description" placeholder="Write your description"/>
+                                <div id="upload-wrap">
+                                    <div class="image-upload-wrap">
+                                        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                        <div class="drag-text">
+                                            <h3>Drag and drop a file or select add Image</h3>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img class="file-upload-image" src="#" alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                        </div>
+                                    </div>
+                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Add Image</button>
+                                </div>
+                                <input class="search-button btn transition-effect" type="submit" value="Upload"/>
+                            </form>
+                        </div>
+
+                        <!--                        <form action="ControllerServlet?action=memoryUpload" method="post" enctype="multipart/form-data">
+                                                    <input type="text" name="description" />
+                                                    <input type="file" name="memoryIMG" />
+                                                    <input type="submit" />
+                                                </form>-->
                         <!-- END: FLIGHT SEARCH -->
                     </div>
                     <!-- END: TAB PANE -->

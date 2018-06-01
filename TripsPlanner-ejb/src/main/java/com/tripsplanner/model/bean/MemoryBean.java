@@ -58,7 +58,7 @@ public class MemoryBean implements MemoryBeanLocal {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Date date = new Date();
         String timestamp = dateFormat.format(date);
-        Date parsed = parsed = dateFormat.parse(timestamp);
+        Date parsed = dateFormat.parse(timestamp);
         
         String descriptionKeyName = user.getGoogleID() + timestamp + "text";
         String imgKeyName = user.getGoogleID() + timestamp + "img";
