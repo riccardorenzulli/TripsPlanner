@@ -56,7 +56,9 @@
                 <div class="col-md-3 rating-price-box text-center clear-padding">
                     <input id="add_memory" class="search-button btn transition-effect" type="button" value="Add Memory" onclick="openMemoryUpload()">
                     <div id="add_memory_div">
-                        <form action="ControllerServlet?action=memoryUpload&id=<%=i%>&day=<%=k%>" id="add_memory_form" class="box" method="post" enctype="multipart/form-data">
+                        <form action="ControllerServlet?action=memoryUpload" id="add_memory_form" class="box" method="post" enctype="multipart/form-data">
+                            <input id="indexPlace" name="indexPlace" value="<%=i%>" type="hidden"/>
+                            <input id="day" name="day" value="<%=k%>" type="hidden"/>
                             <input id="description" type="text" name="description" placeholder="Write your description"/>
                             <div id="upload-wrap">
                                 <div class="image-upload-wrap">

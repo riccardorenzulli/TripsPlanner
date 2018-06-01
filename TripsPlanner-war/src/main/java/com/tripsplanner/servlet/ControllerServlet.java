@@ -69,6 +69,7 @@ public class ControllerServlet extends HttpServlet {
         } 
         
         else if (action.equalsIgnoreCase("tripView")) {
+            System.out.println("IDTRIP: " + request.getParameter("trip_id"));
             RequestDispatcher rd = ctx.getRequestDispatcher("/TripServlet");
             rd.forward(request, response);
         } 
