@@ -11,6 +11,8 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Route;
 import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
+import com.tripsplanner.model.facade.PlaceFacade;
+import com.tripsplanner.model.facade.PlaceFacadeLocal;
 import com.tripsplanner.model.facade.SearchFacadeLocal;
 import com.tripsplanner.model.facade.TripFacadeLocal;
 import java.io.IOException;
@@ -34,6 +36,12 @@ public class TripBean implements TripBeanLocal {
 
     @EJB
     private TripFacadeLocal tripBean;
+    
+    @EJB
+    private HotelBeanLocal hotelBean;
+    
+    @EJB
+    private PlaceFacadeLocal placeFacade;
     
     /*Given the interesting places to be visited and the number of days
       return an arraylist for each cluster containing the indexes of the
@@ -62,7 +70,7 @@ public class TripBean implements TripBeanLocal {
                 cluster.add(indexHotel);
             }
         }
-        
+            
         try {
             trip = fromClustersToTrip(interestingPlaces, clusters);
         } catch (IOException ex) {
@@ -229,6 +237,11 @@ public class TripBean implements TripBeanLocal {
 
     @Override
     public void saveTrip(Trip myTrip) {
+        for(int i=0; i<myTrip.getItineraries().size(); i++) {
+            for(Place place : myTrip.getDayPlaces(i))
+                placeFacade.create(place);
+        }
+        hotelBean.createHotel(myTrip.getHotel());
         tripBean.create(myTrip);
     }
     
