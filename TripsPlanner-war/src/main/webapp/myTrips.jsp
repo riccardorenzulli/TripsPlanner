@@ -68,7 +68,7 @@
                         <h2>MY TRIPS</h2>
                     </div>
                     <!-- START: INDIVIDUAL LISTING AREA -->
-                    <div class="col-md-9 holidays-listing">
+                    <div class="col-md-12 holidays-listing">
                         <%
                             int count = 0;
                             List<Trip> trips = (List<Trip>) request.getAttribute("trips");
@@ -76,7 +76,8 @@
                                 for (Trip trip : trips) {
                         %>
                         <!-- START: HOLIDAYS GRID VIEW -->
-                        <div class="col-md-4 col-sm-6" onclick="goToTripView(this);">
+
+                        <div class="col-md-3 col-sm-6" onclick="goToTripView(this);">
                             <form id="trip_form" action="ControllerServlet?action=tripView" method="post">
                                 <input id='trip_id' name='trip_id' type='hidden' value='<%= trip.getId()%>'/>
                             </form>
@@ -84,7 +85,7 @@
                                 <div class="holiday-header-wrapper">
                                     <div class="holiday-header">
                                         <div class="holiday-img">
-                                            <img src="<%= trip.getDayPlaces(0).get(0).getPhotosUrl()%>" alt="cruise">
+                                            <img src="<%= trip.getDayPlaces(0).get(1).getPhotosUrl()%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
                                             <h4>$499</h4>
@@ -135,7 +136,7 @@
                         </div>
                         <%
                             count++;
-                            if (count % 3 == 0) {
+                            if (count % 4 == 0) {
                         %>
                         <div class="clearfix-sm clearfix"></div>
                         <%
