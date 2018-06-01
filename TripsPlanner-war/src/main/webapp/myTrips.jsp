@@ -77,10 +77,8 @@
                         %>
                         <!-- START: HOLIDAYS GRID VIEW -->
 
-                        <div class="col-md-3 col-sm-6" onclick="goToTripView(this);">
-                            <form id="trip_form" action="ControllerServlet?action=tripView" method="post">
-                                <input id="trip_id" name="trip_id" type='hidden' value="<%= trip.getId()%>"/>
-                            </form>
+
+                        <div class="col-md-3 col-sm-6">
                             <div class="holiday-grid-view">
                                 <div class="holiday-header-wrapper">
                                     <div class="holiday-header">
@@ -88,7 +86,7 @@
                                             <img src="<%= trip.getDayPlaces(0).get(1).getPhotosUrl()%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
-                                            <h4>$499</h4>
+                                            <h4><%= trip.getHotel()==null ?  0 : (int)trip.getHotel().getTotal()%>&euro;</h4>
                                             <h5><%= trip.getItineraries().size()%> Days</h5>
                                         </div>
                                         <div class="holiday-title">
@@ -99,10 +97,10 @@
                                 </div>
                                 <div class="holiday-details">
                                     <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <h5>Theme</h5>
+                                        <h5>Date</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p><i class="fa fa-heart" title="Honeymoon Tour"></i><i class="fa fa-users" title="Group Tour"></i></p>
+                                        <p>From <%= trip.getSearch().getDepartureDate().toString()%> to <%=trip.getSearch().getReturnDate().toString() %></p>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -117,18 +115,18 @@
                                             <i class="fa fa-eye" title="Sightseeing"></i></p>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <h5>Highlight</h5>
+                                        <h5>Places</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p class="sm-text">Lorem Ipsum is simply dummy text of the printing industry.</p>
+                                        <p class="sm-text"><%=trip.getDayPlaces(0).get(1).getName() %>,<%=trip.getDayPlaces(0).get(2).getName()%>...</p>
                                     </div>
                                 </div>
                                 <div class="holiday-footer text-center">
                                     <div class="col-md-8 col-sm-8 col-xs-8 view-detail">
-                                        <a href="#">VIEW DETAILS</a>
+                                        <a href="ControllerServlet?action=tripView&trip_id=<%=trip.getId()%>">VIEW DETAILS</a>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                        <i class="fa fa-heart-o"></i>
+                                        <a href="ControllerServlet?action=delete-trip&id=<%=trip.getId()%>"><i class="fa fa-trash-o"></i></a>
                                         <i class="fa fa-share-alt"></i>
                                     </div>
                                 </div>
@@ -152,18 +150,7 @@
                         <!-- START: PAGINATION -->
                         <div class="clearfix-sm clearfix"></div>
                         <div class="bottom-pagination">
-                            <nav class="pull-right">
-                                <ul class="pagination pagination-lg">
-                                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">6 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
-                                </ul>
-                            </nav>
+
                         </div>
                         <!-- END: PAGINATION -->
                     </div>
@@ -213,7 +200,7 @@
                                 <h4>Popular Tours</h4>
                                 <ul>
                                     <li><a href="#">Romantic France</a></li>
-                                    <li><a href="#">Wonderful Lodnon</a></li>
+                                    <li><a href="#">Wonderful London</a></li>
                                     <li><a href="#">Awesome Amsterdam</a></li>
                                     <li><a href="#">Wild Africa</a></li>
                                     <li><a href="#">Beach Goa</a></li>

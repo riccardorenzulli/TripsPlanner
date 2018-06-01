@@ -11,6 +11,8 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.bean.AmadeusAPIBean;
 import com.tripsplanner.model.bean.GooglePlacesBean;
+import com.tripsplanner.model.bean.HotelBean;
+import com.tripsplanner.model.bean.HotelBeanLocal;
 import com.tripsplanner.model.bean.TripBeanLocal;
 import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Trip;
@@ -53,6 +55,8 @@ public class SearchServlet extends HttpServlet {
     private GoogleDirectionsBean dirBean;
     @EJB
     private TripBeanLocal tripBean;
+    @EJB
+    private HotelBeanLocal hotelBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -203,8 +207,11 @@ public class SearchServlet extends HttpServlet {
                 }    
             }
         }
+        hotelBean.createHotel(selectedHotel);
+        
         Trip trip = tripBean.buildTrip(bestPlaces, tripDays, selectedHotel);
         trip.setSearch(search);
+        trip.setHotel(selectedHotel);
         /*Add the owner of the trip here*/
 
         request.getSession().setAttribute("trip", trip);
