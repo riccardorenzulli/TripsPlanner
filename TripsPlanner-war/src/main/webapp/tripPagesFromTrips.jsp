@@ -16,6 +16,17 @@
         <meta name="author" content="LimpidThemes">
         <meta name="google-signin-client_id" content="682887231528-qe2dfr4gba9fn1dmef7q97bq7l6o6m98.apps.googleusercontent.com">
 
+        <style>
+
+            #fixed {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                padding: 5px;
+            }
+
+        </style>
+        
         <title>TripsPlanner - Create fantastic trips</title>
 
         <!-- STYLES -->
@@ -42,6 +53,7 @@
         <script src="assets/js/login.js"></script>
         <script src="assets/js/tripPage.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="assets/js/googleMapForTrip.js"></script>
     </head>
 
     <body class="load-full-screen">
@@ -112,7 +124,6 @@
         <script src="assets/js/bootstrap-select.min.js"></script>
         <script src="assets/plugins/wow.min.js"></script>
         <script src="assets/js/js.js"></script>
-        <script src="assets/js/googleMapForTrip.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1R8HigvjL4UgHft-PPsfme65pvj846U&callback=initMap&libraries=drawing"
         async defer></script>
         <script>
