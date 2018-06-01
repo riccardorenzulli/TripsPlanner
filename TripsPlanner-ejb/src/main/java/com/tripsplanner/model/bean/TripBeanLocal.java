@@ -26,4 +26,6 @@ public interface TripBeanLocal {
     
     List<Trip> getAllTripByOwner(User owner);
     
+    Trip getTripByOwnerAndID(User owner, long id);
+    
 }

@@ -42,7 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Trip")
 @XmlRootElement
 @NamedQueries({
-@NamedQuery(name = "Trip.findByOwner", query = "SELECT t FROM Trip t WHERE t.owner = :owner")})
+@NamedQuery(name = "Trip.findByOwner", query = "SELECT t FROM Trip t WHERE t.owner = :owner"),
+    @NamedQuery(name = "Trip.findByOwnerAndId", query = "SELECT t FROM Trip t WHERE t.owner = :owner AND t.id = :id")
+})
 public class Trip implements Serializable {
 
     private static final long serialVersionUID = 1L;

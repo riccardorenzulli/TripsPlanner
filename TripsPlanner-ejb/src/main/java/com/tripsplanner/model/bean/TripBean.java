@@ -238,6 +238,12 @@ public class TripBean implements TripBeanLocal {
         return trips;
     }
 
+    @Override
+    public Trip getTripByOwnerAndID(User owner, long id) {
+        Trip trip = tripBean.getTripByOwnerAndID(owner, id);
+        return trip;
+    }
+
     private Place fromHotelToPlace(Hotel hotel) {
         Place hotelPlace = new Place();
         hotelPlace.setName(hotel.getName());

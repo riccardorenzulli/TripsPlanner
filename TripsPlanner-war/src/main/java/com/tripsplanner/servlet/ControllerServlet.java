@@ -27,13 +27,11 @@ import javax.servlet.http.HttpServletResponse;
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
  */
-
 public class ControllerServlet extends HttpServlet {
 
     @EJB
     private ApiKeysBean apiKeysBean;
-    
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,30 +43,29 @@ public class ControllerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         PrintWriter out = response.getWriter();
         ServletContext ctx = getServletContext();
         String action = request.getParameter("action");
-        
+
         // control for api keys in session
         apiKeysBean.findKeysFromCSV(ctx);
-        
+
         if (action == null) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/index.jsp");
             request.getSession().setAttribute("google_places_api", ApiKeysBean.keys.get("google_places_api"));
             rd.forward(request, response);
-        }
-        
-        else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
+        } else if (action.equalsIgnoreCase("login") || action.equalsIgnoreCase("login-f") || action.equalsIgnoreCase("login-g") || action.equalsIgnoreCase("logout")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/LoginServlet");
             rd.forward(request, response);
-        }
-        
-        else if (action.equalsIgnoreCase("search")) {
+        } else if (action.equalsIgnoreCase("search")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
             rd.forward(request, response);
         }
-        
+        else if (action.equalsIgnoreCase("tripView")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
+            rd.forward(request, response);
+        }
 
         else if(action.equalsIgnoreCase("tripHotel")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/SearchServlet");
@@ -114,7 +111,7 @@ public class ControllerServlet extends HttpServlet {
             RequestDispatcher rd = ctx.getRequestDispatcher("/error.jsp");
             rd.forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

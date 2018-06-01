@@ -25,13 +25,13 @@
         </div>
         <%
 
-            ArrayList<Place> places = (ArrayList<Place>) trip.getDayPlaces(k);
-            ArrayList<Route> legs = (ArrayList<Route>) trip.getItineraries().get(k).getLegs();
+            List<Place> places = (List<Place>) trip.getDayPlaces(k);
+            List<Route> legs = (List<Route>) trip.getItineraries().get(k).getLegs();
 
             for (int i = 0; i < places.size() - 1; i++) {
         %>
 
-        <div  class="hotel-list-view">
+        <div  class="hotel-list-view" onclick="setMarker(this)">
             <div class="wrapper">
                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
                     <img src="<%=places.get(i).getPhotosUrl()%>" alt="cruise">
@@ -70,6 +70,8 @@
                         </div>
                     </div>
                 </div>
+                <input id='lat' type='hidden' value='<%= places.get(i).getLat()%>'/>
+                <input id='lon' type='hidden' value='<%= places.get(i).getLng()%>'/>
             </div>
         </div>
 
@@ -89,7 +91,7 @@
         <div  class="hotel-list-view">
             <div class="wrapper">
                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                    <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="cruise">
+                    <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="place">
                 </div>
                 <div class="col-md-6 col-sm-6 hotel-info">
                     <div>
@@ -133,38 +135,25 @@
     %>                            
 </div>
 <!-- END TRIP DIV -->
-<div class="clearfix"></div>
-<!-- START: PAGINATION -->
-<div class="bottom-pagination">
-    <div class="col-md-9 text-center">
-        <%
-            String loggedin = request.getSession().getAttribute("user") == null ? "notloggedin" : "loggedin";
-        %>
-        <form action="ControllerServlet?action=save-trip" method="post" onsubmit="return canSaveTrip(this, '<%= loggedin %>');">
-            <button type="submit" class="search-button btn transition-effect">Save Trip</button>
-        </form>
-        <form id="save-trip-login" action="ControllerServlet?action=save-trip-login" method="post" hidden></form>
-    </div>
-    <nav class="pull-right">
-        <ul class="pagination pagination-lg">
-            <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                <%
-                    for (int i = 0; i < trip.getItineraries().size(); i++) {
-                        if (i == 0) {
-                %>
-            <li id="<%= "button" + i%>" class="active"><a href="#" onclick="showPage(<%= i%>,<%= trip.getItineraries().size()%>)"><%= i + 1%><span class="sr-only">(current)</span></a></li>
-                <%
-                } else {
-                %>
-            <li id="<%= "button" + i%>"><a href="#" onclick="showPage(<%= i%>,<%= trip.getItineraries().size()%>)"><%= i + 1%> <span class="sr-only">(current)</span></a></li>
-                <%
-                        }
-                    }
-                %>
-            <li><a href="#" aria-label="Previous"><span aria-hidden="true">&#187;</span></a></li>
-        </ul>
-    </nav>
+
+<div id="fixed" class="col-md-3 hotel-detail-sidebar">
+
+    <div >
+
+        <div class="col-md-12 clear-padding">
+            <!--					<div class="map sidebar-item">
+                                                            <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
+                                                            <iframe class="hotel-map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJG1usnet4BTkRzQqb_Ys-JOg&amp;key=AIzaSyB6hgZM-ruUqTPVUjXGUR-vv7WRqc4MXjY" ></iframe>
+                                                    </div>-->
+            <div class="map sidebar-item">
+                <div class="hotel-map">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>   
+
 </div>
-<!-- END: PAGINATION -->
-</div>
-<!-- END: INDIVIDUAL LISTING AREA -->
+

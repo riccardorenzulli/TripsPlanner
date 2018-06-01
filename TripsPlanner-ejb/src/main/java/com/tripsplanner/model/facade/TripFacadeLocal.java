@@ -41,4 +41,6 @@ public interface TripFacadeLocal {
     
     public List<Trip> findTripsByOwner(User owner);
     
+    public Trip getTripByOwnerAndID(User owner, long id);
+    
 }
