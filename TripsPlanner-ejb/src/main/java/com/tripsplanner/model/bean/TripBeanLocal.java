@@ -24,6 +24,8 @@ public interface TripBeanLocal {
     
     void saveTrip(Trip myTrip);
     
+    void removeTrip(Trip myTrip);
+    
     List<Trip> getAllTripByOwner(User owner);
     
 }

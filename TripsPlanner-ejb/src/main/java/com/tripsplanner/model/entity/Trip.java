@@ -54,10 +54,6 @@ public class Trip implements Serializable {
     private User owner;
     
     @ManyToMany
-    @JoinTable(name="trip-collab",
-            joinColumns={@JoinColumn(name="trip-id", referencedColumnName = "id")},
-            inverseJoinColumns={@JoinColumn(name="collab-id", referencedColumnName = "id")}
-    )
     private List<User> collaborators = new ArrayList<>();
     
     @OneToOne

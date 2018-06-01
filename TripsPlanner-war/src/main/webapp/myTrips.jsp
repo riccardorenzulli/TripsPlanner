@@ -84,7 +84,7 @@
                                             <img src="<%= trip.getDayPlaces(0).get(1).getPhotosUrl()%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
-                                            <h4><%= (int)trip.getHotel().getDayPrice()*trip.getItineraries().size()%> &euro;</h4>
+                                            <h4><%= (int)trip.getHotel().getDayPrice()*trip.getItineraries().size()%>&euro;</h4>
                                             <h5><%= trip.getItineraries().size()%> Days</h5>
                                         </div>
                                         <div class="holiday-title">
@@ -124,7 +124,7 @@
                                         <a href="#">VIEW DETAILS</a>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-4 social">
-                                        <i class="fa fa-heart-o"></i>
+                                        <a href="ControllerServlet?action=delete-trip&id=<%=trip.getId()%>"><i class="fa fa-trash-o"></i></a>
                                         <i class="fa fa-share-alt"></i>
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                                 <h4>Popular Tours</h4>
                                 <ul>
                                     <li><a href="#">Romantic France</a></li>
-                                    <li><a href="#">Wonderful Lodnon</a></li>
+                                    <li><a href="#">Wonderful London</a></li>
                                     <li><a href="#">Awesome Amsterdam</a></li>
                                     <li><a href="#">Wild Africa</a></li>
                                     <li><a href="#">Beach Goa</a></li>

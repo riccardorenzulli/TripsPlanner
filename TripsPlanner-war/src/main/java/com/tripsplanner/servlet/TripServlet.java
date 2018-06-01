@@ -48,6 +48,9 @@ public class TripServlet extends HttpServlet {
             case "tripsPage":
                 loadTrips(request, response);
                 break;
+            case "delete-trip":
+                removeTrip(request, response);
+                break;
         }
     }
 
@@ -113,6 +116,28 @@ public class TripServlet extends HttpServlet {
             request.getRequestDispatcher("myTrips.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    }
+
+    private void removeTrip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User owner = (User) request.getSession().getAttribute("user");
+        String stringId = request.getParameter("id");
+        long id = Long.parseLong(stringId);
+        if(owner != null){
+            List<Trip> trips = tripBean.getAllTripByOwner(owner);
+            Trip tripToRemove = null;
+            for(Trip trip : trips) {
+                if(id == trip.getId()) {
+                    tripToRemove = trip;
+                    break;
+                }
+            }
+            tripBean.removeTrip(tripToRemove);
+            trips.remove(tripToRemove);
+            request.setAttribute("trips", trips);
+            request.getRequestDispatcher("myTrips.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("myTrips.jsp").forward(request, response);
         }
     }
 
