@@ -55,8 +55,6 @@ public class SearchServlet extends HttpServlet {
     private GoogleDirectionsBean dirBean;
     @EJB
     private TripBeanLocal tripBean;
-    @EJB
-    private HotelBeanLocal hotelBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -207,7 +205,6 @@ public class SearchServlet extends HttpServlet {
                 }    
             }
         }
-        hotelBean.createHotel(selectedHotel);
         
         Trip trip = tripBean.buildTrip(bestPlaces, tripDays, selectedHotel);
         trip.setSearch(search);

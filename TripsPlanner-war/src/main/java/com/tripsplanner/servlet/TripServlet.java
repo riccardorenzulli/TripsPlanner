@@ -101,6 +101,7 @@ public class TripServlet extends HttpServlet {
         User owner = (User) request.getSession().getAttribute("user");
         myTrip.setOwner(owner);
         //System.out.println(myTrip.toString());
+        
         tripBean.saveTrip(myTrip);
         
         List<Trip> trips = tripBean.getAllTripByOwner(owner);

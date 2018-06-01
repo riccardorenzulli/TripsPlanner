@@ -40,8 +40,10 @@ public class Route implements Serializable {
     @ManyToOne
     private DayItinerary dayItinerary;
 
+    @ManyToOne
     private Place departurePlace;
     
+    @ManyToOne
     private Place arrivalPlace;
     
     private String distanceText;
