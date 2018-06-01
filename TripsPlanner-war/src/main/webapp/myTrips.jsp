@@ -84,7 +84,7 @@
                                             <img src="<%= trip.getDayPlaces(0).get(1).getPhotosUrl()%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
-                                            <h4>$499</h4>
+                                            <h4><%= (int)trip.getHotel().getDayPrice()*trip.getItineraries().size()%> &euro;</h4>
                                             <h5><%= trip.getItineraries().size()%> Days</h5>
                                         </div>
                                         <div class="holiday-title">
@@ -95,10 +95,10 @@
                                 </div>
                                 <div class="holiday-details">
                                     <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <h5>Theme</h5>
+                                        <h5>Date</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p><i class="fa fa-heart" title="Honeymoon Tour"></i><i class="fa fa-users" title="Group Tour"></i></p>
+                                        <p>From <%= trip.getSearch().getDepartureDate().toString()%> to <%=trip.getSearch().getReturnDate().toString() %></p>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-4 col-sm-4 col-xs-4">

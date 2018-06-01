@@ -52,6 +52,8 @@ public class Hotel implements Serializable {
     private int guests;
 
     private int list_id;
+    
+    public Hotel() {}
 
     public Hotel(int id, String name, String cityCode, String roomType, String roomDescription, String currency, float total, float dayPrice, int guests, boolean available, float latitude, float longitude, String address) {
         this.name = name;
