@@ -223,7 +223,7 @@ public class SearchServlet extends HttpServlet {
             long idlong = id;
             Trip trip = tripBean.getTripByOwnerAndID(owner, idlong);
             request.getSession().setAttribute("trip", trip);
-            request.getRequestDispatcher("tripPages.jsp").forward(request, response);
+            request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("Error.html").forward(request, response);
         }
