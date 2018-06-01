@@ -76,7 +76,10 @@
                                 for (Trip trip : trips) {
                         %>
                         <!-- START: HOLIDAYS GRID VIEW -->
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6" onclick="goToTripView(this);">
+                            <form id="trip_form" action="ControllerServlet?action=tripView" method="post">
+                                <input id='trip_id' name='trip_id' type='hidden' value='<%= trip.getId()%>'/>
+                            </form>
                             <div class="holiday-grid-view">
                                 <div class="holiday-header-wrapper">
                                     <div class="holiday-header">
@@ -301,6 +304,14 @@
                 $("#amount").val("$ " + $("#price-range").slider("values", 0) +
                         " - $ " + $("#price-range").slider("values", 1));
             });
+            
+            /* form submit */
+            function goToTripView(div){
+                var form = div.querySelector('#trip_form');
+                var id = div.querySelector('#trip_id').value;
+                console.log("id: " +id);
+                form.submit();
+            }
         </script>
     </body>
 </html>
