@@ -68,9 +68,9 @@ public class MemoryServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         if(action.equalsIgnoreCase("memoryUpload")) {
-            
-            int day = Integer.getInteger(request.getParameter("day"));
-            int indexPlace = Integer.getInteger(request.getParameter("id"));
+
+            int day = Integer.parseInt(request.getParameter("day"));
+            int indexPlace = Integer.parseInt(request.getParameter("indexPlace"));
             User user = getSessionUser(request);
             Trip trip = getSessionTrip(request);
             List<Place> places = (List<Place>) trip.getDayPlaces(day);

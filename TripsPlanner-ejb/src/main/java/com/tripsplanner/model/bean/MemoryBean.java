@@ -65,8 +65,7 @@ public class MemoryBean implements MemoryBeanLocal {
         
         Memory memory = new Memory();
         memory.setText(descriptionKeyName);
-        memory.setImgURL(imgKeyName);
-        memory.setOwner(user);
+        memory.setImgURL(imgKeyName);;
         memory.setDate(new java.sql.Date(parsed.getTime()));
         
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(amazon_access_key, amazon_secret_key);

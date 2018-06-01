@@ -56,10 +56,8 @@
                 <div class="col-md-3 rating-price-box text-center clear-padding">
                     <input id="add_memory" class="search-button btn transition-effect" type="button" value="Add Memory" onclick="openMemoryUpload()">
                     <div id="add_memory_div">
-                        <form action="ControllerServlet?action=memoryUpload" id="add_memory_form" class="box" method="post" enctype="multipart/form-data">
-                            <input id="indexPlace" name="indexPlace" value="<%=i%>" type="hidden"/>
-                            <input id="day" name="day" value="<%=k%>" type="hidden"/>
-                            <input id="description" type="text" name="description" placeholder="Write your description"/>
+                        <form action="ControllerServlet?action=memoryUpload&day=<%= k%>&indexPlace=<%= i%>" method="post" enctype="multipart/form-data" id="add_memory_form" class="box">
+                            <input type="text" id="description" name="description" placeholder="Write your description"/>
                             <div id="upload-wrap">
                                 <div class="image-upload-wrap">
                                     <input class="file-upload-input" name="memoryIMG" type='file' onchange="readURL(this);" accept="image/*" />
@@ -120,9 +118,9 @@
                 </div>
                 <div class="clearfix visible-sm-block"></div>
                 <div class="col-md-3 rating-price-box text-center clear-padding">
-                <input id="add_memory" class="search-button btn transition-effect" type="button" value="Add Memory" onclick="openMemoryUpload()">
+                    <input id="add_memory" class="search-button btn transition-effect" type="button" value="Add Memory" onclick="openMemoryUpload()">
                     <div id="add_memory_div">
-                        <form action="ControllerServlet?action=memoryUpload" id="add_memory_form" class="box" method="post" action="" enctype="multipart/form-data">
+                        <form action="ControllerServlet?action=memoryUpload&day=<%= k%>&indexPlace=<%= lastIndex%>" method="post" enctype="multipart/form-data" id="add_memory_form" class="box">
                             <input id="description" type="text" name="description" placeholder="Write your description"/>
                             <div id="upload-wrap">
                                 <div class="image-upload-wrap">

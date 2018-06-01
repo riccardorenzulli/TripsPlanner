@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -40,21 +41,17 @@ public class Memory implements Serializable {
     
     private String text;
     
-    private User owner;
-    
     private Date date;
 
-    public Memory(String imgURL, String text, User owner, Date date) {
+    public Memory(String imgURL, String text, Date date) {
         this.imgURL = imgURL;
         this.text = text;
-        this.owner = owner;
         this.date = date;
     }
     
     public Memory() {
         this.imgURL = null;
         this.text = null;
-        this.owner = null;
         this.date = null;
     }
     
@@ -80,14 +77,6 @@ public class Memory implements Serializable {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     public Date getDate() {

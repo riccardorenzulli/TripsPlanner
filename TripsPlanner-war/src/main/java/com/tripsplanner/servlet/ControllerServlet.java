@@ -46,8 +46,6 @@ public class ControllerServlet extends HttpServlet {
 
         ServletContext ctx = getServletContext();
         String action = request.getParameter("action");
-        String day = request.getParameter("day");
-        System.out.println("DAYYYYYYYYYYYYYYYYYYYYYY: " + day);
 
         // control for api keys in session
         apiKeysBean.findKeysFromCSV(ctx);

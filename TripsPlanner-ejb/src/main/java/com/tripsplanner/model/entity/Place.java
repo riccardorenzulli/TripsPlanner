@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -31,6 +32,7 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
+@Table(name = "place")
 public class Place implements Serializable {
 
     @Id
@@ -58,7 +60,7 @@ public class Place implements Serializable {
     
     private ArrayList<String> types;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Memory> memories;
 
     public String getName() {
