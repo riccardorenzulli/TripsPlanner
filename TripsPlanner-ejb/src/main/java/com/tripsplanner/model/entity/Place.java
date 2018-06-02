@@ -120,6 +120,8 @@ public class Place implements Serializable {
     }
 
     public String getPhotosUrl() {
+        if (photosUrl == null)
+            photosUrl = "http://newenglishtravel.com/wp-content/uploads/2015/11/the-best-travel-websites-in-the-world-1200x800.jpg";
         return photosUrl;
     }
 

@@ -270,7 +270,7 @@ public class TripBean implements TripBeanLocal {
         hotelPlace.setLat(hotel.getLatitude());
         hotelPlace.setLng(hotel.getLongitude());
         hotelPlace.setId(hotel.getId()); //???????
-        hotelPlace.setPhotosUrl("https://cdn.pixabay.com/photo/2015/07/18/04/48/hotel-850020_960_720.jpg");
+        hotelPlace.setPhotosUrl("http://www.hotel-city47.com/wp-content/blogs.dir/864/files/deslizantehome/Hotel_city_habitacion_matrimonio_03.jpg");
         return hotelPlace;
     }
     

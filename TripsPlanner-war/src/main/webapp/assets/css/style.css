@@ -2278,6 +2278,7 @@ h5 {
 .bottom-pagination {
     padding: 30px 0px;
     overflow: hidden;
+    margin-right: 11%;
 }
 @media (max-width: 991px) {
     .form-gp {
@@ -2867,11 +2868,9 @@ h5 {
     border: 1px solid #e6e6e6;
     box-shadow: 0px 0px 5px #e6e6e6;
     overflow: hidden;
+    color: #07253F;
 }
-.holiday-grid-view:hover {
-    border: 1px solid #F19C4F;
-    box-shadow: 0px 0px 5px #F19C4F;
-}
+
 .holiday-grid-view .holiday-header-wrapper {
     position: relative;
 }
@@ -2890,7 +2889,7 @@ h5 {
     top:0;
     color: #ffffff;
     padding: 10px;
-    background: #F2676B;
+    background: #cfb7ae;
 }
 .holiday-grid-view .holiday-header .holiday-title {
     position: absolute;
@@ -2946,6 +2945,10 @@ h5 {
 }
 .holiday-grid-view .holiday-footer .view-detail {
     padding: 15px 0px;
+}
+
+.holiday-grid-view .holiday-footer .view-detail:hover {
+    background: #f7f7f7;
 }
 .holiday-grid-view .holiday-footer .social {
     padding: 15px 0px;
@@ -3220,7 +3223,7 @@ h5 {
     font-weight: bold;
 }
 .hotel-detail-sidebar  h4 i {
-    color: #F2676B;
+    color: #AEC6CF;
     margin-right: 5px;
 }
 .hotel-detail-sidebar .sidebar-item  .sidebar-item-body {

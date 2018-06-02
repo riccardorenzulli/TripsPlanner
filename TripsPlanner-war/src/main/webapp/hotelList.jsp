@@ -57,7 +57,7 @@
         <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- FONTS -->
-
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
 
     </head>
@@ -96,7 +96,7 @@
 
             <!-- START: ROOM GALLERY -->
 
-            <div class="row product-complete-info">
+            <div class="row product-complete-info" style="background-color: #fafafa">
                 <div id="wrap" class="container">
                     <div class="col-md-8 main-content">
                         <div class="room-complete-detail custom-tabs">
@@ -114,7 +114,7 @@
 
                                     <div id="hotel_entry" class="room-info-wrapper" onclick="setPricesAndMarker(this)">
                                         <div class="col-md-4 col-sm-6 clear-padding">
-                                            <img src="assets/images/offer1.jpg" alt="cruise">
+                                            <img src="http://www.hotel-city47.com/wp-content/blogs.dir/864/files/deslizantehome/Hotel_city_habitacion_matrimonio_03.jpg" alt="cruise">
                                         </div>
                                         <div class="col-md-5 col-sm-6 room-desc">
                                             <h4> <%= hotel.getName()%> </h4>

@@ -98,7 +98,13 @@
        <div  class="hotel-list-view">    <!-- style="margin-bottom: 60px;"-->
             <div class="wrapper">
                 <div class="col-md-4 col-sm-6 switch-img clear-padding">
-                    <img src="<%=places.get(lastIndex).getPhotosUrl()%>" alt="place">
+                    <%
+                        String urlPhoto = places.get(lastIndex).getPhotosUrl();
+                        if (urlPhoto == null)
+                            urlPhoto = "http://newenglishtravel.com/wp-content/uploads/2015/11/the-best-travel-websites-in-the-world-1200x800.jpg";
+                    %>
+                                            
+                    <img src="<%=urlPhoto%>" alt="place">
                 </div>
                 <div class="col-md-5 col-sm-6 hotel-info">
                     <div>

@@ -76,7 +76,7 @@
             <jsp:include page="nav.html"/>
             <div class="clearfix"></div>
             <!-- START: LISTING AREA-->
-            <div class="row">
+            <div class="row" style="background-color: #fafafa">
                 <div class="container">	
                     <jsp:include page="dayContentFromTrips.jsp" /> 
 
