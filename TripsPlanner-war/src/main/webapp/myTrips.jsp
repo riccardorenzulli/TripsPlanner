@@ -36,7 +36,7 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600" rel="stylesheet" type="text/css">
 
         <!-- SCRIPTS -->
-        <script src="scripts/login.js"></script>
+        <script src="assets/js/login.js"></script>
         <script src="assets/js/tripPage.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>

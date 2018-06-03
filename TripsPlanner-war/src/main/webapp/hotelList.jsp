@@ -53,7 +53,6 @@
         <link href="assets/css/addmargintomap.css" rel="stylesheet">
 
         <!-- LIGHT -->
-        <link rel="stylesheet" type="text/css" href="assets/css/dummy.css" id="select-style">
         <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- FONTS -->

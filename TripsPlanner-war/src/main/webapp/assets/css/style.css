@@ -7705,7 +7705,14 @@ h5 {
     margin-bottom: 2%;
 }
 
-#add_memory {
+.add_memory {
+    width: 50%;
+    white-space: normal;
+    font-size: 45%;
+}
+
+.view_memory {
+    margin-top: 2%;
     width: 50%;
     white-space: normal;
     font-size: 45%;
