@@ -91,6 +91,8 @@
                         <div class="col-md-7 col-sm-6 hotel-info">
                             <div class="hotel-header">
                                 <h6>
+                                    <%= memories.get(j).getDate()%>
+                                    <br>
                                     <%= memories.get(j).getText()%>
                                 </h6>
                             </div>
@@ -161,6 +163,8 @@
                         <div class="col-md-7 col-sm-6 hotel-info">
                             <div class="hotel-header">
                                 <h6>
+                                    <%= memories.get(j).getDate()%>
+                                    <br>
                                     <%= memories.get(j).getText()%>
                                 </h6>
                             </div>

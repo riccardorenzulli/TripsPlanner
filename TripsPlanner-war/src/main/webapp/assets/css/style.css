@@ -289,7 +289,7 @@ h5 {
     margin-right: 5px;
 }
 .navbar-contact .form-control {
-    background: #0A3152 none repeat scroll 0 0;
+    background: #07253F none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
     box-shadow: none;
@@ -298,7 +298,7 @@ h5 {
     padding: 0 5px 0 10px;
 }
 .navbar-contact .input-group-addon {
-    background: #0A3152 none repeat scroll 0 0;
+    background: #07253F none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
     color: #AEC6CF;
@@ -848,7 +848,7 @@ h5 {
     padding: 5px 5px;
 }
 .ui-datepicker-calendar .ui-state-disabled {
-    color: #0A3152;
+    color: #07253F;
 }
 .ui-datepicker-calendar th {
     color: #ffffff;
@@ -1667,7 +1667,7 @@ h5 {
 }
 .room-grid-view  .room-info .room-desc  p{
     line-height: 1.7;
-    color: #0A3152;
+    color: #07253F;
     font-size: 13px;
 }
 .room-grid-view  .room-info .hotel-rating {
@@ -2100,7 +2100,7 @@ h5 {
 .filter-head h4:after {
     content: "\f0b0";
     background: #07253F none repeat scroll 0 0;
-    border: 4px solid #0A3152;
+    border: 4px solid #07253F;
     border-radius: 50%;
     font-family: "FontAwesome";
     height: 40px;
@@ -2111,7 +2111,7 @@ h5 {
     width: 40px;
 }
 .filter-area {
-    background: #0A3152;
+    background: #07253F;
     color: #fff;
     padding: 15px;
     margin-bottom: 45px;
@@ -2159,7 +2159,7 @@ h5 {
     color: #ffffff;
 }
 .price-filter input {
-    background: #0A3152;
+    background: #07253F;
     border: none;
     color: #F19C4F;
     font-weight: bold;
@@ -2359,7 +2359,7 @@ h5 {
 }
 .hotel-list-view .hotel-desc p {
     font-size: 13px;
-    color: #0A3152;
+    color: #07253F;
     line-height: 1.7;
 }
 .hotel-list-view .rating-box {
@@ -2603,7 +2603,7 @@ h5 {
 #itinerary i {
     padding: 20px 0px;
     font-size: 20px;
-    color: #0A3152;
+    color: #07253F;
 }
 #itinerary .itinerary-date {
     margin: 0;
@@ -2775,7 +2775,7 @@ h5 {
 .flight-direction:after {
     background: #e6e6e6 none repeat scroll 0 0;
     border-radius: 50%;
-    color: #0A3152;
+    color: #07253F;
     content: "";
     height: 15px;
     position: absolute;
@@ -2786,7 +2786,7 @@ h5 {
 .flight-direction:before {
     background: #e6e6e6 none repeat scroll 0 0;
     border-radius: 50%;
-    color: #0A3152;
+    color: #07253F;
     content: "";
     height: 15px;
     position: absolute;
@@ -2798,7 +2798,7 @@ h5 {
     overflow: hidden;
     background: #f7f7f7;
     padding: 10px 0px;
-    color: #0A3152;
+    color: #07253F;
 }
 .flight-list-footer span{
     padding: 0px 10px;
@@ -2821,14 +2821,14 @@ h5 {
 }
 .flight-list-footer .refund {
     color: #F2676B;
-    border-left: 1px solid #0A3152;
-    border-right: 1px solid #0A3152;
+    border-left: 1px solid #07253F;
+    border-right: 1px solid #07253F;
 }
 .flight-list-footer .fa-info-circle {
     cursor: pointer;
 }
 .flight-list-v2 h5 {
-    color: #0A3152;
+    color: #07253F;
     font-size: 13px;
     margin: 5px 0px;
 }
@@ -2928,7 +2928,7 @@ h5 {
 }
 .holiday-grid-view .holiday-details i {
     margin-right: 10px;
-    color: #0A3152;
+    color: #07253F;
 }
 .holiday-grid-view .holiday-details .sm-text {
     font-size: 13px;
@@ -2942,27 +2942,35 @@ h5 {
 .holiday-grid-view .holiday-footer a {
     letter-spacing: 1px;
     font-weight: bold;
-    color: #0A3152;
+    color: #07253F;
 }
 .holiday-grid-view .holiday-footer .view-detail {
     padding: 15px 0px;
+    background: #AEC6CF;
 }
 
 .holiday-grid-view .holiday-footer .view-detail:hover {
-    background: #f7f7f7;
+    background: #cfb7ae;
 }
 .holiday-grid-view .holiday-footer .social {
     padding: 15px 0px;
-    background: #f7f7f7;
+    background: #AEC6CF;
     position: relative;
 }
 .holiday-grid-view .holiday-footer .social i {
     margin: 0px 5px;
+    color: #07253F;
 }
+
 .holiday-grid-view .holiday-footer .social i:hover {
-    color: #F2676B;
+    color: #cfb7ae;
     cursor: pointer;
 }
+
+.holiday-grid-view a {
+    color: #07253F;
+}
+
 @media (max-width: 991px) {
     .modify-holiday  {
         background-size: cover !important;
@@ -3058,13 +3066,13 @@ h5 {
 }
 .cruise-list-view .nav > li > a {
     padding: 5px 15px;
-    color: #0A3152;
+    color: #07253F;
     font-weight: bold;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:hover {
-    color: #0A3152;
+    color: #07253F;
 }
 .cruise-list-view .booking-box {
     border-left: 1px solid #e6e6e6;
@@ -4946,7 +4954,7 @@ h5 {
 }
 .user-profile-tabs .nav-tabs > li {
     float: none !important;
-    border-bottom: 2px solid #0A3152;
+    border-bottom: 2px solid #07253F;
 
 }
 .user-profile-tabs .nav-tabs > li a:hover {
@@ -5910,7 +5918,7 @@ h5 {
     border-radius: 0px;
     height: 40px;
     padding: 10px;
-    background: #0A3152;
+    background: #07253F;
     border: none;
 }
 .sm-footer .footer-subscribe button {
@@ -5944,7 +5952,7 @@ h5 {
     background: #AEC6CF;
 }
 .sm-footer-nav {
-    background: #0A3152;
+    background: #07253F;
     padding: 30px 0px;
     position: relative;
 }
@@ -6048,7 +6056,7 @@ h5 {
 .room-check-horizontal .form-control {
     height: 40px;
     border-radius: 0px;
-    background: #0A3152;
+    background: #07253F;
     color: #fff;
     text-align: center;
     border: none;
@@ -6061,7 +6069,7 @@ h5 {
 }
 .room-check-horizontal .custom-select-button {
     border: none;
-    background: #0A3152;
+    background: #07253F;
 }
 .room-check-horizontal .check-button {
     margin-top: 50px;
@@ -7301,7 +7309,7 @@ h5 {
 }
 .product-grid-view .hotel-desc p {
     font-size: 13px;
-    color: #0A3152;
+    color: #07253F;
     line-height: 1.7;
 }
 .product-grid-view .rating-box {
