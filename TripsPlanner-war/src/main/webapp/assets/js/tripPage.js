@@ -52,19 +52,46 @@ function canSaveTrip(f, loggedin) {
     }
 }
 
-var addmemorybtn;
+var addmemorydiv;
+var viewmemorydiv;
 
 function openMemoryUpload(k, i) {
-    addmemorybtn = document.getElementById("add_memory_div");
-    addmemorybtn.style.display = "block";
+    addmemorydiv = document.getElementById("add_memory_div");
+    addmemorydiv.style.display = "block";
     form = document.getElementById("add_memory_form");
     form.action = "ControllerServlet?action=memoryUpload&day="+k+"&indexPlace="+i;
 }
 
+function viewMemories(k, i) {
+    viewmemorydiv = document.getElementById("view_memory_div"+k+i);
+    viewmemorydiv.style.display = "block";
+}
+
+function reloadUserInfo() {
+    if(xhrObj.readyState === 4 && xhrObj.status === 200) {
+        var ris = xhrObj.responseText;
+        if (ris === "success") {
+            $("#user-personal-info").load("user-profile.jsp #user-personal-info>*","");
+            $("#header").load("header.jsp #header>*","");
+            swal('Success!', 'Personal informations updated.', 'success');
+        }
+        
+        else {
+            swal('Warning!', ris, 'warning');
+        }
+    }
+    else if(xhrObj.status === 400) swal("Error!",  "status 400", "error");
+    
+}
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == addmemorybtn) {
-        addmemorybtn.style.display = "none";
+    if (event.target == addmemorydiv) {
+        addmemorydiv.style.display = "none";
+    }
+    
+    else if (event.target == viewmemorydiv) {
+        viewmemorydiv.style.display = "none";
     }
 }
 

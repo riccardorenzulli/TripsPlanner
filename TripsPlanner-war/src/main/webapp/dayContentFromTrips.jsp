@@ -4,6 +4,7 @@
     Author     : the-silent-fox
 --%>
 
+<%@page import="com.tripsplanner.model.entity.Memory"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tripsplanner.model.entity.User"%>
 <%@page import="com.tripsplanner.model.entity.Route"%>
@@ -60,6 +61,7 @@
                 <div class="col-md-3 rating-price-box text-center clear-padding">
                     <input class="search-button btn transition-effect add_memory" type="button" value="Add Memory" onclick="openMemoryUpload(<%= k%>, <%= i%>)">
                     <input class="search-button btn transition-effect view_memory" type="button" value="View Memories" onclick="viewMemories(<%= k%>, <%= i%>)">
+                    
                 </div>
             </div>
         </div>
@@ -73,7 +75,37 @@
                 <div class="col-md-6 col-sm-6"></div>
             </div>                                  
         </div>
+        
+        <div id="view_memory_div<%=k%><%=i%>" class="view_memory_div">
+            <div class="view_hidden_div">
+                <h5>Memories</h5>
         <%
+            List<Memory> memories = (List<Memory>) places.get(i).getMemories();
+            for (int j = 0; j < memories.size(); j++) {  
+        %>
+            <div class="view_memory_w" class="box">
+                    <div class="wrapper">
+                        <div class="col-md-5 col-sm-6 switch-img clear-padding">
+                            <img src="https://s3.eu-west-3.amazonaws.com/tripsplanner-bucket/<%= memories.get(j).getImgURL() %>" alt="place">
+                        </div>
+                        <div class="col-md-7 col-sm-6 hotel-info">
+                            <div class="hotel-header">
+                                <h6>
+                                    <%= memories.get(j).getDate()%>
+                                    <br>
+                                    <%= memories.get(j).getText()%>
+                                </h6>
+                            </div>
+                            <a class="delete-memory" href="ControllerServlet?action=deleteMemory&day=<%=k%>&indexPlace=<%=i%>&indexMemory=<%=j%>"><i class="far fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            </div>
+        </div>
+        
+        <%
+                
             }
             int lastIndex = places.size() - 1;
         %>
@@ -114,6 +146,33 @@
                     <input class="search-button btn transition-effect add_memory" type="button" value="Add Memory" onclick="openMemoryUpload(<%= k%>, <%= lastIndex%>)">
                     <input class="search-button btn transition-effect view_memory" type="button" value="View Memories" onclick="viewMemories(<%= k%>, <%= lastIndex%>)">
                 </div>
+            </div>
+        </div>
+        <div id="view_memory_div<%=k%><%=lastIndex%>" class="view_memory_div">
+            <div class="view_hidden_div">
+                <h5>Memories</h5>
+        <%
+            List<Memory> memories = (List<Memory>) places.get(lastIndex).getMemories();
+            for (int j = 0; j < memories.size(); j++) {  
+        %>
+            <div class="view_memory_w" class="box">
+                    <div class="wrapper">
+                        <div class="col-md-5 col-sm-6 switch-img clear-padding">
+                            <img src="https://s3.eu-west-3.amazonaws.com/tripsplanner-bucket/<%= memories.get(j).getImgURL() %>" alt="place">
+                        </div>
+                        <div class="col-md-7 col-sm-6 hotel-info">
+                            <div class="hotel-header">
+                                <h6>
+                                    <%= memories.get(j).getDate()%>
+                                    <br>
+                                    <%= memories.get(j).getText()%>
+                                </h6>
+                            </div>
+                            <a class="delete-memory" href="ControllerServlet?action=deleteMemory&day=<%=k%>&indexPlace=<%=lastIndex%>&indexMemory=<%=j%>"><i class="far fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
             </div>
         </div>
     </div>
