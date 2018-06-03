@@ -16,6 +16,6 @@ import javax.ejb.Local;
 @Local
 public interface PlaceBeanLocal {
 
-    void updatePlace(Memory memory, Place place);
+    void updatePlace(Memory memory, Place place, boolean add);
     
 }

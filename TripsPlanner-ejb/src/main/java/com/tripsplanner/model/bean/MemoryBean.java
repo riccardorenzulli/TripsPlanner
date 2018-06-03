@@ -15,7 +15,10 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.tripsplanner.model.entity.Memory;
+import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.User;
+import com.tripsplanner.model.facade.MemoryFacade;
+import com.tripsplanner.model.facade.MemoryFacadeLocal;
 import java.io.File;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -43,6 +46,9 @@ import javax.servlet.http.Part;
 
 @Stateless
 public class MemoryBean implements MemoryBeanLocal {
+
+    @EJB
+    private MemoryFacadeLocal memoryFacade;
     
     @EJB
     private ApiKeysBean apiKeysBean;
@@ -50,7 +56,7 @@ public class MemoryBean implements MemoryBeanLocal {
     private String amazon_secret_key = apiKeysBean.keys.get("amazon_secret_key");
 
     @Override
-    public Memory uploadMemory(String description, Part filePart, String fileName, InputStream image, User user) throws ParseException {
+    public Memory uploadMemory(String description, Part filePart, InputStream image, User user) throws ParseException {
         
         String clientRegion = "eu-west-3";
         String bucketName = "tripsplanner-bucket";
@@ -60,20 +66,16 @@ public class MemoryBean implements MemoryBeanLocal {
         String timestamp = dateFormat.format(date);
         Date parsed = dateFormat.parse(timestamp);
         
-        String descriptionKeyName = user.getGoogleID() + timestamp + "text";
         String imgKeyName = user.getGoogleID() + timestamp + "img";
         
         Memory memory = new Memory();
-        memory.setText(descriptionKeyName);
-        memory.setImgURL(imgKeyName);;
+        memory.setText(description);
+        memory.setImgURL(imgKeyName);
         memory.setDate(new java.sql.Date(parsed.getTime()));
         
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(amazon_access_key, amazon_secret_key);
   
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(clientRegion).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-
-        // Upload a text string as a new object.
-        s3Client.putObject(bucketName, descriptionKeyName, description); 
         
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType("image/jpg");
@@ -83,10 +85,15 @@ public class MemoryBean implements MemoryBeanLocal {
         PutObjectRequest request = new PutObjectRequest(bucketName, imgKeyName, image, metadata);
 
         s3Client.putObject(request);
-        
+        memoryFacade.create(memory);
         return memory;
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
+    @Override
+    public void removeMemory(Memory memory) {
+        memoryFacade.remove(memory);
+    }
 }

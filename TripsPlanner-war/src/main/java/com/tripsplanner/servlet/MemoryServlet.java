@@ -7,6 +7,7 @@ package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.MemoryBeanLocal;
 import com.tripsplanner.model.bean.PlaceBeanLocal;
+import com.tripsplanner.model.bean.TripBeanLocal;
 import com.tripsplanner.model.entity.Memory;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Trip;
@@ -46,6 +47,9 @@ import javax.servlet.http.Part;
 public class MemoryServlet extends HttpServlet {
 
     @EJB
+    private TripBeanLocal tripBean;
+
+    @EJB
     private PlaceBeanLocal placeBean;
 
     @EJB
@@ -68,33 +72,63 @@ public class MemoryServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         if(action.equalsIgnoreCase("memoryUpload")) {
-
-            int day = Integer.parseInt(request.getParameter("day"));
-            int indexPlace = Integer.parseInt(request.getParameter("indexPlace"));
-            User user = getSessionUser(request);
-            Trip trip = getSessionTrip(request);
-            List<Place> places = (List<Place>) trip.getDayPlaces(day);
-            Place place = places.get(indexPlace);
-            String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
-            Part filePart = request.getPart("memoryIMG"); // Retrieves <input type="file" name="file">
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-            InputStream fileContent = filePart.getInputStream();
-
-            try {
-                Memory memory = memoryBean.uploadMemory(description, filePart, fileName, fileContent, user);
-                placeBean.updatePlace(memory, place);
-                request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
-                
-            } catch (ParseException ex) {
-                //rimandare ad una pagina o popup error
-                Logger.getLogger(MemoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            uploadMemory(request, response);     
+        }
+        
+        else if (action.equalsIgnoreCase("viewMemories")) {
+            //RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
+            //rd.forward(request, response);
+        }
+        
+        else if(action.equalsIgnoreCase("deleteMemory")) {
+            deleteMemory(request,response);
         }
         
         else {
             RequestDispatcher rd = ctx.getRequestDispatcher("/error.jsp");
             rd.forward(request, response);
+        }
+    }
+    
+    private void deleteMemory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int day = Integer.parseInt(request.getParameter("day"));
+        int indexPlace = Integer.parseInt(request.getParameter("indexPlace"));
+        int indexMemory = Integer.parseInt(request.getParameter("indexMemory"));
+        User user = getSessionUser(request);
+        Trip trip = getSessionTrip(request);
+        List<Place> places = (List<Place>) trip.getDayPlaces(day);
+        Place place = places.get(indexPlace);
+        Memory memory = place.getMemories().get(indexMemory);
+
+        placeBean.updatePlace(memory, place, false);
+        memoryBean.removeMemory(memory);
+        Trip newTrip = tripBean.getTripByOwnerAndID(user, trip.getId());
+        request.getSession().setAttribute("trip", newTrip);
+        request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
+
+    }
+    
+    private void uploadMemory(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        int day = Integer.parseInt(request.getParameter("day"));
+        int indexPlace = Integer.parseInt(request.getParameter("indexPlace"));
+        User user = getSessionUser(request);
+        Trip trip = getSessionTrip(request);
+        List<Place> places = (List<Place>) trip.getDayPlaces(day);
+        Place place = places.get(indexPlace);
+        String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
+        Part filePart = request.getPart("memoryIMG"); // Retrieves <input type="file" name="file">
+        InputStream fileContent = filePart.getInputStream();
+
+        try {
+            Memory memory = memoryBean.uploadMemory(description, filePart, fileContent, user);
+            placeBean.updatePlace(memory, place, true);
+            Trip newTrip = tripBean.getTripByOwnerAndID(user, trip.getId());
+            request.getSession().setAttribute("trip", newTrip);
+            request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
+
+        } catch (ParseException ex) {
+            //rimandare ad una pagina o popup error
+            Logger.getLogger(MemoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -146,5 +180,6 @@ public class MemoryServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

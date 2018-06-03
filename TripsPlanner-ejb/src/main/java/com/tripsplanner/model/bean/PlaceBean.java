@@ -22,8 +22,9 @@ public class PlaceBean implements PlaceBeanLocal {
     private PlaceFacadeLocal placeFacade;
 
     @Override
-    public void updatePlace(Memory memory, Place place) {
-        place.getMemories().add(memory);
+    public void updatePlace(Memory memory, Place place, boolean add) {
+        if (add) place.getMemories().add(memory);
+        else place.getMemories().remove(memory);
         placeFacade.edit(place);
     }
 

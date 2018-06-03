@@ -85,7 +85,17 @@ public class ControllerServlet extends HttpServlet {
         else if (action.equalsIgnoreCase("memoryUpload")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
             rd.forward(request, response);
-        } 
+        }
+        
+        else if (action.equalsIgnoreCase("viewMemories")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
+            rd.forward(request, response);
+        }
+        
+        else if (action.equalsIgnoreCase("deleteMemory")) {
+            RequestDispatcher rd = ctx.getRequestDispatcher("/MemoryServlet");
+            rd.forward(request, response);
+        }
         
         else if (action.equalsIgnoreCase("user-info")) {
             RequestDispatcher rd = ctx.getRequestDispatcher("/user-profile.jsp");
