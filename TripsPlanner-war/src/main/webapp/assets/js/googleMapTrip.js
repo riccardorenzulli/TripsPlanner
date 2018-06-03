@@ -9,9 +9,9 @@ function initMap() {
         zoom: 15
     });
 
-    var hotels;
-    for (hotels = 0; hotels < coordinates.length; hotels++) {
-        var myLatLng = {lat: coordinates[hotels][0][0], lng: coordinates[hotels][0][1]};
+    var places;
+    for (places = 0; places < coordinates.length; places++) {
+        var myLatLng = {lat: coordinates[places][0][0], lng: coordinates[places][0][1]};
         var marker = new google.maps.Marker({
                 icon: "http://maps.google.com/mapfiles/ms/icons/red.png",
                 position: myLatLng,

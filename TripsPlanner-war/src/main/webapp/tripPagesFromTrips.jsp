@@ -53,7 +53,7 @@
         <script src="assets/js/login.js"></script>
         <script src="assets/js/tripPage.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script src="assets/js/googleMapForTrip.js"></script>
+        <script src="assets/js/googleMapTrip.js"></script>
     </head>
 
     <body class="load-full-screen">

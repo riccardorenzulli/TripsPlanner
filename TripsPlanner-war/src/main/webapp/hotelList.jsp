@@ -233,7 +233,7 @@
         <script src="assets/plugins/wow.min.js"></script>
         <script src="assets/plugins/jquery.flexslider-min.js"></script>
         <script src="assets/js/js.js"></script>
-        <script src="assets/js/googleMap.js"></script>
+        <script src="assets/js/googleMapHotel.js"></script>
         <script src="assets/js/loadingPage.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1R8HigvjL4UgHft-PPsfme65pvj846U&callback=initMap&libraries=drawing"
         async defer></script>

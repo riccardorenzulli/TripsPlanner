@@ -40,11 +40,15 @@
                     <div>
                         <div class="hotel-header">
                             <h5>
-                                <%= places.get(i).getName()%>
+                                <%= places.get(i).getName()%> #<%= i + 1%>
                             </h5>
-                            <p><i class="fa fa-map-marker"></i>
-                                <%= places.get(i).getAddress()%>
-                            </p>
+                            <a href=javascript:void(0) onclick="setMarker(this,<%= k%>,<%= i%>)">
+                                <p><i class="fa fa-map-marker"></i>
+                                    <%= places.get(i).getAddress()%>
+                                </p>
+                                <input class='lat' type='hidden' value='<%= places.get(i).getLat()%>'/>
+                                <input class='lon' type='hidden' value='<%= places.get(i).getLng()%>'/>
+                            </a>
                         </div>
 
                         <div class="hotel-desc">
@@ -52,26 +56,6 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="clearfix visible-sm-block"></div>
-                <div class="col-md-2 rating-price-box text-center clear-padding">
-                    <div class="rating-box">
-                        <div class="tripadvisor-rating">
-                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                        </div>
-                        <div class="user-rating">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                            <span>128 Guest Reviews.</span>
-                        </div>
-                    </div>
-                    <div class="room-book-box">
-
-                        <div class="book">
-                            <a href="#">Modify</a>
-                        </div>
-                    </div>
-                </div>-->
-                <input id='lat' type='hidden' value='<%= places.get(i).getLat()%>'/>
-                <input id='lon' type='hidden' value='<%= places.get(i).getLng()%>'/>
             </div>
         </div>
 
@@ -97,11 +81,15 @@
                     <div>
                         <div class="hotel-header">
                             <h5>
-                                <%= places.get(lastIndex).getName()%>
+                                <%= places.get(lastIndex).getName()%> #<%= lastIndex + 1%>
                             </h5>
-                            <p><i class="fa fa-map-marker"></i>
-                                <%= places.get(lastIndex).getAddress()%>
-                            </p>
+                            <a href=javascript:void(0) onclick="setMarker(this,<%= k%>,<%= lastIndex%>)">
+                                <p><i class="fa fa-map-marker"></i>
+                                    <%= places.get(lastIndex).getAddress()%>
+                                </p>
+                                <input class='lat' type='hidden' value='<%= places.get(lastIndex).getLat()%>'/>
+                                <input class='lon' type='hidden' value='<%= places.get(lastIndex).getLng()%>'/>
+                            </a>
                         </div>
 
                         <div class="hotel-desc">
@@ -109,24 +97,6 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="clearfix visible-sm-block"></div>
-                <div class="col-md-2 rating-price-box text-center clear-padding">
-                    <div class="rating-box">
-                        <div class="tripadvisor-rating">
-                            <img src="assets/images/tripadvisor.png" alt="cruise"><span>4.5/5.0</span>
-                        </div>
-                        <div class="user-rating">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                            <span>128 Guest Reviews.</span>
-                        </div>
-                    </div>
-                    <div class="room-book-box">
-
-                        <div class="book">
-                            <a href="#">Modify</a>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
@@ -137,23 +107,14 @@
 <!-- END TRIP DIV -->
 
 <div id="fixed" class="col-md-3 hotel-detail-sidebar">
-
     <div >
-
         <div class="col-md-12 clear-padding">
-            <!--					<div class="map sidebar-item">
-                                                            <h5><i class="fa fa-map-marker"></i> Mall Road, Shimla, Himachal Pradesh, 176077</h5>
-                                                            <iframe class="hotel-map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJG1usnet4BTkRzQqb_Ys-JOg&amp;key=AIzaSyB6hgZM-ruUqTPVUjXGUR-vv7WRqc4MXjY" ></iframe>
-                                                    </div>-->
             <div class="map sidebar-item">
                 <div class="hotel-map">
                     <div id="map"></div>
                 </div>
             </div>
-
         </div>
-
     </div>   
-
 </div>
 

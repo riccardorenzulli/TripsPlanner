@@ -115,8 +115,6 @@
                     <input class="search-button btn transition-effect view_memory" type="button" value="View Memories" onclick="viewMemories(<%= k%>, <%= lastIndex%>)">
                 </div>
             </div>
-            <input class='lat' type='hidden' value='<%= places.get(lastIndex).getLat()%>'/>
-            <input class='lon' type='hidden' value='<%= places.get(lastIndex).getLng()%>'/>
         </div>
     </div>
     <%
