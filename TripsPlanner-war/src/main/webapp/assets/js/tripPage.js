@@ -54,9 +54,11 @@ function canSaveTrip(f, loggedin) {
 
 var addmemorybtn;
 
-function openMemoryUpload() {
+function openMemoryUpload(k, i) {
     addmemorybtn = document.getElementById("add_memory_div");
     addmemorybtn.style.display = "block";
+    form = document.getElementById("add_memory_form");
+    form.action = "ControllerServlet?action=memoryUpload&day="+k+"&indexPlace="+i;
 }
 
 // When the user clicks anywhere outside of the modal, close it
