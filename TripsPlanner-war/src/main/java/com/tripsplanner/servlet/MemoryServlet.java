@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tripsplanner.servlet;
 
 import com.tripsplanner.model.bean.MemoryBeanLocal;
@@ -14,8 +9,6 @@ import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
@@ -125,7 +118,6 @@ public class MemoryServlet extends HttpServlet {
             Trip newTrip = tripBean.getTripByOwnerAndID(user, trip.getId());
             request.getSession().setAttribute("trip", newTrip);
             request.getRequestDispatcher("tripPagesFromTrips.jsp").forward(request, response);
-
         } catch (ParseException ex) {
             //rimandare ad una pagina o popup error
             Logger.getLogger(MemoryServlet.class.getName()).log(Level.SEVERE, null, ex);

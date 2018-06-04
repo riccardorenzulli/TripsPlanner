@@ -85,10 +85,27 @@
         %>
             <div class="view_memory_w" class="box">
                     <div class="wrapper">
-                        <div class="col-md-5 col-sm-6 switch-img clear-padding">
+                        <div class="col-md-2 col-sm-1 switch-img clear-padding">
+                            <img class="mem_user" src="<%= memories.get(j).getOwner().getImgURL() %>" alt="user">
+                        </div>
+                        <%
+                            if (memories.get(j).getImgURL() != null) {
+                        %>
+                        <div class="col-md-4 col-sm-5 switch-img clear-padding">
                             <img src="https://s3.eu-west-3.amazonaws.com/tripsplanner-bucket/<%= memories.get(j).getImgURL() %>" alt="place">
                         </div>
-                        <div class="col-md-7 col-sm-6 hotel-info">
+                        
+                        <%
+                            } else {
+                        %>
+                        
+                        <div class="col-md-4 col-sm-5 switch-img clear-padding">
+                            <img src="https://s3.favim.com/orig/41/bampw-black-and-white-hand-memories-memory-Favim.com-342114.jpg" alt="place">
+                        </div>
+                        
+                        <% } %>
+                        
+                        <div class="col-md-6 col-sm-5 hotel-info">
                             <div class="hotel-header">
                                 <h6>
                                     <%= memories.get(j).getDate()%>
@@ -157,10 +174,27 @@
         %>
             <div class="view_memory_w" class="box">
                     <div class="wrapper">
-                        <div class="col-md-5 col-sm-6 switch-img clear-padding">
+                        <div class="col-md-2 col-sm-1 switch-img clear-padding">
+                            <img class="mem_user" src="<%= memories.get(j).getOwner().getImgURL() %>" alt="user">
+                        </div>
+                        <%
+                            if (memories.get(j).getImgURL() != null) {
+                        %>
+                        <div class="col-md-4 col-sm-5 switch-img clear-padding">
                             <img src="https://s3.eu-west-3.amazonaws.com/tripsplanner-bucket/<%= memories.get(j).getImgURL() %>" alt="place">
                         </div>
-                        <div class="col-md-7 col-sm-6 hotel-info">
+                        
+                        <%
+                            } else {
+                        %>
+                        
+                        <div class="col-md-4 col-sm-5 switch-img clear-padding">
+                            <img src="https://s3.favim.com/orig/41/bampw-black-and-white-hand-memories-memory-Favim.com-342114.jpg" alt="place">
+                        </div>
+                        
+                        <% } %>
+                        
+                        <div class="col-md-6 col-sm-5 hotel-info">
                             <div class="hotel-header">
                                 <h6>
                                     <%= memories.get(j).getDate()%>

@@ -7794,3 +7794,8 @@ h5 {
     white-space: normal;
     font-size: 45%;
 }
+
+.mem_user {
+    border-radius: 50%;
+    width: 80%;
+}
