@@ -1,27 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tripsplanner.model.bean;
 
 import javax.ejb.Stateless;
-import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.tripsplanner.model.entity.Memory;
-import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.User;
-import com.tripsplanner.model.facade.MemoryFacade;
 import com.tripsplanner.model.facade.MemoryFacadeLocal;
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,31 +56,34 @@ public class MemoryBean implements MemoryBeanLocal {
         String timestamp = dateFormat.format(date);
         Date parsed = dateFormat.parse(timestamp);
         
-        String imgKeyName = user.getGoogleID() + timestamp + "img";
-        
         Memory memory = new Memory();
         memory.setText(description);
-        memory.setImgURL(imgKeyName);
         memory.setDate(new java.sql.Date(parsed.getTime()));
+        memory.setOwner(user);
+                
+        try {
+            if (image.available() != 0) {
+                BasicAWSCredentials awsCreds = new BasicAWSCredentials(amazon_access_key, amazon_secret_key);
+                AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(clientRegion).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+                
+                ObjectMetadata metadata = new ObjectMetadata();
+                metadata.setContentType("image/jpg");
+                metadata.addUserMetadata("x-amz-meta-title", "someTitle");
+                
+                // Upload a file as a new object with ContentType and title specified.
+                String imgKeyName = user.getGoogleID() + timestamp + "img";
+                PutObjectRequest request = new PutObjectRequest(bucketName, imgKeyName, image, metadata);
+                
+                s3Client.putObject(request);
+                memory.setImgURL(imgKeyName);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(MemoryBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials(amazon_access_key, amazon_secret_key);
-  
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(clientRegion).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-        
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("image/jpg");
-        metadata.addUserMetadata("x-amz-meta-title", "someTitle");
-        
-        // Upload a file as a new object with ContentType and title specified.
-        PutObjectRequest request = new PutObjectRequest(bucketName, imgKeyName, image, metadata);
-
-        s3Client.putObject(request);
         memoryFacade.create(memory);
         return memory;
     }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     @Override
     public void removeMemory(Memory memory) {

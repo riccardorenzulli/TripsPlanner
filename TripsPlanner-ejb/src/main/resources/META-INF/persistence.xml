@@ -5,7 +5,6 @@
     <jta-data-source>java:/TripsPlannerDS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
     </properties>
   </persistence-unit>
