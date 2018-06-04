@@ -165,6 +165,17 @@ public class GooglePlacesBean {
         ArrayList<Place> results = new ArrayList();
         results.addAll(places);
         
+        long departureTime = search.getDepartureDate().getTime();
+        long returnTime = search.getReturnDate().getTime();
+        long timeTrip = returnTime - departureTime;
+        int tripDays = ((int)timeTrip/86400000) + 1;
+        
+        int placesForDay = 4;
+        
+        while(results.size() > placesForDay*tripDays) {
+            results.remove(results.size()-1);
+        }
+        
         return results;
     } 
     
@@ -207,7 +218,7 @@ public class GooglePlacesBean {
         ArrayList<Place> places = new ArrayList<Place>();
         JSONArray results = jsonResult.getJSONArray("results");
         
-        for(int i=0; i<5 && i<results.length(); i++) {
+        for(int i=0; i<15 && i<results.length(); i++) {
             JSONObject jsonObj = results.getJSONObject(i);
             places.add(fromJsonToPlace(jsonObj));
         }
