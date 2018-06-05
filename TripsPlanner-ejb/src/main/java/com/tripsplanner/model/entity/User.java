@@ -78,7 +78,7 @@ public class User implements Serializable {
     
     private String sex;
     
-    private short enabled;
+    private Short enabled;
     
     @ManyToMany(mappedBy = "collaborators")
     private List<Trip> trips;
@@ -93,7 +93,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Long id, String name, String email, short enabled) {
+    public User(Long id, String name, String email, Short enabled) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -188,11 +188,11 @@ public class User implements Serializable {
         this.trips = trips;
     }
 
-    public short getEnabled() {
+    public Short getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(short enabled) {
+    public void setEnabled(Short enabled) {
         this.enabled = enabled;
     }
 

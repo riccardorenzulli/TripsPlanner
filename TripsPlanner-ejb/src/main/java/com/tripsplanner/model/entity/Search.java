@@ -44,20 +44,20 @@ public class Search implements Serializable {
 
     private Date returnDate;
 
-    private int numAdult;
+    private Integer numAdult;
 
-    private int numChildren; //declared for future works
+    private Integer numChildren; //declared for future works
     /*Preferences*/
 
-    private boolean museums;
+    private Boolean museums;
 
-    private boolean art;
+    private Boolean art;
 
-    private boolean nature;
+    private Boolean nature;
 
-    private boolean nightLife;
+    private Boolean nightLife;
 
-    private boolean shopping;
+    private Boolean shopping;
     
     public Search() {}
     
@@ -93,59 +93,59 @@ public class Search implements Serializable {
         this.returnDate = returnDate;
     }
 
-    public int getNumAdult() {
+    public Integer getNumAdult() {
         return numAdult;
     }
 
-    public void setNumAdult(int numAdult) {
+    public void setNumAdult(Integer numAdult) {
         this.numAdult = numAdult;
     }
 
-    public int getNumChildren() {
+    public Integer getNumChildren() {
         return numChildren;
     }
 
-    public void setNumChildren(int numChildren) {
+    public void setNumChildren(Integer numChildren) {
         this.numChildren = numChildren;
     }
 
-    public boolean isMuseums() {
+    public Boolean isMuseums() {
         return museums;
     }
 
-    public void setMuseums(boolean museums) {
+    public void setMuseums(Boolean museums) {
         this.museums = museums;
     }
 
-    public boolean isArt() {
+    public Boolean isArt() {
         return art;
     }
 
-    public void setArt(boolean art) {
+    public void setArt(Boolean art) {
         this.art = art;
     }
 
-    public boolean isNature() {
+    public Boolean isNature() {
         return nature;
     }
 
-    public void setNature(boolean nature) {
+    public void setNature(Boolean nature) {
         this.nature = nature;
     }
 
-    public boolean isNightLife() {
+    public Boolean isNightLife() {
         return nightLife;
     }
 
-    public void setNightLife(boolean nightLife) {
+    public void setNightLife(Boolean nightLife) {
         this.nightLife = nightLife;
     }
 
-    public boolean isShopping() {
+    public Boolean isShopping() {
         return shopping;
     }
 
-    public void setShopping(boolean shopping) {
+    public void setShopping(Boolean shopping) {
         this.shopping = shopping;
     }
 
@@ -161,7 +161,7 @@ public class Search implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
+        Integer hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }

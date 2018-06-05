@@ -5,10 +5,15 @@
  */
 package com.tripsplanner.webservice;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tripsplanner.model.bean.LoginBeanLocal;
 import com.tripsplanner.model.bean.TripBeanLocal;
+import com.tripsplanner.model.entity.DayItinerary;
+import com.tripsplanner.model.entity.Route;
 import com.tripsplanner.model.entity.User;
 import com.tripsplanner.model.entity.Trip;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,10 +62,28 @@ public class MobileWebService {
     @GET
     @Path("mytrips")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Trip> getAllTripByOwner() {
+    public ArrayList<Trip> getAllTripByOwner() {
         User user = (User) req.getSession().getAttribute("user");
-        List<Trip> trips = tripBean.getAllTripByOwner(user);
-
+        ArrayList<Trip> trips = new ArrayList<Trip>(tripBean.getAllTripByOwner(user));
+        
+        for (Trip trip : trips) {
+            trip.getOwner().setTrips(null);
+            //trip.getOwner().setBelongingTrips(null);
+            for(User collaborator : trip.getCollaborators()) {
+                collaborator.setTrips(null);
+                //collaborator.setBelongingTrips(null);
+            }
+            for (DayItinerary it : trip.getItineraries()) {
+                it.setTrip(null);
+                for (Route route: it.getLegs())
+                    route.setDayItinerary(null);
+            }
+        }
+        
+        //Gson gson = new GsonBuilder().create();
+        //String json = gson.toJson(trips);
+        //JSONObject jsonObj = new JSONObject(json);
+        
         return trips;
     }
     
