@@ -120,7 +120,7 @@ public class GoogleDirectionsBean {
         }
         
         else if ((travelMode.equalsIgnoreCase("driving") || travelMode.equalsIgnoreCase("walking")) && departureTime != null) {
-            if (departureTime.equalsIgnoreCase("now")) route.setDepartureTimeValue(0);
+            if (departureTime.equalsIgnoreCase("now")) route.setDepartureTimeValue(0L);
             else route.setDepartureTimeValue(Long.parseLong(departureTime));
         }
         

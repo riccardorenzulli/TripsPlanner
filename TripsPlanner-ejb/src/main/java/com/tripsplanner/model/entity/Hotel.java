@@ -37,25 +37,25 @@ public class Hotel implements Serializable {
     
     private String currency;
     
-    private float total;   
+    private Float total;   
     
-    private boolean available;
+    private Boolean available;
     
-    private float latitude;
+    private Float latitude;
     
-    private float longitude;
+    private Float longitude;
 
     private String address;
 
-    private float dayPrice;
+    private Float dayPrice;
 
-    private int guests;
+    private Integer guests;
 
-    private int list_id;
+    private Integer list_id;
     
     public Hotel() {}
 
-    public Hotel(int id, String name, String cityCode, String roomType, String roomDescription, String currency, float total, float dayPrice, int guests, boolean available, float latitude, float longitude, String address) {
+    public Hotel(Integer id, String name, String cityCode, String roomType, String roomDescription, String currency, Float total, Float dayPrice, Integer guests, Boolean available, Float latitude, Float longitude, String address) {
         this.name = name;
         this.cityCode = cityCode;
         this.roomType = roomType;
@@ -71,35 +71,35 @@ public class Hotel implements Serializable {
         this.list_id = id;
     }
 
-    public int getList_id() {
+    public Integer getList_id() {
         return list_id;
     }
 
-    public void setList_id(int list_id) {
+    public void setList_id(Integer list_id) {
         this.list_id = list_id;
     }
     
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(Boolean available) {
         this.available = available;
     }
 
-    public float getDayPrice() {
+    public Float getDayPrice() {
         return dayPrice;
     }
 
-    public void setDayPrice(float dayPrice) {
+    public void setDayPrice(Float dayPrice) {
         this.dayPrice = dayPrice;
     }
 
-    public int getGuests() {
+    public Integer getGuests() {
         return guests;
     }
 
-    public void setGuests(int guests) {
+    public void setGuests(Integer guests) {
         this.guests = guests;
     }
 
@@ -153,27 +153,27 @@ public class Hotel implements Serializable {
         this.currency = currency;
     }
 
-    public float getTotal() {
+    public Float getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(Float total) {
         this.total = total;
     }
 
-    public float getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 

@@ -45,9 +45,9 @@ public class Place implements Serializable {
     
     private String description;
     
-    private float lat;
+    private Float lat;
     
-    private float lng;
+    private Float lng;
     
     private String googlePlaceID;
     
@@ -56,7 +56,7 @@ public class Place implements Serializable {
     
     private String photosUrl; //only the first one
     
-    private float rating = 0;
+    private Float rating = 0.0f;
     
     private ArrayList<String> types;
     
@@ -87,19 +87,19 @@ public class Place implements Serializable {
         this.description = description;
     }
 
-    public float getLat() {
+    public Float getLat() {
         return lat;
     }
 
-    public void setLat(float lat) {
+    public void setLat(Float lat) {
         this.lat = lat;
     }
 
-    public float getLng() {
+    public Float getLng() {
         return lng;
     }
 
-    public void setLng(float lng) {
+    public void setLng(Float lng) {
         this.lng = lng;
     }
 
@@ -137,11 +137,11 @@ public class Place implements Serializable {
         this.types = types;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 

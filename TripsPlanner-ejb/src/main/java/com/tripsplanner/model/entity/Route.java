@@ -128,11 +128,11 @@ public class Route implements Serializable {
         this.distanceText = distanceText;
     }
 
-    public long getDistanceValue() {
+    public Long getDistanceValue() {
         return distanceValue;
     }
 
-    public void setDistanceValue(long distanceValue) {
+    public void setDistanceValue(Long distanceValue) {
         this.distanceValue = distanceValue;
     }
 
@@ -144,11 +144,11 @@ public class Route implements Serializable {
         this.durationText = durationText;
     }
 
-    public long getDurationValue() {
+    public Long getDurationValue() {
         return durationValue;
     }
 
-    public void setDurationValue(long durationValue) {
+    public void setDurationValue(Long durationValue) {
         this.durationValue = durationValue;
     }
 
@@ -168,11 +168,11 @@ public class Route implements Serializable {
         this.fareText = fareText;
     }
 
-    public double getFareValue() {
+    public Double getFareValue() {
         return fareValue;
     }
 
-    public void setFareValue(double fareValue) {
+    public void setFareValue(Double fareValue) {
         this.fareValue = fareValue;
     }
 
@@ -192,11 +192,11 @@ public class Route implements Serializable {
         this.departureTimeText = departureTimeText;
     }
 
-    public long getDepartureTimeValue() {
+    public Long getDepartureTimeValue() {
         return departureTimeValue;
     }
 
-    public void setDepartureTimeValue(long departureTimeValue) {
+    public void setDepartureTimeValue(Long departureTimeValue) {
         this.departureTimeValue = departureTimeValue;
     }
 
@@ -208,11 +208,11 @@ public class Route implements Serializable {
         this.arrivalTimeText = arrivalTimeText;
     }
 
-    public long getArrivalTimeValue() {
+    public Long getArrivalTimeValue() {
         return arrivalTimeValue;
     }
 
-    public void setArrivalTimeValue(long arrivalTimeTextValue) {
+    public void setArrivalTimeValue(Long arrivalTimeTextValue) {
         this.arrivalTimeValue = arrivalTimeTextValue;
     }
 
