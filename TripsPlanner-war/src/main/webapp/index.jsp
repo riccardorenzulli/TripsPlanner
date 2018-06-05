@@ -48,14 +48,14 @@
         <!-- SCRIPTS -->
         <script src="assets/js/sweetalert2.all.js" type="text/javascript"></script>
         <script src="assets/js/index.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String)(session.getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=(String) (session.getAttribute("google_places_api"))%>&libraries=places&callback=initAutocomplete" async defer></script>
         <script src="assets/js/login.js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     </head>
 
     <body class="load-full-screen">
-        
+
         <!-- BEGIN: PRELOADER -->
         <div id="loader" class="load-full-screen">
             <div class="loading-animation">
@@ -66,7 +66,7 @@
             </div>
         </div>
         <!-- END: PRELOADER -->
-        
+
         <!-- BEGIN: SITE-WRAPPER -->
         <div id="load_cont" class="coming-soon-wrapper full-screen">
             <div class="coming-soon full-screen">
@@ -87,30 +87,8 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="main_cont">
-            <div id="supersized" class="quality" style="display: block;">
-                <a target="_blank" style="display: block; opacity: 1;" class="prevslide">
-                    <img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
-                </a>
-                <a target="_blank" style="display: block; opacity: 1;" class="activeslide">
-                    <img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
-                </a>
-                <a target="_blank">
-                    <img src="assets/images/road.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
-                </a>
-            </div>
-            <div id="supersized" class="quality" style="display: block;">
-                <a target="_blank" style="display: block; opacity: 1;" class="">
-                    <img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
-                </a>
-                <a target="_blank" style="display: block; opacity: 1;" class="activeslide">
-                    <img src="assets/images/road.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
-                </a>
-                <a target="_blank">
-                    <img src="assets/images/slide.jpg" style="width: 1841px; height: 1233.47px; left: 0px; top: -355.5px;">
-                </a>
-            </div>
 
             <!-- BEGIN: SITE-WRAPPER -->
             <div class="site-wrapper">
@@ -119,9 +97,6 @@
                 <jsp:include page="nav.html"/>
                 <div class="clearfix"></div>
                 <!-- END: NAV SECTION -->
-
-                <!-- hidden input to pass the amadeus key to javascript for the autocomplete service -->
-                <input id='amadeus_autocomplete' type='hidden' value='${applicationScope['amadeus_autocomplete']}'/>
 
                 <%@include file="searchBox.html" %>
 
@@ -306,8 +281,8 @@
                     //Size & Position
                     min_width: 0, //Min width allowed (in pixels)
                     min_height: 0, //Min height allowed (in pixels)
-                    vertical_center: 0, //Vertically center background
-                    horizontal_center: 0, //Horizontally center background
+                    vertical_center: 1, //Vertically center background
+                    horizontal_center: 1, //Horizontally center background
                     fit_portrait: 1, //Portrait images will not exceed browser height
                     fit_landscape: 0, //Landscape images will not exceed browser width
 

@@ -62,8 +62,11 @@ public class MobileWebService {
     @GET
     @Path("mytrips")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Trip> getAllTripByOwner() {
-        User user = (User) req.getSession().getAttribute("user");
+    public ArrayList<Trip> getAllTripByOwner(
+        @QueryParam("id") String id) {
+        
+        User user = new User();
+        user.setId(Long.parseLong(id));
         ArrayList<Trip> trips = new ArrayList<Trip>(tripBean.getAllTripByOwner(user));
         
         for (Trip trip : trips) {
@@ -109,8 +112,7 @@ public class MobileWebService {
                     hashMap.put("imgURL", imgURL);
                     hashMap.put("id", id);
                     
-                    user = loginBean.validateGoogleUser(hashMap);   
-                    req.getSession().setAttribute("user", user);
+                    user = loginBean.validateGoogleUser(hashMap);
         }
                     
         return user;
