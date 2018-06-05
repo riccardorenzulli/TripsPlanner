@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tripsplanner.model.bean;
 
 import com.tripsplanner.model.entity.DayItinerary;
@@ -11,9 +6,7 @@ import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Route;
 import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
-import com.tripsplanner.model.facade.PlaceFacade;
 import com.tripsplanner.model.facade.PlaceFacadeLocal;
-import com.tripsplanner.model.facade.SearchFacadeLocal;
 import com.tripsplanner.model.facade.TripFacadeLocal;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,13 +25,13 @@ import javax.ejb.Stateless;
 public class TripBean implements TripBeanLocal {
 
     @EJB
-    private GoogleDirectionsBean dirBean;
+    private GoogleDirectionsBean dirFacade;
 
     @EJB
-    private TripFacadeLocal tripBean;
+    private TripFacadeLocal tripFacade;
     
     @EJB
-    private HotelBeanLocal hotelBean;
+    private HotelBeanLocal hotelFacade;
     
     @EJB
     private PlaceFacadeLocal placeFacade;
@@ -182,7 +175,7 @@ public class TripBean implements TripBeanLocal {
     }
 
     private Route createRouteFromPlaces(Place departure, Place destination, DayItinerary dayItinerary) throws IOException {
-        Route route = dirBean.getRoute(departure, destination, "driving", "now");
+        Route route = dirFacade.getRoute(departure, destination, "driving", "now");
         route.setDayItinerary(dayItinerary);
         return route;
     }
@@ -241,24 +234,24 @@ public class TripBean implements TripBeanLocal {
             for(Place place : myTrip.getDayPlaces(i))
                 placeFacade.create(place);
         }
-        hotelBean.createHotel(myTrip.getHotel());
-        tripBean.create(myTrip);
+        hotelFacade.createHotel(myTrip.getHotel());
+        tripFacade.create(myTrip);
     }
     
     @Override
     public void removeTrip(Trip myTrip) {
-        tripBean.remove(myTrip);
+        tripFacade.remove(myTrip);
     }
 
     @Override
     public List<Trip> getAllTripByOwner(User owner) {
-        List<Trip> trips = tripBean.findTripsByOwner(owner);
+        List<Trip> trips = tripFacade.findTripsByOwner(owner);
         return trips;
     }
 
     @Override
     public Trip getTripByOwnerAndID(User owner, long id) {
-        Trip trip = tripBean.getTripByOwnerAndID(owner, id);
+        Trip trip = tripFacade.getTripByOwnerAndID(owner, id);
         return trip;
     }
 
