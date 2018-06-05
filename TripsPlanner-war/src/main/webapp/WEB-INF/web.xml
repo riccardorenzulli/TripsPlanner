@@ -72,4 +72,14 @@
     <welcome-file-list>
         <welcome-file>ControllerServlet</welcome-file>
     </welcome-file-list>
+    <ejb-local-ref>
+        <ejb-ref-name>TripBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.tripsplanner.model.bean.TripBeanLocal</local>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>LoginBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.tripsplanner.model.bean.LoginBeanLocal</local>
+    </ejb-local-ref>
 </web-app>
