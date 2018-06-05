@@ -7467,6 +7467,8 @@ h5 {
 
 #header {
     height: 20%;
+    margin-right: 5%;
+    margin-left: auto;
 }
 
 #profile-pic {
@@ -7828,4 +7830,10 @@ h5 {
 #log-main-container {
     padding-right: 0; 
     padding-left: 0; 
+}
+
+#nav-container {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
 }
