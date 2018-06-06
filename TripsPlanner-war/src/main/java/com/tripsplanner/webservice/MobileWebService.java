@@ -21,19 +21,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -62,8 +54,11 @@ public class MobileWebService {
     @GET
     @Path("mytrips")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Trip> getAllTripByOwner() {
-        User user = (User) req.getSession().getAttribute("user");
+    public ArrayList<Trip> getAllTripByOwner(
+        @QueryParam("id") String id) {
+        
+        User user = new User();
+        user.setId(Long.parseLong(id));
         ArrayList<Trip> trips = new ArrayList<Trip>(tripBean.getAllTripByOwner(user));
         
         for (Trip trip : trips) {
@@ -88,6 +83,53 @@ public class MobileWebService {
     }
     
     @GET
+    @Path("mybasictrips")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<HashMap<String, String>> getBasicInfoTripsByOwner(
+        @QueryParam("id") String id) {
+        
+        User user = new User();
+        user.setId(Long.parseLong(id));
+        ArrayList<HashMap<String, String>> listInfoTrips = new ArrayList<HashMap<String, String>>(tripBean.getBasicInfoTripsByOwner(user));
+        
+        //Gson gson = new GsonBuilder().create();
+        //String json = gson.toJson(trips);
+        //JSONObject jsonObj = new JSONObject(json);
+        
+        return listInfoTrips;
+    }
+    
+    @GET
+    @Path("trip")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Trip getTripByID(
+        @QueryParam("userID") String userID,
+        @QueryParam("id") String id) {
+        
+        User user = new User();
+        user.setId(Long.parseLong(userID));
+        
+        Trip trip = tripBean.getTripByOwnerAndID(user, Long.parseLong(id));
+                
+        trip.getOwner().setTrips(null);
+            //trip.getOwner().setBelongingTrips(null);
+            for(User collaborator : trip.getCollaborators()) {
+                collaborator.setTrips(null);
+                //collaborator.setBelongingTrips(null);
+            }
+            
+            for (DayItinerary it : trip.getItineraries()) {
+                it.setTrip(null);
+                for (Route route: it.getLegs())
+                    route.setDayItinerary(null);
+            }
+            
+        return trip;
+    }
+    
+    
+    
+    @GET
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     public User login(
@@ -109,8 +151,7 @@ public class MobileWebService {
                     hashMap.put("imgURL", imgURL);
                     hashMap.put("id", id);
                     
-                    user = loginBean.validateGoogleUser(hashMap);   
-                    req.getSession().setAttribute("user", user);
+                    user = loginBean.validateGoogleUser(hashMap);
         }
                     
         return user;

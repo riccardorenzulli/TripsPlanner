@@ -6,6 +6,7 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.DayItinerary;
+import java.math.BigInteger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,6 +36,11 @@ public class DayItineraryFacade extends AbstractFacade<DayItinerary> implements 
 
     public DayItineraryFacade() {
         super(DayItinerary.class);
+    }
+
+    public Long getFirstDayItineraryID(Long tripID) {
+        return em.createNamedQuery("DayItinerary.getFirstDayItineraryID", Long.class)
+                .setParameter("tripID", tripID).getResultList().get(0);
     }
     
 }

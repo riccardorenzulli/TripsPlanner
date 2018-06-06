@@ -85,13 +85,14 @@
                                         <div class="holiday-img">
                                             <%
                                                 String urlPhoto = trip.getDayPlaces(0).get(1).getPhotosUrl();
-                                                if (urlPhoto == null)
+                                                if (urlPhoto == null) {
                                                     urlPhoto = "http://newenglishtravel.com/wp-content/uploads/2015/11/the-best-travel-websites-in-the-world-1200x800.jpg";
+                                                }
                                             %>
                                             <img src="<%= urlPhoto%>" alt="cruise">
                                         </div>
                                         <div class="holiday-price">
-                                            <h4><%= trip.getHotel()==null ?  0 : (int)trip.getHotel().getTotal()%>&euro;</h4>
+                                            <h4><%= trip.getHotel() == null ? 0 : trip.getHotel().getTotal()%>&euro;</h4>
                                             <h5><%= trip.getItineraries().size()%> Days</h5>
                                         </div>
                                         <div class="holiday-title">
@@ -105,7 +106,7 @@
                                         <h5>Date</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p>From <%= trip.getSearch().getDepartureDate().toString()%> to <%=trip.getSearch().getReturnDate().toString() %></p>
+                                        <p>From <%= trip.getSearch().getDepartureDate().toString()%> to <%=trip.getSearch().getReturnDate().toString()%></p>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -122,7 +123,7 @@
                                         <h5>Places</h5>
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <p class="sm-text"><%=trip.getDayPlaces(0).get(1).getName() %>,<%=trip.getDayPlaces(0).get(2).getName()%>...</p>
+                                        <p class="sm-text"><%=trip.getDayPlaces(0).get(1).getName()%>,<%=trip.getDayPlaces(0).get(2).getName()%>...</p>
                                     </div>
                                 </div>
                                 <div class="holiday-footer text-center">
@@ -163,7 +164,7 @@
             </div>
             <!-- END: LISTING AREA -->
 
-             <!-- START: FOOTER -->
+            <!-- START: FOOTER -->
             <jsp:include page="footer.html" />
             <!-- END: FOOTER -->
 
@@ -179,6 +180,7 @@
         <script src="assets/js/bootstrap-select.min.js"></script>
         <script src="assets/plugins/wow.min.js"></script>
         <script src="assets/js/js.js"></script>
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
         <script>
 
             /* Price Range Slider */

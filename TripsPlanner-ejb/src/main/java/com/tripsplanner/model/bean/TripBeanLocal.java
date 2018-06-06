@@ -4,6 +4,8 @@ import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -31,5 +33,7 @@ public interface TripBeanLocal {
     List<Trip> getAllTripByOwner(User owner);
     
     Trip getTripByOwnerAndID(User owner, long id);
+    
+    ArrayList<HashMap<String, String>> getBasicInfoTripsByOwner(User owner);
     
 }

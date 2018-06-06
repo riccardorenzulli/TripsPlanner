@@ -3133,7 +3133,6 @@ h5 {
                         20. hotel-detailed.html CSS Start
 *********************************************************************************/
 .page-title {
-    background: url('../images/bg-image16.jpg');
     padding: 60px 0px;
     background-attachment: fixed;
     background-size: contain;
@@ -7404,7 +7403,10 @@ h5 {
 }
 
 #login-container {
-    background: url('../images/road.jpg') no-repeat fixed center;
+    background-color: #fafafa;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
     /*-webkit-filter: blur(5px);*/
     -moz-filter: blur(5px);
     -o-filter: blur(5px);
@@ -7422,17 +7424,24 @@ h5 {
 
 #fb-signin {
     font-size: 13px;
+    /* line-height: 34px; */
+    font-family: Montserrat;
+    /* font-family: Roboto,arial,sans-serif; */
+    font-weight: normal;
+    letter-spacing: .21px;
+    margin-left: 0;
+    margin-right: 0;
+    /* vertical-align: middle; */
 }
 
 #login-card {
-    background-color: #ECEFF1;
-    width:25%;
-    margin-left:37.5%;
-    margin-right:37.5%;
+    background-color: #EEEEEE;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
     margin-top: 10%;
     margin-bottom: 25%;
-    min-width: 350px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.12), 0 1px 12px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
@@ -7458,6 +7467,8 @@ h5 {
 
 #header {
     height: 20%;
+    margin-right: 5%;
+    margin-left: auto;
 }
 
 #profile-pic {
@@ -7798,4 +7809,31 @@ h5 {
 .mem_user {
     border-radius: 50%;
     width: 80%;
+}
+
+.abcRioButtonContents {
+    font-family: 'Montserrat';
+}
+
+.abcRioButtonLightBlue {
+    height: auto;
+    width: auto;
+    font-family: 'Montserrat';
+}
+
+#search-cont {
+    margin-left: 5%;
+    width: 70%;
+    margin-right: 25%;
+}
+
+#log-main-container {
+    padding-right: 0; 
+    padding-left: 0; 
+}
+
+#nav-container {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
 }

@@ -5,8 +5,10 @@
  */
 package com.tripsplanner.model.facade;
 
+import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -42,5 +44,7 @@ public interface TripFacadeLocal {
     public List<Trip> findTripsByOwner(User owner);
     
     public Trip getTripByOwnerAndID(User owner, long id);
+
+    public List<Object[]> getBasicInfoTripsByOwner(User owner);
     
 }

@@ -6,6 +6,7 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.Route;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -37,5 +38,7 @@ public interface RouteFacadeLocal {
     List<Route> findRange(int[] range);
 
     int count();
+    
+    String findSecondPlaceIMG(Long dayItID);
     
 }
