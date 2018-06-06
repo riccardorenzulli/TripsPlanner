@@ -16,7 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -31,6 +34,10 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
+@Table(name = "Route")
+@NamedQueries({
+@NamedQuery(name = "Route.findSecondPlaceIMG", query = "SELECT t.arrivalPlace.photosUrl FROM Route t WHERE t.dayItinerary = :dayItID")
+})
 public class Route implements Serializable {
 
     @Id

@@ -16,7 +16,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
@@ -31,6 +34,10 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
+@Table(name = "DayItinerary")
+@NamedQueries({
+@NamedQuery(name = "DayItinerary.getFirstDayItineraryID", query = "SELECT d.id FROM DayItinerary d where d.trip = :tripID")
+})
 public class DayItinerary implements Serializable {
     
     private static final long serialVersionUID = 1L;

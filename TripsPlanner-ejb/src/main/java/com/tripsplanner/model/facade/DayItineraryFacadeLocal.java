@@ -6,6 +6,7 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.DayItinerary;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -35,6 +36,8 @@ public interface DayItineraryFacadeLocal {
     List<DayItinerary> findAll();
 
     List<DayItinerary> findRange(int[] range);
+    
+    Long getFirstDayItineraryID(Long tripID);
 
     int count();
     

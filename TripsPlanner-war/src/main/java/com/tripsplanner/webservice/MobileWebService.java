@@ -90,6 +90,25 @@ public class MobileWebService {
         return trips;
     }
     
+        @GET
+    @Path("mybasictrips")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<HashMap<String, String>> getBasicInfoTripsByOwner(
+        @QueryParam("id") String id) {
+        
+        User user = new User();
+        user.setId(Long.parseLong(id));
+        ArrayList<HashMap<String, String>> listInfoTrips = new ArrayList<HashMap<String, String>>(tripBean.getBasicInfoTripsByOwner(user));
+        
+        //Gson gson = new GsonBuilder().create();
+        //String json = gson.toJson(trips);
+        //JSONObject jsonObj = new JSONObject(json);
+        
+        return listInfoTrips;
+    }
+    
+    
+    
     @GET
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)

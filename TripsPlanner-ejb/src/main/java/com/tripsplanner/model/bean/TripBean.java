@@ -4,12 +4,17 @@ import com.tripsplanner.model.entity.DayItinerary;
 import com.tripsplanner.model.entity.Hotel;
 import com.tripsplanner.model.entity.Place;
 import com.tripsplanner.model.entity.Route;
+import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
+import com.tripsplanner.model.facade.DayItineraryFacadeLocal;
 import com.tripsplanner.model.facade.PlaceFacadeLocal;
+import com.tripsplanner.model.facade.RouteFacadeLocal;
 import com.tripsplanner.model.facade.TripFacadeLocal;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -23,6 +28,12 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class TripBean implements TripBeanLocal {
+
+    @EJB
+    private DayItineraryFacadeLocal dayItineraryFacade;
+
+    @EJB
+    private RouteFacadeLocal routeFacade;
 
     @EJB
     private GoogleDirectionsBean dirFacade;
@@ -266,6 +277,26 @@ public class TripBean implements TripBeanLocal {
         hotelPlace.setPhotosUrl("http://www.hotel-city47.com/wp-content/blogs.dir/864/files/deslizantehome/Hotel_city_habitacion_matrimonio_03.jpg");
         return hotelPlace;
     }
-    
-    
+
+    @Override
+    public ArrayList<HashMap<String, String>> getBasicInfoTripsByOwner(User owner) {
+        List<Object[]> listSearch = tripFacade.getBasicInfoTripsByOwner(owner);
+        
+        ArrayList<HashMap<String, String>> listInfoTrips = new ArrayList<HashMap<String, String>>();
+        for (Object[] obj : listSearch) {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("idTrip", ((Long)obj[1]).toString());
+            map.put("destination", ((Search)obj[0]).getDestinationCity());
+            map.put("departureDate", ((Search)obj[0]).getDepartureDate().toString());
+            
+            System.out.println("IDDDDDDDDDDDDDDD: "+(Long)obj[1]);
+            Long dayItID = dayItineraryFacade.getFirstDayItineraryID((Long)obj[1]);
+            String placeIMGUrl = routeFacade.findSecondPlaceIMG(dayItID);
+            map.put("placeIMGUrl", placeIMGUrl);
+            
+            listInfoTrips.add(map);
+        }
+        return listInfoTrips;
+    }
+ 
 }

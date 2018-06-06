@@ -5,8 +5,10 @@
  */
 package com.tripsplanner.model.facade;
 
+import com.tripsplanner.model.entity.Search;
 import com.tripsplanner.model.entity.Trip;
 import com.tripsplanner.model.entity.User;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,6 +51,12 @@ public class TripFacade extends AbstractFacade<Trip> implements TripFacadeLocal 
         return em.createNamedQuery("Trip.findByOwnerAndId", Trip.class)
                 .setParameter("owner", owner)
                 .setParameter("id", id).getSingleResult();
+    }
+
+    @Override
+    public List<Object[]> getBasicInfoTripsByOwner(User owner) {
+        return em.createNamedQuery("Trip.findBasicInfoOwner", Object[].class)
+                .setParameter("owner", owner).getResultList();
     }
     
 }

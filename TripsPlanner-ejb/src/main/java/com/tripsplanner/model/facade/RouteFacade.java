@@ -6,6 +6,7 @@
 package com.tripsplanner.model.facade;
 
 import com.tripsplanner.model.entity.Route;
+import java.math.BigInteger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +37,12 @@ public class RouteFacade extends AbstractFacade<Route> implements RouteFacadeLoc
 
     public RouteFacade() {
         super(Route.class);
+    }
+
+    @Override
+    public String findSecondPlaceIMG(Long dayItID) {
+        return em.createNamedQuery("Route.findSecondPlaceIMG", String.class)
+                .setParameter("dayItID", dayItID).getResultList().get(0);
     }
     
 }
