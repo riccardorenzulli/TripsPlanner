@@ -36,7 +36,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DayItinerary")
 @NamedQueries({
-@NamedQuery(name = "DayItinerary.getFirstDayItineraryID", query = "SELECT d.id FROM DayItinerary d where d.trip = :tripID")
+@NamedQuery(name = "DayItinerary.getFirstDayItineraryID", query = "SELECT d.id FROM DayItinerary d where d.trip.id = :tripID")
 })
 public class DayItinerary implements Serializable {
     

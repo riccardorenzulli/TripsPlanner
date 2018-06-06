@@ -36,7 +36,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Route")
 @NamedQueries({
-@NamedQuery(name = "Route.findSecondPlaceIMG", query = "SELECT t.arrivalPlace.photosUrl FROM Route t WHERE t.dayItinerary = :dayItID")
+@NamedQuery(name = "Route.findSecondPlaceIMG", query = "SELECT t.arrivalPlace.photosUrl FROM Route t WHERE t.dayItinerary.id = :dayItID")
 })
 public class Route implements Serializable {
 

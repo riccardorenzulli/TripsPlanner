@@ -290,7 +290,8 @@ public class TripBean implements TripBeanLocal {
             map.put("departureDate", ((Search)obj[0]).getDepartureDate().toString());
             
             System.out.println("IDDDDDDDDDDDDDDD: "+(Long)obj[1]);
-            Long dayItID = dayItineraryFacade.getFirstDayItineraryID((Long)obj[1]);
+            Long idTrip = ((Long)obj[1]);
+            Long dayItID = dayItineraryFacade.getFirstDayItineraryID(idTrip);
             String placeIMGUrl = routeFacade.findSecondPlaceIMG(dayItID);
             map.put("placeIMGUrl", placeIMGUrl);
             
