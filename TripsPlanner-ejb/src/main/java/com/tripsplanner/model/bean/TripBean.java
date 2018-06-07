@@ -262,7 +262,8 @@ public class TripBean implements TripBeanLocal {
             for(Place place : myTrip.getDayPlaces(i))
                 placeFacade.create(place);
         }
-        hotelFacade.createHotel(myTrip.getHotel());
+        Hotel hotel = myTrip.getHotel();
+        if (hotel != null) hotelFacade.createHotel(myTrip.getHotel());
         tripFacade.create(myTrip);
     }
     
@@ -306,7 +307,7 @@ public class TripBean implements TripBeanLocal {
         hotelPlace.setLat(hotel.getLatitude());
         hotelPlace.setLng(hotel.getLongitude());
         hotelPlace.setId(hotel.getId()); //???????
-        hotelPlace.setPhotosUrl("http://www.hotel-city47.com/wp-content/blogs.dir/864/files/deslizantehome/Hotel_city_habitacion_matrimonio_03.jpg");
+        hotelPlace.setPhotosUrl("https://www.hotel-city47.com/wp-content/blogs.dir/864/files/deslizantehome/Hotel_city_habitacion_matrimonio_03.jpg");
         return hotelPlace;
     }
 
@@ -325,8 +326,8 @@ public class TripBean implements TripBeanLocal {
             map.put("idTrip", ((Long)obj[1]).toString());
             map.put("destination", ((Search)obj[0]).getDestinationCity());
             map.put("departureDate", ((Search)obj[0]).getDepartureDate().toString());
+            map.put("arrivalDate", ((Search)obj[0]).getReturnDate().toString());
             
-            System.out.println("IDDDDDDDDDDDDDDD: "+(Long)obj[1]);
             Long idTrip = ((Long)obj[1]);
             Long dayItID = dayItineraryFacade.getFirstDayItineraryID(idTrip);
             String placeIMGUrl = routeFacade.findSecondPlaceIMG(dayItID);
