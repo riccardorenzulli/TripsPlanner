@@ -245,7 +245,8 @@ public class TripBean implements TripBeanLocal {
             for(Place place : myTrip.getDayPlaces(i))
                 placeFacade.create(place);
         }
-        hotelFacade.createHotel(myTrip.getHotel());
+        Hotel hotel = myTrip.getHotel();
+        if (hotel != null) hotelFacade.createHotel(myTrip.getHotel());
         tripFacade.create(myTrip);
     }
     
@@ -288,8 +289,8 @@ public class TripBean implements TripBeanLocal {
             map.put("idTrip", ((Long)obj[1]).toString());
             map.put("destination", ((Search)obj[0]).getDestinationCity());
             map.put("departureDate", ((Search)obj[0]).getDepartureDate().toString());
+            map.put("arrivalDate", ((Search)obj[0]).getReturnDate().toString());
             
-            System.out.println("IDDDDDDDDDDDDDDD: "+(Long)obj[1]);
             Long idTrip = ((Long)obj[1]);
             Long dayItID = dayItineraryFacade.getFirstDayItineraryID(idTrip);
             String placeIMGUrl = routeFacade.findSecondPlaceIMG(dayItID);
