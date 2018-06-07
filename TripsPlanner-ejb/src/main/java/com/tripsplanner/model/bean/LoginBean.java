@@ -24,10 +24,11 @@ import org.json.JSONObject;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean with the business logic related to login
  */
 
 @Stateless
@@ -36,9 +37,6 @@ public class LoginBean implements LoginBeanLocal {
     @EJB
     private UserFacadeLocal userFacade;
 
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     
     public User validateFacebookUser(String token, boolean create) throws MalformedURLException, IOException {
         System.out.print("validateFbUser");
@@ -81,6 +79,13 @@ public class LoginBean implements LoginBeanLocal {
         return jsonOut.has("error") ? null : jsonOut;
     }
 
+    /**
+     * looks for a user in the database with the same email of the user provided
+     * if the user is already present it is returned, hoterwise is created
+     * 
+     * @param mapUser map with user informations
+     * @return the validated user
+     */
     public User validateGoogleUser(HashMap<String, String> mapUser) {
 
         User user = userFacade.findUserByEmail(mapUser.get("email"));

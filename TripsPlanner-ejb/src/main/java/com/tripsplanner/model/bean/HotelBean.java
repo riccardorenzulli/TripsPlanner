@@ -12,8 +12,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean with the business logic related to hotels
  */
 @Stateless
 public class HotelBean implements HotelBeanLocal {
@@ -21,11 +29,13 @@ public class HotelBean implements HotelBeanLocal {
     @EJB
     private HotelFacadeLocal hotelFacade;
 
+    /**
+     * persist an hotel in the database
+     * @param hotel the hotel to be created
+     */
     @Override
     public void createHotel(Hotel hotel) {
         hotelFacade.create(hotel);
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

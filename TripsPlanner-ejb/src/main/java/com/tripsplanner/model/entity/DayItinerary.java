@@ -27,10 +27,11 @@ import javax.persistence.Table;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the day trip informations
  */
 
 @Entity
@@ -41,13 +42,23 @@ import javax.persistence.Table;
 public class DayItinerary implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * database id for the DayItinerary
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the parent Trip
+     */
     @ManyToOne
     private Trip trip;
     
+    /**
+     * the list of routes contained in the specific DayItinerary
+     */
     @OneToMany(mappedBy="dayItinerary", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Route> legs = new ArrayList<Route>();
     

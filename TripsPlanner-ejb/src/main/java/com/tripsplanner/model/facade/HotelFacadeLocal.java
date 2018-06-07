@@ -10,8 +10,17 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * local hotel interface,
+ * expose CRUD operations
  */
 @Local
 public interface HotelFacadeLocal {

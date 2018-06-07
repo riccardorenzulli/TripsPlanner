@@ -22,10 +22,12 @@ import javax.servlet.http.HttpServletResponse;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * the ControllerServlet acts as a controller to process calls from the views.
+ * all the redirections are done using a parameter sent by the views
  */
 public class ControllerServlet extends HttpServlet {
 

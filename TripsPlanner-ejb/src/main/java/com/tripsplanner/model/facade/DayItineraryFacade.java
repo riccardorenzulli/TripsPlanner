@@ -17,10 +17,11 @@ import javax.persistence.PersistenceContext;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * specific DayItineray facade 
  */
 
 @Stateless
@@ -38,6 +39,11 @@ public class DayItineraryFacade extends AbstractFacade<DayItinerary> implements 
         super(DayItinerary.class);
     }
 
+    /**
+     * retrive the first day itineray Id from the database
+     * @param tripID the id of the trip which owns the day itinerary
+     * @return the first day itinerary id
+     */
     public Long getFirstDayItineraryID(Long tripID) {
         return em.createNamedQuery("DayItinerary.getFirstDayItineraryID", Long.class)
                 .setParameter("tripID", tripID).getResultList().get(0);

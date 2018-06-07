@@ -15,42 +15,92 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- *
- * @author giovannibonetta
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the trip hotel informations
  */
 @Entity
 public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * database id for the Hotel
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the Hotel name
+     */
     private String name;
     
+    /**
+     * the city IATA code 
+     */
     private String cityCode;
     
+    /**
+     * the room type
+     */
     private String roomType;
     
+    /**
+     * a brief description of the room available
+     */
     private String roomDescription;
     
+    /**
+     * the accepted currency
+     */
     private String currency;
     
+    /**
+     * the total amount for the room
+     */
     private Float total;   
     
+    /**
+     * the availability of the room
+     */
     private Boolean available;
     
+    /**
+     * the hotel latitude
+     */
     private Float latitude;
     
+    /**
+     * the hotel longitude
+     */
     private Float longitude;
 
+    /**
+     * the hotel address
+     */
     private String address;
 
+    /**
+     * the dayPrice for the room
+     */
     private Float dayPrice;
 
+    /**
+     * the number of guests for the room
+     */
     private Integer guests;
 
+    /**
+     * the hotel index 
+     */
     private Integer list_id;
     
     public Hotel() {}
@@ -210,6 +260,12 @@ public class Hotel implements Serializable {
         return "Hotel{" + "id=" + id + ", name=" + name + ", cityCode=" + cityCode + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", currency=" + currency + ", total=" + total + ", available=" + available + ", latitude=" + latitude + ", longitude=" + longitude + ", address=" + address + ", dayPrice=" + dayPrice + ", guests=" + guests + ", list_id=" + list_id + '}';
     }
     
+    /**
+     * 
+     * @param h
+     * @param i
+     * @return 
+     */
     public static Hotel fromJsonToHotel(JSONObject h, int i) {
         
         boolean available = h.getBoolean("available");

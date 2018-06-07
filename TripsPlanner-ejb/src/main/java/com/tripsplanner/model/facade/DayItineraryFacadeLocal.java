@@ -16,10 +16,12 @@ import javax.ejb.Local;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * local day itinerary interface,
+ * expose CRUD operations and the specific day itinerary operations
  */
 
 @Local
@@ -37,6 +39,11 @@ public interface DayItineraryFacadeLocal {
 
     List<DayItinerary> findRange(int[] range);
     
+    /**
+     * retrive the first day itineray Id from the database
+     * @param tripID the id of the trip which owns the day itinerary
+     * @return the first day itinerary id
+     */
     Long getFirstDayItineraryID(Long tripID);
 
     int count();

@@ -36,10 +36,14 @@ import org.json.JSONObject;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ */
+
+/**
+ * Bean that allows to call the Amadeus Rest service
+ * to get hotel and flight informations
  */
 
 @Stateless
@@ -109,7 +113,14 @@ public class AmadeusAPIBean {
         return token;
     }
 
-    // Where can I fly to from Paris?
+    /**
+     * returns flight info just providing the departure city and date.
+     * example of question it answers: Where can I fly to from Paris?
+     * 
+     * @param departure_date the flight departure date
+     * @return JSONObject with flight info
+     * @throws Exception general exception 
+     */
     public JSONObject getInspirationFlight(String departure_city_IATA, String departure_date) throws Exception{
         String amadeus_token = getAmadeusToken();
         OkHttpClient client = new OkHttpClient();
@@ -125,7 +136,16 @@ public class AmadeusAPIBean {
         return jsonObj;
     }
     
-    //I know where I want to fly, the dates and duration, what are the best flight deals?
+    /**
+     * returns low fare flight for provided departure city, destination city and departure date.
+     * example of question it answers:
+     * I know where I want to fly, the dates and duration, what are the best flight deals?
+     * 
+     * @param destination_IATA the IATA code of the destination city
+     * @param departure_date the departure date
+     * @return JSONObject with flight data
+     * @throws Exception general exception
+     */
     public JSONObject getLowFareFlight(String departure_IATA, String destination_IATA,  String departure_date) throws Exception{
         String amadeus_token = getAmadeusToken();
         OkHttpClient client = new OkHttpClient();
@@ -140,26 +160,40 @@ public class AmadeusAPIBean {
         JSONObject jsonObj = new JSONObject(response_body);
         return jsonObj;
     }
+    /**
+     * returns hotel offers for provided search informations in json.
+     * example of question it answers:
+     * What are the best hotel offers during my trip?
+     * 
+     * @param lat destination city latitude
+     * @param lon destination city longitude
+     * @param num_people number of travelling people
+     * @param departure_date the departure date
+     * @param return_date the return date
+     * @return JSONObject with hotels data
+     */
     
-    // What are the best hotel offers during my trip?
     public JSONObject getHotelsJson(Float lat, Float lon, int num_people, String departure_date, String return_date) throws Exception {
         String amadeus_token = getAmadeusToken();
-//        System.out.println("amadeus token: " + amadeus_token);
-//        OkHttpClient client = new OkHttpClient();
-//
-//        Request request = new Request.Builder()
-//                .header("authorization", "Bearer " + amadeus_token)
-//                .url("https://test.api.amadeus.com/v1/shopping/hotel-offers?cityCode=" + destination_IATA + "&checkInDate=" + departure_date + "&checkOutDate=" + return_date) //+"&page%5Blimit%5D=5")
-//                .build();
-//
-//        Response response = client.newCall(request).execute();
-//        String response_body = response.body().string();
         String requestUrl = "https://test.api.amadeus.com/v1/shopping/hotel-offers?latitude=" + lat +"&longitude=" + lon +"&radius=5&radiusUnit=KM&includeClosed=false&adults="+num_people+"&checkInDate=" + departure_date + "&checkOutDate=" + return_date +"&bestRateOnly=true&view=FULL";
         JSONObject jsonObj = runConnection(requestUrl, amadeus_token);
 
         return jsonObj;
     }
     
+    /**
+     * returns hotel offers for provided search informations as an ArrayList of Hotel objects.
+     * example of question it answers:
+     * What are the best hotel offers during my trip?
+     * 
+     * @param lat destination city latitude
+     * @param lon destination city longitude
+     * @param num_people number of travelling people
+     * @param departure_date the departure date
+     * @param return_date the return date
+     * @return ArrayList of Hotel objects with hotels data
+     * @throws Exception general exception
+     */
     public ArrayList<Hotel> getHotels(Float lat, Float lon, int num_people, String departure_date, String return_date) throws Exception {
         String dep_date = mmggyy_to_yymmgg(departure_date);
         String ret_date = mmggyy_to_yymmgg(return_date);

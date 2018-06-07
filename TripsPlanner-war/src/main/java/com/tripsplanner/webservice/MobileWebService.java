@@ -28,9 +28,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.QueryParam;
 
 /**
- * REST Web Service
- *
- * @author riccardo
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * implementation of restfull webservices 
  */
 @Path("/")
 public class MobileWebService {
@@ -51,6 +58,12 @@ public class MobileWebService {
     public MobileWebService() {
     }
     
+    /**
+     * gets all the trips owned by a specific user
+     * 
+     * @param id the user owner id
+     * @return ArrayList of Trips objects 
+     */
     @GET
     @Path("mytrips")
     @Produces(MediaType.APPLICATION_JSON)
@@ -82,6 +95,11 @@ public class MobileWebService {
         return trips;
     }
     
+    /**
+     * get general informations about all the trips owned by a user
+     * @param id the user owner id
+     * @return ArrayList of hashmap, every hashmap contains basic informations about a trip, like the image of the second place in the first dayitinerary, the dates of the trip and the departure city
+     */
     @GET
     @Path("mybasictrips")
     @Produces(MediaType.APPLICATION_JSON)
@@ -92,13 +110,15 @@ public class MobileWebService {
         user.setId(Long.parseLong(id));
         ArrayList<HashMap<String, String>> listInfoTrips = new ArrayList<HashMap<String, String>>(tripBean.getBasicInfoTripsByOwner(user));
         
-        //Gson gson = new GsonBuilder().create();
-        //String json = gson.toJson(trips);
-        //JSONObject jsonObj = new JSONObject(json);
-        
         return listInfoTrips;
     }
     
+    /**
+     * get a specific trip owned by a specific user
+     * @param userID the owner id
+     * @param id the trip id
+     * @return Trip, the specific trip object
+     */
     @GET
     @Path("trip")
     @Produces(MediaType.APPLICATION_JSON)
@@ -128,7 +148,17 @@ public class MobileWebService {
     }
     
     
-    
+    /**
+     * validate a GoogleUser, if the user is present in the database it is returned, 
+     * otherwise a new user is created with the provided informations and saved in the database
+     * @param type specifies if the user is a Google or Facebook one
+     * @param email the user email
+     * @param name the user name
+     * @param surname the user surname
+     * @param imgURL the user image url
+     * @param id the user id
+     * @return the validated user
+     */
     @GET
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)

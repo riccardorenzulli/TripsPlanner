@@ -23,8 +23,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- *
- * @author the-silent-fox
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean with the business logic related to Trip
  */
 @Stateless
 public class TripBean implements TripBeanLocal {
@@ -47,10 +55,15 @@ public class TripBean implements TripBeanLocal {
     @EJB
     private PlaceFacadeLocal placeFacade;
     
-    /*Given the interesting places to be visited and the number of days
-      return an arraylist for each cluster containing the indexes of the
-      places belonging to the clusters.
-    */
+    /**
+     * Given the interesting places to be visited and the number of days
+     * return an arraylist for each cluster containing the indexes of the
+     * places belonging to the clusters.
+     * @param interestingPlaces list of interesting Places objects
+     * @param dayTrips number of days
+     * @param hotel the Hotel choosed for the trip
+     * @return Trip object 
+     */
     public Trip buildTrip(List<Place> interestingPlaces, int dayTrips, Hotel hotel) {
         Trip trip = null;
         
@@ -239,6 +252,10 @@ public class TripBean implements TripBeanLocal {
         return newClusters;
     }
 
+    /**
+     * persist the trip in the database
+     * @param myTrip the trip object to be saved
+     */
     @Override
     public void saveTrip(Trip myTrip) {
         for(int i=0; i<myTrip.getItineraries().size(); i++) {
@@ -249,17 +266,32 @@ public class TripBean implements TripBeanLocal {
         tripFacade.create(myTrip);
     }
     
+    /**
+     * remove the specific trip from the database
+     * @param myTrip the trip to be deleted
+     */
     @Override
     public void removeTrip(Trip myTrip) {
         tripFacade.remove(myTrip);
     }
 
+    /**
+     * gets all the trips owned by a specific user
+     * @param owner the user owner
+     * @return a List of Trip objects 
+     */
     @Override
     public List<Trip> getAllTripByOwner(User owner) {
         List<Trip> trips = tripFacade.findTripsByOwner(owner);
         return trips;
     }
 
+    /**
+     * gets a specific trip owned by a specific user
+     * @param owner the owner user
+     * @param id the id of the trip to be returned
+     * @return the trip Object 
+     */
     @Override
     public Trip getTripByOwnerAndID(User owner, long id) {
         Trip trip = tripFacade.getTripByOwnerAndID(owner, id);
@@ -278,6 +310,11 @@ public class TripBean implements TripBeanLocal {
         return hotelPlace;
     }
 
+    /**
+     * gets basic informations about all the trips owned by the specific user
+     * @param owner the owner user
+     * @return ArrayList containing one hasmap for every trip. the hasmap contains information like: departure city, trip image, dates
+     */
     @Override
     public ArrayList<HashMap<String, String>> getBasicInfoTripsByOwner(User owner) {
         List<Object[]> listSearch = tripFacade.getBasicInfoTripsByOwner(owner);

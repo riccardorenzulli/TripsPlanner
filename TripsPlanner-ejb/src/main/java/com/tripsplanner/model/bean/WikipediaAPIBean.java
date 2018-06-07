@@ -21,16 +21,24 @@ import org.json.JSONObject;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean with the business logic related to the Wikipedia rest service
  */
 
 @Stateless
 @LocalBean
 public class WikipediaAPIBean {
     
+    /**
+     * returns a basic description of the place with a specific name
+     * @param name the name of the place to be described
+     * @return String place description
+     * @throws MalformedURLException malformedUrlexception
+     * @throws IOException IOexception
+     */
     public static String getDescription(String name) throws MalformedURLException, IOException {
         String stringName = name.replace(' ', '_');
         String url = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exchars=175&titles="+stringName;

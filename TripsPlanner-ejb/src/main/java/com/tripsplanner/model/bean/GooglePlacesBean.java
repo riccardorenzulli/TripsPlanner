@@ -31,10 +31,11 @@ import org.json.JSONObject;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean for accessing the Google places rest service to retrive informations about places in the city
  */
 
 @Stateless
@@ -125,6 +126,14 @@ public class GooglePlacesBean {
         return json;      
     }
     
+    /**
+     * gets the interesting places in a city with special focus on some type of places
+     * like: nature, museums and art.
+     * 
+     * @param search the search information for the trip
+     * @return ArrayList of important places in the city 
+     * @throws IOException 
+     */
     public ArrayList<Place> getInterestingPlaces(Search search) throws IOException {
         JSONObject jsonResult = getInterestingPlacesJSON(search.getDestinationCity());
         Set<Place> places = new HashSet();

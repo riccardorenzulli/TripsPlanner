@@ -22,41 +22,79 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the search informations
  */
 
 @Entity
 public class Search implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * database id for the Search
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the departure city
+     */
     private String departureCity;
     
+    /**
+     * the destination city
+     */
     private String destinationCity;
 
+    /**
+     * the departure date
+     */
     private Date departureDate;
 
+    /**
+     * the return date
+     */
     private Date returnDate;
 
+    /**
+     * the number of traveling adults
+     */
     private Integer numAdult;
 
+    /**
+     * the number of traveling chidrens
+     */
     private Integer numChildren; //declared for future works
     /*Preferences*/
 
+    /**
+     * if museums are preferred
+     */
     private Boolean museums;
 
+    /**
+     * if art is preferred
+     */
     private Boolean art;
 
+    /**
+     * if nature is preferred
+     */
     private Boolean nature;
 
+    /**
+     * if nightlife is preferred
+     */
     private Boolean nightLife;
 
+    /**
+     * if shopping is preferred
+     */
     private Boolean shopping;
     
     public Search() {}

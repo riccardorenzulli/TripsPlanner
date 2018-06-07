@@ -12,8 +12,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- *
- * @author riccardo
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean with the business logic related to places
  */
 @Stateless
 public class PlaceBean implements PlaceBeanLocal {
@@ -21,6 +29,13 @@ public class PlaceBean implements PlaceBeanLocal {
     @EJB
     private PlaceFacadeLocal placeFacade;
 
+    /**
+     * update a place with the provided memory
+     * 
+     * @param memory the memory to be added or removed
+     * @param place the owner of the memory
+     * @param add if true the memory is added, otherwise removed
+     */
     @Override
     public void updatePlace(Memory memory, Place place, boolean add) {
         if (add) place.getMemories().add(memory);
@@ -28,7 +43,5 @@ public class PlaceBean implements PlaceBeanLocal {
         placeFacade.edit(place);
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     
 }

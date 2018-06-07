@@ -22,10 +22,11 @@ import javax.ejb.Stateless;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean with the business logic related to search
  */
 
 @Stateless
@@ -34,6 +35,11 @@ public class SearchBean implements SearchBeanLocal {
     @EJB
     private SearchFacadeLocal search;
 
+    /**
+     * create a search object with the provided informations
+     * @param mapSearch map cointaining the form informations about the trip
+     * @return actual search object containing the form trip informations
+     */
     @Override
     public Search createSearch(HashMap<String, String> mapSearch) {
         /*Get the parameters from the search box*/
@@ -81,6 +87,4 @@ public class SearchBean implements SearchBeanLocal {
         
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

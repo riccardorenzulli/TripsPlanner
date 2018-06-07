@@ -18,24 +18,37 @@ import javax.persistence.Id;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the trip cost informations
  */
 
 @Entity
 public class Cost implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * database id for the Cost
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
  
+    /**
+     * the flight cost
+     */
     @Column(name = "flight")
     private Double flight;
+    /**
+     * the hotel cost
+     */
     @Column(name = "hotel")
     private Double hotel;
+    /**
+     * the transportations cost
+     */
     @Column(name = "transit")
     private Double transit;
 

@@ -22,19 +22,23 @@ import javax.servlet.ServletContext;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ *
+ * bean for load external api keys 
+ * 
  */
-
 @Stateless
 @LocalBean
 public class ApiKeysBean {
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     public static HashMap<String, String> keys = new HashMap<String, String>();
 
+    /**
+     * loads external api keys and save them in the servlet context
+     * 
+     * @param ctx the servlet context
+     */
     public void findKeysFromCSV(ServletContext ctx) {
         InputStream csvFile = ctx.getResourceAsStream("/WEB-INF/keys.csv");
         String line = "";

@@ -27,10 +27,11 @@ import javax.persistence.Table;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the route informations
  */
 
 @Entity
@@ -40,41 +41,89 @@ import javax.persistence.Table;
 })
 public class Route implements Serializable {
 
+    /**
+     * database id for the Route
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the parent DayItinerary
+     */
     @ManyToOne
     private DayItinerary dayItinerary;
 
+    /**
+     * the root starting place
+     */
     @ManyToOne
     private Place departurePlace;
     
+    /**
+     * the route arrival place
+     */
     @ManyToOne
     private Place arrivalPlace;
     
+    /**
+     * the distance between departure and arrival places 
+     */
     private String distanceText;
     
+    /**
+     * the distance between departure and arrival places 
+     */
     private Long distanceValue;
     
+    /**
+     * the rout travel time
+     */
     private String durationText;
     
+    /**
+     * the rout travel time
+     */
     private Long durationValue;
     
+    /**
+     * the route travel mode
+     */
     private String travelMode;
     
+    /**
+     * the route travel fare
+     */
     private String fareText;
     
+    /**
+     * the value for the route travel fare
+     */
     private Double fareValue;
     
+    /**
+     * the query for the Google api service
+     */
     private String query;
     
+    /**
+     * departure time
+     */
     private String departureTimeText;
     
+    /**
+     * departure time
+     */
     private Long departureTimeValue;
     
+    /**
+     * arrival time
+     */
     private String arrivalTimeText;
     
+    /**
+     * arrival time
+     */
     private Long arrivalTimeValue;
 
     public Route() {

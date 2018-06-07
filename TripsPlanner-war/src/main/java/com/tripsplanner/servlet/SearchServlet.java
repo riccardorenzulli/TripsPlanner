@@ -37,10 +37,11 @@ import org.json.JSONObject;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * specific controller for calls related to the index.jsp view
  */
 
 public class SearchServlet extends HttpServlet {

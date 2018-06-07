@@ -27,10 +27,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the trip informations
  */
 
 @Entity
@@ -44,19 +45,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Trip implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * database id for the Trip
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the user owner of the Trip
+     */
     @ManyToOne
     private User owner;
     
+    /**
+     * the list of collaborator users
+     */
     @ManyToMany
     private List<User> collaborators = new ArrayList<>();
     
+    /**
+     * the hotel chosed for the Trip
+     */
     @OneToOne
     private Hotel hotel;
     
+    /**
+     * the list of DayItineraries
+     */
     @OneToMany(mappedBy="trip", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DayItinerary> itineraries;
     

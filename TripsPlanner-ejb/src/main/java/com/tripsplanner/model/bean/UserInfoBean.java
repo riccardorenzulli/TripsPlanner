@@ -11,8 +11,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- *
- * @author riccardo
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean containing the business logic for the User
  */
 @Stateless
 public class UserInfoBean implements UserInfoBeanLocal {
@@ -20,6 +28,15 @@ public class UserInfoBean implements UserInfoBeanLocal {
     @EJB
     private UserFacadeLocal userFacade;
 
+    /**
+     * modifies the specified user changing his information in the database with the new ones
+     * @param oldUser the user to be changed 
+     * @param newName the new name
+     * @param newSurname the new surname
+     * @param newAge the new age
+     * @param newSex the new sex
+     * @return string that can have two value "success" or "New data can't be the same as the old ones."
+     */
     @Override
     public String modifyUser(User oldUser, String newName, String newSurname, String newAge, String newSex) {
         

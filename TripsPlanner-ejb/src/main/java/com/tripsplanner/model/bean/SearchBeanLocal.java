@@ -15,15 +15,21 @@ import javax.ejb.Local;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * local bean interface for search bean
  */
 
 @Local
 public interface SearchBeanLocal {
 
+    /**
+     * create a search object with the provided informations
+     * @param mapSearch map cointaining general informations about the trip
+     * @return actual search object containing the form trip informations
+     */
     public Search createSearch(HashMap<String, String> mapSearch);
     
 }

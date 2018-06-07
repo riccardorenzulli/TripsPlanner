@@ -14,26 +14,43 @@ import javax.persistence.ManyToOne;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the memory informations
  */
 
 @Entity
 public class Memory implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * database id for the Memory
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the url of the memory image
+     */
     private String imgURL;
     
+    /**
+     * the memory description
+     */
     private String text;
     
+    /**
+     * date when the memory was created
+     */
     private Date date;
     
+    /**
+     * the memory owner
+     */
     @ManyToOne
     private User owner;
 

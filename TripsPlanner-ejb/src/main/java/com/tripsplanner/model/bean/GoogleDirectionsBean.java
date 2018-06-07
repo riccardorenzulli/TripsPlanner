@@ -24,10 +24,11 @@ import org.json.JSONObject;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean for accessing Google rest services to get info about routes
  */
 
 @Stateless
@@ -81,6 +82,16 @@ public class GoogleDirectionsBean {
         return json;
     }
     
+    /**
+     * call Google api rest service to retrive route informations between two Places in a Trip
+     * 
+     * @param departurePlace the departure place
+     * @param destinationPlace the destination place
+     * @param travelMode the travel mode (walk, public service..)
+     * @param departureTime the departure time 
+     * @return Route object
+     * @throws IOException 
+     */
     public Route getRoute(Place departurePlace, Place destinationPlace, String travelMode, String departureTime) throws IOException {
         
         String query = this.getDirectionsQuery(departurePlace, destinationPlace, travelMode, departureTime);

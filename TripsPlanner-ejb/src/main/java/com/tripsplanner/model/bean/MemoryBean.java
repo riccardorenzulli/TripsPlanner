@@ -28,10 +28,11 @@ import javax.servlet.http.Part;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * bean related to place memories
  */
 
 @Stateless
@@ -45,6 +46,16 @@ public class MemoryBean implements MemoryBeanLocal {
     private String amazon_access_key = apiKeysBean.keys.get("amazon_access_key");
     private String amazon_secret_key = apiKeysBean.keys.get("amazon_secret_key");
 
+    /**
+     * upload a memory to the Amazon s3 service
+     * 
+     * @param description the description of the memory
+     * @param filePart filePart about the image
+     * @param image the image to be uploaded
+     * @param user the memory owner
+     * @return the saved memory
+     * @throws ParseException parse exception
+     */
     @Override
     public Memory uploadMemory(String description, Part filePart, InputStream image, User user) throws ParseException {
         
@@ -85,6 +96,10 @@ public class MemoryBean implements MemoryBeanLocal {
         return memory;
     }
 
+    /**
+     * remove a memory from the database
+     * @param memory the memory to be removed
+     */
     @Override
     public void removeMemory(Memory memory) {
         memoryFacade.remove(memory);

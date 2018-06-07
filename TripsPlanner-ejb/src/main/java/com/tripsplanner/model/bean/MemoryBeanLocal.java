@@ -19,17 +19,32 @@ import javax.servlet.http.Part;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * local interface of memory bean
  */
 
 @Local
 public interface MemoryBeanLocal {
 
+    /**
+     * upload a memory
+     * 
+     * @param description memory description 
+     * @param filePart FilePart of the image
+     * @param fileContent the media to be uploaded
+     * @param user the memory owner
+     * @return the saved Memory 
+     * @throws ParseException parse exception
+     */
     public Memory uploadMemory(String description, Part filePart, InputStream fileContent, User user) throws ParseException;
 
+    /**
+     * remove the momory from the database
+     * @param memory the memory to be removed
+     */
     public void removeMemory(Memory memory);
     
 }

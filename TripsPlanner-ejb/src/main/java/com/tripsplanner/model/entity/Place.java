@@ -25,41 +25,78 @@ import javax.persistence.Table;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the place informations
  */
 
 @Entity
 @Table(name = "place")
 public class Place implements Serializable {
 
+    /**
+     * database id for the Place
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * the place name
+     */
     private String name;
     
+    /**
+     * the place address
+     */
     private String address;
     
+    /**
+     * the place description
+     */
     private String description;
     
+    /**
+     * the place latitude
+     */
     private Float lat;
     
+    /**
+     * the place longitude
+     */
     private Float lng;
     
+    /**
+     * the GooglePlace id
+     */
     private String googlePlaceID;
     
+    /**
+     * the Google id
+     */
     private String googleID;
     /*opening hours?*/
     
+    /**
+     * the url of the image in the memory
+     */
     private String photosUrl; //only the first one
     
+    /**
+     * place rating
+     */
     private Float rating = 0.0f;
     
+    /**
+     * types related with the place
+     */
     private ArrayList<String> types;
     
+    /**
+     * list of memories related to the place
+     */
     @OneToMany(cascade = CascadeType.ALL)
     private List<Memory> memories;
 

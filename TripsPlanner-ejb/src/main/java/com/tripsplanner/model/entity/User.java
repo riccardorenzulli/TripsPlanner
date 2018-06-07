@@ -29,10 +29,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Department of Computer Science<br>
  * Sviluppo Software per Componenti e Servizi Web<br>
  * Date: May 2018<br><br>
- * <p/>
  * giovanni.bonetta@edu.unito.it<br>
  * riccardo.renzulli@edu.unito.it<br>
  * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * enetity related to the User informations
  */
 
 @Entity
@@ -54,35 +55,75 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * database id for the User
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    /**
+     * the user name
+     */
     private String name;
     
+    /**
+     * the user surname
+     */
     private String surname;
     
+    /**
+     * the user password
+     */
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     
+    /**
+     * the user email
+     */
     @Basic(optional = false)
     private String email;
     
+    /**
+     * the user image url
+     */
     private String imgURL;
     
+    /**
+     * the facebook user id
+     */
     private BigInteger fbID;
     
+    /**
+     * the google user id
+     */
     private String googleID;
     
+    /**
+     * the user age
+     */
     private Integer age;
     
+    /**
+     * the user sex
+     */
     private String sex;
     
+    /**
+     * if the user is enabled
+     */
     private Short enabled;
     
+    /**
+     * list of trip of which the user is a collaborator
+     */
     @ManyToMany(mappedBy = "collaborators")
     private List<Trip> trips;
     
+    /**
+     * the trips owned by the user
+     */
     @OneToMany(mappedBy = "owner")
     private List<Trip> belongingTrips;
 

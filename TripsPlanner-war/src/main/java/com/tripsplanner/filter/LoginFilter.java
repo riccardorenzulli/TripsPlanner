@@ -22,8 +22,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author giovannibonetta
+ * Authors: Giovanni Bonetta, Riccardo Renzulli, Gabriele Sartor<br>
+ * Università degli Studi di Torino<br>
+ * Department of Computer Science<br>
+ * Sviluppo Software per Componenti e Servizi Web<br>
+ * Date: May 2018<br><br>
+ * giovanni.bonetta@edu.unito.it<br>
+ * riccardo.renzulli@edu.unito.it<br>
+ * gabriele.sartor@edu.unito.it<br><br>
+ * 
+ * the filter redirects to login.jsp if the session has no user
  */
 public class LoginFilter implements Filter {
     
@@ -108,7 +116,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
 	HttpServletResponse res = (HttpServletResponse) response;
         
-        // get the current sessio without creating a new one
+        // get the current session without creating a new one
         HttpSession session = req.getSession();
         if(session.getAttribute("user") == null){
             res.sendRedirect("login.jsp");
